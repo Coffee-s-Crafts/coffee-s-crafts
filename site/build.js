@@ -122,6 +122,7 @@ async function build(){
     SITE_TITLE,
     CONTACT_EMAIL,
     VGEN_URL,
+    VGEN_PORTFOLIO,
     SAMPLE_IMAGES: sampleHtml,
   };
 
