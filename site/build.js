@@ -43,16 +43,29 @@ async function fetchVgenImages(){
     const browser = await puppeteer.launch({ args: ['--no-sandbox','--disable-setuid-sandbox'] });
     const page = await browser.newPage();
     await page.goto(VGEN_PORTFOLIO, { waitUntil: 'networkidle2', timeout: 20000 });
-    // give client-side JS a moment to render images
+    // give client-side JS a moment to render
     await page.waitForTimeout(1000);
+    // collect image srcs
     const srcs = await page.$$eval('img', imgs => imgs.map(i => i.src).filter(Boolean));
+    // capture the main `div.content` HTML so we can embed or link to it
+    let contentHtml = null;
+    try{
+      contentHtml = await page.$eval('div.content', el => el.outerHTML);
+    }catch(_){
+      // if selector not found, try a broader class match used by vgen
+      try{
+        contentHtml = await page.$eval("div[class*='Tabs__Screen']", el => el.outerHTML);
+      }catch(__){
+        contentHtml = null;
+      }
+    }
     await browser.close();
     const list = Array.from(new Set(srcs)).filter(s => /^https?:\/\//i.test(s)).slice(0, SAMPLE_COUNT);
-    return { images: list, error: null };
+    return { images: list, contentHtml, error: null };
   }catch(e){
     const msg = e && e.message ? e.message : String(e);
-    console.error('Error fetching VGEN images with Puppeteer:', msg);
-    return { images: [], error: msg };
+    console.error('Error fetching VGEN images/content with Puppeteer:', msg);
+    return { images: [], contentHtml: null, error: msg };
   }
 }
 
@@ -74,9 +87,23 @@ async function build(){
     console.log('USE_VGEN_IMAGES enabled — attempting to fetch images from', VGEN_PORTFOLIO);
     const res = await fetchVgenImages();
     images = res.images || [];
+    const contentHtml = res.contentHtml || null;
     fetchError = res.error || null;
     console.log('VGEN images found:', images.length);
     if(fetchError) console.error('VGEN fetch error:', fetchError);
+    // if we captured the content div HTML, write it out for embedding/linking
+    if(contentHtml){
+      try{
+        const wrapped = `<!doctype html>\n<html><head><meta charset="utf-8"><title>VGEN Content</title></head><body>\n<!-- fetched from ${VGEN_PORTFOLIO} -->\n${contentHtml}\n</body></html>`;
+        fs.writeFileSync(path.join(OUT,'vgen-content.html'), wrapped, 'utf8');
+        // also create a simple link page users can click from the site
+        const linkHtml = `<!doctype html>\n<html><head><meta charset="utf-8"><title>VGEN Portfolio</title></head><body>\n<p>Embedded VGEN content saved from <a href="${VGEN_PORTFOLIO}">${VGEN_PORTFOLIO}</a>.</p>\n<p><a href="/vgen-content.html">View embedded VGEN content</a></p>\n<p><a href="${VGEN_PORTFOLIO}" target="_blank">Open original on VGEN</a></p>\n</body></html>`;
+        fs.writeFileSync(path.join(OUT,'vgen-link.html'), linkHtml, 'utf8');
+        console.log('Wrote vgen-content.html and vgen-link.html to', OUT);
+      }catch(e){
+        console.error('Failed to write vgen content files:', e && e.message ? e.message : e);
+      }
+    }
   }
 
   // fallback to local assets when no remote images found or not enabled
@@ -112,6 +139,7 @@ async function build(){
       imagesCount: images.length,
       images: images.slice(0, SAMPLE_COUNT),
       fetchError,
+      contentSaved: fs.existsSync(path.join(OUT,'vgen-content.html')),
       builtAt: new Date().toISOString(),
     };
     fs.writeFileSync(path.join(OUT,'build-info.json'), JSON.stringify(diag, null, 2));
