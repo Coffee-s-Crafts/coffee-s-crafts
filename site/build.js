@@ -13,6 +13,7 @@ const CONTACT_LINK = process.env.CONTACT_LINK || 'contact.html';
 const USE_VGEN = process.env.USE_VGEN === 'true' || process.env.USE_VGEN_IMAGES === 'true' || process.env.USE_VGEN_IMAGES === '1';
 const VGEN_PORTFOLIO = process.env.VGEN_PORTFOLIO || process.env.VGEN_PORTFOLIO_URL || '';
 const VGEN_URL = process.env.VGEN_URL || VGEN_PORTFOLIO || '';
+const FOOTER_TEXT = `${SITE_TITLE} — ${CONTACT_EMAIL}`;
 
 function ensureDir(p){
   if(!fs.existsSync(p)) fs.mkdirSync(p, { recursive: true });
@@ -102,6 +103,7 @@ async function build(){
   const vars = {
     SITE_TITLE,
     CONTACT_EMAIL,
+    FOOTER_TEXT,
     SAMPLE_IMAGES: sampleHtml,
     INDEX_LINK,
     GALLERY_LINK,
