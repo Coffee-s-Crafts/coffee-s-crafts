@@ -6,9 +6,13 @@ const ART_SRC = process.env.ART_SOURCE_DIR || 'assets/art';
 const SITE_TITLE = process.env.SITE_TITLE || "Coffee's Crafts";
 const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'artist@example.com';
 const SAMPLE_COUNT = parseInt(process.env.SAMPLE_COUNT || '6', 10);
+const INDEX_LINK = process.env.INDEX_LINK || 'index.html';
+const GALLERY_LINK = process.env.GALLERY_LINK || 'gallery.html';
+const CONTACT_LINK = process.env.CONTACT_LINK || 'contact.html';
 // Feature flag: whether to use remote VGEN image generation
-const USE_VGEN = process.env.USE_VGEN === 'true' || false;
-const VGEN_PORTFOLIO = process.env.VGEN_PORTFOLIO || '';
+const USE_VGEN = process.env.USE_VGEN === 'true' || process.env.USE_VGEN_IMAGES === 'true' || process.env.USE_VGEN_IMAGES === '1';
+const VGEN_PORTFOLIO = process.env.VGEN_PORTFOLIO || process.env.VGEN_PORTFOLIO_URL || '';
+const VGEN_URL = process.env.VGEN_URL || VGEN_PORTFOLIO || '';
 
 function ensureDir(p){
   if(!fs.existsSync(p)) fs.mkdirSync(p, { recursive: true });
@@ -95,6 +99,10 @@ async function build(){
     SITE_TITLE,
     CONTACT_EMAIL,
     SAMPLE_IMAGES: sampleHtml,
+    INDEX_LINK,
+    GALLERY_LINK,
+    CONTACT_LINK,
+    VGEN_URL,
   };
 
   fs.writeFileSync(path.join(OUT,'index.html'), renderTemplate('index.html', vars));
