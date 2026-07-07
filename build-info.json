@@ -1,0 +1,15 @@
+{
+  "USE_VGEN": true,
+  "VGEN_PORTFOLIO": "https://vgen.co/CoffeeEX/portfolio",
+  "ART_SRC": "assets/art",
+  "SAMPLE_COUNT": 6,
+  "imagesCount": 4,
+  "images": [
+    "assets/art/sample1.svg",
+    "assets/art/sample2.svg",
+    "assets/art/sample3.svg",
+    "assets/art/sample4.svg"
+  ],
+  "fetchError": "require() of ES Module /home/runner/work/coffee-s-crafts/coffee-s-crafts/node_modules/puppeteer/lib/puppeteer/puppeteer.js from /home/runner/work/coffee-s-crafts/coffee-s-crafts/site/build.js not supported.\nInstead change the require of puppeteer.js in /home/runner/work/coffee-s-crafts/coffee-s-crafts/site/build.js to a dynamic import() which is available in all CommonJS modules.",
+  "builtAt": "2026-07-07T06:18:38.005Z"
+}
