@@ -8,7 +8,12 @@ const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'artist@example.com';
 const VGEN_URL = process.env.VGEN_URL || 'https://vgen.co/CoffeeEX';
 const VGEN_PORTFOLIO = process.env.VGEN_PORTFOLIO_URL || `${VGEN_URL}/portfolio`;
 const SAMPLE_COUNT = parseInt(process.env.SAMPLE_COUNT || '6', 10);
-const USE_VGEN = (process.env.USE_VGEN_IMAGES === 'true' || process.env.USE_VGEN_IMAGES === '1');
+// Allow enabling VGEN image fetch via env or automatically enable in GitHub Actions CI
+const USE_VGEN = (
+  process.env.USE_VGEN_IMAGES === 'true' ||
+  process.env.USE_VGEN_IMAGES === '1' ||
+  process.env.GITHUB_ACTIONS === 'true'
+);
 
 function ensureDir(p){
   if(!fs.existsSync(p)) fs.mkdirSync(p, { recursive: true });
@@ -60,6 +65,7 @@ async function build(){
   // list/sample images
   let images = [];
 
+  console.log('Build settings:', { USE_VGEN, VGEN_PORTFOLIO, ART_SRC, SAMPLE_COUNT });
   if(USE_VGEN){
     console.log('USE_VGEN_IMAGES enabled — attempting to fetch images from', VGEN_PORTFOLIO);
     images = await fetchVgenImages();
