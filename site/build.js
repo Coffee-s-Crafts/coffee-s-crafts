@@ -46,10 +46,12 @@ async function fetchVgenImages(){
     await page.waitForTimeout(1000);
     const srcs = await page.$$eval('img', imgs => imgs.map(i => i.src).filter(Boolean));
     await browser.close();
-    return Array.from(new Set(srcs)).filter(s => /^https?:\/\//i.test(s)).slice(0, SAMPLE_COUNT);
+    const list = Array.from(new Set(srcs)).filter(s => /^https?:\/\//i.test(s)).slice(0, SAMPLE_COUNT);
+    return { images: list, error: null };
   }catch(e){
-    console.error('Error fetching VGEN images with Puppeteer:', e && e.message ? e.message : e);
-    return [];
+    const msg = e && e.message ? e.message : String(e);
+    console.error('Error fetching VGEN images with Puppeteer:', msg);
+    return { images: [], error: msg };
   }
 }
 
@@ -64,12 +66,16 @@ async function build(){
 
   // list/sample images
   let images = [];
+  let fetchError = null;
 
   console.log('Build settings:', { USE_VGEN, VGEN_PORTFOLIO, ART_SRC, SAMPLE_COUNT });
   if(USE_VGEN){
     console.log('USE_VGEN_IMAGES enabled — attempting to fetch images from', VGEN_PORTFOLIO);
-    images = await fetchVgenImages();
+    const res = await fetchVgenImages();
+    images = res.images || [];
+    fetchError = res.error || null;
     console.log('VGEN images found:', images.length);
+    if(fetchError) console.error('VGEN fetch error:', fetchError);
   }
 
   // fallback to local assets when no remote images found or not enabled
@@ -94,6 +100,24 @@ async function build(){
   fs.writeFileSync(path.join(OUT,'index.html'), renderTemplate('index.html', vars));
   fs.writeFileSync(path.join(OUT,'gallery.html'), renderTemplate('gallery.html', vars));
   fs.writeFileSync(path.join(OUT,'contact.html'), renderTemplate('contact.html', vars));
+
+  // diagnostics file for CI: records chosen image sources and any errors
+  try{
+    const diag = {
+      USE_VGEN,
+      VGEN_PORTFOLIO,
+      ART_SRC,
+      SAMPLE_COUNT,
+      imagesCount: images.length,
+      images: images.slice(0, SAMPLE_COUNT),
+      fetchError,
+      builtAt: new Date().toISOString(),
+    };
+    fs.writeFileSync(path.join(OUT,'build-info.json'), JSON.stringify(diag, null, 2));
+    console.log('Wrote build-info.json with diagnostics');
+  }catch(e){
+    console.error('Failed to write build-info.json:', e && e.message ? e.message : e);
+  }
 
   console.log('Site built to', OUT);
 }
