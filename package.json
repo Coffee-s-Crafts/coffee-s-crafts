@@ -1,0 +1,11 @@
+{
+  "name": "coffee-s-crafts",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "node site/build.js"
+  },
+  "dependencies": {
+    "puppeteer": "^25.3.0"
+  }
+}

@@ -11,16 +11,17 @@ jobs:
     permissions:
       contents: write
       pages: write
+      deployments: write
       id-token: write
     env:
       SITE_TITLE: ${{ secrets.SITE_TITLE }}
       CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}
-      VGEN_URL: ${{ secrets.VGEN_URL }}
-      # Enable fetching images from vgen portfolio during CI build
-      USE_VGEN_IMAGES: 'true'
-      VGEN_PORTFOLIO_URL: 'https://vgen.co/CoffeeEX/portfolio'
+      # Build uses local art assets
       ART_SOURCE_DIR: ${{ secrets.ART_SOURCE_DIR }}
       OUTPUT_DIR: 'dist'
+      # Enable VGEN gallery fetching when `USE_VGEN` is true and `VGEN_PORTFOLIO` is set
+      USE_VGEN: 'true'
+      VGEN_PORTFOLIO: ${{ secrets.VGEN_PORTFOLIO }}
       SAMPLE_COUNT: ${{ secrets.SAMPLE_COUNT }}
 
     steps:
@@ -40,10 +41,8 @@ jobs:
       - name: Show build environment
         run: |
           echo "--- Build environment ---"
-          env | grep -E 'USE_VGEN_IMAGES|VGEN|ART_SOURCE_DIR|OUTPUT_DIR|SAMPLE_COUNT|GITHUB_ACTIONS' || true
-          node -e "console.log('NODE ENV vars:', { USE_VGEN_IMAGES: process.env.USE_VGEN_IMAGES, GITHUB_ACTIONS: process.env.GITHUB_ACTIONS, VGEN_PORTFOLIO_URL: process.env.VGEN_PORTFOLIO_URL, ART_SOURCE_DIR: process.env.ART_SOURCE_DIR })"
-          echo "--- site/build.js (head) ---"
-          sed -n '1,120p' site/build.js || true
+          env | grep -E 'ART_SOURCE_DIR|OUTPUT_DIR|SAMPLE_COUNT|GITHUB_ACTIONS' || true
+          node -e "console.log('NODE ENV vars:', { GITHUB_ACTIONS: process.env.GITHUB_ACTIONS, ART_SOURCE_DIR: process.env.ART_SOURCE_DIR })"
 
       - name: Build site
         run: |
@@ -53,13 +52,30 @@ jobs:
         run: |
           echo "dist contents:" && ls -la dist || true
 
-      - name: Deploy to gh-pages branch
+      - name: Configure GitHub Pages
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-        uses: peaceiris/actions-gh-pages@v3
+        uses: actions/configure-pages@v3
+
+      - name: Upload artifact for GitHub Pages
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          publish_branch: gh-pages
-          cname: coffeescrafts.com
-          user_name: github-actions[bot]
-          user_email: 41898282+github-actions[bot]@users.noreply.github.com
+          path: ./dist
+
+      - name: Dispatch pages-build-deployment event
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && success() }}
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          event-type: pages-build-deployment
+          client-payload: '{"source":"build-and-deploy","ref":"refs/heads/main"}'
+
+      - name: Create GitHub deployment (so it shows in Deployments)
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && success() }}
+        run: |
+          echo "Creating deployment for $GITHUB_REPOSITORY on $GITHUB_REF"
+          curl -sS -X POST \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/${{ github.repository }}/deployments \
+            -d '{"ref":"refs/heads/main","task":"pages","auto_merge":false,"required_contexts":[],"environment":"github-pages","description":"GitHub Pages deployment from CI"}' || true
