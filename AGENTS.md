@@ -24,5 +24,6 @@ These rules are always in effect for this repository unless the user explicitly 
 
 - When editing deployment workflows, prefer changes that keep `gh-pages` as the publish target.
 - When changing image assets, preserve the branch-specific Git LFS policy above.
+- For requests about deployed `gh-pages` content that depends on environment variables (for example VGEN/contact links), check the `gh-pages` branch output and the env-var sources first (`.github/workflows/deploy-pages.yml`, build metadata such as `build-info.json`, and current defaults in `site/build.js` on `main`) before editing generated files.
 - If a proposed change conflicts with these rules, stop and ask for confirmation before proceeding.
 - Call out any detected mismatch between workflow behavior and these repository deployment settings.
