@@ -40,11 +40,8 @@ async function build(){
 
   // list/sample images
   let images = [];
-  let fetchError = null;
 
-  console.log('Build settings:', { USE_VGEN, VGEN_PORTFOLIO, ART_SRC, SAMPLE_COUNT });
-  // plain local build path
-  console.log('VGEN fetching disabled — using local art assets only');
+  console.log('Build settings:', { ART_SRC, SAMPLE_COUNT, OUT });
 
   // fallback to local assets when no remote images found or not enabled
   if(!images || images.length === 0){
@@ -61,8 +58,6 @@ async function build(){
   const vars = {
     SITE_TITLE,
     CONTACT_EMAIL,
-    VGEN_URL,
-    VGEN_PORTFOLIO,
     SAMPLE_IMAGES: sampleHtml,
   };
 
