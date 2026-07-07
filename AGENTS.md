@@ -12,8 +12,17 @@ These rules are always in effect for this repository unless the user explicitly 
 6. Published output must preserve custom-domain behavior (include/update `CNAME` with `coffeescrafts.com` when applicable).
 7. Do not remove or weaken these guardrails without explicit user approval in the current task.
 
+## Repository Ruleset: Git LFS Image Policy (Mandatory)
+
+1. On `main`, source art files under `assets/art/*.svg` must be tracked with Git LFS.
+2. `.gitattributes` on `main` must include:
+   - `assets/art/*.svg filter=lfs diff=lfs merge=lfs -text`
+3. On `gh-pages`, published image assets should remain regular files (non-LFS pointers) so GitHub Pages serves them directly.
+4. Do not introduce LFS pointer files into published site output on `gh-pages`.
+
 ## Implementation Guidance for Agents
 
 - When editing deployment workflows, prefer changes that keep `gh-pages` as the publish target.
+- When changing image assets, preserve the branch-specific Git LFS policy above.
 - If a proposed change conflicts with these rules, stop and ask for confirmation before proceeding.
 - Call out any detected mismatch between workflow behavior and these repository deployment settings.
