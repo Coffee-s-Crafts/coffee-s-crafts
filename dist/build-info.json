@@ -1,8 +1,10 @@
 {
-  "USE_VGEN": false,
-  "VGEN_PORTFOLIO": "https://vgen.co/CoffeeEX/portfolio",
   "ART_SRC": "assets/art",
   "SAMPLE_COUNT": 6,
+  "USE_VGEN": false,
+  "VGEN_PORTFOLIO": "",
+  "fetchError": null,
+  "contentSaved": false,
   "imagesCount": 4,
   "images": [
     "assets/art/sample1.svg",
@@ -10,7 +12,5 @@
     "assets/art/sample3.svg",
     "assets/art/sample4.svg"
   ],
-  "fetchError": null,
-  "contentSaved": false,
-  "builtAt": "2026-07-07T12:54:22.370Z"
+  "builtAt": "2026-07-07T15:08:28.995Z"
 }
