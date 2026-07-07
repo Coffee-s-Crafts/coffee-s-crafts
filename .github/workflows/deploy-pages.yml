@@ -57,3 +57,11 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
+
+      - name: Dispatch pages-build-deployment event
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && success() }}
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          event-type: pages-build-deployment
+          client-payload: '{"source":"build-and-deploy","ref":"refs/heads/main"}'
