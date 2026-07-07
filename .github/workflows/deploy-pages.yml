@@ -29,6 +29,9 @@ jobs:
           SITE_TITLE: ${{ secrets.SITE_TITLE }}
           CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}
           VGEN_URL: ${{ secrets.VGEN_URL }}
+          # Enable fetching images from vgen portfolio during CI build
+          USE_VGEN_IMAGES: 'true'
+          VGEN_PORTFOLIO_URL: 'https://vgen.co/CoffeeEX/portfolio'
           ART_SOURCE_DIR: ${{ secrets.ART_SOURCE_DIR }}
           OUTPUT_DIR: 'dist'
           SAMPLE_COUNT: ${{ secrets.SAMPLE_COUNT }}
@@ -46,6 +49,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
           publish_branch: gh-pages
-          cname: coffeescrafts.com
           user_name: github-actions[bot]
           user_email: 41898282+github-actions[bot]@users.noreply.github.com
