@@ -34,7 +34,7 @@ function renderTemplate(name, vars){
   const tpl = fs.readFileSync(path.join('site','templates', name), 'utf8');
   return tpl.replace(/%%(\w+)%%/g, (_, key)=> vars[key] || '');
 }
-// No remote VGEN fetching: build uses local art assets only.
+// Optional remote VGEN fetching with local art fallback.
 
 async function build(){
   // prepare output
@@ -54,12 +54,12 @@ async function build(){
   let fetchError = null;
   let contentSaved = false;
   if(USE_VGEN && VGEN_PORTFOLIO){
+    let timeout;
     try{
       console.log('Attempting to fetch VGEN portfolio from', VGEN_PORTFOLIO);
       const controller = new AbortController();
-      const timeout = setTimeout(()=>controller.abort(), 5000);
+      timeout = setTimeout(()=>controller.abort(), 5000);
       const res = await fetch(VGEN_PORTFOLIO, { signal: controller.signal });
-      clearTimeout(timeout);
       if(res.ok){
         const ct = res.headers.get('content-type') || '';
         let data;
@@ -71,15 +71,19 @@ async function build(){
             .filter(u => typeof u === 'string')
             .filter(f => /\.(png|jpe?g|svg|gif|webp)$/i.test(f))
             .slice(0, SAMPLE_COUNT);
+          contentSaved = images.length > 0;
         }else if(typeof data === 'string'){
           const urls = Array.from(data.matchAll(/https?:\/\/[\w\-./%]+\.(png|jpe?g|svg|gif|webp)/ig)).map(m => m[0]);
           images = urls.slice(0, SAMPLE_COUNT);
+          contentSaved = images.length > 0;
         }
       }else{
         fetchError = `VGEN responded ${res.status}`;
       }
     }catch(err){
       fetchError = err && err.message ? err.message : String(err);
+    }finally{
+      if(timeout) clearTimeout(timeout);
     }
   }
 
@@ -109,7 +113,7 @@ async function build(){
   fs.writeFileSync(path.join(OUT,'gallery.html'), renderTemplate('gallery.html', vars));
   fs.writeFileSync(path.join(OUT,'contact.html'), renderTemplate('contact.html', vars));
 
-  // diagnostics file for CI: records chosen image sources
+  // diagnostics file for CI: records image source selection and fetch status
   try{
     const diag = {
       ART_SRC,
