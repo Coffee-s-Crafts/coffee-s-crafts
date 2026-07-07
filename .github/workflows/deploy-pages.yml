@@ -2,26 +2,29 @@ name: Build and Deploy Pages
 
 on:
   workflow_dispatch:
-  push: {}
-  pull_request: {}
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      pages: write
-      deployments: write
-      id-token: write
     env:
       SITE_TITLE: ${{ secrets.SITE_TITLE }}
       CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}
       # Build uses local art assets
       ART_SOURCE_DIR: ${{ secrets.ART_SOURCE_DIR }}
       OUTPUT_DIR: 'dist'
+      INDEX_LINK: 'index.html'
+      GALLERY_LINK: 'gallery.html'
+      CONTACT_LINK: 'contact.html'
       # Enable VGEN gallery fetching when `USE_VGEN` is true and `VGEN_PORTFOLIO` is set
       USE_VGEN: 'true'
       VGEN_PORTFOLIO: ${{ secrets.VGEN_PORTFOLIO }}
+      VGEN_URL: ${{ secrets.VGEN_URL }}
       SAMPLE_COUNT: ${{ secrets.SAMPLE_COUNT }}
 
     steps:
@@ -52,30 +55,13 @@ jobs:
         run: |
           echo "dist contents:" && ls -la dist || true
 
-      - name: Configure GitHub Pages
+      - name: Deploy to gh-pages branch
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-        uses: actions/configure-pages@v3
-
-      - name: Upload artifact for GitHub Pages
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-        uses: actions/upload-pages-artifact@v3
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          path: ./dist
-
-      - name: Dispatch pages-build-deployment event
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && success() }}
-        uses: peter-evans/repository-dispatch@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          event-type: pages-build-deployment
-          client-payload: '{"source":"build-and-deploy","ref":"refs/heads/main"}'
-
-      - name: Create GitHub deployment (so it shows in Deployments)
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && success() }}
-        run: |
-          echo "Creating deployment for $GITHUB_REPOSITORY on $GITHUB_REF"
-          curl -sS -X POST \
-            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Accept: application/vnd.github+json" \
-            https://api.github.com/repos/${{ github.repository }}/deployments \
-            -d '{"ref":"refs/heads/main","task":"pages","auto_merge":false,"required_contexts":[],"environment":"github-pages","description":"GitHub Pages deployment from CI"}' || true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
+          cname: coffeescrafts.com
+          user_name: github-actions[bot]
+          user_email: 41898282+github-actions[bot]@users.noreply.github.com

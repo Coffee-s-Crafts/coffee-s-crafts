@@ -1,5 +1,3 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600">
-  <rect width="100%" height="100%" fill="#e8f5ff"/>
-  <rect x="120" y="100" width="480" height="320" rx="24" fill="#6ea8fe" />
-  <text x="50%" y="85%" dominant-baseline="middle" text-anchor="middle" font-size="36" fill="#073763">Sample 2</text>
-</svg>
+version https://git-lfs.github.com/spec/v1
+oid sha256:76a52ca1871649f5695246ca423909dd2934d61a1d8d786de23aec147c12843d
+size 323
