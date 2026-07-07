@@ -1,1 +1,1 @@
-assets/art/* filter=lfs diff=lfs merge=lfs -text
+assets/art/*.svg filter=lfs diff=lfs merge=lfs -textassets/art/* filter=lfs diff=lfs merge=lfs -text
