@@ -2,8 +2,8 @@ name: Build and Deploy Pages
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ main ]
+  push: {}
+  pull_request: {}
 
 jobs:
   build-and-deploy:
@@ -43,7 +43,8 @@ jobs:
   deploy:
     needs: build-and-deploy
     runs-on: ubuntu-latest
-    environment: github-pages
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    environment: 'github-pages'
     permissions:
       pages: write
       id-token: write
