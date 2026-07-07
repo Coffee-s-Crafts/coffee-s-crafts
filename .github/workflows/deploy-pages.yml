@@ -1,0 +1,65 @@
+name: Build and Deploy Pages
+
+on:
+  workflow_dispatch:
+  push: {}
+  pull_request: {}
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    env:
+      SITE_TITLE: ${{ secrets.SITE_TITLE }}
+      CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}
+      VGEN_URL: ${{ secrets.VGEN_URL }}
+      # Enable fetching images from vgen portfolio during CI build
+      USE_VGEN_IMAGES: 'true'
+      VGEN_PORTFOLIO_URL: 'https://vgen.co/CoffeeEX/portfolio'
+      ART_SOURCE_DIR: ${{ secrets.ART_SOURCE_DIR }}
+      OUTPUT_DIR: 'dist'
+      SAMPLE_COUNT: ${{ secrets.SAMPLE_COUNT }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Show build environment
+        run: |
+          echo "--- Build environment ---"
+          env | grep -E 'USE_VGEN_IMAGES|VGEN|ART_SOURCE_DIR|OUTPUT_DIR|SAMPLE_COUNT|GITHUB_ACTIONS' || true
+          node -e "console.log('NODE ENV vars:', { USE_VGEN_IMAGES: process.env.USE_VGEN_IMAGES, GITHUB_ACTIONS: process.env.GITHUB_ACTIONS, VGEN_PORTFOLIO_URL: process.env.VGEN_PORTFOLIO_URL, ART_SOURCE_DIR: process.env.ART_SOURCE_DIR })"
+          echo "--- site/build.js (head) ---"
+          sed -n '1,120p' site/build.js || true
+
+      - name: Build site
+        run: |
+          node site/build.js
+
+      - name: Archive dist
+        run: |
+          echo "dist contents:" && ls -la dist || true
+
+      - name: Deploy to gh-pages branch
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
+          cname: coffeescrafts.com
+          user_name: github-actions[bot]
+          user_email: 41898282+github-actions[bot]@users.noreply.github.com
