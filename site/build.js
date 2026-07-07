@@ -6,6 +6,9 @@ const ART_SRC = process.env.ART_SOURCE_DIR || 'assets/art';
 const SITE_TITLE = process.env.SITE_TITLE || "Coffee's Crafts";
 const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'artist@example.com';
 const SAMPLE_COUNT = parseInt(process.env.SAMPLE_COUNT || '6', 10);
+// Feature flag: whether to use remote VGEN image generation
+const USE_VGEN = process.env.USE_VGEN === 'true' || false;
+const VGEN_PORTFOLIO = process.env.VGEN_PORTFOLIO || '';
 
 function ensureDir(p){
   if(!fs.existsSync(p)) fs.mkdirSync(p, { recursive: true });
@@ -43,6 +46,39 @@ async function build(){
 
   console.log('Build settings:', { ART_SRC, SAMPLE_COUNT, OUT });
 
+  // Try VGEN portfolio when enabled
+  let fetchError = null;
+  let contentSaved = false;
+  if(USE_VGEN && VGEN_PORTFOLIO){
+    try{
+      console.log('Attempting to fetch VGEN portfolio from', VGEN_PORTFOLIO);
+      const controller = new AbortController();
+      const timeout = setTimeout(()=>controller.abort(), 5000);
+      const res = await fetch(VGEN_PORTFOLIO, { signal: controller.signal });
+      clearTimeout(timeout);
+      if(res.ok){
+        const ct = res.headers.get('content-type') || '';
+        let data;
+        if(ct.includes('application/json')) data = await res.json();
+        else data = await res.text();
+
+        if(Array.isArray(data)){
+          images = data
+            .filter(u => typeof u === 'string')
+            .filter(f => /\.(png|jpe?g|svg|gif|webp)$/i.test(f))
+            .slice(0, SAMPLE_COUNT);
+        }else if(typeof data === 'string'){
+          const urls = Array.from(data.matchAll(/https?:\/\/[\w\-./%]+\.(png|jpe?g|svg|gif|webp)/ig)).map(m => m[0]);
+          images = urls.slice(0, SAMPLE_COUNT);
+        }
+      }else{
+        fetchError = `VGEN responded ${res.status}`;
+      }
+    }catch(err){
+      fetchError = err && err.message ? err.message : String(err);
+    }
+  }
+
   // fallback to local assets when no remote images found or not enabled
   if(!images || images.length === 0){
     if(fs.existsSync(ART_SRC)){
@@ -70,6 +106,10 @@ async function build(){
     const diag = {
       ART_SRC,
       SAMPLE_COUNT,
+      USE_VGEN,
+      VGEN_PORTFOLIO,
+      fetchError,
+      contentSaved,
       imagesCount: images.length,
       images: images.slice(0, SAMPLE_COUNT),
       builtAt: new Date().toISOString(),
