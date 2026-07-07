@@ -19,6 +19,9 @@ jobs:
       # Build uses local art assets
       ART_SOURCE_DIR: ${{ secrets.ART_SOURCE_DIR }}
       OUTPUT_DIR: 'dist'
+      # Enable VGEN gallery fetching when `USE_VGEN` is true and `VGEN_PORTFOLIO` is set
+      USE_VGEN: 'true'
+      VGEN_PORTFOLIO: ${{ secrets.VGEN_PORTFOLIO }}
       SAMPLE_COUNT: ${{ secrets.SAMPLE_COUNT }}
 
     steps:
