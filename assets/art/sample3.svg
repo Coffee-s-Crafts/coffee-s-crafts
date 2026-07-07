@@ -1,3 +1,5 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:0815499e221868c0115feec9fc9b928567c676cab32486040d3096321e479e5e
-size 509
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600">
+  <rect width="100%" height="100%" fill="#fff7e6"/>
+  <path d="M100 300 C200 100, 600 100, 700 300" fill="#ffd49b" stroke="#ff8c42" stroke-width="6"/>
+  <text x="50%" y="85%" dominant-baseline="middle" text-anchor="middle" font-size="36" fill="#5b3a29">Sample 3</text>
+</svg>
