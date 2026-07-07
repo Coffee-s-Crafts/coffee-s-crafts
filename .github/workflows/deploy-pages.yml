@@ -1,0 +1,52 @@
+name: Build and Deploy Pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Build site
+        env:
+          SITE_TITLE: ${{ secrets.SITE_TITLE }}
+          CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}
+          VGEN_URL: ${{ secrets.VGEN_URL }}
+          ART_SOURCE_DIR: ${{ secrets.ART_SOURCE_DIR }}
+          OUTPUT_DIR: 'dist'
+          SAMPLE_COUNT: ${{ secrets.SAMPLE_COUNT }}
+        run: |
+          node site/build.js
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: dist
+
+  deploy:
+    needs: build-and-deploy
+    runs-on: ubuntu-latest
+    environment: github-pages
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
