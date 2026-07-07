@@ -16,9 +16,7 @@ jobs:
       SITE_TITLE: ${{ secrets.SITE_TITLE }}
       CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}
       VGEN_URL: ${{ secrets.VGEN_URL }}
-      # Enable fetching images from vgen portfolio during CI build
-      USE_VGEN_IMAGES: 'true'
-      VGEN_PORTFOLIO_URL: 'https://vgen.co/CoffeeEX/portfolio'
+      # VGEN fetching removed; build uses local art assets
       ART_SOURCE_DIR: ${{ secrets.ART_SOURCE_DIR }}
       OUTPUT_DIR: 'dist'
       SAMPLE_COUNT: ${{ secrets.SAMPLE_COUNT }}
@@ -40,8 +38,8 @@ jobs:
       - name: Show build environment
         run: |
           echo "--- Build environment ---"
-          env | grep -E 'USE_VGEN_IMAGES|VGEN|ART_SOURCE_DIR|OUTPUT_DIR|SAMPLE_COUNT|GITHUB_ACTIONS' || true
-          node -e "console.log('NODE ENV vars:', { USE_VGEN_IMAGES: process.env.USE_VGEN_IMAGES, GITHUB_ACTIONS: process.env.GITHUB_ACTIONS, VGEN_PORTFOLIO_URL: process.env.VGEN_PORTFOLIO_URL, ART_SOURCE_DIR: process.env.ART_SOURCE_DIR })"
+          env | grep -E 'ART_SOURCE_DIR|OUTPUT_DIR|SAMPLE_COUNT|GITHUB_ACTIONS' || true
+          node -e "console.log('NODE ENV vars:', { GITHUB_ACTIONS: process.env.GITHUB_ACTIONS, ART_SOURCE_DIR: process.env.ART_SOURCE_DIR })"
 
       - name: Build site
         run: |
