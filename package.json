@@ -6,6 +6,6 @@
     "build": "node site/build.js"
   },
   "dependencies": {
-    "puppeteer": "^20.11.0"
+    "puppeteer": "^25.3.0"
   }
 }
