@@ -53,7 +53,7 @@ const TRELLO_LINK_TEXT        = process.env.TRELLO_LINK_TEXT        || '📋 Art
 const QUEUE_TRACKING_TEXT     = process.env.QUEUE_TRACKING_TEXT     || 'Track art commission progress here:';
 const TWITCH_URL              = (process.env.TWITCH_URL             || 'https://twitch.tv/coffeescrafts').trim();
 const TWITCH_LINK_TEXT        = process.env.TWITCH_LINK_TEXT        || '📺 Twitch';
-const FURSUIT_TOS_URL         = (process.env.FURSUIT_TOS_URL        || 'https://docs.google.com/document/d/1nN5qPhuR_FkKkcDdRS9EFwbbkudlANWd0wdbjgQee5s/edit?usp=sharing').trim();
+const FURSUIT_TOS_URL         = (process.env.FURSUIT_TOS_URL        || 'tos.html').trim();
 const FURSUIT_TOS_LINK_TEXT   = process.env.FURSUIT_TOS_LINK_TEXT   || '📄 Fursuit TOS';
 const FURSUIT_QUEUE_URL       = (process.env.FURSUIT_QUEUE_URL      || 'https://trello.com/b/1NyoDiwp/fursuit-wips').trim();
 const FURSUIT_QUEUE_LINK_TEXT = process.env.FURSUIT_QUEUE_LINK_TEXT || '📋 Fursuit Queue Trello';
@@ -125,6 +125,19 @@ const FURSUIT_PRICES = process.env.FURSUIT_PRICES ? JSON.parse(process.env.FURSU
   { name: '3/4 digi', price: '$1,185' },
   { name: 'Full planti', price: '$1,335' },
   { name: 'Full digi', price: '$1,435' }
+];
+
+// Terms of Service structured content
+const TOS_TITLE = process.env.TOS_TITLE || "CoffeeEX's Terms of Service";
+const TOS_UPDATED = process.env.TOS_UPDATED || 'Updated May 26, 2026';
+const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTIONS) : [
+  { heading: 'GENERAL', paragraphs: ["I reserve the right to decline any commission. No ABDL/Feral NSFW."] },
+  { heading: 'PAYMENTS', paragraphs: ['All payments will be made through VGen.'] },
+  { heading: 'REVISIONS', paragraphs: ['Revisions can be requested during the sketch phase mainly. Small lineart and color/marking changes can be made, such as to make them more accurate to what you want, but drastic changes to lineart/markings are not allowed, if they aren\'t shown on the ref sheet.'] },
+  { heading: 'DEADLINES AND DELIVERY', paragraphs: ['Deadlines are minimum 1 month. Delivery is through messaging as a PNG.'] },
+  { heading: 'USE', paragraphs: ['Personal use only, DO NOT use for AI purposes. Please credit me wherever you post it.'] },
+  { heading: 'REFUNDS', paragraphs: ['No refunds available after sketch is sent. Full refund if no sketch is sent yet.'] },
+  { heading: 'COMMUNICATION', paragraphs: ['Please message me on discord, coffee.ex if you cannot contact me on VGen.'] }
 ];
 
 // ── Build functions ───────────────────────────────────────────────────────
@@ -295,6 +308,9 @@ async function build() {
     FURSUIT_LINK,
     ART_SECTIONS,
     FURSUIT_PRICES,
+    TOS_TITLE,
+    TOS_UPDATED,
+    TOS_SECTIONS,
   };
 
   fs.writeFileSync(path.join(OUT, 'index.html'), renderTemplate('index.html', vars));
@@ -302,6 +318,7 @@ async function build() {
   fs.writeFileSync(path.join(OUT, 'contact.html'), renderTemplate('contact.html', vars));
   fs.writeFileSync(path.join(OUT, 'art.html'), renderTemplate('art.html', vars));
   fs.writeFileSync(path.join(OUT, 'fursuit.html'), renderTemplate('fursuit.html', vars));
+  fs.writeFileSync(path.join(OUT, 'tos.html'), renderTemplate('tos.html', vars));
 
   try {
     const diag = {
