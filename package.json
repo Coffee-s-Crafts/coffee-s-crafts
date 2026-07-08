@@ -4,8 +4,5 @@
   "private": true,
   "scripts": {
     "build": "node site/build.js"
-  },
-  "dependencies": {
-    "puppeteer": "^25.3.0"
   }
 }
