@@ -1,22 +1,11 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>%%SITE_TITLE%%</title>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&family=Shrikhand&display=swap">
-  <link rel="stylesheet" href="styles.css">
+  {{> head}}
 </head>
 <body>
-  <header class="site-header">
-    <span class="brand">%%SITE_TITLE%%</span>
-    <nav>
-      <a href="%%INDEX_LINK%%">Home</a>
-      <a href="%%GALLERY_LINK%%">Gallery</a>
-      <a href="%%CONTACT_LINK%%">Contact</a>
-    </nav>
-  </header>
+  {{> header}}
 
   <div class="hero">
     <h1>%%SITE_TITLE%%</h1>
@@ -42,8 +31,6 @@
     </section>
   </main>
 
-  <footer class="site-footer">
-    <p>%%FOOTER_TEXT%%</p>
-  </footer>
+  {{> footer}}
 </body>
 </html>
