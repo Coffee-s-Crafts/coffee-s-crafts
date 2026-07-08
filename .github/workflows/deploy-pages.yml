@@ -25,6 +25,7 @@ jobs:
       USE_VGEN: 'true'
       VGEN_PORTFOLIO: ${{ secrets.VGEN_PORTFOLIO }}
       VGEN_URL: ${{ secrets.VGEN_URL }}
+      COMMISSION_STATUS: ${{ secrets.COMMISSION_STATUS }}
       SAMPLE_COUNT: ${{ secrets.SAMPLE_COUNT }}
 
     steps:

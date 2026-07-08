@@ -12,8 +12,13 @@ const CONTACT_LINK = process.env.CONTACT_LINK || 'contact.html';
 // Feature flag: whether to use remote VGEN image generation
 const USE_VGEN = process.env.USE_VGEN === 'true' || process.env.USE_VGEN_IMAGES === 'true' || process.env.USE_VGEN_IMAGES === '1';
 const VGEN_PORTFOLIO = process.env.VGEN_PORTFOLIO || process.env.VGEN_PORTFOLIO_URL || '';
-const VGEN_URL = process.env.VGEN_URL || VGEN_PORTFOLIO || '';
-const FOOTER_TEXT = `${SITE_TITLE} — ${CONTACT_EMAIL}`;
+const DEFAULT_VGEN_URL = 'https://vgen.co/CoffeeEX';
+const VGEN_URL = (process.env.VGEN_URL || VGEN_PORTFOLIO || DEFAULT_VGEN_URL).trim();
+const COMMISSION_OPEN = (process.env.COMMISSION_STATUS || 'open').toLowerCase() === 'open';
+const COMMISSION_STATUS_CLASS = COMMISSION_OPEN ? 'open' : 'closed';
+const COMMISSION_STATUS_LABEL = COMMISSION_OPEN ? 'Commissions Open' : 'Commissions Closed';
+const FOOTER_YEAR = new Date().getFullYear();
+const FOOTER_TEXT = `© ${FOOTER_YEAR} ${SITE_TITLE} — ${CONTACT_EMAIL}`;
 
 function ensureDir(p){
   if(!fs.existsSync(p)) fs.mkdirSync(p, { recursive: true });
@@ -109,6 +114,8 @@ async function build(){
     GALLERY_LINK,
     CONTACT_LINK,
     VGEN_URL,
+    COMMISSION_STATUS_CLASS,
+    COMMISSION_STATUS_LABEL,
   };
 
   fs.writeFileSync(path.join(OUT,'index.html'), renderTemplate('index.html', vars));
