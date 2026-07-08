@@ -232,7 +232,7 @@ const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(proce
   {
     heading: 'COMMUNICATION',
     paragraphs: [
-      `Maintain timely communication. If the buyer fails to provide required information or misses agreed payments within a reasonable period, the maker may pause or cancel the commission; refunds in that case are at the maker's discretion. For urgent issues contact <a href="${DISCORD_URL}" target="_blank" rel="noopener">Discord</a>.`
+      `Maintain timely communication. If the buyer fails to provide required information or misses agreed payments within a reasonable period, the maker may pause or cancel the commission; refunds in that case are at the maker's discretion. For urgent issues contact the artist on <a href="${DISCORD_URL}" target="_blank" rel="noopener">Discord</a>.`
     ]
   },
   {
