@@ -44,7 +44,7 @@ const TIER3_TITLE         = process.env.TIER3_TITLE         || "Full Body";
 const TIER3_DESC          = process.env.TIER3_DESC          || "Full character with detailed shading and a custom background scene.";
 const TIER4_TITLE         = process.env.TIER4_TITLE         || "Custom / Ask";
 const TIER4_DESC          = process.env.TIER4_DESC          || "Something else in mind? Reach out and we can work out a quote together.";
-const CONTACT_HEADING     = process.env.CONTACT_HEADING     || "Get in Touch";
+const CONTACT_HEADING     = process.env.CONTACT_HEADING     || "Contact";
 const VGEN_LINK_TEXT      = process.env.VGEN_LINK_TEXT      || "🎨 VGen Portfolio";
 const EMAIL_LINK_TEXT     = process.env.EMAIL_LINK_TEXT     || "✉️ Email Me";
 
