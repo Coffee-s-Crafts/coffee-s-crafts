@@ -10,7 +10,24 @@
   <main class="page-content">
     <section class="content-panel">
       <h1>Art Commissions</h1>
-      %%ART_CONTENT%%
+      {{#each ART_SECTIONS}}
+      <article class="art-section">
+        <h2>{{this.title}}</h2>
+        {{#each this.paragraphs}}<p>{{this}}</p>{{/each}}
+        <h4>Details</h4>
+        <ul>
+          {{#each this.details}}<li>{{this}}</li>{{/each}}
+        </ul>
+        <h4>Add-ons</h4>
+        <ul>
+          {{#each this.addons}}<li>{{this}}</li>{{/each}}
+        </ul>
+        <h4>Important</h4>
+        <ul>
+          {{#each this.important}}<li>{{this}}</li>{{/each}}
+        </ul>
+      </article>
+      {{/each}}
     </section>
   </main>
 

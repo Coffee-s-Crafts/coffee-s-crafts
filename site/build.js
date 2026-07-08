@@ -73,105 +73,59 @@ const CONTACT_EMAIL           = process.env.CONTACT_EMAIL           || 'coffee@c
 const FOOTER_TEXT             = `© ${FOOTER_YEAR} ${SITE_TITLE} — ${CONTACT_EMAIL}`;
 
 // ── New page content (configurable via env) ─────────────────────────────────
-const ART_CONTENT = process.env.ART_CONTENT || `
-<article>
-  <h2>Art — Starting From</h2>
+const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTIONS) : [
+  {
+    title: 'Full Body (not for commercial use): $20',
+    paragraphs: ['One fullbody of your chosen furry character!'],
+    details: ['Delivered as a PNG'],
+    addons: ['Shading', 'Extra Characters', 'Background options'],
+    important: ['Please be as detailed as possible when explaining what you\'d like, such as pose, expression, etc. NO SHADED REFERENCES PLEASE.']
+  },
+  {
+    title: 'Furry Headshot (not for commercial use): $10',
+    paragraphs: ['Includes one headshot of your furry character.'],
+    details: ['Delivered as a PNG'],
+    addons: ['Shading', 'Simple color background', 'Simple splash background'],
+    important: ['Please be as thorough as possible when describing what you want. NO SHADED REFERENCE SHEETS.']
+  },
+  {
+    title: 'Furry PNGTuber: $35',
+    paragraphs: ['Four frames of your character and a step-by-step setup guide for PNGTuber use.'],
+    details: ['File is a .veado file to be used on Veadotube.'],
+    addons: [],
+    important: ['Please provide an unshaded reference.']
+  },
+  {
+    title: 'Scenic Furry: $50',
+    paragraphs: ['A scenic drawing of one (or more) of your characters. Scenery depends on complexity type.'],
+    details: ['File delivered as a PNG.'],
+    addons: ['Extra characters', 'Background complexity'],
+    important: ['NO SHADED REFERENCE SHEETS. Please provide detailed scene description and reference photos when possible.']
+  },
+  {
+    title: 'Furry Reference Sheet: $45',
+    paragraphs: ['Symmetrical front & back of your character. There are free add-ons such as putting the characters likes and dislikes on the ref.'],
+    details: [],
+    addons: ['See request form for many add-ons'],
+    important: ['PLEASE send unshaded artworks of your character. If requesting a custom character, include the custom character add-on fee.']
+  }
+];
 
-  <section>
-    <h3>Full Body (not for commercial use): $20</h3>
-    <p># One fullbody of your chosen furry character!</p>
-    <h4>Details</h4>
-    <ul>
-      <li>Delivered as a PNG</li>
-    </ul>
-    <h4>Add-ons</h4>
-    <ul>
-      <li>Shading</li>
-      <li>Extra Characters</li>
-      <li>Background options</li>
-    </ul>
-    <h4>Important</h4>
-    <p>Please be as detailed as possible when explaining what you'd like, such as pose, expression, etc. NO SHADED REFERENCES PLEASE.</p>
-  </section>
-
-  <section>
-    <h3>Furry Headshot (not for commercial use): $10</h3>
-    <p>Includes one headshot of your furry character.</p>
-    <h4>Details</h4>
-    <ul>
-      <li>Delivered as a PNG</li>
-    </ul>
-    <h4>Add-ons</h4>
-    <ul>
-      <li>Shading</li>
-      <li>Simple color background</li>
-      <li>Simple splash background</li>
-    </ul>
-    <h4>Important</h4>
-    <p>Please be as thorough as possible when describing what you want. NO SHADED REFERENCE SHEETS.</p>
-  </section>
-
-  <section>
-    <h3>Furry PNGTuber: $35</h3>
-    <h4>Includes</h4>
-    <ul>
-      <li>Four frames of your character (Mouth open eyes closed, mouth closed eyes open, mouth closed eyes closed, mouth open eyes open)</li>
-      <li>A detailed step-by-step guide on how to set up your PNGTuber</li>
-    </ul>
-    <h4>Details</h4>
-    <p>File is a .veado file to be used on Veadotube.</p>
-    <h4>Add-ons</h4>
-    <p>No addons available.</p>
-    <h4>Important</h4>
-    <p>I will also be giving helpful youtube videos on how to set certain things up. Please make sure your reference is unshaded.</p>
-  </section>
-
-  <section>
-    <h3>Scenic Furry: $50</h3>
-    <h4>Includes</h4>
-    <p>A scenic drawing of one (or more) of your characters. Scenery depends on complexity type.</p>
-    <h4>Details</h4>
-    <p>File delivered as a PNG.</p>
-    <h4>Add-ons</h4>
-    <p>Extra characters, background complexity. Please see request form photos for examples of each complexity.</p>
-    <h4>Important</h4>
-    <p>NO SHADED REFERENCE SHEETS. Please go into as much detail describing the scene you'd like (Unless simple scene, then you only have a limited amount of options!) as well as the pose, or poses, if multiple characters. Including reference photos is very helpful!</p>
-  </section>
-
-  <section>
-    <h3>Furry Reference Sheet: $45</h3>
-    <h4>Includes</h4>
-    <p>Symmetrical front & back of your character. There are free add-ons such as putting the characters likes and dislikes on the ref.</p>
-    <h4>Add-ons</h4>
-    <p>Many different add-ons can be seen on the request form :)</p>
-    <h4>Important</h4>
-    <ul>
-      <li>PLEASE send me unshaded artworks of your character. This makes color picking and markings easier to read!</li>
-      <li>If you are also requesting a custom character, you MUST click the add-on that adds the additional custom character fee. If you don't, I will not accept the commission.</li>
-    </ul>
-  </section>
-</article>
-`;
-
-const FURSUIT_CONTENT = process.env.FURSUIT_CONTENT || `
-<article>
-  <ul class="prices-list">
-    <li><strong>Head only:</strong> $465</li>
-    <li><strong>Paws only:</strong> $85</li>
-    <li><strong>Feetpaws only:</strong> $165</li>
-    <li><strong>One foot tail (Each additional foot is +$20):</strong> $60</li>
-    <li><strong>Planti legs only:</strong> $225</li>
-    <li><strong>Digi legs only:</strong> $325</li>
-    <li><strong>Mini partial:</strong> $645</li>
-    <li><strong>Mini partial + feet:</strong> $765</li>
-    <li><strong>Mini partial + feet + armsleeves:</strong> $865</li>
-    <li><strong>3/4 planti:</strong> $1,085</li>
-    <li><strong>3/4 digi:</strong> $1,185</li>
-    <li><strong>Full planti:</strong> $1,335</li>
-    <li><strong>Full digi:</strong> $1,435</li>
-  </ul>
-</article>
-`;
+const FURSUIT_PRICES = process.env.FURSUIT_PRICES ? JSON.parse(process.env.FURSUIT_PRICES) : [
+  { name: 'Head only', price: '$465' },
+  { name: 'Paws only', price: '$85' },
+  { name: 'Feetpaws only', price: '$165' },
+  { name: 'One foot tail (Each additional foot is +$20)', price: '$60' },
+  { name: 'Planti legs only', price: '$225' },
+  { name: 'Digi legs only', price: '$325' },
+  { name: 'Mini partial', price: '$645' },
+  { name: 'Mini partial + feet', price: '$765' },
+  { name: 'Mini partial + feet + armsleeves', price: '$865' },
+  { name: '3/4 planti', price: '$1,085' },
+  { name: '3/4 digi', price: '$1,185' },
+  { name: 'Full planti', price: '$1,335' },
+  { name: 'Full digi', price: '$1,435' }
+];
 
 // ── Build functions ───────────────────────────────────────────────────────
 
@@ -293,8 +247,8 @@ async function build() {
     X_LINK_TEXT,
     ART_LINK,
     FURSUIT_LINK,
-    ART_CONTENT,
-    FURSUIT_CONTENT,
+    ART_SECTIONS,
+    FURSUIT_PRICES,
   };
 
   fs.writeFileSync(path.join(OUT, 'index.html'), renderTemplate('index.html', vars));
