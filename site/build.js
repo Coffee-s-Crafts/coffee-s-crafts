@@ -180,7 +180,6 @@ const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTI
 
 // Fursuit TOS (default placeholder: paste content from provided Google Doc)
 const FURSUIT_TOS_TITLE = process.env.FURSUIT_TOS_TITLE || 'Fursuit Terms of Service';
-const FURSUIT_TOS_UPDATED = process.env.FURSUIT_TOS_UPDATED || 'Source: https://docs.google.com/document/d/1nN5qPhuR_FkKkcDdRS9EFwbbkudlANWd0wdbjgQee5s/edit?tab=t.0';
 const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(process.env.FURSUIT_TOS_SECTIONS) : [
   {
     heading: 'Introduction',
@@ -408,7 +407,6 @@ async function build() {
     TOS_UPDATED,
     TOS_SECTIONS,
     FURSUIT_TOS_TITLE,
-    FURSUIT_TOS_UPDATED,
     FURSUIT_TOS_SECTIONS,
     ART_TOS_URL,
     ART_TOS_LINK_TEXT,
