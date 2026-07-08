@@ -92,21 +92,21 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
     important: ['Please be as thorough as possible when describing what you want. NO SHADED REFERENCE SHEETS.']
   },
   {
-    title: 'Furry PNGTuber: $35',
+    title: 'Furry PNGTuber: $35+',
     paragraphs: ['Four frames of your character and a step-by-step setup guide for PNGTuber use.'],
     details: ['File is a .veado file to be used on Veadotube.'],
     addons: [],
     important: ['Please provide an unshaded reference.']
   },
   {
-    title: 'Scenic Furry: $50',
+    title: 'Scenic Furry Commissions: $50+',
     paragraphs: ['A scenic drawing of one (or more) of your characters. Scenery depends on complexity type.'],
     details: ['File delivered as a PNG.'],
     addons: ['Extra characters', 'Background complexity'],
     important: ['NO SHADED REFERENCE SHEETS. Please provide detailed scene description and reference photos when possible.']
   },
   {
-    title: 'Furry Reference Sheet: $45',
+    title: 'Furry Reference Sheet: $45+',
     paragraphs: ['Symmetrical front & back of your character. There are free add-ons such as putting the characters likes and dislikes on the ref.'],
     details: [],
     addons: ['See request form for many add-ons'],
@@ -132,7 +132,7 @@ const FURSUIT_PRICES = process.env.FURSUIT_PRICES ? JSON.parse(process.env.FURSU
 
 // Terms of Service structured content
 const TOS_TITLE = process.env.TOS_TITLE || "CoffeeEX's Terms of Service";
-const TOS_UPDATED = process.env.TOS_UPDATED || 'Updated May 26, 2026';
+const TOS_UPDATED = process.env.TOS_UPDATED || 'Updated July 8, 2026';
 const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTIONS) : [
   {
     heading: 'GENERAL',
@@ -178,7 +178,7 @@ const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTI
   }
 ];
 
-// Fursuit TOS (default placeholder: paste content from provided Google Doc)
+
 const FURSUIT_TOS_TITLE = process.env.FURSUIT_TOS_TITLE || 'Fursuit Terms of Service';
 const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(process.env.FURSUIT_TOS_SECTIONS) : [
   {
