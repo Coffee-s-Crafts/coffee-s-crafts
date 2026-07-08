@@ -178,3 +178,23 @@ section h2{font-size:1.75rem;color:var(--accent);border-bottom:2px solid var(--b
   main{padding:1.25rem 1rem}
   .commission-info{grid-template-columns:1fr}
 }
+
+/* ── New components styling ───────────────────── */
+.commission-overview{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-bottom:1.25rem}
+.commission-overview .commission-card{cursor:default}
+.commission-overview details{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.75rem;box-shadow:var(--shadow)}
+.commission-overview summary{font-weight:700;color:var(--accent);list-style:none;cursor:pointer}
+.commission-overview summary a{color:inherit}
+.commission-overview ul{margin:.5rem 0 0;padding-left:1.25rem;color:var(--muted)}
+
+.prices-list{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.5rem}
+.prices-list li{background:var(--surface);border:1px solid var(--border);padding:.75rem;border-radius:8px}
+
+.art-section{background:var(--surface);border:1px solid var(--border);padding:1rem;border-radius:8px;margin-bottom:.75rem;box-shadow:var(--shadow)}
+.art-section h2{font-size:1.15rem;color:var(--accent);margin-bottom:.5rem}
+.art-section p{color:var(--muted);margin:0 0 .5rem}
+
+.tos .updated{color:var(--muted);font-size:.95rem;margin-bottom:1rem}
+.tos .tos-section{background:var(--surface);border:1px solid var(--border);padding:1rem;border-radius:8px;margin-bottom:.75rem}
+.tos .tos-section h2{font-size:1rem;color:var(--accent);margin-bottom:.45rem}
+.tos .tos-section p{margin:0;color:var(--muted)}
