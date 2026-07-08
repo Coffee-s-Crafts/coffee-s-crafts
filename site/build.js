@@ -182,52 +182,61 @@ const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTI
 const FURSUIT_TOS_TITLE = process.env.FURSUIT_TOS_TITLE || 'Fursuit Terms of Service';
 const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(process.env.FURSUIT_TOS_SECTIONS) : [
   {
-    heading: 'Introduction',
+    heading: 'GENERAL',
     paragraphs: [
-      "Thank you for your interest in my fursuit work. Below are the terms that govern quotes, orders, and delivery.",
-      `Trello queue: <a href="${FURSUIT_QUEUE_URL}" target="_blank" rel="noopener">${FURSUIT_QUEUE_URL}</a>`
+      "I reserve the right to decline any fursuit commission. Prohibited content includes ABDL and Feral NSFW."
     ]
   },
   {
-    heading: 'Quotes & Pricing',
+    heading: 'PAYMENTS',
     paragraphs: [
-      "Quotes are estimates based on the information provided and are subject to change after a full evaluation. A formal quote will be issued prior to requesting payment. If you decline a quote, no obligation is incurred."
+      "Payments are processed via VGen unless another processor is agreed in writing. A non-refundable deposit or full payment may be required to secure a commission slot. The buyer is responsible for payment-processor fees and for ensuring payments clear. Work will not begin until the required payment or deposit is received."
     ]
   },
   {
-    heading: 'Price List',
+    heading: 'QUOTES & PRICING',
     paragraphs: [
-      `Base pricing and package options are published on the fursuit pricing page: <a href="${FURSUIT_LINK}" target="_blank" rel="noopener">${FURSUIT_LINK}</a>. The final binding price is the quoted amount provided at booking.`
+      `Quotes are estimates based on the information provided and are subject to change after a full evaluation. Base pricing and package options are published on the fursuit pricing page: <a href="${FURSUIT_LINK}" target="_blank" rel="noopener">${FURSUIT_LINK}</a>. A formal, written quote will be issued prior to requesting payment; the quoted amount at booking is the final binding price.`
     ]
   },
   {
-    heading: 'Add-Ons',
+    heading: 'REVISIONS',
     paragraphs: [
-      'Add-ons and custom options may incur additional charges. Specific add-on pricing will be provided in your quote.'
+      "Revisions are limited to minor adjustments during agreed stages. Major changes introduced after production begins may incur additional fees and will affect delivery timelines. Any revisions outside the original scope will be quoted separately."
     ]
   },
   {
-    heading: 'What to Expect',
+    heading: 'DELIVERY & TIMELINES',
     paragraphs: [
-      "Suits are handmade; minor imperfections can occur. Report major defects within 14 days of delivery for evaluation. I do not line heads by default; request lining before booking if required.",
-      'Production timelines depend on complexity; some projects may take several months to a year. Progress updates are provided on request.'
+      "Estimated production timelines are provided with quotes and are not guaranteed. Delays can occur for reasons beyond the maker's control; the maker will notify the buyer of significant delays. The maker will provide progress updates on request."
     ]
   },
   {
-    heading: 'Payment Plans',
+    heading: 'PAYMENT PLANS',
     paragraphs: [
-      'Payment plans are available by agreement and require timely payments. Failure to meet agreed payments may result in cancellation and forfeiture of payments made; refunds for completed work are at the seller\'s discretion.'
+      "Payment plans may be offered by agreement. Buyers must meet scheduled payments; failure to do so may result in suspension, cancellation of the commission, and forfeiture of payments made. Refunds for work already completed are at the maker's discretion."
     ]
   },
   {
-    heading: 'Repairs & Shipping',
+    heading: 'REPAIRS & SHIPPING',
     paragraphs: [
-      'If items arrive damaged, provide photo/video evidence promptly. Repairs for defects due to maker error will be made at no labor cost; return shipping may be the buyer\'s responsibility unless otherwise agreed. ',
-      'If a buyer becomes unresponsive for 6+ months after requests for required information, the maker may return unfinished work and will not issue a refund for labor already performed.'
+      "Inspect items on receipt and report significant damage within 14 days with photo or video evidence. The maker will repair defects due to workmanship at no labor cost; return shipping for repairs may be the buyer's responsibility unless otherwise agreed."
     ]
   },
   {
-    heading: 'Contact & Misc',
+    heading: 'REFUNDS',
+    paragraphs: [
+      "Full refunds are available only if no work (including sketches or material purchases) has been produced. Once production or repairs have commenced, refunds are not available except at the maker's discretion; any partial refund will reflect work completed and non-recoverable expenses. Chargebacks may be contested and could result in refusal of future service."
+    ]
+  },
+  {
+    heading: 'COMMUNICATION',
+    paragraphs: [
+      `Maintain timely communication. If the buyer fails to provide required information or misses agreed payments within a reasonable period, the maker may pause or cancel the commission; refunds in that case are at the maker's discretion. For urgent issues contact <a href="${DISCORD_URL}" target="_blank" rel="noopener">Discord</a>.`
+    ]
+  },
+  {
+    heading: 'CONTACT & MISC',
     paragraphs: [
       `For quotes and inquiries: Instagram <a href="${INSTAGRAM_URL}" target="_blank" rel="noopener">${INSTAGRAM_URL}</a> or email <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.`,
       'Thank you for supporting my small business.'
