@@ -238,7 +238,7 @@ const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(proce
   {
     heading: 'CONTACT & MISC',
     paragraphs: [
-      `For quotes and inquiries: Instagram <a href="${INSTAGRAM_URL}" target="_blank" rel="noopener">${INSTAGRAM_URL}</a> or email <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.`,
+      `For quotes and inquiries: <a href="${INSTAGRAM_URL}" target="_blank" rel="noopener">${INSTAGRAM_LINK_TEXT}</a> or <a href="mailto:${CONTACT_EMAIL}">${EMAIL_LINK_TEXT}</a>.`,
       'Thank you for supporting my small business.'
     ]
   }
