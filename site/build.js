@@ -10,7 +10,6 @@ const COMMISSION_OPEN = (process.env.COMMISSION_STATUS || 'open').toLowerCase() 
 const COMMISSION_STATUS_CLASS = COMMISSION_OPEN ? 'open' : 'closed';
 const COMMISSION_STATUS_LABEL = COMMISSION_OPEN ? 'Commissions Open' : 'Commissions Closed';
 const FOOTER_YEAR = new Date().getFullYear();
-const FOOTER_TEXT = `© ${FOOTER_YEAR} ${SITE_TITLE} — ${CONTACT_EMAIL}`;
 
 // ── Configurable copy ─────────────────────────────────────────────────────
 const SITE_TITLE          = process.env.SITE_TITLE          || "Coffee's Crafts";
@@ -42,6 +41,7 @@ const CONTACT_HEADING     = process.env.CONTACT_HEADING     || 'Contact';
 const VGEN_URL            = (process.env.VGEN_URL           || 'https://vgen.co/CoffeeEX').trim();
 const VGEN_LINK_TEXT      = process.env.VGEN_LINK_TEXT      || '🎨 VGen Portfolio';
 const CONTACT_EMAIL       = process.env.CONTACT_EMAIL       || 'coffee@coffeescrafts.com';
+const FOOTER_TEXT = `© ${FOOTER_YEAR} ${SITE_TITLE} — ${CONTACT_EMAIL}`;
 const EMAIL_LINK_TEXT     = process.env.EMAIL_LINK_TEXT     || '✉️ Email Me';
 const DISCORD_URL         = (process.env.DISCORD_URL        || 'https://www.discord.com/users/339092532162068481').trim();
 const DISCORD_LINK_TEXT   = process.env.DISCORD_LINK_TEXT   || '💬 Discord: coffee.ex';
