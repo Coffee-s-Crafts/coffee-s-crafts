@@ -147,7 +147,75 @@ const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTI
 const FURSUIT_TOS_TITLE = process.env.FURSUIT_TOS_TITLE || 'Fursuit Terms of Service';
 const FURSUIT_TOS_UPDATED = process.env.FURSUIT_TOS_UPDATED || 'Source: https://docs.google.com/document/d/1nN5qPhuR_FkKkcDdRS9EFwbbkudlANWd0wdbjgQee5s/edit?tab=t.0';
 const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(process.env.FURSUIT_TOS_SECTIONS) : [
-  { heading: 'Fursuit Terms', paragraphs: ['Please paste the Fursuit Terms of Service content here (source: Google Doc).'] }
+  {
+    heading: 'Introduction',
+    paragraphs: [
+      "Howdy there! I see you like my fursuits, eh? Well, let’s get into some information I think you should know about me and my work.",
+      'LINK TO MY TRELLO QUEUE: <a href="https://trello.com/b/1NyoDiwp/fursuit-wips" target="_blank" rel="noopener">https://trello.com/b/1NyoDiwp/fursuit-wips</a>'
+    ]
+  },
+  {
+    heading: 'Prices',
+    paragraphs: [
+      "First, let’s get the prices out of the way. Each price is the flat rate that I charge for my time, effort, and skill for making a suit. It DOES NOT include any extra add-ons, complexity of the character, or overall material cost. For an exact price for a certain character, you’d have to get a quote from me (quotes are free). If I give you a quote and you dislike the price, please respond courteously — a brief 'I've decided not to get this' is fine.",
+      'If you’d like a free quote, DM me on my Instagram @coffees.crafts. If I do not respond in about a day, contact me via my business email at <a href="mailto:coffeesdemons@gmail.com">coffeesdemons@gmail.com</a>.'
+    ]
+  },
+  {
+    heading: 'Price List (base prices)',
+    paragraphs: [
+      'Just the Head — $465 base price',
+      'Just the Paws — $85 base price',
+      'Just the Feetpaws — $165 base price',
+      'Just the Tail — $60 base price for a simple, foot long tail. +$20 per additional foot',
+      'Just the Planti Legs — $225 base price',
+      'Just the Digi Legs — $325 base price',
+      'Mini Partial (Head, Paws, Tail) — $645 base price',
+      'Partial (Head, Paws, Tail, Feetpaws) — $815 base price',
+      'Full Partial (Head, Paws, Tail, Feetpaws, Armsleeves) — $900 base price',
+      'Full Plantigrade Suit — $1,600 base price',
+      'Full Digitigrade Suit — $2,365 base price'
+    ]
+  },
+  {
+    heading: 'Add-Ons',
+    paragraphs: [
+      'Add-ons are anything extra you want on a suit. Some are highly specific and are not listed here — DM me to ask about custom add-ons and pricing.',
+      'Current add-ons include: Magnetic Eyelids (experimental) — base set + second set of your choosing for $35; Claws for Paws — $20 base (larger/longer claws cost more).'
+    ]
+  },
+  {
+    heading: 'What to Expect',
+    paragraphs: [
+      "My work is done by hand and small imperfections can occur (for example, a hidden hot-glue spot or a small bald patch). I will always put my best effort into each piece.",
+      'I DO NOT currently line my fursuit heads — I find lining can make the head more stuffy. If this is a dealbreaker, please find another maker. ' ,
+      'I work in focused sessions and may take breaks. Some suits can take from a few months up to a year depending on complexity and scheduling. You may request WIPs or progress reports at any time.'
+    ]
+  },
+  {
+    heading: 'Payment Plans',
+    paragraphs: [
+      'Payment plans are available. You must make a payment each month; the amount is agreed when the plan is set up. Do not underpay (for example $10/month) as that is not sustainable.',
+      'If you fail to make payments or repeatedly underpay, I may drop your commission and issue a partial refund (materials are non-refundable). If you cease contact for several months without response, no refund will be issued until you re-establish communication.'
+    ]
+  },
+  {
+    heading: 'Repair & Refund Policy',
+    paragraphs: [
+      'If items arrive damaged (huge holes, tearing, etc.) provide photo/video evidence and I will repair the items free of charge if the box is undamaged. If the box is damaged in shipping, I will repair the suit but you must cover return shipping.',
+      'If you become unresponsive for 6+ months after I request necessary info (materials, measurements, etc.), I will return whatever I have completed and will not issue a refund for work done. For shorter unresponsiveness I will wait and may offer partial refunds depending on progress.'
+    ]
+  },
+  {
+    heading: 'Contact & Misc',
+    paragraphs: [
+      'Contact me on my suit-making account or business email first when requesting a quote.',
+      'Instagrams: Art account @coffeedemonn; Suit-making account @coffees.crafts',
+      'Business email: <a href="mailto:coffeesdemons@gmail.com">coffeesdemons@gmail.com</a>',
+      'Toyhou.se: <a href="https://toyhou.se/CoffeeEX">https://toyhou.se/CoffeeEX</a>',
+      'Thank you for reading — if you consider commissioning me, it really means a lot to me as a small business.'
+    ]
+  }
 ];
 
 // ── Build functions ───────────────────────────────────────────────────────
