@@ -173,7 +173,7 @@ const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTI
   {
     heading: 'COMMUNICATION',
     paragraphs: [
-      `Maintain timely communication. If the buyer does not respond to requests for required information within a reasonable period, the seller may pause or cancel the commission; refunds in that case are at the seller's discretion. For urgent issues contact the artist on <a href="${DISCORD_URL}" target="_blank" rel="noopener">Discord</a>.`
+      `Maintain timely communication. If the buyer does not respond to requests for required information within a reasonable period, the seller may pause or cancel the commission; refunds in that case are at the seller's discretion. For urgent issues contact the artist on <a href="${DISCORD_URL}" target="_blank" rel="noopener">${DISCORD_LINK_TEXT}</a> or <a href="${TELEGRAM_URL}" target="_blank" rel="noopener">${TELEGRAM_LINK_TEXT}</a>.`
     ]
   }
 ];
@@ -232,13 +232,13 @@ const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(proce
   {
     heading: 'COMMUNICATION',
     paragraphs: [
-      `Maintain timely communication. If the buyer fails to provide required information or misses agreed payments within a reasonable period, the maker may pause or cancel the commission; refunds in that case are at the maker's discretion. For urgent issues contact the artist on <a href="${DISCORD_URL}" target="_blank" rel="noopener">Discord</a>.`
+      `Maintain timely communication. If the buyer fails to provide required information or misses agreed payments within a reasonable period, the maker may pause or cancel the commission; refunds in that case are at the maker's discretion. For urgent issues contact the artist on <a href="${DISCORD_URL}" target="_blank" rel="noopener">${DISCORD_LINK_TEXT}</a> or <a href="${TELEGRAM_URL}" target="_blank" rel="noopener">${TELEGRAM_LINK_TEXT}</a>.`
     ]
   },
   {
     heading: 'CONTACT & MISC',
     paragraphs: [
-      `For quotes and inquiries: <a href="${INSTAGRAM_URL}" target="_blank" rel="noopener">${INSTAGRAM_LINK_TEXT}</a> or <a href="mailto:${CONTACT_EMAIL}">${EMAIL_LINK_TEXT}</a>.`,
+      `For quotes and inquiries: <a href="${DISCORD_URL}" target="_blank" rel="noopener">${DISCORD_LINK_TEXT}</a> or <a href="${TELEGRAM_URL}" target="_blank" rel="noopener">${TELEGRAM_LINK_TEXT}</a>, or email <a href="mailto:${CONTACT_EMAIL}">${EMAIL_LINK_TEXT}</a>.`,
       'Thank you for supporting my small business.'
     ]
   }
