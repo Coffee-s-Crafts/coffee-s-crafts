@@ -1,70 +1,76 @@
 const fs = require('fs');
 const path = require('path');
 
-const OUT = process.env.OUTPUT_DIR || 'dist';
-const ART_SRC = process.env.ART_SOURCE_DIR || 'assets/art';
-const INDEX_LINK = process.env.INDEX_LINK || 'index.html';
-const GALLERY_LINK = process.env.GALLERY_LINK || 'gallery.html';
-const CONTACT_LINK = process.env.CONTACT_LINK || 'contact.html';
-const COMMISSION_OPEN = (process.env.COMMISSION_STATUS || 'open').toLowerCase() === 'open';
+// ── Paths ─────────────────────────────────────────────
+const OUT                     = process.env.OUTPUT_DIR     || 'dist';
+const ART_SRC                 = process.env.ART_SOURCE_DIR || 'assets/art';
+const INDEX_LINK              = process.env.INDEX_LINK     || 'index.html';
+const GALLERY_LINK            = process.env.GALLERY_LINK   || 'gallery.html';
+const CONTACT_LINK            = process.env.CONTACT_LINK   || 'contact.html';
+
+// ── Commission status ─────────────────────────────────
+const COMMISSION_OPEN         = (process.env.COMMISSION_STATUS || 'open').toLowerCase() === 'open';
 const COMMISSION_STATUS_CLASS = COMMISSION_OPEN ? 'open' : 'closed';
 const COMMISSION_STATUS_LABEL = COMMISSION_OPEN ? 'Commissions Open' : 'Commissions Closed';
-const FOOTER_YEAR = new Date().getFullYear();
 
-// ── Configurable copy ─────────────────────────────────────────────────────
-const SITE_TITLE          = process.env.SITE_TITLE          || "Coffee's Crafts";
+// ── Configurable settings ─────────────────────────────────────────────────────
 // index page
-const HERO_TAGLINE        = process.env.HERO_TAGLINE        || "Original art & custom commissions — made with love ☕";
-const HERO_CTA            = process.env.HERO_CTA            || 'Browse the Gallery';
-const ABOUT_HEADING       = process.env.ABOUT_HEADING       || 'About';
-const ABOUT_BODY          = process.env.ABOUT_BODY          || "Welcome! I'm an independent artist specialising in character art, cozy illustrations, and custom commissions. Every piece is crafted with care — from first sketch to final colour.";
-const ABOUT_CTA_INTRO     = process.env.ABOUT_CTA_INTRO     || 'Looking for something unique?';
-const ABOUT_CTA_LINK_TEXT = process.env.ABOUT_CTA_LINK_TEXT || 'Check commission availability';
-const FEATURED_HEADING    = process.env.FEATURED_HEADING    || 'Featured Work';
-const GALLERY_MORE_TEXT   = process.env.GALLERY_MORE_TEXT   || 'See all artwork →';
+const HERO_TAGLINE            = process.env.HERO_TAGLINE            || "Original art & custom commissions — made with love ☕";
+const HERO_CTA                = process.env.HERO_CTA                || 'Browse the Gallery';
+const ABOUT_HEADING           = process.env.ABOUT_HEADING           || 'About';
+const ABOUT_BODY              = process.env.ABOUT_BODY              || "Welcome! I'm an independent artist specialising in character art, cozy illustrations, and custom commissions. Every piece is crafted with care — from first sketch to final colour.";
+const ABOUT_CTA_INTRO         = process.env.ABOUT_CTA_INTRO         || 'Looking for something unique?';
+const ABOUT_CTA_LINK_TEXT     = process.env.ABOUT_CTA_LINK_TEXT     || 'Check commission availability';
+const FEATURED_HEADING        = process.env.FEATURED_HEADING        || 'Featured Work';
+const GALLERY_MORE_TEXT       = process.env.GALLERY_MORE_TEXT       || 'See all artwork →';
 // gallery page
-const GALLERY_HEADING     = process.env.GALLERY_HEADING     || 'Gallery';
-const GALLERY_META        = process.env.GALLERY_META        || 'A selection of original pieces and commission samples.';
-const SAMPLE_COUNT        = parseInt(process.env.SAMPLE_COUNT || '6', 10);
+const GALLERY_HEADING         = process.env.GALLERY_HEADING         || 'Gallery';
+const GALLERY_META            = process.env.GALLERY_META            || 'A selection of original pieces and commission samples.';
+const SAMPLE_COUNT            = parseInt(process.env.SAMPLE_COUNT   || '6', 10);
 // contact page
-const COMMISSIONS_HEADING = process.env.COMMISSIONS_HEADING || 'Commissions';
-const COMMISSIONS_INTRO   = process.env.COMMISSIONS_INTRO   || "Interested in a custom piece? I offer a range of commission types. Send me a message with your idea and I'll get back to you as soon as possible.";
-const TIER1_TITLE         = process.env.TIER1_TITLE         || 'Bust / Icon';
-const TIER1_DESC          = process.env.TIER1_DESC          || 'Single character, cropped at shoulders. Great for profile pictures and reference sheets.';
-const TIER2_TITLE         = process.env.TIER2_TITLE         || 'Half Body';
-const TIER2_DESC          = process.env.TIER2_DESC          || 'Character shown to the waist with simple background options.';
-const TIER3_TITLE         = process.env.TIER3_TITLE         || 'Full Body';
-const TIER3_DESC          = process.env.TIER3_DESC          || 'Full character with detailed shading and a custom background scene.';
-const TIER4_TITLE         = process.env.TIER4_TITLE         || 'Custom / Ask';
-const TIER4_DESC          = process.env.TIER4_DESC          || 'Something else in mind? Reach out and we can work out a quote together.';
-const CONTACT_HEADING     = process.env.CONTACT_HEADING     || 'Contact';
-const VGEN_URL            = (process.env.VGEN_URL           || 'https://vgen.co/CoffeeEX').trim();
-const VGEN_LINK_TEXT      = process.env.VGEN_LINK_TEXT      || '🎨 VGen Portfolio';
-const CONTACT_EMAIL       = process.env.CONTACT_EMAIL       || 'coffee@coffeescrafts.com';
-const FOOTER_TEXT = `© ${FOOTER_YEAR} ${SITE_TITLE} — ${CONTACT_EMAIL}`;
-const EMAIL_LINK_TEXT     = process.env.EMAIL_LINK_TEXT     || '✉️ Email Me';
-const DISCORD_URL         = (process.env.DISCORD_URL        || 'https://www.discord.com/users/339092532162068481').trim();
-const DISCORD_LINK_TEXT   = process.env.DISCORD_LINK_TEXT   || '💬 Discord: coffee.ex';
-const TELEGRAM_URL        = (process.env.TELEGRAM_URL       || 'https://t.me/coffeescrafts').trim();
-const TELEGRAM_LINK_TEXT  = process.env.TELEGRAM_LINK_TEXT  || "📨 Telegram: Coffee's Crafts";
-const TRELLO_URL          = (process.env.TRELLO_URL         || 'https://trello.com/b/uces30Ct/anthrocon-art-queue').trim();
-const TRELLO_LINK_TEXT    = process.env.TRELLO_LINK_TEXT    || '📋 Art Queue Trello';
-const QUEUE_TRACKING_TEXT = process.env.QUEUE_TRACKING_TEXT || 'Track art commission progress here:';
-const TWITCH_URL          = (process.env.TWITCH_URL         || 'https://twitch.tv/coffeescrafts').trim();
-const TWITCH_LINK_TEXT    = process.env.TWITCH_LINK_TEXT    || '📺 Twitch';
-const FURSUIT_TOS_URL     = (process.env.FURSUIT_TOS_URL    || 'https://docs.google.com/document/d/1nN5qPhuR_FkKkcDdRS9EFwbbkudlANWd0wdbjgQee5s/edit?usp=sharing').trim();
-const FURSUIT_TOS_LINK_TEXT = process.env.FURSUIT_TOS_LINK_TEXT || '📄 Fursuit TOS';
-const FURSUIT_QUEUE_URL   = (process.env.FURSUIT_QUEUE_URL  || 'https://trello.com/b/1NyoDiwp/fursuit-wips').trim();
+const COMMISSIONS_HEADING     = process.env.COMMISSIONS_HEADING     || 'Commissions';
+const COMMISSIONS_INTRO       = process.env.COMMISSIONS_INTRO       || "Interested in a custom piece? I offer a range of commission types. Send me a message with your idea and I'll get back to you as soon as possible.";
+const TIER1_TITLE             = process.env.TIER1_TITLE             || 'Bust / Icon';
+const TIER1_DESC              = process.env.TIER1_DESC              || 'Single character, cropped at shoulders. Great for profile pictures and reference sheets.';
+const TIER2_TITLE             = process.env.TIER2_TITLE             || 'Half Body';
+const TIER2_DESC              = process.env.TIER2_DESC              || 'Character shown to the waist with simple background options.';
+const TIER3_TITLE             = process.env.TIER3_TITLE             || 'Full Body';
+const TIER3_DESC              = process.env.TIER3_DESC              || 'Full character with detailed shading and a custom background scene.';
+const TIER4_TITLE             = process.env.TIER4_TITLE             || 'Custom / Ask';
+const TIER4_DESC              = process.env.TIER4_DESC              || 'Something else in mind? Reach out and we can work out a quote together.';
+const CONTACT_HEADING         = process.env.CONTACT_HEADING         || 'Contact';
+const VGEN_URL                = (process.env.VGEN_URL               || 'https://vgen.co/CoffeeEX').trim();
+const VGEN_LINK_TEXT          = process.env.VGEN_LINK_TEXT          || '🎨 VGen Portfolio';
+const EMAIL_LINK_TEXT         = process.env.EMAIL_LINK_TEXT         || '✉️ Email Me';
+const DISCORD_URL             = (process.env.DISCORD_URL            || 'https://www.discord.com/users/339092532162068481').trim();
+const DISCORD_LINK_TEXT       = process.env.DISCORD_LINK_TEXT       || '💬 Discord: coffee.ex';
+const TELEGRAM_URL            = (process.env.TELEGRAM_URL           || 'https://t.me/coffeescrafts').trim();
+const TELEGRAM_LINK_TEXT      = process.env.TELEGRAM_LINK_TEXT      || "📨 Telegram: Coffee's Crafts";
+const TRELLO_URL              = (process.env.TRELLO_URL             || 'https://trello.com/b/uces30Ct/anthrocon-art-queue').trim();
+const TRELLO_LINK_TEXT        = process.env.TRELLO_LINK_TEXT        || '📋 Art Queue Trello';
+const QUEUE_TRACKING_TEXT     = process.env.QUEUE_TRACKING_TEXT     || 'Track art commission progress here:';
+const TWITCH_URL              = (process.env.TWITCH_URL             || 'https://twitch.tv/coffeescrafts').trim();
+const TWITCH_LINK_TEXT        = process.env.TWITCH_LINK_TEXT        || '📺 Twitch';
+const FURSUIT_TOS_URL         = (process.env.FURSUIT_TOS_URL        || 'https://docs.google.com/document/d/1nN5qPhuR_FkKkcDdRS9EFwbbkudlANWd0wdbjgQee5s/edit?usp=sharing').trim();
+const FURSUIT_TOS_LINK_TEXT   = process.env.FURSUIT_TOS_LINK_TEXT   || '📄 Fursuit TOS';
+const FURSUIT_QUEUE_URL       = (process.env.FURSUIT_QUEUE_URL      || 'https://trello.com/b/1NyoDiwp/fursuit-wips').trim();
 const FURSUIT_QUEUE_LINK_TEXT = process.env.FURSUIT_QUEUE_LINK_TEXT || '📋 Fursuit Queue Trello';
-const FURSUIT_QUEUE_TEXT  = process.env.FURSUIT_QUEUE_TEXT  || 'Track fursuit commission progress here:';
-const TOYHOUSE_URL        = (process.env.TOYHOUSE_URL       || 'https://toyhou.se/CoffeeEX').trim();
-const TOYHOUSE_LINK_TEXT  = process.env.TOYHOUSE_LINK_TEXT  || '🏠 Toyhou.se';
-const INSTAGRAM_URL       = (process.env.INSTAGRAM_URL      || 'https://www.instagram.com/coffeedemonn').trim();
-const INSTAGRAM_LINK_TEXT = process.env.INSTAGRAM_LINK_TEXT || '📸 Instagram';
-const CARRD_URL           = (process.env.CARRD_URL          || 'https://coffeescraftsgallery.carrd.co').trim();
-const CARRD_LINK_TEXT     = process.env.CARRD_LINK_TEXT     || '🌐 Carrd';
-const X_URL               = (process.env.X_URL              || 'https://x.com/coffeesden').trim();
-const X_LINK_TEXT         = process.env.X_LINK_TEXT         || '🐦 X / Twitter';
+const FURSUIT_QUEUE_TEXT      = process.env.FURSUIT_QUEUE_TEXT      || 'Track fursuit commission progress here:';
+const TOYHOUSE_URL            = (process.env.TOYHOUSE_URL           || 'https://toyhou.se/CoffeeEX').trim();
+const TOYHOUSE_LINK_TEXT      = process.env.TOYHOUSE_LINK_TEXT      || '🏠 Toyhou.se';
+const INSTAGRAM_URL           = (process.env.INSTAGRAM_URL          || 'https://www.instagram.com/coffeedemonn').trim();
+const INSTAGRAM_LINK_TEXT     = process.env.INSTAGRAM_LINK_TEXT     || '📸 Instagram';
+const CARRD_URL               = (process.env.CARRD_URL              || 'https://coffeescraftsgallery.carrd.co').trim();
+const CARRD_LINK_TEXT         = process.env.CARRD_LINK_TEXT         || '🌐 Carrd';
+const X_URL                   = (process.env.X_URL                  || 'https://x.com/coffeesden').trim();
+const X_LINK_TEXT             = process.env.X_LINK_TEXT             || '🐦 X / Twitter';
+// global site settings
+const FOOTER_YEAR             = new Date().getFullYear();
+const SITE_TITLE              = process.env.SITE_TITLE              || "Coffee's Crafts";
+const CONTACT_EMAIL           = process.env.CONTACT_EMAIL           || 'coffee@coffeescrafts.com';
+const FOOTER_TEXT             = `© ${FOOTER_YEAR} ${SITE_TITLE} — ${CONTACT_EMAIL}`;
+
+// ── Build functions ───────────────────────────────────────────────────────
 
 function ensureDir(p) {
   if (!fs.existsSync(p)) fs.mkdirSync(p, { recursive: true });
