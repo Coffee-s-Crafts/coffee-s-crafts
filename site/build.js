@@ -48,13 +48,17 @@ const DISCORD_URL             = (process.env.DISCORD_URL            || 'https://
 const DISCORD_LINK_TEXT       = process.env.DISCORD_LINK_TEXT       || '💬 Discord: coffee.ex';
 const TELEGRAM_URL            = (process.env.TELEGRAM_URL           || 'https://t.me/coffeescrafts').trim();
 const TELEGRAM_LINK_TEXT      = process.env.TELEGRAM_LINK_TEXT      || "📨 Telegram: Coffee's Crafts";
+const CASHAPP_HANDLE         = process.env.CASHAPP_HANDLE           || '$ashcoffeeEX';
+const CASHAPP_URL            = process.env.CASHAPP_URL              || 'https://cash.app/$ashcoffeeEX';
+const PAYPAL_EMAIL           = process.env.PAYPAL_EMAIL             || 'mawdemonn@gmail.com';
+const PAYPAL_LINK_TEXT       = process.env.PAYPAL_LINK_TEXT         || 'PayPal';
 const TRELLO_URL              = (process.env.TRELLO_URL             || 'https://trello.com/b/uces30Ct/anthrocon-art-queue').trim();
 const TRELLO_LINK_TEXT        = process.env.TRELLO_LINK_TEXT        || '📋 Art Queue Trello';
 const QUEUE_TRACKING_TEXT     = process.env.QUEUE_TRACKING_TEXT     || 'Track art commission progress here:';
 const TWITCH_URL              = (process.env.TWITCH_URL             || 'https://twitch.tv/coffeescrafts').trim();
 const TWITCH_LINK_TEXT        = process.env.TWITCH_LINK_TEXT        || '📺 Twitch';
 // Terms/TOC URLs
-const ART_TOS_URL             = (process.env.ART_TOS_URL             || 'tos.html').trim();
+const ART_TOS_URL             = (process.env.ART_TOS_URL            || 'tos.html').trim();
 const ART_TOS_LINK_TEXT       = process.env.ART_TOS_LINK_TEXT       || '📄 Terms of Service';
 const FURSUIT_TOS_URL         = (process.env.FURSUIT_TOS_URL        || 'fursuit-tos.html').trim();
 const FURSUIT_TOS_LINK_TEXT   = process.env.FURSUIT_TOS_LINK_TEXT   || '📄 Fursuit TOS';
@@ -190,7 +194,7 @@ const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(proce
   {
     heading: 'PAYMENTS',
     paragraphs: [
-      "Payments are processed via VGen unless another processor is agreed in writing. A non-refundable deposit or full payment may be required to secure a commission slot. The buyer is responsible for payment-processor fees and for ensuring payments clear. Work will not begin until the required payment or deposit is received."
+      `Payments for fursuit commissions are accepted via Cash App (<a href="${CASHAPP_URL}" target="_blank" rel="noopener">${CASHAPP_HANDLE}</a>) or PayPal (<a href="mailto:${PAYPAL_EMAIL}">${PAYPAL_EMAIL}</a>). A non-refundable deposit or full payment may be required to secure a commission slot. The buyer is responsible for any payment-processor fees and for ensuring payments clear. Work will not begin until the required payment or deposit is received.`
     ]
   },
   {
@@ -392,6 +396,10 @@ async function build() {
     DISCORD_LINK_TEXT,
     TELEGRAM_URL,
     TELEGRAM_LINK_TEXT,
+    CASHAPP_HANDLE,
+    CASHAPP_URL,
+    PAYPAL_EMAIL,
+    PAYPAL_LINK_TEXT,
     TRELLO_URL,
     TRELLO_LINK_TEXT,
     QUEUE_TRACKING_TEXT,
