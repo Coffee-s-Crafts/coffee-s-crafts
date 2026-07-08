@@ -134,13 +134,48 @@ const FURSUIT_PRICES = process.env.FURSUIT_PRICES ? JSON.parse(process.env.FURSU
 const TOS_TITLE = process.env.TOS_TITLE || "CoffeeEX's Terms of Service";
 const TOS_UPDATED = process.env.TOS_UPDATED || 'Updated May 26, 2026';
 const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTIONS) : [
-  { heading: 'GENERAL', paragraphs: ["I reserve the right to decline any commission. No ABDL/Feral NSFW."] },
-  { heading: 'PAYMENTS', paragraphs: ['All payments will be made through VGen.'] },
-  { heading: 'REVISIONS', paragraphs: ['Revisions can be requested during the sketch phase mainly. Small lineart and color/marking changes can be made, such as to make them more accurate to what you want, but drastic changes to lineart/markings are not allowed, if they aren\'t shown on the ref sheet.'] },
-  { heading: 'DEADLINES AND DELIVERY', paragraphs: ['Deadlines are minimum 1 month. Delivery is through messaging as a PNG.'] },
-  { heading: 'USE', paragraphs: ['Personal use only, DO NOT use for AI purposes. Please credit me wherever you post it.'] },
-  { heading: 'REFUNDS', paragraphs: ['No refunds available after sketch is sent. Full refund if no sketch is sent yet.'] },
-  { heading: 'COMMUNICATION', paragraphs: ['Please message me on discord, coffee.ex if you cannot contact me on VGen.'] }
+  {
+    heading: 'GENERAL',
+    paragraphs: [
+      "I reserve the right to decline any commission. Prohibited content includes ABDL and Feral NSFW."
+    ]
+  },
+  {
+    heading: 'PAYMENTS',
+    paragraphs: [
+      "Payments are processed via VGen unless another processor is agreed in writing. A deposit or full payment may be required to secure a commission slot. The buyer is responsible for any payment-processor fees and for ensuring payments clear. Work will not begin until the required payment or deposit is received."
+    ]
+  },
+  {
+    heading: 'REVISIONS',
+    paragraphs: [
+      "Revisions are limited to minor adjustments during the sketch phase. Major changes or new concepts introduced after the sketch stage may incur additional fees and will affect delivery timelines. Any revisions beyond the scope agreed at booking will be billed separately."
+    ]
+  },
+  {
+    heading: 'DEADLINES AND DELIVERY',
+    paragraphs: [
+      "Quoted delivery timelines are estimates and not guaranteed. Delays can occur for reasons beyond the seller's control; the seller will notify the buyer of significant delays. Delivery is made via messaging and files are typically provided as PNG unless otherwise agreed."
+    ]
+  },
+  {
+    heading: 'USE',
+    paragraphs: [
+      "Artwork is licensed for personal use only. Commercial use, resale, or distribution requires an explicit commercial license. Artwork must not be used to train AI models or for automated data collection. Please credit the artist when practical."
+    ]
+  },
+  {
+    heading: 'REFUNDS',
+    paragraphs: [
+      "Full refunds are available only if no work (including sketches) has been produced. Once a sketch has been delivered, refunds are not available except at the seller's discretion; any partial refund will fairly reflect work already completed and any non-recoverable expenses. Chargebacks may result in the permanent refusal of future service and may be contested."
+    ]
+  },
+  {
+    heading: 'COMMUNICATION',
+    paragraphs: [
+      `Maintain timely communication. If the buyer does not respond to requests for required information within a reasonable period, the seller may pause or cancel the commission; refunds in that case are at the seller's discretion. For urgent issues contact <a href="${DISCORD_URL}" target="_blank" rel="noopener">Discord</a>.`
+    ]
+  }
 ];
 
 // Fursuit TOS (default placeholder: paste content from provided Google Doc)
@@ -150,54 +185,53 @@ const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(proce
   {
     heading: 'Introduction',
     paragraphs: [
-      "Howdy there! I see you like my fursuits, eh? Well, let’s get into some information I think you should know about me and my work.",
-      `LINK TO MY TRELLO QUEUE: <a href="${FURSUIT_QUEUE_URL}" target="_blank" rel="noopener">${FURSUIT_QUEUE_URL}</a>`
+      "Thank you for your interest in my fursuit work. Below are the terms that govern quotes, orders, and delivery.",
+      `Trello queue: <a href="${FURSUIT_QUEUE_URL}" target="_blank" rel="noopener">${FURSUIT_QUEUE_URL}</a>`
     ]
   },
   {
-    heading: 'Prices',
+    heading: 'Quotes & Pricing',
     paragraphs: [
-      "Each price is the flat rate that I charge for my time, effort, and skill for making a suit. It DOES NOT include any extra add-ons, complexity of the character, or overall material cost. For an exact price for a certain character, you’d have to get a quote from me (quotes are free). If I give you a quote and you dislike the price, please respond courteously — a brief 'I've decided not to get this' is fine.",
-      `If you’d like a free quote, DM me on my Instagram: <a href="${INSTAGRAM_URL}" target="_blank" rel="noopener">${INSTAGRAM_URL}</a>. If I do not respond in about a day, contact me via my business email at <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.`
+      "Quotes are estimates based on the information provided and are subject to change after a full evaluation. A formal quote will be issued prior to requesting payment. If you decline a quote, no obligation is incurred."
+    ]
+  },
+  {
+    heading: 'Price List',
+    paragraphs: [
+      `Base pricing and package options are published on the fursuit pricing page: <a href="${FURSUIT_LINK}" target="_blank" rel="noopener">${FURSUIT_LINK}</a>. The final binding price is the quoted amount provided at booking.`
     ]
   },
   {
     heading: 'Add-Ons',
     paragraphs: [
-      'Add-ons are anything extra you want on a suit. Some are highly specific and are not listed here — DM me to ask about custom add-ons and pricing.',
-      'Current add-ons include: Magnetic Eyelids (experimental) — base set + second set of your choosing for $35; Claws for Paws — $20 base (larger/longer claws cost more).'
+      'Add-ons and custom options may incur additional charges. Specific add-on pricing will be provided in your quote.'
     ]
   },
   {
     heading: 'What to Expect',
     paragraphs: [
-      "My work is done by hand and small imperfections can occur (for example, a hidden hot-glue spot or a small bald patch). I will always put my best effort into each piece.",
-      'I DO NOT currently line my fursuit heads — I find lining can make the head more stuffy. If this is a dealbreaker, please find another maker. ' ,
-      'I work in focused sessions and may take breaks. Some suits can take from a few months up to a year depending on complexity and scheduling. You may request WIPs or progress reports at any time.'
+      "Suits are handmade; minor imperfections can occur. Report major defects within 14 days of delivery for evaluation. I do not line heads by default; request lining before booking if required.",
+      'Production timelines depend on complexity; some projects may take several months to a year. Progress updates are provided on request.'
     ]
   },
   {
     heading: 'Payment Plans',
     paragraphs: [
-      'Payment plans are available. You must make a payment each month; the amount is agreed when the plan is set up. Do not underpay (for example $10/month) as that is not sustainable.',
-      'If you fail to make payments or repeatedly underpay, I may drop your commission and issue a partial refund (materials are non-refundable). If you cease contact for several months without response, no refund will be issued until you re-establish communication.'
+      'Payment plans are available by agreement and require timely payments. Failure to meet agreed payments may result in cancellation and forfeiture of payments made; refunds for completed work are at the seller\'s discretion.'
     ]
   },
   {
-    heading: 'Repair & Refund Policy',
+    heading: 'Repairs & Shipping',
     paragraphs: [
-      'If items arrive damaged (huge holes, tearing, etc.) provide photo/video evidence and I will repair the items free of charge if the box is undamaged. If the box is damaged in shipping, I will repair the suit but you must cover return shipping.',
-      'If you become unresponsive for 6+ months after I request necessary info (materials, measurements, etc.), I will return whatever I have completed and will not issue a refund for work done. For shorter unresponsiveness I will wait and may offer partial refunds depending on progress.'
+      'If items arrive damaged, provide photo/video evidence promptly. Repairs for defects due to maker error will be made at no labor cost; return shipping may be the buyer\'s responsibility unless otherwise agreed. ',
+      'If a buyer becomes unresponsive for 6+ months after requests for required information, the maker may return unfinished work and will not issue a refund for labor already performed.'
     ]
   },
   {
     heading: 'Contact & Misc',
     paragraphs: [
-      'Contact me on my suit-making account or business email first when requesting a quote.',
-      `Instagrams: Art account <a href="${INSTAGRAM_URL}" target="_blank" rel="noopener">${INSTAGRAM_URL}</a>`,
-      `Business email: <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>`,
-      `Toyhou.se: <a href="${TOYHOUSE_URL}" target="_blank" rel="noopener">${TOYHOUSE_URL}</a>`,
-      'Thank you for reading — if you consider commissioning me, it really means a lot to me as a small business.'
+      `For quotes and inquiries: Instagram <a href="${INSTAGRAM_URL}" target="_blank" rel="noopener">${INSTAGRAM_URL}</a> or email <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.`,
+      'Thank you for supporting my small business.'
     ]
   }
 ];
