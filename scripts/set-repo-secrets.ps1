@@ -7,8 +7,8 @@ $siteTitle = Read-Host "SITE_TITLE (default: Coffee's Crafts)"
 if ([string]::IsNullOrWhiteSpace($siteTitle)) { $siteTitle = "Coffee's Crafts" }
 $siteTitle | gh secret set SITE_TITLE --repo $repo
 
-$contact = Read-Host "CONTACT_EMAIL (default: artist@example.com)"
-if ([string]::IsNullOrWhiteSpace($contact)) { $contact = 'artist@example.com' }
+$contact = Read-Host "CONTACT_EMAIL (default: coffee@coffeescrafts.com)"
+if ([string]::IsNullOrWhiteSpace($contact)) { $contact = 'coffee@coffeescrafts.com' }
 $contact | gh secret set CONTACT_EMAIL --repo $repo
 
 $vgenPortfolio = Read-Host "VGEN_PORTFOLIO (optional)"
