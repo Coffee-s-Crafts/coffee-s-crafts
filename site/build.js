@@ -65,8 +65,15 @@ function copyDir(src, dest){
 }
 
 function renderTemplate(name, vars){
-  const tpl = fs.readFileSync(path.join('site','templates', name), 'utf8');
-  return tpl.replace(/%%(\w+)%%/g, (_, key)=> vars[key] || '');
+  const partialsDir = path.join('site', 'templates', 'partials');
+  let tpl = fs.readFileSync(path.join('site','templates', name), 'utf8');
+  // inline partials: {{> partial_name }} → contents of partials/<partial_name>.html
+  tpl = tpl.replace(/\{\{>\s*([\w-]+)\s*\}\}/g, (_, partialName) => {
+    const partialPath = path.join(partialsDir, `${partialName}.html`);
+    return fs.existsSync(partialPath) ? fs.readFileSync(partialPath, 'utf8') : '';
+  });
+  // substitute %%TOKEN%% variables
+  return tpl.replace(/%%(\w+)%%/g, (_, key) => vars[key] != null ? vars[key] : '');
 }
 // Optional remote VGEN fetching with local art fallback.
 
