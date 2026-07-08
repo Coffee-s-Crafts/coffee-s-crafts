@@ -5,12 +5,14 @@
   "VGEN_PORTFOLIO": "",
   "fetchError": null,
   "contentSaved": false,
-  "imagesCount": 4,
+  "imagesCount": 6,
   "images": [
     "assets/art/sample1.svg",
     "assets/art/sample2.svg",
     "assets/art/sample3.svg",
-    "assets/art/sample4.svg"
+    "assets/art/sample4.svg",
+    "assets/art/sample5.svg",
+    "assets/art/sample6.svg"
   ],
-  "builtAt": "2026-07-07T23:56:58.965Z"
+  "builtAt": "2026-07-08T00:46:37.565Z"
 }

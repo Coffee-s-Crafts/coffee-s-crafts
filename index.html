@@ -4,11 +4,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Coffee's Crafts</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&family=Shrikhand&display=swap">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>Coffee's Crafts</h1>
+  <header class="site-header">
+    <span class="brand">Coffee's Crafts</span>
     <nav>
       <a href="index.html">Home</a>
       <a href="gallery.html">Gallery</a>
@@ -16,25 +18,37 @@
     </nav>
   </header>
 
+  <div class="hero">
+    <h1>Coffee's Crafts</h1>
+    <p class="tagline">Original art &amp; custom commissions — made with love ☕</p>
+    <a href="gallery.html" class="btn">Browse the Gallery</a>
+  </div>
+
   <main>
     <section>
-      <h2>Welcome</h2>
-      <p>Artist portfolio and commissions.</p>
+      <h2>About</h2>
+      <div class="about-blurb">
+        <p>Welcome! I'm an independent artist specialising in character art, cozy illustrations, and custom commissions. Every piece is crafted with care — from first sketch to final colour.</p>
+        <p>Looking for something unique? <a href="contact.html">Check commission availability</a>.</p>
+      </div>
     </section>
 
     <section>
-      <h2>Sample Art</h2>
+      <h2>Featured Work</h2>
       <ul class="art-list">
         <li><img src="assets/art/sample1.svg" alt="art"/></li>
 <li><img src="assets/art/sample2.svg" alt="art"/></li>
 <li><img src="assets/art/sample3.svg" alt="art"/></li>
 <li><img src="assets/art/sample4.svg" alt="art"/></li>
+<li><img src="assets/art/sample5.svg" alt="art"/></li>
+<li><img src="assets/art/sample6.svg" alt="art"/></li>
       </ul>
+      <p style="margin-top:1rem"><a href="gallery.html">See all artwork →</a></p>
     </section>
   </main>
 
-  <footer>
-    <p>Coffee's Crafts — artist@example.com</p>
+  <footer class="site-footer">
+    <p>© 2026 Coffee's Crafts — artist@example.com</p>
   </footer>
 </body>
 </html>

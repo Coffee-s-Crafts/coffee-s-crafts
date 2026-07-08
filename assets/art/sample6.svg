@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
+  <rect width="800" height="800" fill="#f0f8ff"/>
+  <!-- outer badge ring -->
+  <circle cx="400" cy="400" r="340" fill="#ffd700" stroke="#333" stroke-width="10"/>
+  <!-- star burst ring -->
+  <polygon points="400,75 430,175 528,100 480,195 590,180 515,255 624,300 510,320 580,420 468,400 490,515 410,455 370,565 340,450 228,510 275,395 154,375 258,330 170,255 280,265 210,165 316,200" fill="#ff8c00" opacity=".85" stroke="#333" stroke-width="4"/>
+  <!-- inner white circle -->
+  <circle cx="400" cy="400" r="230" fill="#fff" stroke="#333" stroke-width="8"/>
+  <!-- coffee cup -->
+  <rect x="300" y="330" width="200" height="160" rx="18" fill="#6f4e37" stroke="#333" stroke-width="6"/>
+  <rect x="300" y="330" width="200" height="60" rx="18" fill="#5c3a1e" stroke="#333" stroke-width="6"/>
+  <path d="M500 380 Q540 380 540 420 Q540 460 500 460" fill="none" stroke="#333" stroke-width="8" stroke-linecap="round"/>
+  <ellipse cx="400" cy="490" rx="110" ry="22" fill="#5c3a1e" stroke="#333" stroke-width="6"/>
+  <!-- steam -->
+  <path d="M350 315 Q340 280 355 250 Q370 220 360 190" fill="none" stroke="#aaa" stroke-width="7" stroke-linecap="round" opacity=".7"/>
+  <path d="M400 305 Q390 265 405 235 Q420 205 410 175" fill="none" stroke="#aaa" stroke-width="7" stroke-linecap="round" opacity=".7"/>
+  <path d="M450 315 Q440 275 455 248 Q470 218 460 188" fill="none" stroke="#aaa" stroke-width="7" stroke-linecap="round" opacity=".7"/>
+  <!-- label on cup -->
+  <text x="400" y="430" text-anchor="middle" font-size="34" fill="#ffe066" font-family="Georgia,serif" font-weight="bold">☕</text>
+  <!-- badge text -->
+  <text x="400" y="600" text-anchor="middle" font-size="36" fill="#333" font-family="Georgia,serif" font-weight="bold">Coffee's Crafts</text>
+  <text x="400" y="635" text-anchor="middle" font-size="20" fill="#6f4e37" font-family="Georgia,serif">✦ est. 2024 ✦</text>
+</svg>
