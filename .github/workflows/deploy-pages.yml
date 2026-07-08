@@ -15,16 +15,21 @@ jobs:
     env:
       SITE_TITLE: ${{ secrets.SITE_TITLE }}
       CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}
-      # Build uses local art assets
       ART_SOURCE_DIR: ${{ secrets.ART_SOURCE_DIR }}
       OUTPUT_DIR: 'dist'
       INDEX_LINK: 'index.html'
       GALLERY_LINK: 'gallery.html'
       CONTACT_LINK: 'contact.html'
-      # Enable VGEN gallery fetching when `USE_VGEN` is true and `VGEN_PORTFOLIO` is set
-      USE_VGEN: 'true'
-      VGEN_PORTFOLIO: ${{ secrets.VGEN_PORTFOLIO }}
       VGEN_URL: ${{ secrets.VGEN_URL }}
+      DISCORD_URL: ${{ vars.DISCORD_URL }}
+      DISCORD_LINK_TEXT: ${{ vars.DISCORD_LINK_TEXT }}
+      TELEGRAM_URL: ${{ vars.TELEGRAM_URL }}
+      TELEGRAM_LINK_TEXT: ${{ vars.TELEGRAM_LINK_TEXT }}
+      TRELLO_URL: ${{ vars.TRELLO_URL }}
+      TRELLO_LINK_TEXT: ${{ vars.TRELLO_LINK_TEXT }}
+      QUEUE_TRACKING_TEXT: ${{ vars.QUEUE_TRACKING_TEXT }}
+      TWITCH_URL: ${{ vars.TWITCH_URL }}
+      TWITCH_LINK_TEXT: ${{ vars.TWITCH_LINK_TEXT }}
       COMMISSION_STATUS: ${{ secrets.COMMISSION_STATUS }}
       SAMPLE_COUNT: ${{ secrets.SAMPLE_COUNT }}
 
