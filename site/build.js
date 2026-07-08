@@ -196,7 +196,7 @@ const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(proce
   {
     heading: 'QUOTES & PRICING',
     paragraphs: [
-      `Quotes are estimates based on the information provided and are subject to change after a full evaluation. Base pricing and package options are published on the fursuit pricing page: <a href="${FURSUIT_LINK}" target="_blank" rel="noopener">${FURSUIT_LINK}</a>. A formal, written quote will be issued prior to requesting payment; the quoted amount at booking is the final binding price.`
+      `Quotes are estimates based on the information provided and are subject to change after a full evaluation. Base pricing and package options are published on the <a href="${FURSUIT_LINK}" target="_blank" rel="noopener">fursuit pricing page</a>. A formal, written quote will be issued prior to requesting payment; the quoted amount at booking is the final binding price.`
     ]
   },
   {
