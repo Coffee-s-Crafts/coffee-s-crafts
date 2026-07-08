@@ -30,6 +30,10 @@ Rules:
 3. Any new configurable value must also be documented as a secret or variable in `.github/workflows/deploy-pages.yml` so the artist can override it via GitHub repository secrets/variables without touching code.
 4. Structural HTML (tags, class names, layout) lives in templates; all human-readable content lives in env vars.
 
+Additional guidance:
+- Do NOT place raw HTML fragments in `site/build.js` constants or defaults. Constants should contain data only (strings, numbers, arrays, objects) that represent content, not layout. Templates must contain the HTML structure and iterate/render the provided data.
+- Preferred pattern: expose structured values in `site/build.js` (for example an `ART_SECTIONS` array of objects with `title`, `paragraphs`, `details`, `addons`, `important`), and render them in templates using tokens or simple iteration. After changes, run `node site/build.js` to verify pages are generated correctly.
+
 ## Implementation Guidance for Agents
 
 - When editing deployment workflows, prefer changes that keep `gh-pages` as the publish target.

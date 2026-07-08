@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>%%SITE_TITLE%% — Fursuits</title>
+  {{> head}}
+</head>
+<body>
+  {{> header}}
+
+  <main class="page-content">
+    <section class="content-panel">
+      <h1>Fursuit Pricing</h1>
+      <ul class="prices-list">
+        {{#each FURSUIT_PRICES}}
+        <li><strong>{{this.name}}</strong>: {{this.price}}</li>
+        {{/each}}
+      </ul>
+    </section>
+  </main>
+
+  {{> footer}}
+</body>
+</html>
