@@ -26,84 +26,35 @@
     <section class="content-panel">
       <h1>Art Commissions</h1>
       
-<article>
-  <h2>Art — Starting From</h2>
-
-  <section>
-    <h3>Full Body (not for commercial use): $20</h3>
-    <p># One fullbody of your chosen furry character!</p>
-    <h4>Details</h4>
-    <ul>
-      <li>Delivered as a PNG</li>
-    </ul>
-    <h4>Add-ons</h4>
-    <ul>
-      <li>Shading</li>
-      <li>Extra Characters</li>
-      <li>Background options</li>
-    </ul>
-    <h4>Important</h4>
-    <p>Please be as detailed as possible when explaining what you'd like, such as pose, expression, etc. NO SHADED REFERENCES PLEASE.</p>
-  </section>
-
-  <section>
-    <h3>Furry Headshot (not for commercial use): $10</h3>
-    <p>Includes one headshot of your furry character.</p>
-    <h4>Details</h4>
-    <ul>
-      <li>Delivered as a PNG</li>
-    </ul>
-    <h4>Add-ons</h4>
-    <ul>
-      <li>Shading</li>
-      <li>Simple color background</li>
-      <li>Simple splash background</li>
-    </ul>
-    <h4>Important</h4>
-    <p>Please be as thorough as possible when describing what you want. NO SHADED REFERENCE SHEETS.</p>
-  </section>
-
-  <section>
-    <h3>Furry PNGTuber: $35</h3>
-    <h4>Includes</h4>
-    <ul>
-      <li>Four frames of your character (Mouth open eyes closed, mouth closed eyes open, mouth closed eyes closed, mouth open eyes open)</li>
-      <li>A detailed step-by-step guide on how to set up your PNGTuber</li>
-    </ul>
-    <h4>Details</h4>
-    <p>File is a .veado file to be used on Veadotube.</p>
-    <h4>Add-ons</h4>
-    <p>No addons available.</p>
-    <h4>Important</h4>
-    <p>I will also be giving helpful youtube videos on how to set certain things up. Please make sure your reference is unshaded.</p>
-  </section>
-
-  <section>
-    <h3>Scenic Furry: $50</h3>
-    <h4>Includes</h4>
-    <p>A scenic drawing of one (or more) of your characters. Scenery depends on complexity type.</p>
-    <h4>Details</h4>
-    <p>File delivered as a PNG.</p>
-    <h4>Add-ons</h4>
-    <p>Extra characters, background complexity. Please see request form photos for examples of each complexity.</p>
-    <h4>Important</h4>
-    <p>NO SHADED REFERENCE SHEETS. Please go into as much detail describing the scene you'd like (Unless simple scene, then you only have a limited amount of options!) as well as the pose, or poses, if multiple characters. Including reference photos is very helpful!</p>
-  </section>
-
-  <section>
-    <h3>Furry Reference Sheet: $45</h3>
-    <h4>Includes</h4>
-    <p>Symmetrical front & back of your character. There are free add-ons such as putting the characters likes and dislikes on the ref.</p>
-    <h4>Add-ons</h4>
-    <p>Many different add-ons can be seen on the request form :)</p>
-    <h4>Important</h4>
-    <ul>
-      <li>PLEASE send me unshaded artworks of your character. This makes color picking and markings easier to read!</li>
-      <li>If you are also requesting a custom character, you MUST click the add-on that adds the additional custom character fee. If you don't, I will not accept the commission.</li>
-    </ul>
-  </section>
-</article>
-
+      <article class="art-section">
+        <h2>Full Body (not for commercial use): $20</h2>
+        {{#each this.paragraphs}}<p></p>
+      <article class="art-section">
+        <h2>Furry Headshot (not for commercial use): $10</h2>
+        {{#each this.paragraphs}}<p></p>
+      <article class="art-section">
+        <h2>Furry PNGTuber: $35</h2>
+        {{#each this.paragraphs}}<p></p>
+      <article class="art-section">
+        <h2>Scenic Furry: $50</h2>
+        {{#each this.paragraphs}}<p></p>
+      <article class="art-section">
+        <h2>Furry Reference Sheet: $45</h2>
+        {{#each this.paragraphs}}<p></p>
+        <h4>Details</h4>
+        <ul>
+          {{#each this.details}}<li>{{this}}</li>{{/each}}
+        </ul>
+        <h4>Add-ons</h4>
+        <ul>
+          {{#each this.addons}}<li>{{this}}</li>{{/each}}
+        </ul>
+        <h4>Important</h4>
+        <ul>
+          {{#each this.important}}<li>{{this}}</li>{{/each}}
+        </ul>
+      </article>
+      {{/each}}
     </section>
   </main>
 
