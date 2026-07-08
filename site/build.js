@@ -49,20 +49,20 @@ const DISCORD_LINK_TEXT   = process.env.DISCORD_LINK_TEXT   || 'coffee.ex';
 const TELEGRAM_URL        = (process.env.TELEGRAM_URL || 'https://t.me/coffeescrafts').trim();
 const TELEGRAM_LINK_TEXT  = process.env.TELEGRAM_LINK_TEXT  || "Coffee's Crafts";
 const TRELLO_URL          = (process.env.TRELLO_URL || 'https://trello.com/b/uces30Ct/anthrocon-art-queue').trim();
-const TRELLO_LINK_TEXT    = process.env.TRELLO_LINK_TEXT    || 'Art Queue Tracker';
-const QUEUE_TRACKING_TEXT = process.env.QUEUE_TRACKING_TEXT || 'Track commission progress here:';
+const TRELLO_LINK_TEXT    = process.env.TRELLO_LINK_TEXT    || 'Art Queue Trello';
+const QUEUE_TRACKING_TEXT = process.env.QUEUE_TRACKING_TEXT || 'Track art commission progress here:';
 const TWITCH_URL          = (process.env.TWITCH_URL || 'https://twitch.tv/coffeescrafts').trim();
 const TWITCH_LINK_TEXT    = process.env.TWITCH_LINK_TEXT    || '📺 Twitch';
 const FURSUIT_TOS_URL     = (process.env.FURSUIT_TOS_URL || 'https://docs.google.com/document/d/1nN5qPhuR_FkKkcDdRS9EFwbbkudlANWd0wdbjgQee5s/edit?usp=sharing').trim();
 const FURSUIT_TOS_LINK_TEXT = process.env.FURSUIT_TOS_LINK_TEXT || 'Fursuit TOS';
 const FURSUIT_QUEUE_URL   = (process.env.FURSUIT_QUEUE_URL || 'https://trello.com/b/1NyoDiwp/fursuit-wips').trim();
-const FURSUIT_QUEUE_LINK_TEXT = process.env.FURSUIT_QUEUE_LINK_TEXT || 'Trello Fursuit Queue';
+const FURSUIT_QUEUE_LINK_TEXT = process.env.FURSUIT_QUEUE_LINK_TEXT || 'Fursuit Queue Trello';
 const FURSUIT_QUEUE_TEXT  = process.env.FURSUIT_QUEUE_TEXT  || 'Track fursuit commission progress here:';
 const TOYHOUSE_URL        = (process.env.TOYHOUSE_URL || 'https://toyhou.se/CoffeeEX').trim();
 const TOYHOUSE_LINK_TEXT  = process.env.TOYHOUSE_LINK_TEXT  || 'Toyhou.se';
-const INSTAGRAM_URL       = (process.env.INSTAGRAM_URL || 'https://toyhou.se/CoffeeEX').trim();
+const INSTAGRAM_URL       = (process.env.INSTAGRAM_URL || 'https://www.instagram.com/coffeedemonn').trim();
 const INSTAGRAM_LINK_TEXT = process.env.INSTAGRAM_LINK_TEXT || 'Instagram';
-const CARRD_URL           = (process.env.CARRD_URL || 'https://coffeescraftsgallery.carrd.co/').trim();
+const CARRD_URL           = (process.env.CARRD_URL || 'https://coffeescraftsgallery.carrd.co').trim();
 const CARRD_LINK_TEXT     = process.env.CARRD_LINK_TEXT     || 'Carrd';
 
 function ensureDir(p) {
