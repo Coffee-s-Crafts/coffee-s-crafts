@@ -151,30 +151,14 @@ const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(proce
     heading: 'Introduction',
     paragraphs: [
       "Howdy there! I see you like my fursuits, eh? Well, let’s get into some information I think you should know about me and my work.",
-      'LINK TO MY TRELLO QUEUE: <a href="https://trello.com/b/1NyoDiwp/fursuit-wips" target="_blank" rel="noopener">https://trello.com/b/1NyoDiwp/fursuit-wips</a>'
+      `LINK TO MY TRELLO QUEUE: <a href="${FURSUIT_QUEUE_URL}" target="_blank" rel="noopener">${FURSUIT_QUEUE_URL}</a>`
     ]
   },
   {
     heading: 'Prices',
     paragraphs: [
-      "First, let’s get the prices out of the way. Each price is the flat rate that I charge for my time, effort, and skill for making a suit. It DOES NOT include any extra add-ons, complexity of the character, or overall material cost. For an exact price for a certain character, you’d have to get a quote from me (quotes are free). If I give you a quote and you dislike the price, please respond courteously — a brief 'I've decided not to get this' is fine.",
-      'If you’d like a free quote, DM me on my Instagram @coffees.crafts. If I do not respond in about a day, contact me via my business email at <a href="mailto:coffeesdemons@gmail.com">coffeesdemons@gmail.com</a>.'
-    ]
-  },
-  {
-    heading: 'Price List (base prices)',
-    paragraphs: [
-      'Just the Head — $465 base price',
-      'Just the Paws — $85 base price',
-      'Just the Feetpaws — $165 base price',
-      'Just the Tail — $60 base price for a simple, foot long tail. +$20 per additional foot',
-      'Just the Planti Legs — $225 base price',
-      'Just the Digi Legs — $325 base price',
-      'Mini Partial (Head, Paws, Tail) — $645 base price',
-      'Partial (Head, Paws, Tail, Feetpaws) — $815 base price',
-      'Full Partial (Head, Paws, Tail, Feetpaws, Armsleeves) — $900 base price',
-      'Full Plantigrade Suit — $1,600 base price',
-      'Full Digitigrade Suit — $2,365 base price'
+      "Each price is the flat rate that I charge for my time, effort, and skill for making a suit. It DOES NOT include any extra add-ons, complexity of the character, or overall material cost. For an exact price for a certain character, you’d have to get a quote from me (quotes are free). If I give you a quote and you dislike the price, please respond courteously — a brief 'I've decided not to get this' is fine.",
+      `If you’d like a free quote, DM me on my Instagram: <a href="${INSTAGRAM_URL}" target="_blank" rel="noopener">${INSTAGRAM_URL}</a>. If I do not respond in about a day, contact me via my business email at <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.`
     ]
   },
   {
@@ -210,9 +194,9 @@ const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(proce
     heading: 'Contact & Misc',
     paragraphs: [
       'Contact me on my suit-making account or business email first when requesting a quote.',
-      'Instagrams: Art account @coffeedemonn; Suit-making account @coffees.crafts',
-      'Business email: <a href="mailto:coffeesdemons@gmail.com">coffeesdemons@gmail.com</a>',
-      'Toyhou.se: <a href="https://toyhou.se/CoffeeEX">https://toyhou.se/CoffeeEX</a>',
+      `Instagrams: Art account <a href="${INSTAGRAM_URL}" target="_blank" rel="noopener">${INSTAGRAM_URL}</a>`,
+      `Business email: <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>`,
+      `Toyhou.se: <a href="${TOYHOUSE_URL}" target="_blank" rel="noopener">${TOYHOUSE_URL}</a>`,
       'Thank you for reading — if you consider commissioning me, it really means a lot to me as a small business.'
     ]
   }
