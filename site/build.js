@@ -26,7 +26,7 @@ const GALLERY_MORE_TEXT       = process.env.GALLERY_MORE_TEXT       || 'See all 
 // gallery page
 const GALLERY_HEADING         = process.env.GALLERY_HEADING         || 'Gallery';
 const GALLERY_META            = process.env.GALLERY_META            || 'A selection of original pieces and commission samples.';
-const SAMPLE_COUNT            = parseInt(process.env.SAMPLE_COUNT   || '6', 10);
+const SAMPLE_COUNT            = parseInt(process.env.SAMPLE_COUNT   || '4', 10);
 // contact page
 const COMMISSIONS_HEADING     = process.env.COMMISSIONS_HEADING     || 'Commissions';
 const COMMISSIONS_INTRO       = process.env.COMMISSIONS_INTRO       || "Interested in a custom piece? I offer a range of commission types. Send me a message with your idea and I'll get back to you as soon as possible.";
