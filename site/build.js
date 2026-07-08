@@ -63,6 +63,8 @@ const INSTAGRAM_URL       = (process.env.INSTAGRAM_URL || 'https://www.instagram
 const INSTAGRAM_LINK_TEXT = process.env.INSTAGRAM_LINK_TEXT || 'Instagram';
 const CARRD_URL           = (process.env.CARRD_URL || 'https://coffeescraftsgallery.carrd.co').trim();
 const CARRD_LINK_TEXT     = process.env.CARRD_LINK_TEXT     || 'Carrd';
+const X_URL               = (process.env.X_URL || 'https://x.com/coffeesden').trim();
+const X_LINK_TEXT         = process.env.X_LINK_TEXT         || '🐦 X / Twitter';
 
 function ensureDir(p) {
   if (!fs.existsSync(p)) fs.mkdirSync(p, { recursive: true });
@@ -163,6 +165,8 @@ async function build() {
     INSTAGRAM_LINK_TEXT,
     CARRD_URL,
     CARRD_LINK_TEXT,
+    X_URL,
+    X_LINK_TEXT,
   };
 
   fs.writeFileSync(path.join(OUT, 'index.html'), renderTemplate('index.html', vars));
