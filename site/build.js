@@ -173,7 +173,7 @@ const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTI
   {
     heading: 'COMMUNICATION',
     paragraphs: [
-      `Maintain timely communication. If the buyer does not respond to requests for required information within a reasonable period, the seller may pause or cancel the commission; refunds in that case are at the seller's discretion. For urgent issues contact <a href="${DISCORD_URL}" target="_blank" rel="noopener">Discord</a>.`
+      `Maintain timely communication. If the buyer does not respond to requests for required information within a reasonable period, the seller may pause or cancel the commission; refunds in that case are at the seller's discretion. For urgent issues contact the artist on <a href="${DISCORD_URL}" target="_blank" rel="noopener">Discord</a>.`
     ]
   }
 ];
