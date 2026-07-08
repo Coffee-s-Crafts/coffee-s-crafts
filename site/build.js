@@ -152,22 +152,68 @@ function renderTemplate(name, vars) {
     const partialPath = path.join(partialsDir, `${partialName}.html`);
     return fs.existsSync(partialPath) ? fs.readFileSync(partialPath, 'utf8') : '';
   });
-  // simple each block support: {{#each ITEMS}}...{{/each}}
-  tpl = tpl.replace(/\{\{#each\s+(\w+)\s*\}\}([\s\S]*?)\{\{\/each\}\}/g, (_, arrName, block) => {
-    const arr = Array.isArray(vars[arrName]) ? vars[arrName] : [];
-    return arr.map(item => {
-      return block.replace(/\{\{\s*([\w\.]+)\s*\}\}/g, (_, key) => {
-        if (key.indexOf('this.') === 0) {
-          const prop = key.slice(5);
-          return item[prop] != null ? item[prop] : '';
-        }
-        // fallback to outer vars
-        return vars[key] != null ? vars[key] : '';
-      });
-    }).join('');
-  });
+  // Recursive renderer to support nested each blocks and `this` values
+  function renderString(str, vars, ctxThis) {
+    const openTag = '{{#each';
+    let startIndex = str.indexOf(openTag);
+    while (startIndex !== -1) {
+      const openClose = str.indexOf('}}', startIndex);
+      if (openClose === -1) break;
+      const arrName = str.slice(startIndex + openTag.length, openClose).trim();
 
-  return tpl.replace(/%%(\w+)%%/g, (_, key) => vars[key] != null ? vars[key] : '');
+      // find matching closing tag taking nesting into account
+      let depth = 1;
+      let searchIndex = openClose + 2;
+      let nextOpen, nextClose;
+      while (depth > 0) {
+        nextOpen = str.indexOf(openTag, searchIndex);
+        nextClose = str.indexOf('{{/each}}', searchIndex);
+        if (nextClose === -1) {
+          // no matching close
+          searchIndex = -1;
+          break;
+        }
+        if (nextOpen !== -1 && nextOpen < nextClose) {
+          depth++;
+          searchIndex = nextOpen + 1;
+        } else {
+          depth--;
+          searchIndex = nextClose + '{{/each}}'.length;
+        }
+      }
+      if (searchIndex === -1) break;
+      const blockStart = openClose + 2;
+      const blockEnd = searchIndex - '{{/each}}'.length;
+      const block = str.slice(blockStart, blockEnd);
+
+      let arr = [];
+      if (arrName.indexOf('this.') === 0) {
+        const prop = arrName.slice(5);
+        arr = ctxThis && Array.isArray(ctxThis[prop]) ? ctxThis[prop] : [];
+      } else {
+        arr = Array.isArray(vars[arrName]) ? vars[arrName] : [];
+      }
+      const rendered = arr.map(item => renderString(block, vars, item)).join('');
+      str = str.slice(0, startIndex) + rendered + str.slice(searchIndex);
+      startIndex = str.indexOf(openTag, startIndex + rendered.length);
+    }
+
+    // replace simple placeholders like {{this.prop}}, {{this}} or {{KEY}}
+    str = str.replace(/\{\{\s*([\w\.]+)\s*\}\}/g, (_, key) => {
+      if (key === 'this') return ctxThis != null ? String(ctxThis) : '';
+      if (key.indexOf('this.') === 0) {
+        const prop = key.slice(5);
+        return ctxThis && ctxThis[prop] != null ? String(ctxThis[prop]) : '';
+      }
+      return vars[key] != null ? String(vars[key]) : '';
+    });
+
+    // handle %%TOKENS%%
+    str = str.replace(/%%(\w+)%%/g, (_, key) => vars[key] != null ? vars[key] : '');
+    return str;
+  }
+
+  return renderString(tpl, vars, null);
 }
 
 async function build() {
