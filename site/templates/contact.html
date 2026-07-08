@@ -3,12 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Contact - %%SITE_TITLE%%</title>
+  <title>Contact — %%SITE_TITLE%%</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&family=Shrikhand&display=swap">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>Contact</h1>
+  <header class="site-header">
+    <span class="brand">%%SITE_TITLE%%</span>
     <nav>
       <a href="%%INDEX_LINK%%">Home</a>
       <a href="%%GALLERY_LINK%%">Gallery</a>
@@ -19,13 +21,39 @@
   <main>
     <section>
       <h2>Commissions</h2>
-      <p>For commissions, visit the artist's vgen page:</p>
-      <p><a href="%%VGEN_URL%%" target="_blank" rel="noopener">%%VGEN_URL%%</a></p>
-      <p>Or email: <a href="mailto:%%CONTACT_EMAIL%%">%%CONTACT_EMAIL%%</a></p>
+
+      <span class="commission-status %%COMMISSION_STATUS_CLASS%%">%%COMMISSION_STATUS_LABEL%%</span>
+
+      <p>Interested in a custom piece? I offer a range of commission types. Send me a message with your idea and I'll get back to you as soon as possible.</p>
+
+      <div class="commission-info">
+        <div class="commission-card">
+          <h3>Bust / Icon</h3>
+          <p>Single character, cropped at shoulders. Great for profile pictures and reference sheets.</p>
+        </div>
+        <div class="commission-card">
+          <h3>Half Body</h3>
+          <p>Character shown to the waist with simple background options.</p>
+        </div>
+        <div class="commission-card">
+          <h3>Full Body</h3>
+          <p>Full character with detailed shading and a custom background scene.</p>
+        </div>
+        <div class="commission-card">
+          <h3>Custom / Ask</h3>
+          <p>Something else in mind? Reach out and we can work out a quote together.</p>
+        </div>
+      </div>
+
+      <h2>Get in Touch</h2>
+      <div class="contact-links">
+        <a href="%%VGEN_URL%%" target="_blank" rel="noopener">🎨 VGen Portfolio</a>
+        <a href="mailto:%%CONTACT_EMAIL%%">✉️ Email Me</a>
+      </div>
     </section>
   </main>
 
-  <footer>
+  <footer class="site-footer">
     <p>%%FOOTER_TEXT%%</p>
   </footer>
 </body>
