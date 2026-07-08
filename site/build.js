@@ -53,6 +53,17 @@ const TRELLO_LINK_TEXT    = process.env.TRELLO_LINK_TEXT    || 'Art Queue Tracke
 const QUEUE_TRACKING_TEXT = process.env.QUEUE_TRACKING_TEXT || 'Track commission progress here:';
 const TWITCH_URL          = (process.env.TWITCH_URL || 'https://twitch.tv/coffeescrafts').trim();
 const TWITCH_LINK_TEXT    = process.env.TWITCH_LINK_TEXT    || '📺 Twitch';
+const FURSUIT_TOS_URL     = (process.env.FURSUIT_TOS_URL || 'https://docs.google.com/document/d/1nN5qPhuR_FkKkcDdRS9EFwbbkudlANWd0wdbjgQee5s/edit?usp=sharing').trim();
+const FURSUIT_TOS_LINK_TEXT = process.env.FURSUIT_TOS_LINK_TEXT || 'Fursuit TOS';
+const FURSUIT_QUEUE_URL   = (process.env.FURSUIT_QUEUE_URL || 'https://trello.com/b/1NyoDiwp/fursuit-wips').trim();
+const FURSUIT_QUEUE_LINK_TEXT = process.env.FURSUIT_QUEUE_LINK_TEXT || 'Trello Fursuit Queue';
+const FURSUIT_QUEUE_TEXT  = process.env.FURSUIT_QUEUE_TEXT  || 'Track fursuit commission progress here:';
+const TOYHOUSE_URL        = (process.env.TOYHOUSE_URL || 'https://toyhou.se/CoffeeEX').trim();
+const TOYHOUSE_LINK_TEXT  = process.env.TOYHOUSE_LINK_TEXT  || 'Toyhou.se';
+const INSTAGRAM_URL       = (process.env.INSTAGRAM_URL || 'https://toyhou.se/CoffeeEX').trim();
+const INSTAGRAM_LINK_TEXT = process.env.INSTAGRAM_LINK_TEXT || 'Instagram';
+const CARRD_URL           = (process.env.CARRD_URL || 'https://coffeescraftsgallery.carrd.co/').trim();
+const CARRD_LINK_TEXT     = process.env.CARRD_LINK_TEXT     || 'Carrd';
 
 function ensureDir(p) {
   if (!fs.existsSync(p)) fs.mkdirSync(p, { recursive: true });
@@ -142,6 +153,17 @@ async function build() {
     QUEUE_TRACKING_TEXT,
     TWITCH_URL,
     TWITCH_LINK_TEXT,
+    FURSUIT_TOS_URL,
+    FURSUIT_TOS_LINK_TEXT,
+    FURSUIT_QUEUE_URL,
+    FURSUIT_QUEUE_LINK_TEXT,
+    FURSUIT_QUEUE_TEXT,
+    TOYHOUSE_URL,
+    TOYHOUSE_LINK_TEXT,
+    INSTAGRAM_URL,
+    INSTAGRAM_LINK_TEXT,
+    CARRD_URL,
+    CARRD_LINK_TEXT,
   };
 
   fs.writeFileSync(path.join(OUT, 'index.html'), renderTemplate('index.html', vars));
