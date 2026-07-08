@@ -53,7 +53,10 @@ const TRELLO_LINK_TEXT        = process.env.TRELLO_LINK_TEXT        || '📋 Art
 const QUEUE_TRACKING_TEXT     = process.env.QUEUE_TRACKING_TEXT     || 'Track art commission progress here:';
 const TWITCH_URL              = (process.env.TWITCH_URL             || 'https://twitch.tv/coffeescrafts').trim();
 const TWITCH_LINK_TEXT        = process.env.TWITCH_LINK_TEXT        || '📺 Twitch';
-const FURSUIT_TOS_URL         = (process.env.FURSUIT_TOS_URL        || 'tos.html').trim();
+// Terms/TOC URLs
+const ART_TOS_URL             = (process.env.ART_TOS_URL             || 'tos.html').trim();
+const ART_TOS_LINK_TEXT       = process.env.ART_TOS_LINK_TEXT       || '📄 Terms of Service';
+const FURSUIT_TOS_URL         = (process.env.FURSUIT_TOS_URL        || 'fursuit-tos.html').trim();
 const FURSUIT_TOS_LINK_TEXT   = process.env.FURSUIT_TOS_LINK_TEXT   || '📄 Fursuit TOS';
 const FURSUIT_QUEUE_URL       = (process.env.FURSUIT_QUEUE_URL      || 'https://trello.com/b/1NyoDiwp/fursuit-wips').trim();
 const FURSUIT_QUEUE_LINK_TEXT = process.env.FURSUIT_QUEUE_LINK_TEXT || '📋 Fursuit Queue Trello';
@@ -138,6 +141,13 @@ const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTI
   { heading: 'USE', paragraphs: ['Personal use only, DO NOT use for AI purposes. Please credit me wherever you post it.'] },
   { heading: 'REFUNDS', paragraphs: ['No refunds available after sketch is sent. Full refund if no sketch is sent yet.'] },
   { heading: 'COMMUNICATION', paragraphs: ['Please message me on discord, coffee.ex if you cannot contact me on VGen.'] }
+];
+
+// Fursuit TOS (default placeholder: paste content from provided Google Doc)
+const FURSUIT_TOS_TITLE = process.env.FURSUIT_TOS_TITLE || 'Fursuit Terms of Service';
+const FURSUIT_TOS_UPDATED = process.env.FURSUIT_TOS_UPDATED || 'Source: https://docs.google.com/document/d/1nN5qPhuR_FkKkcDdRS9EFwbbkudlANWd0wdbjgQee5s/edit?tab=t.0';
+const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(process.env.FURSUIT_TOS_SECTIONS) : [
+  { heading: 'Fursuit Terms', paragraphs: ['Please paste the Fursuit Terms of Service content here (source: Google Doc).'] }
 ];
 
 // ── Build functions ───────────────────────────────────────────────────────
@@ -311,6 +321,13 @@ async function build() {
     TOS_TITLE,
     TOS_UPDATED,
     TOS_SECTIONS,
+    FURSUIT_TOS_TITLE,
+    FURSUIT_TOS_UPDATED,
+    FURSUIT_TOS_SECTIONS,
+    ART_TOS_URL,
+    ART_TOS_LINK_TEXT,
+    FURSUIT_TOS_URL,
+    FURSUIT_TOS_LINK_TEXT,
   };
 
   fs.writeFileSync(path.join(OUT, 'index.html'), renderTemplate('index.html', vars));
@@ -319,6 +336,7 @@ async function build() {
   fs.writeFileSync(path.join(OUT, 'art.html'), renderTemplate('art.html', vars));
   fs.writeFileSync(path.join(OUT, 'fursuit.html'), renderTemplate('fursuit.html', vars));
   fs.writeFileSync(path.join(OUT, 'tos.html'), renderTemplate('tos.html', vars));
+  fs.writeFileSync(path.join(OUT, 'fursuit-tos.html'), renderTemplate('fursuit-tos.html', vars));
 
   try {
     const diag = {
