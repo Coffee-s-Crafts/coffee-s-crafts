@@ -340,23 +340,25 @@ async function build() {
   const artDest = path.join(OUT, ART_SRC);
   copyDir(ART_SRC, artDest);
 
-  let images = [];
+  let allImages = [];
   console.log('Build settings:', { ART_SRC, SAMPLE_COUNT, OUT });
 
   if (fs.existsSync(ART_SRC)) {
-    images = fs.readdirSync(ART_SRC)
+    allImages = fs.readdirSync(ART_SRC)
       .filter(f => /\.(png|jpe?g|svg|gif|webp)$/i.test(f))
-      .slice(0, SAMPLE_COUNT)
       .map(f => path.posix.join(ART_SRC.replace(/\\/g, '/'), f));
   }
 
-  const sampleHtml = images.map(i => `<li><img src="${i}" alt="art"/></li>`).join('\n');
+  const sampleList = allImages.slice(0, SAMPLE_COUNT);
+  const sampleHtml = sampleList.map(i => `<li><img src="${i}" alt="art"/></li>`).join('\n');
+  const galleryHtml = allImages.map(i => `<li><img src="${i}" alt="art"/></li>`).join('\n');
 
   const vars = {
     SITE_TITLE,
     CONTACT_EMAIL,
     FOOTER_TEXT,
     SAMPLE_IMAGES: sampleHtml,
+    GALLERY_IMAGES: galleryHtml,
     INDEX_LINK,
     GALLERY_LINK,
     CONTACT_LINK,
@@ -436,8 +438,8 @@ async function build() {
       ART_SRC,
       SAMPLE_COUNT,
       VGEN_URL,
-      imagesCount: images.length,
-      images: images.slice(0, SAMPLE_COUNT),
+      imagesCount: allImages.length,
+      images: allImages.slice(0, SAMPLE_COUNT),
       builtAt: new Date().toISOString(),
     };
     fs.writeFileSync(path.join(OUT, 'build-info.json'), JSON.stringify(diag, null, 2));
