@@ -154,7 +154,7 @@ const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTI
   {
     heading: 'PAYMENTS',
     paragraphs: [
-      "Payments are processed via VGen unless another processor is agreed in writing. A deposit or full payment may be required to secure a commission slot. The buyer is responsible for any payment-processor fees and for ensuring payments clear. Work will not begin until the required payment or deposit is received."
+      `Payments are processed via <a href="${VGEN_URL}" target="_blank" rel="noopener">VGen</a> unless another processor is agreed in writing. A deposit or full payment may be required to secure a commission slot. The buyer is responsible for any payment-processor fees and for ensuring payments clear. Work will not begin until the required payment or deposit is received.`
     ]
   },
   {
