@@ -4,6 +4,7 @@ const path = require('path');
 // ── Paths ─────────────────────────────────────────────
 const OUT                     = process.env.OUTPUT_DIR     || 'dist';
 const ART_SRC                 = process.env.ART_SOURCE_DIR || 'assets/art';
+const FURSUIT_SRC             = process.env.FURSUIT_SOURCE_DIR || 'assets/fursuits';
 const INDEX_LINK              = process.env.INDEX_LINK     || 'index.html';
 const GALLERY_LINK            = process.env.GALLERY_LINK   || 'gallery.html';
 const ART_LINK                = process.env.ART_LINK       || 'art.html';
@@ -350,8 +351,11 @@ async function build() {
 
   const artDest = path.join(OUT, ART_SRC);
   copyDir(ART_SRC, artDest);
+  const fursuitDest = path.join(OUT, FURSUIT_SRC);
+  copyDir(FURSUIT_SRC, fursuitDest);
 
   let allImages = [];
+  let fursuitImages = [];
   console.log('Build settings:', { ART_SRC, SAMPLE_COUNT, OUT });
 
   if (fs.existsSync(ART_SRC)) {
@@ -360,9 +364,16 @@ async function build() {
       .map(f => path.posix.join(ART_SRC.replace(/\\/g, '/'), f));
   }
 
+  if (fs.existsSync(FURSUIT_SRC)) {
+    fursuitImages = fs.readdirSync(FURSUIT_SRC)
+      .filter(f => /\.(png|jpe?g|svg|gif|webp)$/i.test(f))
+      .map(f => path.posix.join(FURSUIT_SRC.replace(/\\/g, '/'), f));
+  }
+
   const sampleList = allImages.slice(0, SAMPLE_COUNT);
   const sampleHtml = sampleList.map(i => `<li><img src="${i}" alt="art"/></li>`).join('\n');
   const galleryHtml = allImages.map(i => `<li><img src="${i}" alt="art"/></li>`).join('\n');
+  const fursuitGalleryHtml = fursuitImages.map(i => `<li><img src="${i}" alt="fursuit"/></li>`).join('\n');
 
   const vars = {
     SITE_TITLE,
@@ -438,6 +449,8 @@ async function build() {
     ART_TOS_LINK_TEXT,
     FURSUIT_TOS_URL,
     FURSUIT_TOS_LINK_TEXT,
+    ART_GALLERY_IMAGES: galleryHtml,
+    FURSUIT_GALLERY_IMAGES: fursuitGalleryHtml,
   };
 
   fs.writeFileSync(path.join(OUT, 'index.html'), renderTemplate('index.html', vars));

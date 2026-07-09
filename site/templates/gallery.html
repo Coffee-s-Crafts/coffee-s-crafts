@@ -11,8 +11,14 @@
     <section>
       <h2>%%GALLERY_HEADING%%</h2>
       <p class="gallery-meta">%%GALLERY_META%%</p>
+      <h3>Art</h3>
       <ul class="art-list">
-        %%GALLERY_IMAGES%%
+        %%ART_GALLERY_IMAGES%%
+      </ul>
+
+      <h3 style="margin-top:1.5rem">Fursuits</h3>
+      <ul class="art-list fursuit-list">
+        %%FURSUIT_GALLERY_IMAGES%%
       </ul>
     </section>
   </main>
@@ -57,7 +63,7 @@
 
       document.addEventListener('click', function(e){
         const target = e.target;
-        if(target.closest('.art-list') && target.tagName === 'IMG'){
+        if((target.closest('.art-list') || target.closest('.fursuit-list')) && target.tagName === 'IMG'){
           e.preventDefault();
           openModal(target);
         }
