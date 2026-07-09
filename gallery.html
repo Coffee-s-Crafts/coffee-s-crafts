@@ -46,25 +46,33 @@
 
   <script>
     (function(){
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImg');
+      const caption = document.getElementById('modalCaption');
+      const closeBtn = document.getElementById('modalClose');
+
+      // Ensure modal is a direct child of <body> so it's not clipped by ancestor stacking contexts
+      if (modal && modal.parentNode !== document.body) document.body.appendChild(modal);
+
       function openModal(img){
-        const modal = document.getElementById('imageModal');
-        const modalImg = document.getElementById('modalImg');
-        const caption = document.getElementById('modalCaption');
         modalImg.src = img.src;
         modalImg.alt = img.alt || '';
-        // show resolution when available
         const w = img.naturalWidth || img.width;
         const h = img.naturalHeight || img.height;
         caption.textContent = `${w} × ${h} — ${img.src.split('/').pop()}`;
         modal.classList.add('open');
         modal.setAttribute('aria-hidden','false');
+        // prevent background scroll
+        document.body.style.overflow = 'hidden';
       }
+
       function closeModal(){
-        const modal = document.getElementById('imageModal');
         modal.classList.remove('open');
         modal.setAttribute('aria-hidden','true');
-        document.getElementById('modalImg').src='';
+        modalImg.src = '';
+        document.body.style.overflow = '';
       }
+
       document.addEventListener('click', function(e){
         const target = e.target;
         if(target.closest('.art-list') && target.tagName === 'IMG'){
@@ -72,10 +80,11 @@
           openModal(target);
         }
       });
-      document.getElementById('modalClose').addEventListener('click', closeModal);
-      document.getElementById('imageModal').addEventListener('click', function(e){
-        if(e.target.id === 'imageModal') closeModal();
-      });
+
+      closeBtn.addEventListener('click', closeModal);
+
+      // Click outside content closes
+      modal.addEventListener('click', function(e){ if (e.target === modal) closeModal(); });
       document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
     })();
   </script>

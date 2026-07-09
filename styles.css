@@ -200,9 +200,9 @@ section h2{font-size:1.75rem;color:var(--accent);border-bottom:2px solid var(--b
 .tos .tos-section p{margin:0;color:var(--muted)}
 
 /* Image modal */
-.modal-overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.7);z-index:200}
+.modal-overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.75);z-index:99999}
 .modal-overlay.open{display:flex}
-.modal-content{background:transparent;padding:1rem;max-width:95%;max-height:90%;display:flex;flex-direction:column;align-items:center;gap:.5rem}
+.modal-content{position:relative;background:transparent;padding:1rem;max-width:95%;max-height:90%;display:flex;flex-direction:column;align-items:center;gap:.5rem}
 .modal-content img{max-width:100%;max-height:80vh;border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,.6)}
-.modal-caption{color:#fff;font-size:.95rem;background:rgba(0,0,0,.4);padding:.35rem .6rem;border-radius:6px}
-.modal-close{position:absolute;right:1rem;top:1rem;background:rgba(255,255,255,.9);border-radius:999px;border:0;padding:.35rem .6rem;cursor:pointer;font-weight:bold}
+.modal-caption{color:#fff;font-size:.95rem;background:rgba(0,0,0,.45);padding:.35rem .6rem;border-radius:6px}
+.modal-close{position:absolute;right:8px;top:8px;background:rgba(255,255,255,.95);border-radius:999px;border:0;padding:.35rem .6rem;cursor:pointer;font-weight:bold}
