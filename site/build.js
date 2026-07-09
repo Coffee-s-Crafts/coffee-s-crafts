@@ -2,14 +2,14 @@ const fs = require('fs');
 const path = require('path');
 
 // ── Paths ─────────────────────────────────────────────
-const OUT                     = process.env.OUTPUT_DIR     || 'dist';
-const ART_SRC                 = process.env.ART_SOURCE_DIR || 'assets/art';
+const OUT                     = process.env.OUTPUT_DIR         || 'dist';
+const ART_SRC                 = process.env.ART_SOURCE_DIR     || 'assets/art';
 const FURSUIT_SRC             = process.env.FURSUIT_SOURCE_DIR || 'assets/fursuits';
-const INDEX_LINK              = process.env.INDEX_LINK     || 'index.html';
-const GALLERY_LINK            = process.env.GALLERY_LINK   || 'gallery.html';
-const ART_LINK                = process.env.ART_LINK       || 'art.html';
-const FURSUIT_LINK            = process.env.FURSUIT_LINK   || 'fursuit.html';
-const CONTACT_LINK            = process.env.CONTACT_LINK   || 'contact.html';
+const INDEX_LINK              = process.env.INDEX_LINK         || 'index.html';
+const GALLERY_LINK            = process.env.GALLERY_LINK       || 'gallery.html';
+const ART_LINK                = process.env.ART_LINK           || 'art.html';
+const FURSUIT_LINK            = process.env.FURSUIT_LINK       || 'fursuit.html';
+const CONTACT_LINK            = process.env.CONTACT_LINK       || 'contact.html';
 
 // ── Commission status ─────────────────────────────────
 const COMMISSION_OPEN         = (process.env.COMMISSION_STATUS || 'open').toLowerCase() === 'open';
