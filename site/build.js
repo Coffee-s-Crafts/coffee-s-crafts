@@ -32,12 +32,12 @@ const SAMPLE_COUNT            = parseInt(process.env.SAMPLE_COUNT   || '4', 10);
 // contact page
 const COMMISSIONS_HEADING     = process.env.COMMISSIONS_HEADING     || 'Commissions';
 const COMMISSIONS_INTRO       = process.env.COMMISSIONS_INTRO       || "Interested in a custom piece? I offer a range of commission types. Send me a message with your idea and I'll get back to you as soon as possible.";
-const TIER1_TITLE             = process.env.TIER1_TITLE             || 'Bust / Icon';
-const TIER1_DESC              = process.env.TIER1_DESC              || 'Single character, cropped at shoulders. Great for profile pictures and reference sheets.';
+const TIER1_TITLE             = process.env.TIER1_TITLE             || 'Bust';
+const TIER1_DESC              = process.env.TIER1_DESC              || 'Shoulder-up portrait of your character with paws included.';
 const TIER2_TITLE             = process.env.TIER2_TITLE             || 'Half Body';
-const TIER2_DESC              = process.env.TIER2_DESC              || 'Character shown to the waist with simple background options.';
+const TIER2_DESC              = process.env.TIER2_DESC              || 'Waist-up of your character.';
 const TIER3_TITLE             = process.env.TIER3_TITLE             || 'Full Body';
-const TIER3_DESC              = process.env.TIER3_DESC              || 'Full character with detailed shading and a custom background scene.';
+const TIER3_DESC              = process.env.TIER3_DESC              || 'Full body of your character.';
 const TIER4_TITLE             = process.env.TIER4_TITLE             || 'Custom / Ask';
 const TIER4_DESC              = process.env.TIER4_DESC              || 'Something else in mind? Reach out and we can work out a quote together.';
 const CONTACT_HEADING         = process.env.CONTACT_HEADING         || 'Contact';
@@ -82,38 +82,45 @@ const FOOTER_TEXT             = `© ${FOOTER_YEAR} ${SITE_TITLE} — ${CONTACT_E
 // ── New page content (configurable via env) ─────────────────────────────────
 const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTIONS) : [
   {
-    title: 'Full Body (not for commercial use): $20',
-    paragraphs: ['One fullbody of your chosen furry character!'],
+    title: 'Full Body: $20',
+    paragraphs: ['Full body of your character.'],
     details: ['Delivered as a PNG'],
-    addons: ['Shading', 'Extra Characters', 'Background options'],
+    addons: ['Commercial usage rights - 35%', 'Shading - $20', 'Extra Character - $15'],
     important: ['Please be as detailed as possible when explaining what you\'d like, such as pose, expression, etc. NO SHADED REFERENCES PLEASE.']
   },
   {
-    title: 'Furry Headshot (not for commercial use): $10',
-    paragraphs: ['Includes one headshot of your furry character.'],
+    title: 'Bust: $15+',
+    paragraphs: ['Shoulder up portrait of your character (paws included).'],
     details: ['Delivered as a PNG'],
-    addons: ['Shading', 'Simple color background', 'Simple splash background'],
+    addons: ['Commercial usage rights - 35%', 'Shading - $15'],
+    important: ['Please be as detailed as possible when explaining what you\'d like, such as pose, expression, etc. NO SHADED REFERENCES PLEASE.']
+  },
+  {
+    title: 'Headshot: $10',
+    paragraphs: ['Headshot of your character.'],
+    details: ['Delivered as a PNG'],
+    addons: ['Commercial usage rights - 35%', 'Shading - $10', 'Simple color background - Free', 'Simple splash background - Free'],
     important: ['Please be as thorough as possible when describing what you want. NO SHADED REFERENCE SHEETS.']
   },
   {
     title: 'Furry PNGTuber: $35+',
     paragraphs: ['Four frames of your character and a step-by-step setup guide for PNGTuber use.'],
     details: ['File is a .veado file to be used on Veadotube.'],
-    addons: [],
+    addons: ['Commercial usage rights - 35%', 'Shading - $15', 'Extra frames - $8.50 per frame'],
     important: ['Please provide an unshaded reference.']
   },
   {
     title: 'Scenic Furry Commissions: $50+',
-    paragraphs: ['A scenic drawing of one (or more) of your characters. Scenery depends on complexity type.'],
+    paragraphs: ['Scenic drawing of your character. Scenery depends on complexity type.'],
     details: ['File delivered as a PNG.'],
-    addons: ['Extra characters', 'Background complexity'],
+    addons: ['Commercial usage rights - 35%', 'Extra characters - $15', 'Background complexity - Ask for quote'],
     important: ['NO SHADED REFERENCE SHEETS. Please provide detailed scene description and reference photos when possible.']
   },
   {
     title: 'Furry Reference Sheet: $45+',
     paragraphs: ['Symmetrical front & back of your character. There are free add-ons such as putting the characters likes and dislikes on the ref.'],
     details: [],
-    addons: ['See request form for many add-ons'],
+    addons: ['Commercial usage rights - 35%', 'Symmetrical front & back', 'Asymmetrical front & back - $10', 'Add side view - $10', 'Add a closeup headshot - $10', 'Add eyes closeup - $5', 'Accessories (Up to 3)- $10', 'Name, gender, species (text)', 'Likes/Dislikes(text)', 'Character description (text)'],
     important: ['PLEASE send unshaded artworks of your character. If requesting a custom character, include the custom character add-on fee.']
   }
 ];
@@ -165,7 +172,7 @@ const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTI
   {
     heading: 'USE',
     paragraphs: [
-      "Artwork is licensed for personal use only. Commercial use, resale, or distribution requires an explicit commercial license. Artwork must not be used to train AI models or for automated data collection. Please credit the artist when practical."
+      "All artwork produced is licensed for personal use only. Commercial use, resale, distribution, or use in monetized projects is prohibited unless a commercial license is explicitly granted or commercial rights are included in the final quoted price. Artwork must not be used to train AI models or for automated data collection. Please credit the artist when practical."
     ]
   },
   {
