@@ -372,6 +372,8 @@ async function build() {
 
   const sampleList = allImages.slice(0, SAMPLE_COUNT);
   const sampleHtml = sampleList.map(i => `<li><img src="${i}" alt="art"/></li>`).join('\n');
+  const fursuitSampleList = fursuitImages.slice(0, SAMPLE_COUNT);
+  const fursuitSampleHtml = fursuitSampleList.map(i => `<li><img src="${i}" alt="fursuit"/></li>`).join('\n');
   const galleryHtml = allImages.map(i => `<li><img src="${i}" alt="art"/></li>`).join('\n');
   const fursuitGalleryHtml = fursuitImages.map(i => `<li><img src="${i}" alt="fursuit"/></li>`).join('\n');
 
@@ -451,6 +453,8 @@ async function build() {
     FURSUIT_TOS_LINK_TEXT,
     ART_GALLERY_IMAGES: galleryHtml,
     FURSUIT_GALLERY_IMAGES: fursuitGalleryHtml,
+    SAMPLE_IMAGES: sampleHtml,
+    FURSUIT_SAMPLE_IMAGES: fursuitSampleHtml,
   };
 
   fs.writeFileSync(path.join(OUT, 'index.html'), renderTemplate('index.html', vars));
