@@ -26,11 +26,22 @@
     <section>
       <h2>Gallery</h2>
       <p class="gallery-meta">A selection of original pieces and commission samples.</p>
+      <h3>Art</h3>
       <ul class="art-list">
         <li><img src="assets/art/Layer_3.png" alt="art"/></li>
 <li><img src="assets/art/boyo.png" alt="art"/></li>
 <li><img src="assets/art/eeeee.png" alt="art"/></li>
 <li><img src="assets/art/reki.png" alt="art"/></li>
+      </ul>
+
+      <h3 style="margin-top:1.5rem">Fursuits</h3>
+      <ul class="art-list fursuit-list">
+        <li><img src="assets/fursuits/fursuit-placeholder-01.svg" alt="fursuit"/></li>
+<li><img src="assets/fursuits/fursuit-placeholder-02.svg" alt="fursuit"/></li>
+<li><img src="assets/fursuits/fursuit-placeholder-03.svg" alt="fursuit"/></li>
+<li><img src="assets/fursuits/fursuit-placeholder-04.svg" alt="fursuit"/></li>
+<li><img src="assets/fursuits/fursuit-placeholder-05.svg" alt="fursuit"/></li>
+<li><img src="assets/fursuits/fursuit-placeholder-06.svg" alt="fursuit"/></li>
       </ul>
     </section>
   </main>
@@ -75,7 +86,7 @@
 
       document.addEventListener('click', function(e){
         const target = e.target;
-        if(target.closest('.art-list') && target.tagName === 'IMG'){
+        if((target.closest('.art-list') || target.closest('.fursuit-list')) && target.tagName === 'IMG'){
           e.preventDefault();
           openModal(target);
         }
