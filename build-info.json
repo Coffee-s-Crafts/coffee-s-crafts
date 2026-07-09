@@ -2,12 +2,12 @@
   "ART_SRC": "assets/art",
   "SAMPLE_COUNT": 4,
   "VGEN_URL": "https://vgen.co/CoffeeEX",
-  "imagesCount": 4,
+  "imagesCount": 5,
   "images": [
     "assets/art/Layer_3.png",
+    "assets/art/anthrocon-2026-badges.jpg",
     "assets/art/boyo.png",
-    "assets/art/eeeee.png",
-    "assets/art/reki.png"
+    "assets/art/eeeee.png"
   ],
-  "builtAt": "2026-07-09T12:18:48.810Z"
+  "builtAt": "2026-07-09T12:45:40.119Z"
 }
