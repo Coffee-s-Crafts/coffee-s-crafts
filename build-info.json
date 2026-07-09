@@ -2,12 +2,12 @@
   "ART_SRC": "assets/art",
   "SAMPLE_COUNT": 4,
   "VGEN_URL": "https://vgen.co/CoffeeEX",
-  "imagesCount": 6,
+  "imagesCount": 10,
   "images": [
-    "assets/art/sample1.svg",
-    "assets/art/sample2.svg",
-    "assets/art/sample3.svg",
-    "assets/art/sample4.svg"
+    "assets/art/Layer_3.png",
+    "assets/art/boyo.png",
+    "assets/art/eeeee.png",
+    "assets/art/reki.png"
   ],
-  "builtAt": "2026-07-08T20:57:35.969Z"
+  "builtAt": "2026-07-09T04:20:16.716Z"
 }
