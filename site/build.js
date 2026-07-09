@@ -120,7 +120,7 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
     title: 'Furry Reference Sheet: $45+',
     paragraphs: ['Symmetrical front & back of your character. There are free add-ons such as putting the characters likes and dislikes on the ref.'],
     details: [],
-    addons: ['Commercial usage rights - 35%', 'Symmetrical front & back', 'Asymmetrical front & back - $10', 'Add side view - $10', 'Add a closeup headshot - $10', 'Add eyes closeup - $5', 'Accessories (Up to 3)- $10', 'Name, gender, species (text)', 'Likes/Dislikes(text)', 'Character description (text)'],
+    addons: ['Commercial usage rights - 35%', 'Symmetrical front & back', 'Asymmetrical front & back - $10', 'Add side view - $10', 'Add a closeup headshot - $10', 'Add eyes closeup - $5', 'Accessories (Up to 3)- $10', 'Name, gender, species (text)', 'Likes/Dislikes (text)', 'Character description (text)'],
     important: ['PLEASE send unshaded artworks of your character. If requesting a custom character, include the custom character add-on fee.']
   }
 ];
