@@ -35,6 +35,50 @@
     </section>
   </main>
 
+  <!-- Image modal -->
+  <div id="imageModal" class="modal-overlay" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true">
+      <button id="modalClose" class="modal-close" aria-label="Close">✕</button>
+      <img id="modalImg" src="" alt="" />
+      <div id="modalCaption" class="modal-caption"></div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      function openModal(img){
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImg');
+        const caption = document.getElementById('modalCaption');
+        modalImg.src = img.src;
+        modalImg.alt = img.alt || '';
+        // show resolution when available
+        const w = img.naturalWidth || img.width;
+        const h = img.naturalHeight || img.height;
+        caption.textContent = `${w} × ${h} — ${img.src.split('/').pop()}`;
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden','false');
+      }
+      function closeModal(){
+        const modal = document.getElementById('imageModal');
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden','true');
+        document.getElementById('modalImg').src='';
+      }
+      document.addEventListener('click', function(e){
+        const target = e.target;
+        if(target.closest('.art-list') && target.tagName === 'IMG'){
+          e.preventDefault();
+          openModal(target);
+        }
+      });
+      document.getElementById('modalClose').addEventListener('click', closeModal);
+      document.getElementById('imageModal').addEventListener('click', function(e){
+        if(e.target.id === 'imageModal') closeModal();
+      });
+      document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
+    })();
+  </script>
     <footer class="site-footer">
     <p>© 2026 Coffee's Crafts — coffee@coffeescrafts.com — <a href="tos.html">📄 Terms of Service</a> | <a href="fursuit-tos.html">📄 Fursuit TOS</a></p>
   </footer>
