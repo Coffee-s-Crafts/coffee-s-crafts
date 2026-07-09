@@ -268,5 +268,4 @@ jobs:
         - Build script: `site/build.js` (contains defaults and env var keys you can override).
 
         ---
-
-        If you'd like, I can add a ready-to-use `.github/workflows/deploy-pages.yml` file to this repo. Want me to create it?
+```
