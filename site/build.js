@@ -16,6 +16,47 @@ const COMMISSION_OPEN         = (process.env.COMMISSION_STATUS || 'open').toLowe
 const COMMISSION_STATUS_CLASS = COMMISSION_OPEN ? 'open' : 'closed';
 const COMMISSION_STATUS_LABEL = COMMISSION_OPEN ? 'Commissions Open' : 'Commissions Closed';
 
+// ── Promotions (configurable via env PROMOTIONS as JSON array) ─────────────────
+// Each promotion: { id, name, type: 'flat'|'percent', amount, start: 'YYYY-MM-DD', end: 'YYYY-MM-DD', badgeText }
+function safeParsePromotions(raw) {
+  if (!raw) return [];
+  try {
+    const arr = JSON.parse(raw);
+    if (!Array.isArray(arr)) return [];
+    return arr.map(p => ({
+      id: p.id || (p.name || '').toLowerCase().replace(/\s+/g, '-'),
+      name: p.name || '',
+      type: p.type === 'percent' ? 'percent' : 'flat',
+      amount: Number(p.amount) || 0,
+      start: p.start || null,
+      end: p.end || null,
+      badgeText: p.badgeText || null
+    }));
+  } catch (e) {
+    return [];
+  }
+}
+
+const PROMOTIONS = safeParsePromotions(process.env.PROMOTIONS);
+function isPromotionActive(p, now) {
+  if (!p) return false;
+  const start = p.start ? new Date(p.start) : null;
+  const end = p.end ? new Date(p.end) : null;
+  if (start && isNaN(start.getTime())) return false;
+  if (end && isNaN(end.getTime())) return false;
+  if (start && now < start) return false;
+  if (end && now > end) return false;
+  return true;
+}
+
+const _now = new Date();
+const ACTIVE_PROMOTIONS = PROMOTIONS.filter(p => isPromotionActive(p, _now));
+const PROMOTIONS_AVAILABLE = ACTIVE_PROMOTIONS.length > 0;
+const PROMOTION_STATUS_CLASS = PROMOTIONS_AVAILABLE ? 'active' : 'none';
+const PROMOTION_STATUS_LABEL = PROMOTIONS_AVAILABLE
+  ? (ACTIVE_PROMOTIONS.map(p => (p.badgeText || (p.type === 'percent' ? `${p.amount}% off` : `$${p.amount} off`))).join(', '))
+  : 'No Promotions';
+
 // ── Configurable settings ─────────────────────────────────────────────────────
 // index page
 const HERO_TAGLINE            = process.env.HERO_TAGLINE            || "Original art & custom commissions — made with love ☕";
@@ -455,6 +496,11 @@ async function build() {
     FURSUIT_GALLERY_IMAGES: fursuitGalleryHtml,
     SAMPLE_IMAGES: sampleHtml,
     FURSUIT_SAMPLE_IMAGES: fursuitSampleHtml,
+    PROMOTIONS,
+    ACTIVE_PROMOTIONS,
+    PROMOTIONS_AVAILABLE,
+    PROMOTION_STATUS_CLASS,
+    PROMOTION_STATUS_LABEL,
   };
 
   fs.writeFileSync(path.join(OUT, 'index.html'), renderTemplate('index.html', vars));
