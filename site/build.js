@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const _now = new Date();
 
 // ── Paths ─────────────────────────────────────────────
 const OUT                     = process.env.OUTPUT_DIR         || 'dist';
@@ -49,7 +50,6 @@ function isPromotionActive(p, now) {
   return true;
 }
 
-const _now = new Date();
 const ACTIVE_PROMOTIONS = PROMOTIONS.filter(p => isPromotionActive(p, _now));
 const PROMOTIONS_AVAILABLE = ACTIVE_PROMOTIONS.length > 0;
 const PROMOTION_STATUS_CLASS = PROMOTIONS_AVAILABLE ? 'active' : 'none';
@@ -116,7 +116,7 @@ const CARRD_LINK_TEXT         = process.env.CARRD_LINK_TEXT         || '🌐 Car
 const X_URL                   = (process.env.X_URL                  || 'https://x.com/coffeesden').trim();
 const X_LINK_TEXT             = process.env.X_LINK_TEXT             || '🐦 X / Twitter';
 // global site settings
-const FOOTER_YEAR             = new Date().getFullYear();
+const FOOTER_YEAR             = _now.getFullYear();
 const SITE_TITLE              = process.env.SITE_TITLE              || "Coffee's Crafts";
 const CONTACT_EMAIL           = process.env.CONTACT_EMAIL           || 'coffee@coffeescrafts.com';
 const FOOTER_TEXT             = `© ${FOOTER_YEAR} ${SITE_TITLE} — ${CONTACT_EMAIL}`;
@@ -518,7 +518,7 @@ async function build() {
       VGEN_URL,
       imagesCount: allImages.length,
       images: allImages.slice(0, SAMPLE_COUNT),
-      builtAt: new Date().toISOString(),
+      builtAt: _now.toISOString(),
     };
     fs.writeFileSync(path.join(OUT, 'build-info.json'), JSON.stringify(diag, null, 2));
     console.log('Wrote build-info.json with diagnostics');
