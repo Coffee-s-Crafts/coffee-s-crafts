@@ -66,7 +66,7 @@ const ABOUT_BODY              = process.env.ABOUT_BODY              || "Welcome!
 const ABOUT_CTA_INTRO         = process.env.ABOUT_CTA_INTRO         || 'Looking for something unique?';
 const ABOUT_CTA_LINK_TEXT     = process.env.ABOUT_CTA_LINK_TEXT     || 'Check commission availability';
 const FEATURED_HEADING        = process.env.FEATURED_HEADING        || 'Featured Work';
-const GALLERY_MORE_TEXT       = process.env.GALLERY_MORE_TEXT       || 'See all artwork →';
+const GALLERY_MORE_TEXT       = process.env.GALLERY_MORE_TEXT       || 'See all →';
 // gallery page
 const GALLERY_HEADING         = process.env.GALLERY_HEADING         || 'Gallery';
 const GALLERY_META            = process.env.GALLERY_META            || 'A selection of original pieces and commission samples.';
