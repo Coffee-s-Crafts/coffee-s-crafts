@@ -236,13 +236,13 @@ const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTI
   {
     heading: 'REFUNDS',
     paragraphs: [
-      "Full refunds are available only if no work (including sketches) has been produced. Once a sketch has been delivered, refunds are not available except at the seller's discretion; any partial refund will fairly reflect work already completed and any non-recoverable expenses. Chargebacks may result in the permanent refusal of future service and may be contested."
+      "Full refunds are available only if no work (including sketches) has been produced. Once a sketch has been delivered, refunds are not available except at the artist's discretion; any partial refund will fairly reflect work already completed and any non-recoverable expenses. Chargebacks may result in the permanent refusal of future service and may be contested."
     ]
   },
   {
     heading: 'COMMUNICATION',
     paragraphs: [
-      `Maintain timely communication. If the buyer does not respond to requests for required information within a reasonable period, the seller may pause or cancel the commission; refunds in that case are at the seller's discretion. For urgent issues contact the artist on <a href="${DISCORD_URL}" target="_blank" rel="noopener">${DISCORD_LINK_TEXT}</a> or <a href="${TELEGRAM_URL}" target="_blank" rel="noopener">${TELEGRAM_LINK_TEXT}</a>.`
+      `Maintain timely communication. If the buyer does not respond to requests for required information within a reasonable period, the artist may pause or cancel the commission; refunds in that case are at the artist's discretion. For urgent issues contact the artist on <a href="${DISCORD_URL}" target="_blank" rel="noopener">${DISCORD_LINK_TEXT}</a> or <a href="${TELEGRAM_URL}" target="_blank" rel="noopener">${TELEGRAM_LINK_TEXT}</a>.`
     ]
   }
 ];
