@@ -185,30 +185,46 @@ const FURSUIT_PRICES = process.env.FURSUIT_PRICES ? JSON.parse(process.env.FURSU
 
 // Terms of Service structured content
 const TOS_TITLE = process.env.TOS_TITLE || "CoffeeEX's Terms of Service";
-const TOS_UPDATED = process.env.TOS_UPDATED || 'Updated July 8, 2026';
+const TOS_UPDATED = process.env.TOS_UPDATED || 'Updated July 16, 2026';
 const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTIONS) : [
   {
     heading: 'GENERAL',
     paragraphs: [
-      "I reserve the right to decline any commission. Prohibited content includes ABDL and Feral NSFW."
+      "I reserve the right to decline any commission for any reason. Prohibited content includes ABDL and feral NSFW. Additional subjects may be declined at my discretion.",
+      "These Terms of Service constitute the entire agreement between the artist and the buyer regarding commissioned work unless otherwise agreed in writing."
     ]
   },
   {
     heading: 'PAYMENTS',
     paragraphs: [
-      `Payments are processed via <a href="${VGEN_URL}" target="_blank" rel="noopener">VGen</a> unless another processor is agreed in writing. A deposit or full payment may be required to secure a commission slot. The buyer is responsible for any payment-processor fees and for ensuring payments clear. Work will not begin until the required payment or deposit is received.`
+      `Payments are processed through <a href="${VGEN_URL}" target="_blank" rel="noopener">VGen</a> unless another payment method is agreed upon in writing.",
+      "A deposit or full payment may be required to reserve a commission slot.",
+      "Payment secures a place in the commission queue but does not guarantee that work will begin immediately. Work will not begin until all required payments have cleared and all requested references, descriptions, and other commission details have been received.
+      "The buyer is responsible for any payment processor fees, currency conversion fees, taxes, or other charges imposed by the payment provider.`
+    ]
+  },
+  {
+    heading: 'COMMISSION QUEUE',
+    paragraphs: [
+      "Commissions are completed according to the artist's production schedule and queue.",
+      "The artist reserves the right to determine the order in which commissions are completed, including prioritizing rush orders, convention deadlines, or other business needs."
     ]
   },
   {
     heading: 'REVISIONS',
     paragraphs: [
-      "Revisions are limited to minor adjustments during the sketch phase. Major changes or new concepts introduced after the sketch stage may incur additional fees and will affect delivery timelines. Any revisions beyond the scope agreed at booking will be billed separately."
+      "Minor revisions are included during the sketch phase.",
+      "Major revisions, new concepts, or changes in project scope requested after sketch approval may incur additional fees and will extend the estimated completion date.",
+      "Revision requests beyond the originally agreed scope will be billed separately.",
+      "Sketch approvals or revision requests should be provided within 14 calendar days. Failure to respond may result in the commission being placed on hold until communication resumes."
     ]
   },
   {
     heading: 'DEADLINES AND DELIVERY',
     paragraphs: [
-      "Quoted delivery timelines are estimates only and are not guaranteed unless explicitly stated in writing. Estimated completion dates are automatically extended by client-requested revisions, changes in project scope, missing references, delayed responses, payment delays, technical issues, illness, emergencies, conventions, vacations, or other circumstances beyond the artist's reasonable control. The artist will make reasonable efforts to notify the buyer of any significant delays. Final artwork will be delivered via the agreed communication method, and files will typically be provided in PNG format unless otherwise agreed."
+      "Quoted delivery timelines are estimates only and are not guaranteed unless explicitly stated in writing.",
+      "Estimated completion dates are automatically extended by client-requested revisions, changes in project scope, missing references, delayed responses, payment delays, technical issues, illness, emergencies, conventions, vacations, or other circumstances beyond the artist's reasonable control.",
+      "The artist will make reasonable efforts to notify the buyer of any significant delays. Final artwork will be delivered via the agreed communication method, and files will typically be provided in PNG format unless otherwise agreed."
     ]
   },
   {
