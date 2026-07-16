@@ -208,7 +208,7 @@ const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTI
   {
     heading: 'DEADLINES AND DELIVERY',
     paragraphs: [
-      "Quoted delivery timelines are estimates and not guaranteed. Delays can occur for reasons beyond the seller's control; the seller will notify the buyer of significant delays. Delivery is made via messaging and files are typically provided as PNG unless otherwise agreed."
+      "Quoted delivery timelines are estimates only and are not guaranteed unless explicitly stated in writing. Estimated completion dates are automatically extended by client-requested revisions, changes in project scope, missing references, delayed responses, payment delays, technical issues, illness, emergencies, conventions, vacations, or other circumstances beyond the artist's reasonable control. The artist will make reasonable efforts to notify the buyer of any significant delays. Final artwork will be delivered via the agreed communication method, and files will typically be provided in PNG format unless otherwise agreed."
     ]
   },
   {
