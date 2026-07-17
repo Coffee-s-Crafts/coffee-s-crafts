@@ -300,6 +300,7 @@ const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTI
 
 
 const FURSUIT_TOS_TITLE = process.env.FURSUIT_TOS_TITLE || 'Fursuit Terms of Service';
+const FURSUIT_TOS_UPDATED = process.env.FURSUIT_TOS_UPDATED || 'Updated July 17, 2026';
 const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(process.env.FURSUIT_TOS_SECTIONS) : [
   {
     heading: 'GENERAL',
@@ -317,6 +318,38 @@ const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(proce
     heading: 'QUOTES & PRICING',
     paragraphs: [
       `Quotes are estimates based on the information provided and are subject to change after a full evaluation. Base pricing and package options are published on the <a href="${FURSUIT_LINK}" target="_blank" rel="noopener">fursuit pricing page</a>. A formal, written quote will be issued prior to requesting payment; the quoted amount at booking is the final binding price.`
+    ]
+  },
+  {
+    heading: 'ACCEPTANCE OF DELIVERY',
+    paragraphs: [
+      "The buyer is responsible for reviewing delivered items promptly.",
+      "Unless otherwise agreed, delivered fursuit items or documentation are considered accepted 14 calendar days after delivery if no issues are reported. Requests made after acceptance may be treated as new revisions or repairs and billed accordingly."
+    ]
+  },
+  {
+    heading: 'FILE RETENTION',
+    paragraphs: [
+      "The maker is not obligated to retain project source files or pattern files indefinitely. Buyers should download and back up any provided files, photos, or documentation promptly.",
+      "Unless otherwise agreed in writing, project files, reference photos, and editable source materials may be permanently deleted 90 calendar days after final delivery."
+    ]
+  },
+  {
+    heading: 'CONDUCT',
+    paragraphs: [
+      "Abusive, threatening, discriminatory, harassing, or otherwise inappropriate behavior toward the maker may result in immediate cancellation of the commission. Any refund issued will be determined in accordance with the Refunds section of these Terms."
+    ]
+  },
+  {
+    heading: 'FORCE MAJEURE',
+    paragraphs: [
+      "The maker shall not be considered in breach of these Terms due to delays or inability to perform caused by events beyond their reasonable control, including but not limited to illness, injury, family emergencies, natural disasters, severe weather, internet outages, equipment failure, software issues, power outages, government action, labor disputes, or other force majeure events."
+    ]
+  },
+  {
+    heading: 'GOVERNING LAW',
+    paragraphs: [
+      "These Terms shall be governed by and construed in accordance with the laws of the Commonwealth of Pennsylvania, United States, without regard to its conflict of law principles."
     ]
   },
   {
