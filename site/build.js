@@ -262,7 +262,6 @@ const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTI
       "If the buyer fails to respond to requests for required information, approvals, or revisions within 14 calendar days, the commission may be placed on hold.",
       "If no communication is received for 60 calendar days, the commission may be considered inactive. Inactive commissions may be moved to the back of the queue when communication resumes.",
       "If no communication is received for 180 calendar days, the commission may be considered abandoned. In such cases, the artist may cancel the commission and retain payment proportional to work completed.",
-      `For urgent matters, the artist can be contacted on <a href="${DISCORD_URL}" target="_blank" rel="noopener">Discord</a> or <a href="${TELEGRAM_URL}" target="_blank" rel="noopener">Telegram</a>.`
     ]
   },
   {
@@ -295,6 +294,13 @@ const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTI
     paragraphs: [
       "These Terms of Service shall be governed by and construed in accordance with the laws of the Commonwealth of Pennsylvania, United States, without regard to its conflict of law principles."
     ]
+  },
+  {
+    heading: 'CONTACT & MISC',
+    paragraphs: [
+      `For quotes and inquiries: <a href="${DISCORD_URL}" target="_blank" rel="noopener">${DISCORD_LINK_TEXT}</a>, <a href="${TELEGRAM_URL}" target="_blank" rel="noopener">${TELEGRAM_LINK_TEXT}</a>, or <a href="${PAYPAL_URL}" target="_blank" rel="noopener">PayPal</a>.`,
+      'Thank you for supporting my small business.'
+    ]
   }
 ];
 
@@ -311,7 +317,7 @@ const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(proce
   {
     heading: 'PAYMENTS',
     paragraphs: [
-      `Payments for fursuit commissions are accepted via Cash App (<a href="${CASHAPP_URL}" target="_blank" rel="noopener">${CASHAPP_HANDLE}</a>) or PayPal (<a href="${PAYPAL_URL}" target="_blank" rel="noopener">${PAYPAL_LINK_TEXT}</a>). A non-refundable deposit or full payment may be required to secure a commission slot. The buyer is responsible for any payment-processor fees and for ensuring payments clear. Work will not begin until the required payment or deposit is received.`
+      `Payments for fursuit commissions are accepted via Cash App (<a href="${CASHAPP_URL}" target="_blank" rel="noopener">${CASHAPP_HANDLE}</a>) or PayPal (<a href="${PAYPAL_URL}" target="_blank" rel="noopener">PayPal</a>). A non-refundable deposit or full payment may be required to secure a commission slot. The buyer is responsible for any payment-processor fees and for ensuring payments clear. Work will not begin until the required payment or deposit is received.`
     ]
   },
   {
@@ -385,13 +391,13 @@ const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(proce
   {
     heading: 'COMMUNICATION',
     paragraphs: [
-      `Maintain timely communication. If the buyer fails to provide required information or misses agreed payments within a reasonable period, the maker may pause or cancel the commission; refunds in that case are at the maker's discretion. For urgent issues contact the artist on <a href="${DISCORD_URL}" target="_blank" rel="noopener">Discord</a> or <a href="${TELEGRAM_URL}" target="_blank" rel="noopener">Telegram</a>.`
+      `Maintain timely communication. If the buyer fails to provide required information or misses agreed payments within a reasonable period, the maker may pause or cancel the commission; refunds in that case are at the maker's discretion.`
     ]
   },
   {
     heading: 'CONTACT & MISC',
     paragraphs: [
-      `For quotes and inquiries: <a href="${DISCORD_URL}" target="_blank" rel="noopener">Discord</a>, <a href="${TELEGRAM_URL}" target="_blank" rel="noopener">Telegram</a>, or <a href="mailto:${CONTACT_EMAIL}">email</a>.`,
+      `For quotes, inquiries, and urgent matters: <a href="${DISCORD_URL}" target="_blank" rel="noopener">Discord</a>, <a href="${TELEGRAM_URL}" target="_blank" rel="noopener">Telegram</a>, <a href="${PAYPAL_URL}" target="_blank" rel="noopener">Paypal</a>, or <a href="mailto:${CONTACT_EMAIL}">email</a>.`,
       'Thank you for supporting my small business.'
     ]
   }
