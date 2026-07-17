@@ -92,7 +92,7 @@ const TELEGRAM_URL            = (process.env.TELEGRAM_URL           || 'https://
 const TELEGRAM_LINK_TEXT      = process.env.TELEGRAM_LINK_TEXT      || "📨 Telegram: Coffee's Crafts";
 const CASHAPP_HANDLE         = process.env.CASHAPP_HANDLE           || '$ashcoffeeEX';
 const CASHAPP_URL            = process.env.CASHAPP_URL              || 'https://cash.app/$ashcoffeeEX';
-const PAYPAL_EMAIL           = process.env.PAYPAL_EMAIL             || 'mawdemonn@gmail.com';
+const PAYPAL_URL             = process.env.PAYPAL_URL               || 'https://paypal.me/coffeescrafts';
 const PAYPAL_LINK_TEXT       = process.env.PAYPAL_LINK_TEXT         || 'PayPal';
 const TRELLO_URL              = (process.env.TRELLO_URL             || 'https://trello.com/b/uces30Ct/anthrocon-art-queue').trim();
 const TRELLO_LINK_TEXT        = process.env.TRELLO_LINK_TEXT        || '📋 Art Queue Trello';
@@ -311,7 +311,7 @@ const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(proce
   {
     heading: 'PAYMENTS',
     paragraphs: [
-      `Payments for fursuit commissions are accepted via Cash App (<a href="${CASHAPP_URL}" target="_blank" rel="noopener">${CASHAPP_HANDLE}</a>) or PayPal (<a href="mailto:${PAYPAL_EMAIL}">${PAYPAL_EMAIL}</a>). A non-refundable deposit or full payment may be required to secure a commission slot. The buyer is responsible for any payment-processor fees and for ensuring payments clear. Work will not begin until the required payment or deposit is received.`
+      `Payments for fursuit commissions are accepted via Cash App (<a href="${CASHAPP_URL}" target="_blank" rel="noopener">${CASHAPP_HANDLE}</a>) or PayPal (<a href="${PAYPAL_URL}" target="_blank" rel="noopener">${PAYPAL_LINK_TEXT}</a>). A non-refundable deposit or full payment may be required to secure a commission slot. The buyer is responsible for any payment-processor fees and for ensuring payments clear. Work will not begin until the required payment or deposit is received.`
     ]
   },
   {
@@ -391,7 +391,7 @@ const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(proce
   {
     heading: 'CONTACT & MISC',
     paragraphs: [
-      `For quotes and inquiries: <a href="${DISCORD_URL}" target="_blank" rel="noopener">${DISCORD_LINK_TEXT}</a> or <a href="${TELEGRAM_URL}" target="_blank" rel="noopener">${TELEGRAM_LINK_TEXT}</a>, or email <a href="mailto:${CONTACT_EMAIL}">${EMAIL_LINK_TEXT}</a>.`,
+      `For quotes and inquiries: <a href="${DISCORD_URL}" target="_blank" rel="noopener">Discord</a>, <a href="${TELEGRAM_URL}" target="_blank" rel="noopener">Telegram</a>, or <a href="mailto:${CONTACT_EMAIL}">email</a>.`,
       'Thank you for supporting my small business.'
     ]
   }
@@ -559,7 +559,7 @@ async function build() {
     TELEGRAM_LINK_TEXT,
     CASHAPP_HANDLE,
     CASHAPP_URL,
-    PAYPAL_EMAIL,
+    PAYPAL_URL,
     PAYPAL_LINK_TEXT,
     TRELLO_URL,
     TRELLO_LINK_TEXT,

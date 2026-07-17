@@ -208,7 +208,7 @@ jobs:
                   SAMPLE_COUNT: '6'
                   SITE_TITLE: "Coffee's Crafts"
                   CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}
-                  PAYPAL_EMAIL: ${{ secrets.PAYPAL_EMAIL }}
+                  PAYPAL_URL: ${{ secrets.PAYPAL_URL }}
                   ART_SECTIONS: '[{"title":"Bust","paragraphs":["Shoulder-up portrait"],"details":["PNG"]}]'
                 run: node site/build.js
               - name: Deploy to gh-pages
