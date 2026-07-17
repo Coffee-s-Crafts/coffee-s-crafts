@@ -262,7 +262,7 @@ const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTI
       "If the buyer fails to respond to requests for required information, approvals, or revisions within 14 calendar days, the commission may be placed on hold.",
       "If no communication is received for 60 calendar days, the commission may be considered inactive. Inactive commissions may be moved to the back of the queue when communication resumes.",
       "If no communication is received for 180 calendar days, the commission may be considered abandoned. In such cases, the artist may cancel the commission and retain payment proportional to work completed.",
-      `For urgent matters, the artist can be contacted on <a href="${DISCORD_URL}" target="_blank" rel="noopener">${DISCORD_LINK_TEXT}</a> or <a href="${TELEGRAM_URL}" target="_blank" rel="noopener">${TELEGRAM_LINK_TEXT}</a>.`
+      `For urgent matters, the artist can be contacted on <a href="${DISCORD_URL}" target="_blank" rel="noopener">Discord</a> or <a href="${TELEGRAM_URL}" target="_blank" rel="noopener">Telegram</a>.`
     ]
   },
   {
