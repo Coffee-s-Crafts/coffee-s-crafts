@@ -185,7 +185,7 @@ const FURSUIT_PRICES = process.env.FURSUIT_PRICES ? JSON.parse(process.env.FURSU
 
 // Terms of Service structured content
 const TOS_TITLE = process.env.TOS_TITLE || "CoffeeEX's Terms of Service";
-const TOS_UPDATED = process.env.TOS_UPDATED || 'Updated July 16, 2026';
+const TOS_UPDATED = process.env.TOS_UPDATED || 'Updated July 17, 2026';
 const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTIONS) : [
   {
     heading: 'GENERAL',
@@ -224,25 +224,76 @@ const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTI
     paragraphs: [
       "Quoted delivery timelines are estimates only and are not guaranteed unless explicitly stated in writing.",
       "Estimated completion dates are automatically extended by client-requested revisions, changes in project scope, missing references, delayed responses, payment delays, technical issues, illness, emergencies, conventions, vacations, or other circumstances beyond the artist's reasonable control.",
-      "The artist will make reasonable efforts to notify the buyer of any significant delays. Final artwork will be delivered via the agreed communication method, and files will typically be provided in PNG format unless otherwise agreed."
+      "The artist will make reasonable efforts to notify the buyer of any significant delays.",
+      "Final artwork will be delivered via the agreed communication method. Files will typically be provided in PNG format unless otherwise agreed."
     ]
   },
   {
     heading: 'USE',
     paragraphs: [
-      "All artwork produced is licensed for personal use only. Commercial use, resale, distribution, or use in monetized projects is prohibited unless a commercial license is explicitly granted or commercial rights are included in the final quoted price. Artwork must not be used to train AI models or for automated data collection. Please credit the artist when practical."
+      "Unless explicitly transferred in writing, all copyrights and intellectual property rights remain the sole property of the artist. Purchasing a commission does not transfer copyright ownership.",
+      "Artwork is licensed for personal use only unless commercial rights are explicitly granted in writing or included in the quoted commission price. Commercial use, redistribution, resale, minting as NFTs, tokenization, or use in monetized projects is prohibited without the artist's prior written permission.",
+      "Artwork may not be used to train, fine-tune, evaluate, or otherwise develop artificial intelligence or machine learning systems, nor may it be included in datasets used for such purposes without the artist's prior written permission.",
+      "Credit to the artist is appreciated whenever practical."
+    ]
+  },
+  {
+    heading: 'PORTFOLIO RIGHTS',
+    paragraphs: [
+      "Unless otherwise agreed in writing before work begins, the artist reserves the right to display commissioned artwork in portfolios, galleries, livestreams, social media, websites, convention displays, and other promotional materials.",
+      "Private or confidential commissions must be requested and agreed upon before work begins and may incur an additional fee."
     ]
   },
   {
     heading: 'REFUNDS',
     paragraphs: [
-      "Full refunds are available only if no work (including sketches) has been produced. Once a sketch has been delivered, refunds are not available except at the artist's discretion; any partial refund will fairly reflect work already completed and any non-recoverable expenses. Chargebacks may result in the permanent refusal of future service and may be contested."
+      "If the buyer cancels before work has begun, the artist may issue a full refund at their discretion.",
+      "If the artist cancels the commission before substantial work has begun, the buyer will receive an appropriate refund.",
+      "Once work has begun, any refund will be reduced to fairly reflect the work completed and any non-recoverable expenses incurred.",
+      "Once a sketch has been delivered, refunds are generally unavailable except at the artist's discretion.",
+      "Initiating a chargeback or payment dispute without first attempting to resolve the matter directly with the artist constitutes a violation of these Terms of Service. Fraudulent or unwarranted chargebacks may be contested, and future commissions may be refused."
     ]
   },
   {
     heading: 'COMMUNICATION',
     paragraphs: [
-      `Maintain timely communication. If the buyer does not respond to requests for required information within a reasonable period, the artist may pause or cancel the commission; refunds in that case are at the artist's discretion. For urgent issues contact the artist on <a href="${DISCORD_URL}" target="_blank" rel="noopener">${DISCORD_LINK_TEXT}</a> or <a href="${TELEGRAM_URL}" target="_blank" rel="noopener">${TELEGRAM_LINK_TEXT}</a>.`
+      "The buyer is responsible for providing accurate contact information and monitoring the agreed communication method. Failure to receive notifications due to muted servers, spam filters, blocked messages, or outdated contact information does not constitute artist negligence.",
+      "The artist will generally respond to commission-related messages within three business days, although response times may be longer due to illness, conventions, travel, emergencies, holidays, or periods of high workload.",
+      "If the buyer fails to respond to requests for required information, approvals, or revisions within 14 calendar days, the commission may be placed on hold.",
+      "If no communication is received for 60 calendar days, the commission may be considered inactive. Inactive commissions may be moved to the back of the queue when communication resumes.",
+      "If no communication is received for 180 calendar days, the commission may be considered abandoned. In such cases, the artist may cancel the commission and retain payment proportional to work completed.",
+      `For urgent matters, the artist can be contacted on <a href="${DISCORD_URL}" target="_blank" rel="noopener">${DISCORD_LINK_TEXT}</a> or <a href="${TELEGRAM_URL}" target="_blank" rel="noopener">${TELEGRAM_LINK_TEXT}</a>.`
+    ]
+  },
+  {
+    heading: 'ACCEPTANCE OF DELIVERY',
+    paragraphs: [
+      "The buyer is responsible for reviewing delivered artwork promptly.",
+      "Unless otherwise agreed, delivered artwork is considered accepted 14 calendar days after delivery if no issues are reported. Requests made after acceptance may be treated as new revisions and billed accordingly."
+    ]
+  },
+  {
+    heading: 'FILE RETENTION',
+    paragraphs: [
+      "The artist is not obligated to retain project files indefinitely. Buyers should download and back up delivered files promptly. Unless otherwise agreed, project files may be permanently deleted after 90 calendar days following final delivery."
+    ]
+  },
+  {
+    heading: 'CONDUCT',
+    paragraphs: [
+      "Abusive, threatening, discriminatory, harassing, or otherwise inappropriate behavior toward the artist may result in immediate cancellation of the commission. Any refund issued will be determined in accordance with the Refunds section of these Terms."
+    ]
+  },
+  {
+    heading: 'FORCE MAJEURE',
+    paragraphs: [
+      "The artist shall not be considered in breach of these Terms of Service due to delays or inability to perform caused by events beyond their reasonable control, including but not limited to illness, injury, family emergencies, natural disasters, severe weather, internet outages, equipment failure, software issues, power outages, government action, labor disputes, or other force majeure events."
+    ]
+  },
+  {
+    heading: 'GOVERNING LAW',
+    paragraphs: [
+      "These Terms of Service shall be governed by and construed in accordance with the laws of the Commonwealth of Pennsylvania, United States, without regard to its conflict of law principles."
     ]
   }
 ];
