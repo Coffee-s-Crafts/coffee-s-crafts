@@ -6,11 +6,15 @@ const _now = new Date();
 const OUT                     = process.env.OUTPUT_DIR         || 'dist';
 const ART_SRC                 = process.env.ART_SOURCE_DIR     || 'assets/art';
 const FURSUIT_SRC             = process.env.FURSUIT_SOURCE_DIR || 'assets/fursuits';
+
 const INDEX_LINK              = process.env.INDEX_LINK         || 'index.html';
 const GALLERY_LINK            = process.env.GALLERY_LINK       || 'gallery.html';
+const CONTACT_LINK            = process.env.CONTACT_LINK       || 'contact.html';
 const ART_LINK                = process.env.ART_LINK           || 'art.html';
 const FURSUIT_LINK            = process.env.FURSUIT_LINK       || 'fursuit.html';
-const CONTACT_LINK            = process.env.CONTACT_LINK       || 'contact.html';
+const ART_TOS_LINK            = process.env.ART_TOS_LINK       || 'tos.html';
+const FURSUIT_TOS_LINK        = process.env.FURSUIT_TOS_LINK   || 'fursuit-tos.html';
+
 
 // ── Commission status ─────────────────────────────────
 const COMMISSION_OPEN         = (process.env.COMMISSION_STATUS || 'open').toLowerCase() === 'open';
@@ -58,70 +62,67 @@ const PROMOTION_STATUS_LABEL = PROMOTIONS_AVAILABLE
   : 'No Promotions';
 
 // ── Configurable settings ─────────────────────────────────────────────────────
-// index page
-const HERO_TAGLINE            = process.env.HERO_TAGLINE            || "Original art & custom commissions — made with love ☕";
-const HERO_CTA                = process.env.HERO_CTA                || 'Browse the Gallery';
-const ABOUT_HEADING           = process.env.ABOUT_HEADING           || 'About';
-const ABOUT_BODY              = process.env.ABOUT_BODY              || "Welcome! I'm an independent artist specializing in character art, fursuits, and custom commissions. Every piece is crafted with care and skill, with your input always in mind.";
-const ABOUT_CTA_INTRO         = process.env.ABOUT_CTA_INTRO         || 'Looking for something unique?';
-const ABOUT_CTA_LINK_TEXT     = process.env.ABOUT_CTA_LINK_TEXT     || 'Check commission availability';
-const FEATURED_HEADING        = process.env.FEATURED_HEADING        || 'Featured Work';
-const GALLERY_MORE_TEXT       = process.env.GALLERY_MORE_TEXT       || 'See all →';
-// gallery page
-const GALLERY_HEADING         = process.env.GALLERY_HEADING         || 'Gallery';
-const GALLERY_META            = process.env.GALLERY_META            || 'A selection of original pieces and commission samples.';
-const SAMPLE_COUNT            = parseInt(process.env.SAMPLE_COUNT   || '4', 10);
-// contact page
-const COMMISSIONS_HEADING     = process.env.COMMISSIONS_HEADING     || 'Commissions';
-const COMMISSIONS_INTRO       = process.env.COMMISSIONS_INTRO       || "Interested in a custom piece? I offer a range of commission types. Send me a message with your idea and I'll get back to you as soon as possible.";
-const TIER1_TITLE             = process.env.TIER1_TITLE             || 'Bust';
-const TIER1_DESC              = process.env.TIER1_DESC              || 'Shoulder-up portrait of your character with paws included.';
-const TIER2_TITLE             = process.env.TIER2_TITLE             || 'Half Body';
-const TIER2_DESC              = process.env.TIER2_DESC              || 'Waist-up of your character.';
-const TIER3_TITLE             = process.env.TIER3_TITLE             || 'Full Body';
-const TIER3_DESC              = process.env.TIER3_DESC              || 'Full body of your character.';
-const TIER4_TITLE             = process.env.TIER4_TITLE             || 'Custom / Ask';
-const TIER4_DESC              = process.env.TIER4_DESC              || 'Something else in mind? Reach out and we can work out a quote together.';
-const CONTACT_HEADING         = process.env.CONTACT_HEADING         || 'Contact';
-const VGEN_URL                = (process.env.VGEN_URL               || 'https://vgen.co/CoffeeEX').trim();
-const VGEN_LINK_TEXT          = process.env.VGEN_LINK_TEXT          || '🎨 VGen Portfolio';
-const EMAIL_LINK_TEXT         = process.env.EMAIL_LINK_TEXT         || '✉️ Email Me';
-const DISCORD_URL             = (process.env.DISCORD_URL            || 'https://www.discord.com/users/339092532162068481').trim();
-const DISCORD_LINK_TEXT       = process.env.DISCORD_LINK_TEXT       || '💬 Discord: coffee.ex';
-const TELEGRAM_URL            = (process.env.TELEGRAM_URL           || 'https://t.me/coffeescrafts').trim();
-const TELEGRAM_LINK_TEXT      = process.env.TELEGRAM_LINK_TEXT      || "📨 Telegram: Coffee's Crafts";
-const CASHAPP_HANDLE         = process.env.CASHAPP_HANDLE           || '$ashcoffeeEX';
-const CASHAPP_URL            = process.env.CASHAPP_URL              || 'https://cash.app/$ashcoffeeEX';
-const PAYPAL_URL             = process.env.PAYPAL_URL               || 'https://paypal.me/coffeescrafts';
-const PAYPAL_LINK_TEXT       = process.env.PAYPAL_LINK_TEXT         || 'PayPal';
-const TRELLO_URL              = (process.env.TRELLO_URL             || 'https://trello.com/b/uces30Ct/anthrocon-art-queue').trim();
-const TRELLO_LINK_TEXT        = process.env.TRELLO_LINK_TEXT        || '📋 Art Queue Trello';
-const QUEUE_TRACKING_TEXT     = process.env.QUEUE_TRACKING_TEXT     || 'Track art commission progress here:';
-const TWITCH_URL              = (process.env.TWITCH_URL             || 'https://twitch.tv/coffeescrafts').trim();
-const TWITCH_LINK_TEXT        = process.env.TWITCH_LINK_TEXT        || '📺 Twitch';
-// Terms/TOC URLs
-const ART_TOS_URL             = (process.env.ART_TOS_URL            || 'tos.html').trim();
-const ART_TOS_LINK_TEXT       = process.env.ART_TOS_LINK_TEXT       || '📄 Terms of Service';
-const FURSUIT_TOS_URL         = (process.env.FURSUIT_TOS_URL        || 'fursuit-tos.html').trim();
-const FURSUIT_TOS_LINK_TEXT   = process.env.FURSUIT_TOS_LINK_TEXT   || '📄 Fursuit TOS';
-const FURSUIT_QUEUE_URL       = (process.env.FURSUIT_QUEUE_URL      || 'https://trello.com/b/1NyoDiwp/fursuit-wips').trim();
-const FURSUIT_QUEUE_LINK_TEXT = process.env.FURSUIT_QUEUE_LINK_TEXT || '📋 Fursuit Queue Trello';
-const FURSUIT_QUEUE_TEXT      = process.env.FURSUIT_QUEUE_TEXT      || 'Track fursuit commission progress here:';
-const TOYHOUSE_URL            = (process.env.TOYHOUSE_URL           || 'https://toyhou.se/CoffeeEX').trim();
-const TOYHOUSE_LINK_TEXT      = process.env.TOYHOUSE_LINK_TEXT      || '🏠 Toyhou.se';
-const INSTAGRAM_URL           = (process.env.INSTAGRAM_URL          || 'https://www.instagram.com/coffeedemonn').trim();
-const INSTAGRAM_LINK_TEXT     = process.env.INSTAGRAM_LINK_TEXT     || '📸 Instagram';
-const CARRD_URL               = (process.env.CARRD_URL              || 'https://coffeescraftsgallery.carrd.co').trim();
-const CARRD_LINK_TEXT         = process.env.CARRD_LINK_TEXT         || '🌐 Carrd';
-const X_URL                   = (process.env.X_URL                  || 'https://x.com/coffeesden').trim();
-const X_LINK_TEXT             = process.env.X_LINK_TEXT             || '🐦 X / Twitter';
 // global site settings
 const FOOTER_YEAR             = _now.getFullYear();
-const SITE_TITLE              = process.env.SITE_TITLE              || "Coffee's Crafts";
-const CONTACT_EMAIL           = process.env.CONTACT_EMAIL           || 'coffee@coffeescrafts.com';
+const SITE_TITLE              = process.env.SITE_TITLE                     || "Coffee's Crafts";
+const CONTACT_EMAIL           = process.env.CONTACT_EMAIL                  || 'coffee@coffeescrafts.com';
 const FOOTER_TEXT             = `© ${FOOTER_YEAR} ${SITE_TITLE} — ${CONTACT_EMAIL}`;
-
-// ── New page content (configurable via env) ─────────────────────────────────
+// index page
+const HERO_TAGLINE            = process.env.HERO_TAGLINE                   || "Original art & custom commissions — made with love ☕";
+const HERO_CTA                = process.env.HERO_CTA                       || 'Browse the Gallery';
+const ABOUT_HEADING           = process.env.ABOUT_HEADING                  || 'About';
+const ABOUT_BODY              = process.env.ABOUT_BODY                     || "Welcome! I'm an independent artist specializing in character art, fursuits, and custom commissions. Every piece is crafted with care and skill, with your input always in mind.";
+const ABOUT_CTA_INTRO         = process.env.ABOUT_CTA_INTRO                || 'Looking for something unique?';
+const ABOUT_CTA_LINK_TEXT     = process.env.ABOUT_CTA_LINK_TEXT            || 'Check commission availability';
+const FEATURED_HEADING        = process.env.FEATURED_HEADING               || 'Featured Work';
+const GALLERY_MORE_TEXT       = process.env.GALLERY_MORE_TEXT              || 'See all →';
+// gallery page
+const GALLERY_HEADING         = process.env.GALLERY_HEADING                || 'Gallery';
+const GALLERY_META            = process.env.GALLERY_META                   || 'A selection of original pieces and commission samples.';
+const SAMPLE_COUNT            = parseInt(process.env.SAMPLE_COUNT          || '4', 10);
+// contact page
+const COMMISSIONS_HEADING     = process.env.COMMISSIONS_HEADING            || 'Commissions';
+const COMMISSIONS_INTRO       = process.env.COMMISSIONS_INTRO              || "Interested in a custom piece? I offer a range of commission types. Send me a message with your idea and I'll get back to you as soon as possible.";
+const TIER1_TITLE             = process.env.TIER1_TITLE                    || 'Bust';
+const TIER1_DESC              = process.env.TIER1_DESC                     || 'Shoulder-up portrait of your character with paws included.';
+const TIER2_TITLE             = process.env.TIER2_TITLE                    || 'Half Body';
+const TIER2_DESC              = process.env.TIER2_DESC                     || 'Waist-up of your character.';
+const TIER3_TITLE             = process.env.TIER3_TITLE                    || 'Full Body';
+const TIER3_DESC              = process.env.TIER3_DESC                     || 'Full body of your character.';
+const TIER4_TITLE             = process.env.TIER4_TITLE                    || 'Custom / Ask';
+const TIER4_DESC              = process.env.TIER4_DESC                     || 'Something else in mind? Reach out and we can work out a quote together.';
+const CONTACT_HEADING         = process.env.CONTACT_HEADING                || 'Contact';
+const VGEN_URL                = (process.env.VGEN_URL                      || '').trim() || 'https://vgen.co/CoffeeEX';
+const VGEN_LINK_TEXT          = process.env.VGEN_LINK_TEXT                 || '🎨 VGen Portfolio';
+const EMAIL_LINK_TEXT         = process.env.EMAIL_LINK_TEXT                || '✉️ Email Me';
+const DISCORD_URL             = (process.env.DISCORD_URL                   || '').trim() || 'https://www.discord.com/users/339092532162068481';
+const DISCORD_LINK_TEXT       = process.env.DISCORD_LINK_TEXT              || '💬 Discord: coffee.ex';
+const TELEGRAM_URL            = (process.env.TELEGRAM_URL                  || '').trim() || 'https://t.me/coffeescrafts';
+const TELEGRAM_LINK_TEXT      = process.env.TELEGRAM_LINK_TEXT             || "📨 Telegram: Coffee's Crafts";
+const CASHAPP_HANDLE         = process.env.CASHAPP_HANDLE                  || '$ashcoffeeEX';
+const CASHAPP_URL            = process.env.CASHAPP_URL                     || 'https://cash.app/$ashcoffeeEX';
+const PAYPAL_URL             = process.env.PAYPAL_URL                      || 'https://paypal.me/coffeescrafts';
+const PAYPAL_LINK_TEXT       = process.env.PAYPAL_LINK_TEXT                || 'PayPal';
+const TRELLO_URL              = (process.env.TRELLO_URL                    || '').trim() || 'https://trello.com/b/uces30Ct/anthrocon-art-queue';
+const TRELLO_LINK_TEXT        = process.env.TRELLO_LINK_TEXT               || '📋 Art Queue Trello';
+const QUEUE_TRACKING_TEXT     = process.env.QUEUE_TRACKING_TEXT            || 'Track art commission progress here:';
+const TWITCH_URL              = (process.env.TWITCH_URL                    || '').trim() || 'https://twitch.tv/coffeescrafts';
+const TWITCH_LINK_TEXT        = process.env.TWITCH_LINK_TEXT               || '📺 Twitch';
+// Terms/TOC URLs
+const ART_TOS_LINK_TEXT       = process.env.ART_TOS_LINK_TEXT              || '📄 Terms of Service';
+const FURSUIT_TOS_LINK_TEXT   = process.env.FURSUIT_TOS_LINK_TEXT          || '📄 Fursuit TOS';
+const FURSUIT_QUEUE_URL       = (process.env.FURSUIT_QUEUE_URL             || '').trim() || 'https://trello.com/b/1NyoDiwp/fursuit-wips';
+const FURSUIT_QUEUE_LINK_TEXT = process.env.FURSUIT_QUEUE_LINK_TEXT        || '📋 Fursuit Queue Trello';
+const FURSUIT_QUEUE_TEXT      = process.env.FURSUIT_QUEUE_TEXT             || 'Track fursuit commission progress here:';
+const TOYHOUSE_URL            = (process.env.TOYHOUSE_URL                  || '').trim() || 'https://toyhou.se/CoffeeEX';
+const TOYHOUSE_LINK_TEXT      = process.env.TOYHOUSE_LINK_TEXT             || '🏠 Toyhou.se';
+const INSTAGRAM_URL           = (process.env.INSTAGRAM_URL                 || '').trim() || 'https://www.instagram.com/coffeedemonn';
+const INSTAGRAM_LINK_TEXT     = process.env.INSTAGRAM_LINK_TEXT            || '📸 Instagram';
+const CARRD_URL               = (process.env.CARRD_URL                     || '').trim() || 'https://coffeescraftsgallery.carrd.co';
+const CARRD_LINK_TEXT         = process.env.CARRD_LINK_TEXT                || '🌐 Carrd';
+const X_URL                   = (process.env.X_URL                         || '').trim() || 'https://x.com/coffeesden';
+const X_LINK_TEXT             = process.env.X_LINK_TEXT                    || '🐦 X / Twitter';
+// commission pages
 const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTIONS) : [
   {
     title: 'Full Body: $20',
@@ -166,7 +167,6 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
     important: ['PLEASE send unshaded artworks of your character. If requesting a custom character, include the custom character add-on fee.']
   }
 ];
-
 const FURSUIT_PRICES = process.env.FURSUIT_PRICES ? JSON.parse(process.env.FURSUIT_PRICES) : [
   { name: 'Head only', price: '$465' },
   { name: 'Paws only', price: '$85' },
@@ -182,8 +182,7 @@ const FURSUIT_PRICES = process.env.FURSUIT_PRICES ? JSON.parse(process.env.FURSU
   { name: 'Full planti', price: '$1,335' },
   { name: 'Full digi', price: '$1,435' }
 ];
-
-// Terms of Service structured content
+// terms of service pages
 const TOS_TITLE = process.env.TOS_TITLE || "CoffeeEX's Artwork Terms of Service";
 const TOS_UPDATED = process.env.TOS_UPDATED || 'Updated July 17, 2026';
 const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTIONS) : [
@@ -309,8 +308,6 @@ const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTI
     ]
   }
 ];
-
-
 const FURSUIT_TOS_TITLE = process.env.FURSUIT_TOS_TITLE || "CoffeeEX's Fursuit Terms of Service";
 const FURSUIT_TOS_UPDATED = process.env.FURSUIT_TOS_UPDATED || 'Updated July 17, 2026';
 const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(process.env.FURSUIT_TOS_SECTIONS) : [
@@ -579,7 +576,7 @@ async function build() {
     QUEUE_TRACKING_TEXT,
     TWITCH_URL,
     TWITCH_LINK_TEXT,
-    FURSUIT_TOS_URL,
+    FURSUIT_TOS_LINK,
     FURSUIT_TOS_LINK_TEXT,
     FURSUIT_QUEUE_URL,
     FURSUIT_QUEUE_LINK_TEXT,
@@ -594,6 +591,7 @@ async function build() {
     X_LINK_TEXT,
     ART_LINK,
     FURSUIT_LINK,
+    ART_TOS_LINK,
     ART_SECTIONS,
     FURSUIT_PRICES,
     TOS_TITLE,
@@ -602,13 +600,9 @@ async function build() {
     FURSUIT_TOS_TITLE,
     FURSUIT_TOS_UPDATED,
     FURSUIT_TOS_SECTIONS,
-    ART_TOS_URL,
     ART_TOS_LINK_TEXT,
-    FURSUIT_TOS_URL,
-    FURSUIT_TOS_LINK_TEXT,
     ART_GALLERY_IMAGES: galleryHtml,
     FURSUIT_GALLERY_IMAGES: fursuitGalleryHtml,
-    SAMPLE_IMAGES: sampleHtml,
     FURSUIT_SAMPLE_IMAGES: fursuitSampleHtml,
     PROMOTIONS,
     ACTIVE_PROMOTIONS,
@@ -617,13 +611,20 @@ async function build() {
     PROMOTION_STATUS_LABEL,
   };
 
-  fs.writeFileSync(path.join(OUT, 'index.html'), renderTemplate('index.html', vars));
-  fs.writeFileSync(path.join(OUT, 'gallery.html'), renderTemplate('gallery.html', vars));
-  fs.writeFileSync(path.join(OUT, 'contact.html'), renderTemplate('contact.html', vars));
-  fs.writeFileSync(path.join(OUT, 'art.html'), renderTemplate('art.html', vars));
-  fs.writeFileSync(path.join(OUT, 'fursuit.html'), renderTemplate('fursuit.html', vars));
-  fs.writeFileSync(path.join(OUT, 'tos.html'), renderTemplate('tos.html', vars));
-  fs.writeFileSync(path.join(OUT, 'fursuit-tos.html'), renderTemplate('fursuit-tos.html', vars));
+  [
+      INDEX_LINK,
+      GALLERY_LINK,
+      CONTACT_LINK,
+      ART_LINK,
+      FURSUIT_LINK,
+      ART_TOS_LINK,
+      FURSUIT_TOS_LINK,
+  ].forEach(page => {
+      fs.writeFileSync(
+          path.join(OUT, page),
+          renderTemplate(page, vars)
+      );
+  });
 
   try {
     const diag = {
