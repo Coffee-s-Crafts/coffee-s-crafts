@@ -213,21 +213,21 @@ const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTI
     ]
   },
   {
-    heading: 'PAYMENTS',
-    paragraphs: [
-      `Payments are processed through <a href="${VGEN_URL}" target="_blank" rel="noopener">VGen</a> unless another payment method is agreed upon in writing.`,
-      "A deposit or full payment may be required to reserve a commission slot.",
-      "Payment secures a place in the commission queue but does not guarantee that work will begin immediately. Work will not begin until all required payments have cleared and all requested references, descriptions, and other commission details have been received.",
-      "The buyer is responsible for any payment processor fees, currency conversion fees, taxes, or other charges imposed by the payment provider."
-    ]
-  },
-  {
     heading: 'REVISIONS',
     paragraphs: [
       "Minor revisions are included during the sketch phase.",
       "Major revisions, new concepts, or changes in project scope requested after sketch approval may incur additional fees and will extend the estimated completion date.",
       "Revision requests beyond the originally agreed scope will be billed separately.",
       "Sketch approvals or revision requests should be provided within 14 calendar days. Failure to respond may result in the commission being placed on hold until communication resumes."
+    ]
+  },
+  {
+    heading: 'PAYMENTS',
+    paragraphs: [
+      `Payments are processed through <a href="${VGEN_URL}" target="_blank" rel="noopener">VGen</a> unless another payment method is agreed upon in writing.`,
+      "A deposit or full payment may be required to reserve a commission slot.",
+      "Payment secures a place in the commission queue but does not guarantee that work will begin immediately. Work will not begin until all required payments have cleared and all requested references, descriptions, and other commission details have been received.",
+      "The buyer is responsible for any payment processor fees, currency conversion fees, taxes, or other charges imposed by the payment provider."
     ]
   },
   {
