@@ -135,7 +135,7 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
     ],
     important: [
       'Please be as detailed as possible when describing what you want, such as pose, expression, etc.',
-      'Please provide an unshaded reference'
+      'Please provide an unshaded reference.'
     ]
   },
   {
@@ -148,7 +148,7 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
     ],
     important: [
       'Please be as detailed as possible when describing what you want, such as pose, expression, etc.',
-      'Please provide an unshaded reference'
+      'Please provide an unshaded reference.'
     ]
   },
   {
@@ -163,7 +163,7 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
     ],
     important: [
       'Please be as detailed as possible when describing what you want, such as pose, expression, etc.',
-      'Please provide an unshaded reference'
+      'Please provide an unshaded reference.'
     ]
   },
   {
@@ -188,7 +188,7 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
     ],
     important: [
       'Please provide detailed scene description and reference photos when possible.',
-      'Please provide an unshaded reference'
+      'Please provide an unshaded reference.'
     ]
   },
   {
@@ -210,7 +210,7 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
     ],
     important: [
       'If requesting a custom character without an existing reference, include the custom character add-on fee.',
-      'Please provide an unshaded reference'
+      'Please provide an unshaded reference.'
     ]
   }
 ];
