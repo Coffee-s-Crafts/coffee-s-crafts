@@ -128,7 +128,11 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
     title: 'Full Body: $20',
     paragraphs: ['Full body of your character.'],
     details: ['Delivered as a PNG'],
-    addons: ['Commercial usage rights - 35%', 'Shading - $20', 'Extra Character - $15'],
+    addons: [
+      'Commercial usage rights - 35%',
+      'Shading - $20',
+      'Extra Character - $15'
+    ],
     important: [
       'Please be as detailed as possible when describing what you want, such as pose, expression, etc.',
       'Please provide an unshaded reference'
@@ -138,7 +142,10 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
     title: 'Bust: $15+',
     paragraphs: ['Shoulder up portrait of your character (paws included).'],
     details: ['Delivered as a PNG'],
-    addons: ['Commercial usage rights - 35%', 'Shading - $15'],
+    addons: [
+      'Commercial usage rights - 35%',
+      'Shading - $15'
+    ],
     important: [
       'Please be as detailed as possible when describing what you want, such as pose, expression, etc.',
       'Please provide an unshaded reference'
@@ -148,7 +155,12 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
     title: 'Headshot: $10',
     paragraphs: ['Headshot of your character.'],
     details: ['Delivered as a PNG'],
-    addons: ['Commercial usage rights - 35%', 'Shading - $10', 'Simple color background - Free', 'Simple splash background - Free'],
+    addons: [
+      'Commercial usage rights - 35%',
+      'Shading - $10',
+      'Simple color background - Free',
+      'Simple splash background - Free'
+    ],
     important: [
       'Please be as detailed as possible when describing what you want, such as pose, expression, etc.',
       'Please provide an unshaded reference'
@@ -158,14 +170,22 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
     title: 'Furry PNGTuber: $35+',
     paragraphs: ['Four frames of your character and a step-by-step setup guide for PNGTuber use.'],
     details: ['File is a .veado file to be used on Veadotube.'],
-    addons: ['Commercial usage rights - 35%', 'Shading - $15', 'Extra frames - $8.50 per frame'],
+    addons: [
+      'Commercial usage rights - 35%',
+      'Shading - $15',
+      'Extra frames - $8.50 per frame'
+    ],
     important: ['Please provide an unshaded reference.']
   },
   {
     title: 'Scenic Furry Commissions: $50+',
     paragraphs: ['Scenic drawing of your character. Scenery depends on complexity type.'],
     details: ['File delivered as a PNG.'],
-    addons: ['Commercial usage rights - 35%', 'Extra characters - $15', 'Background complexity - Ask for quote'],
+    addons: 
+    ['Commercial usage rights - 35%',
+      'Extra characters - $15',
+      'Background complexity - Ask for quote'
+    ],
     important: [
       'Please provide detailed scene description and reference photos when possible.',
       'Please provide an unshaded reference'
@@ -175,9 +195,21 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
     title: 'Furry Reference Sheet: $45+',
     paragraphs: ['Symmetrical front & back of your character. There are free add-ons such as putting the characters likes and dislikes on the ref.'],
     details: [],
-    addons: ['Commercial usage rights - 35%', 'Symmetrical front & back', 'Asymmetrical front & back - $10', 'Add side view - $10', 'Add a closeup headshot - $10', 'Add eyes closeup - $5', 'Accessories (Up to 3)- $10', 'Name, gender, species (text)', 'Likes/Dislikes (text)', 'Character description (text)'],
+    addons: [
+      'Commercial usage rights - 35%',
+      'Custom Character - $40',
+      'Accessories (Up to 3)- $10',
+      'Add side view - $10', 
+      'Add a closeup headshot - $10',
+      'Add eyes closeup - $5',
+      'Asymmetrical front & back - $10',
+      'Symmetrical front & back - Free',
+      'Name, gender, species (text) - Free',
+      'Likes/Dislikes (text) - Free',
+      'Character description (text) - Free'
+    ],
     important: [
-      'If requesting a custom character, include the custom character add-on fee.',
+      'If requesting a custom character without an existing reference, include the custom character add-on fee.',
       'Please provide an unshaded reference'
     ]
   }
