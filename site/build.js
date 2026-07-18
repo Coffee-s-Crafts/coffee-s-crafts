@@ -200,7 +200,7 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
       'Custom Character - $40',
       'Accessories (Up to 3)- $10',
       'Add side view - $10', 
-      'Add a closeup headshot - $10',
+      'Add headshot closeup - $10',
       'Add eyes closeup - $5',
       'Asymmetrical front & back - $10',
       'Symmetrical front & back - Free',
