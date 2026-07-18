@@ -318,7 +318,7 @@ const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(proce
   {
     heading: 'PAYMENTS',
     paragraphs: [
-      `Payments for fursuit commissions are accepted via Cash App (<a href="${CASHAPP_URL}" target="_blank" rel="noopener">${CASHAPP_HANDLE}</a>) or PayPal (<a href="${PAYPAL_URL}" target="_blank" rel="noopener">PayPal</a>). A non-refundable deposit or full payment may be required to secure a commission slot. The buyer is responsible for any payment-processor fees and for ensuring payments clear. Work will not begin until the required payment or deposit is received.`
+      `Payments for fursuit commissions are accepted via <a href="${CASHAPP_URL}" target="_blank" rel="noopener">CashApp</a> or <a href="${PAYPAL_URL}" target="_blank" rel="noopener">PayPal</a>. A non-refundable deposit or full payment may be required to secure a commission slot. The buyer is responsible for any payment-processor fees and for ensuring payments clear. Work will not begin until the required payment or deposit is received.`
     ]
   },
   {
