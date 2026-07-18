@@ -129,21 +129,30 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
     paragraphs: ['Full body of your character.'],
     details: ['Delivered as a PNG'],
     addons: ['Commercial usage rights - 35%', 'Shading - $20', 'Extra Character - $15'],
-    important: ['Please be as detailed as possible when describing what you want, such as pose, expression, etc. NO SHADED REFERENCES PLEASE.']
+    important: [
+      'Please be as detailed as possible when describing what you want, such as pose, expression, etc.',
+      'Please provide an unshaded reference'
+    ]
   },
   {
     title: 'Bust: $15+',
     paragraphs: ['Shoulder up portrait of your character (paws included).'],
     details: ['Delivered as a PNG'],
     addons: ['Commercial usage rights - 35%', 'Shading - $15'],
-    important: ['Please be as detailed as possible when describing what you want, such as pose, expression, etc. NO SHADED REFERENCES PLEASE.']
+    important: [
+      'Please be as detailed as possible when describing what you want, such as pose, expression, etc.',
+      'Please provide an unshaded reference'
+    ]
   },
   {
     title: 'Headshot: $10',
     paragraphs: ['Headshot of your character.'],
     details: ['Delivered as a PNG'],
     addons: ['Commercial usage rights - 35%', 'Shading - $10', 'Simple color background - Free', 'Simple splash background - Free'],
-    important: ['Please be as detailed as possible when describing what you want, such as pose, expression, etc. NO SHADED REFERENCES PLEASE.']
+    important: [
+      'Please be as detailed as possible when describing what you want, such as pose, expression, etc.',
+      'Please provide an unshaded reference'
+    ]
   },
   {
     title: 'Furry PNGTuber: $35+',
@@ -157,14 +166,20 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
     paragraphs: ['Scenic drawing of your character. Scenery depends on complexity type.'],
     details: ['File delivered as a PNG.'],
     addons: ['Commercial usage rights - 35%', 'Extra characters - $15', 'Background complexity - Ask for quote'],
-    important: ['Please provide detailed scene description and reference photos when possible. NO SHADED REFERENCES PLEASE.']
+    important: [
+      'Please provide detailed scene description and reference photos when possible.',
+      'Please provide an unshaded reference'
+    ]
   },
   {
     title: 'Furry Reference Sheet: $45+',
     paragraphs: ['Symmetrical front & back of your character. There are free add-ons such as putting the characters likes and dislikes on the ref.'],
     details: [],
     addons: ['Commercial usage rights - 35%', 'Symmetrical front & back', 'Asymmetrical front & back - $10', 'Add side view - $10', 'Add a closeup headshot - $10', 'Add eyes closeup - $5', 'Accessories (Up to 3)- $10', 'Name, gender, species (text)', 'Likes/Dislikes (text)', 'Character description (text)'],
-    important: ['If requesting a custom character, include the custom character add-on fee. NO SHADED REFERENCES PLEASE.']
+    important: [
+      'If requesting a custom character, include the custom character add-on fee.',
+      'Please provide an unshaded reference'
+    ]
   }
 ];
 const FURSUIT_PRICES = process.env.FURSUIT_PRICES ? JSON.parse(process.env.FURSUIT_PRICES) : [
