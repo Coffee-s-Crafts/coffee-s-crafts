@@ -184,7 +184,7 @@ const FURSUIT_PRICES = process.env.FURSUIT_PRICES ? JSON.parse(process.env.FURSU
 ];
 
 // Terms of Service structured content
-const TOS_TITLE = process.env.TOS_TITLE || "CoffeeEX's Terms of Service";
+const TOS_TITLE = process.env.TOS_TITLE || "CoffeeEX's Artwork Terms of Service";
 const TOS_UPDATED = process.env.TOS_UPDATED || 'Updated July 17, 2026';
 const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTIONS) : [
   {
@@ -311,7 +311,7 @@ const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTI
 ];
 
 
-const FURSUIT_TOS_TITLE = process.env.FURSUIT_TOS_TITLE || 'Fursuit Terms of Service';
+const FURSUIT_TOS_TITLE = process.env.FURSUIT_TOS_TITLE || "CoffeeEX's Fursuit Terms of Service";
 const FURSUIT_TOS_UPDATED = process.env.FURSUIT_TOS_UPDATED || 'Updated July 17, 2026';
 const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(process.env.FURSUIT_TOS_SECTIONS) : [
   {
