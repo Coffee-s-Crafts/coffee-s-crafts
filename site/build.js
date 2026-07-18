@@ -324,7 +324,7 @@ const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(proce
   {
     heading: 'GOVERNING LAW',
     paragraphs: [
-      "These Terms shall be governed by and construed in accordance with the laws of the Commonwealth of Pennsylvania, United States, without regard to its conflict of law principles."
+      "These Terms of Service shall be governed by and construed in accordance with the laws of the Commonwealth of Pennsylvania, United States, without regard to its conflict of law principles."
     ]
   },
   {
