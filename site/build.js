@@ -207,6 +207,12 @@ const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTI
     ]
   },
   {
+    heading: 'QUOTES & PRICING',
+    paragraphs: [
+      `Quotes are estimates based on the information provided and are subject to change after a full evaluation. Base pricing and package options are published on the <a href="${ART_LINK}" target="_blank" rel="noopener">art pricing page</a>. A formal, written quote will be issued prior to requesting payment; the quoted amount at booking is the final binding price.`
+    ]
+  },
+  {
     heading: 'PAYMENTS',
     paragraphs: [
       `Payments are processed through <a href="${VGEN_URL}" target="_blank" rel="noopener">VGen</a> unless another payment method is agreed upon in writing.`,
