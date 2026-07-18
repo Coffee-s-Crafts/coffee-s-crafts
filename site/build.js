@@ -339,25 +339,34 @@ const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(proce
   {
     heading: 'REVISIONS',
     paragraphs: [
-      "Revisions are limited to minor adjustments during agreed stages. Major changes introduced after production begins may incur additional fees and will affect delivery timelines. Any revisions outside the original scope will be quoted separately."
+      "Revisions are limited to minor adjustments during agreed stages.",
+      "Major changes introduced after production begins may incur additional fees and will affect delivery timelines.",
+      "Any revisions outside the original scope will be quoted separately."
     ]
   },
   {
     heading: 'PAYMENTS',
     paragraphs: [
-      `Payments for fursuit commissions are accepted via <a href="${CASHAPP_URL}" target="_blank" rel="noopener">CashApp</a> or <a href="${PAYPAL_URL}" target="_blank" rel="noopener">PayPal</a>. A non-refundable deposit or full payment may be required to secure a commission slot. The buyer is responsible for any payment-processor fees and for ensuring payments clear. Work will not begin until the required payment or deposit is received.`
+      `Payments for fursuit commissions are accepted via <a href="${CASHAPP_URL}" target="_blank" rel="noopener">CashApp</a> or <a href="${PAYPAL_URL}" target="_blank" rel="noopener">PayPal</a>.`,
+      "A non-refundable deposit or full payment may be required to secure a commission slot.",
+      "The buyer is responsible for any payment-processor fees and for ensuring payments clear.",
+      "Work will not begin until the required payment or deposit is received."
     ]
   },
   {
     heading: 'PAYMENT PLANS',
     paragraphs: [
-      "Payment plans may be offered by agreement. Buyers must meet scheduled payments; failure to do so may result in suspension, cancellation of the commission, and forfeiture of payments made. Refunds for work already completed are at the maker's discretion."
+      "Payment plans may be offered by agreement.",
+      "Buyers must meet scheduled payments; failure to do so may result in suspension, cancellation of the commission, and forfeiture of payments made."
     ]
   },
   {
     heading: 'REFUNDS',
     paragraphs: [
-      "Full refunds are available only if no work (including sketches or material purchases) has been produced. Once production or repairs have commenced, refunds are not available except at the maker's discretion; any partial refund will reflect work completed and non-recoverable expenses. Chargebacks may be contested and could result in refusal of future service."
+      "Full refunds are available only if no work (including sketches or material purchases) has been produced.",
+      "Once production or repairs have commenced, refunds are not available except at the maker's discretion; any partial refund will reflect work completed and non-recoverable expenses.",
+      "Refunds for work already completed are at the maker's discretion.",
+      "Chargebacks may be contested and could result in refusal of future service."
     ]
   },
   {
@@ -370,13 +379,16 @@ const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(proce
   {
     heading: 'REPAIRS & SHIPPING',
     paragraphs: [
-      "Inspect items on receipt and report significant damage within 14 days with photo or video evidence. The maker will repair defects due to workmanship at no labor cost; return shipping for repairs may be the buyer's responsibility unless otherwise agreed."
+      "The buyer must inspect items on receipt and report significant damage within 14 days with photo or video evidence.",
+      "The maker will repair defects due to workmanship at no labor cost; return shipping for repairs may be the buyer's responsibility unless otherwise agreed."
     ]
   },
   {
     heading: 'DELIVERY & TIMELINES',
     paragraphs: [
-      "Estimated production timelines are provided with quotes and are not guaranteed. Delays can occur for reasons beyond the maker's control; the maker will notify the buyer of significant delays. The maker will provide progress updates on request."
+      "Estimated production timelines are provided with quotes and are not guaranteed.",
+      "Delays can occur for reasons beyond the maker's control; the maker will notify the buyer of significant delays.",
+      "The maker will provide progress updates on request."
     ]
   },
   {
@@ -389,7 +401,7 @@ const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(proce
   {
     heading: 'COMMUNICATION',
     paragraphs: [
-      `Maintain timely communication. If the buyer fails to provide required information or misses agreed payments within a reasonable period, the maker may pause or cancel the commission; refunds in that case are at the maker's discretion.`
+      "The buyer must maintain timely communication. If the buyer fails to provide required information or misses agreed payments within a reasonable period, the maker may pause or cancel the commission; refunds in that case are at the maker's discretion."
     ]
   },
   {
