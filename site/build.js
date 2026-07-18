@@ -195,19 +195,24 @@ const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTI
     ]
   },
   {
+    heading: 'GOVERNING LAW',
+    paragraphs: [
+      "These Terms of Service shall be governed by and construed in accordance with the laws of the Commonwealth of Pennsylvania, United States, without regard to its conflict of law principles."
+    ]
+  },
+  {
+    heading: 'FORCE MAJEURE',
+    paragraphs: [
+      "The artist shall not be considered in breach of these Terms of Service due to delays or inability to perform caused by events beyond their reasonable control, including but not limited to illness, injury, family emergencies, natural disasters, severe weather, internet outages, equipment failure, software issues, power outages, government action, labor disputes, or other force majeure events."
+    ]
+  },
+  {
     heading: 'PAYMENTS',
     paragraphs: [
       `Payments are processed through <a href="${VGEN_URL}" target="_blank" rel="noopener">VGen</a> unless another payment method is agreed upon in writing.`,
       "A deposit or full payment may be required to reserve a commission slot.",
       "Payment secures a place in the commission queue but does not guarantee that work will begin immediately. Work will not begin until all required payments have cleared and all requested references, descriptions, and other commission details have been received.",
       "The buyer is responsible for any payment processor fees, currency conversion fees, taxes, or other charges imposed by the payment provider."
-    ]
-  },
-  {
-    heading: 'COMMISSION QUEUE',
-    paragraphs: [
-      "Commissions are completed according to the artist's production schedule and queue.",
-      "The artist reserves the right to determine the order in which commissions are completed, including prioritizing rush orders, convention deadlines, or other business needs."
     ]
   },
   {
@@ -220,12 +225,36 @@ const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTI
     ]
   },
   {
+    heading: 'REFUNDS',
+    paragraphs: [
+      "If the buyer cancels before work has begun, the artist may issue a full refund at their discretion.",
+      "If the artist cancels the commission before substantial work has begun, the buyer will receive an appropriate refund.",
+      "Once work has begun, any refund will be reduced to fairly reflect the work completed and any non-recoverable expenses incurred.",
+      "Once a sketch has been delivered, refunds are generally unavailable except at the artist's discretion.",
+      "Initiating a chargeback or payment dispute without first attempting to resolve the matter directly with the artist constitutes a violation of these Terms of Service. Fraudulent or unwarranted chargebacks may be contested, and future commissions may be refused."
+    ]
+  },
+  {
     heading: 'DEADLINES AND DELIVERY',
     paragraphs: [
       "Quoted delivery timelines are estimates only and are not guaranteed unless explicitly stated in writing.",
       "Estimated completion dates are automatically extended by client-requested revisions, changes in project scope, missing references, delayed responses, payment delays, technical issues, illness, emergencies, conventions, vacations, or other circumstances beyond the artist's reasonable control.",
       "The artist will make reasonable efforts to notify the buyer of any significant delays.",
       "Final artwork will be delivered via the agreed communication method. Files will typically be provided in PNG format unless otherwise agreed."
+    ]
+  },
+  {
+    heading: 'ACCEPTANCE OF DELIVERY',
+    paragraphs: [
+      "The buyer is responsible for reviewing delivered artwork promptly.",
+      "Unless otherwise agreed, delivered artwork is considered accepted 14 calendar days after delivery if no issues are reported. Requests made after acceptance may be treated as new revisions and billed accordingly."
+    ]
+  },
+  {
+    heading: 'COMMISSION QUEUE',
+    paragraphs: [
+      "Commissions are completed according to the artist's production schedule and queue.",
+      "The artist reserves the right to determine the order in which commissions are completed, including prioritizing rush orders, convention deadlines, or other business needs."
     ]
   },
   {
@@ -245,13 +274,9 @@ const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTI
     ]
   },
   {
-    heading: 'REFUNDS',
+    heading: 'FILE RETENTION',
     paragraphs: [
-      "If the buyer cancels before work has begun, the artist may issue a full refund at their discretion.",
-      "If the artist cancels the commission before substantial work has begun, the buyer will receive an appropriate refund.",
-      "Once work has begun, any refund will be reduced to fairly reflect the work completed and any non-recoverable expenses incurred.",
-      "Once a sketch has been delivered, refunds are generally unavailable except at the artist's discretion.",
-      "Initiating a chargeback or payment dispute without first attempting to resolve the matter directly with the artist constitutes a violation of these Terms of Service. Fraudulent or unwarranted chargebacks may be contested, and future commissions may be refused."
+      "The artist is not obligated to retain project files indefinitely. Buyers should download and back up delivered files promptly. Unless otherwise agreed, project files may be permanently deleted after 90 calendar days following final delivery."
     ]
   },
   {
@@ -265,34 +290,9 @@ const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTI
     ]
   },
   {
-    heading: 'ACCEPTANCE OF DELIVERY',
-    paragraphs: [
-      "The buyer is responsible for reviewing delivered artwork promptly.",
-      "Unless otherwise agreed, delivered artwork is considered accepted 14 calendar days after delivery if no issues are reported. Requests made after acceptance may be treated as new revisions and billed accordingly."
-    ]
-  },
-  {
-    heading: 'FILE RETENTION',
-    paragraphs: [
-      "The artist is not obligated to retain project files indefinitely. Buyers should download and back up delivered files promptly. Unless otherwise agreed, project files may be permanently deleted after 90 calendar days following final delivery."
-    ]
-  },
-  {
     heading: 'CONDUCT',
     paragraphs: [
       "Abusive, threatening, discriminatory, harassing, or otherwise inappropriate behavior toward the artist may result in immediate cancellation of the commission. Any refund issued will be determined in accordance with the Refunds section of these Terms."
-    ]
-  },
-  {
-    heading: 'FORCE MAJEURE',
-    paragraphs: [
-      "The artist shall not be considered in breach of these Terms of Service due to delays or inability to perform caused by events beyond their reasonable control, including but not limited to illness, injury, family emergencies, natural disasters, severe weather, internet outages, equipment failure, software issues, power outages, government action, labor disputes, or other force majeure events."
-    ]
-  },
-  {
-    heading: 'GOVERNING LAW',
-    paragraphs: [
-      "These Terms of Service shall be governed by and construed in accordance with the laws of the Commonwealth of Pennsylvania, United States, without regard to its conflict of law principles."
     ]
   },
   {
@@ -316,15 +316,45 @@ const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(proce
     ]
   },
   {
-    heading: 'PAYMENTS',
+    heading: 'GOVERNING LAW',
     paragraphs: [
-      `Payments for fursuit commissions are accepted via <a href="${CASHAPP_URL}" target="_blank" rel="noopener">CashApp</a> or <a href="${PAYPAL_URL}" target="_blank" rel="noopener">PayPal</a>. A non-refundable deposit or full payment may be required to secure a commission slot. The buyer is responsible for any payment-processor fees and for ensuring payments clear. Work will not begin until the required payment or deposit is received.`
+      "These Terms shall be governed by and construed in accordance with the laws of the Commonwealth of Pennsylvania, United States, without regard to its conflict of law principles."
+    ]
+  },
+  {
+    heading: 'FORCE MAJEURE',
+    paragraphs: [
+      "The maker shall not be considered in breach of these Terms due to delays or inability to perform caused by events beyond their reasonable control, including but not limited to illness, injury, family emergencies, natural disasters, severe weather, internet outages, equipment failure, software issues, power outages, government action, labor disputes, or other force majeure events."
     ]
   },
   {
     heading: 'QUOTES & PRICING',
     paragraphs: [
       `Quotes are estimates based on the information provided and are subject to change after a full evaluation. Base pricing and package options are published on the <a href="${FURSUIT_LINK}" target="_blank" rel="noopener">fursuit pricing page</a>. A formal, written quote will be issued prior to requesting payment; the quoted amount at booking is the final binding price.`
+    ]
+  },
+  {
+    heading: 'REVISIONS',
+    paragraphs: [
+      "Revisions are limited to minor adjustments during agreed stages. Major changes introduced after production begins may incur additional fees and will affect delivery timelines. Any revisions outside the original scope will be quoted separately."
+    ]
+  },
+  {
+    heading: 'PAYMENTS',
+    paragraphs: [
+      `Payments for fursuit commissions are accepted via <a href="${CASHAPP_URL}" target="_blank" rel="noopener">CashApp</a> or <a href="${PAYPAL_URL}" target="_blank" rel="noopener">PayPal</a>. A non-refundable deposit or full payment may be required to secure a commission slot. The buyer is responsible for any payment-processor fees and for ensuring payments clear. Work will not begin until the required payment or deposit is received.`
+    ]
+  },
+  {
+    heading: 'PAYMENT PLANS',
+    paragraphs: [
+      "Payment plans may be offered by agreement. Buyers must meet scheduled payments; failure to do so may result in suspension, cancellation of the commission, and forfeiture of payments made. Refunds for work already completed are at the maker's discretion."
+    ]
+  },
+  {
+    heading: 'REFUNDS',
+    paragraphs: [
+      "Full refunds are available only if no work (including sketches or material purchases) has been produced. Once production or repairs have commenced, refunds are not available except at the maker's discretion; any partial refund will reflect work completed and non-recoverable expenses. Chargebacks may be contested and could result in refusal of future service."
     ]
   },
   {
@@ -335,34 +365,9 @@ const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(proce
     ]
   },
   {
-    heading: 'FILE RETENTION',
+    heading: 'REPAIRS & SHIPPING',
     paragraphs: [
-      "The maker is not obligated to retain project source files or pattern files indefinitely. Buyers should download and back up any provided files, photos, or documentation promptly.",
-      "Unless otherwise agreed in writing, project files, reference photos, and editable source materials may be permanently deleted 90 calendar days after final delivery."
-    ]
-  },
-  {
-    heading: 'CONDUCT',
-    paragraphs: [
-      "Abusive, threatening, discriminatory, harassing, or otherwise inappropriate behavior toward the maker may result in immediate cancellation of the commission. Any refund issued will be determined in accordance with the Refunds section of these Terms."
-    ]
-  },
-  {
-    heading: 'FORCE MAJEURE',
-    paragraphs: [
-      "The maker shall not be considered in breach of these Terms due to delays or inability to perform caused by events beyond their reasonable control, including but not limited to illness, injury, family emergencies, natural disasters, severe weather, internet outages, equipment failure, software issues, power outages, government action, labor disputes, or other force majeure events."
-    ]
-  },
-  {
-    heading: 'GOVERNING LAW',
-    paragraphs: [
-      "These Terms shall be governed by and construed in accordance with the laws of the Commonwealth of Pennsylvania, United States, without regard to its conflict of law principles."
-    ]
-  },
-  {
-    heading: 'REVISIONS',
-    paragraphs: [
-      "Revisions are limited to minor adjustments during agreed stages. Major changes introduced after production begins may incur additional fees and will affect delivery timelines. Any revisions outside the original scope will be quoted separately."
+      "Inspect items on receipt and report significant damage within 14 days with photo or video evidence. The maker will repair defects due to workmanship at no labor cost; return shipping for repairs may be the buyer's responsibility unless otherwise agreed."
     ]
   },
   {
@@ -372,27 +377,22 @@ const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(proce
     ]
   },
   {
-    heading: 'PAYMENT PLANS',
+    heading: 'FILE RETENTION',
     paragraphs: [
-      "Payment plans may be offered by agreement. Buyers must meet scheduled payments; failure to do so may result in suspension, cancellation of the commission, and forfeiture of payments made. Refunds for work already completed are at the maker's discretion."
+      "The maker is not obligated to retain project source files or pattern files indefinitely. Buyers should download and back up any provided files, photos, or documentation promptly.",
+      "Unless otherwise agreed in writing, project files, reference photos, and editable source materials may be permanently deleted 90 calendar days after final delivery."
     ]
-  },
-  {
-    heading: 'REPAIRS & SHIPPING',
-    paragraphs: [
-      "Inspect items on receipt and report significant damage within 14 days with photo or video evidence. The maker will repair defects due to workmanship at no labor cost; return shipping for repairs may be the buyer's responsibility unless otherwise agreed."
-    ]
-  },
-  {
-    heading: 'REFUNDS',
-    paragraphs: [
-      "Full refunds are available only if no work (including sketches or material purchases) has been produced. Once production or repairs have commenced, refunds are not available except at the maker's discretion; any partial refund will reflect work completed and non-recoverable expenses. Chargebacks may be contested and could result in refusal of future service."
-    ]
-  },
+  },  
   {
     heading: 'COMMUNICATION',
     paragraphs: [
       `Maintain timely communication. If the buyer fails to provide required information or misses agreed payments within a reasonable period, the maker may pause or cancel the commission; refunds in that case are at the maker's discretion.`
+    ]
+  },
+  {
+    heading: 'CONDUCT',
+    paragraphs: [
+      "Abusive, threatening, discriminatory, harassing, or otherwise inappropriate behavior toward the maker may result in immediate cancellation of the commission. Any refund issued will be determined in accordance with the Refunds section of these Terms."
     ]
   },
   {
