@@ -193,7 +193,7 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
   },
   {
     title: 'Furry Reference Sheet: $45+',
-    paragraphs: ['Symmetrical front & back of your character. There are free add-ons such as putting the characters likes and dislikes on the ref.'],
+    paragraphs: ['Symmetrical front & back of your character.'],
     details: [],
     addons: [
       'Commercial usage rights - 35%',
