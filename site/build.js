@@ -180,7 +180,7 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
   {
     title: 'Scenic Furry Commissions: $50+',
     paragraphs: ['Scenic drawing of your character. Scenery depends on complexity type.'],
-    details: ['File delivered as a PNG.'],
+    details: ['Delivered as a PNG.'],
     addons: 
     ['Commercial usage rights - 35%',
       'Extra characters - $15',
@@ -194,7 +194,7 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
   {
     title: 'Furry Reference Sheet: $45+',
     paragraphs: ['Symmetrical front & back of your character.'],
-    details: [],
+    details: ['Delivered as a PNG.'],
     addons: [
       'Commercial usage rights - 35%',
       'Custom Character - $40',
