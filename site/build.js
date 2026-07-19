@@ -94,14 +94,15 @@ const TIER4_DESC              = process.env.TIER4_DESC                       || 
 const CONTACT_HEADING         = process.env.CONTACT_HEADING                  || 'Contact';
 const VGEN_URL                = (process.env.VGEN_URL || '').trim()          || 'https://vgen.co/CoffeeEX';
 const VGEN_LINK_TEXT          = process.env.VGEN_LINK_TEXT                   || '🎨 VGen Portfolio';
+const EMAIL_URL                = (process.env.EMAIL_URL || '').trim()        || `mailto:${CONTACT_EMAIL}`;
 const EMAIL_LINK_TEXT         = process.env.EMAIL_LINK_TEXT                  || '✉️ Email Me';
 const DISCORD_URL             = (process.env.DISCORD_URL || '').trim()       || 'https://www.discord.com/users/339092532162068481';
 const DISCORD_LINK_TEXT       = process.env.DISCORD_LINK_TEXT                || '💬 Discord: coffee.ex';
 const TELEGRAM_URL            = (process.env.TELEGRAM_URL || '').trim()      || 'https://t.me/coffeescrafts';
 const TELEGRAM_LINK_TEXT      = process.env.TELEGRAM_LINK_TEXT               || "📨 Telegram: Coffee's Crafts";
+const CASHAPP_URL             = (process.env.CASHAPP_URL || '').trim()       || 'https://cash.app/$ashcoffeeEX';
 const CASHAPP_HANDLE          = process.env.CASHAPP_HANDLE                   || '$ashcoffeeEX';
-const CASHAPP_URL             = process.env.CASHAPP_URL                      || 'https://cash.app/$ashcoffeeEX';
-const PAYPAL_URL              = process.env.PAYPAL_URL                       || 'https://paypal.me/coffeescrafts';
+const PAYPAL_URL              = (process.env.PAYPAL_URL || '').trim()        || 'https://paypal.me/coffeescrafts';
 const PAYPAL_LINK_TEXT        = process.env.PAYPAL_LINK_TEXT                 || 'PayPal';
 const TRELLO_URL              = (process.env.TRELLO_URL || '').trim()        || 'https://trello.com/b/uces30Ct/anthrocon-art-queue';
 const TRELLO_LINK_TEXT        = process.env.TRELLO_LINK_TEXT                 || '📋 Art Queue Trello';
@@ -621,6 +622,7 @@ async function build() {
     TIER4_DESC,
     CONTACT_HEADING,
     VGEN_LINK_TEXT,
+    EMAIL_URL,
     EMAIL_LINK_TEXT,
     DISCORD_URL,
     DISCORD_LINK_TEXT,
