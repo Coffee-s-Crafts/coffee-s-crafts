@@ -351,7 +351,7 @@ const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTI
   {
     heading: 'CONTACT & MISC',
     paragraphs: [
-      `For quotes, inquiries, and urgent matters: <a href="${DISCORD_URL}" target="_blank" rel="noopener">Discord</a>, <a href="${TELEGRAM_URL}" target="_blank" rel="noopener">Telegram</a>, <a href="${PAYPAL_URL}" target="_blank" rel="noopener">Paypal</a>, or <a href="mailto:${CONTACT_EMAIL}">email</a>.`,
+      `For quotes, inquiries, and urgent matters: <a href="${DISCORD_URL}" target="_blank" rel="noopener">Discord</a>, <a href="${TELEGRAM_URL}" target="_blank" rel="noopener">Telegram</a>, <a href="${PAYPAL_URL}" target="_blank" rel="noopener">PayPal</a>, or <a href="mailto:${CONTACT_EMAIL}">email</a>.`,
       'Thank you for supporting my small business.'
     ]
   }
@@ -461,7 +461,7 @@ const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(proce
   {
     heading: 'CONTACT & MISC',
     paragraphs: [
-      `For quotes, inquiries, and urgent matters: <a href="${DISCORD_URL}" target="_blank" rel="noopener">Discord</a>, <a href="${TELEGRAM_URL}" target="_blank" rel="noopener">Telegram</a>, <a href="${PAYPAL_URL}" target="_blank" rel="noopener">Paypal</a>, or <a href="mailto:${CONTACT_EMAIL}">email</a>.`,
+      `For quotes, inquiries, and urgent matters: <a href="${DISCORD_URL}" target="_blank" rel="noopener">Discord</a>, <a href="${TELEGRAM_URL}" target="_blank" rel="noopener">Telegram</a>, <a href="${PAYPAL_URL}" target="_blank" rel="noopener">PayPal</a>, or <a href="mailto:${CONTACT_EMAIL}">email</a>.`,
       'Thank you for supporting my small business.'
     ]
   }
