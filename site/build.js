@@ -127,7 +127,7 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
   {
     title: 'Full Body: $20',
     paragraphs: ['Full body of your character.'],
-    details: ['Delivered as a PNG'],
+    details: ['Delivered as a PNG.'],
     addons: [
       'Commercial usage rights - 35%',
       'Shading - $20',
@@ -141,7 +141,7 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
   {
     title: 'Bust: $15+',
     paragraphs: ['Shoulder up portrait of your character (paws included).'],
-    details: ['Delivered as a PNG'],
+    details: ['Delivered as a PNG.'],
     addons: [
       'Commercial usage rights - 35%',
       'Shading - $15'
@@ -154,7 +154,7 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
   {
     title: 'Headshot: $10',
     paragraphs: ['Headshot of your character.'],
-    details: ['Delivered as a PNG'],
+    details: ['Delivered as a PNG.'],
     addons: [
       'Commercial usage rights - 35%',
       'Shading - $10',
