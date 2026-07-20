@@ -158,13 +158,15 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
     details: ['Delivered as a PNG.'],
     addons: [
       'Commercial usage rights - 35%',
+      'Button - $5 + Shipping',
       'Shading - $10',
       'Simple color background - Free',
       'Simple splash background - Free'
     ],
     important: [
       'Please be as detailed as possible when describing what you want, such as pose, expression, etc.',
-      'Please provide an unshaded reference.'
+      'Please provide an unshaded reference.',
+      'Shipping costs for buttons are not included in the price and will be calculated based on your location. Free pick-up is available at conventions where applicable.'
     ]
   },
   {
