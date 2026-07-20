@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>%%SITE_TITLE%% — Premade Items</title>
+  {{> head}}
+</head>
+<body>
+  {{> header}}
+
+  <main class="page-content">
+    <section class="content-panel">
+      <h1>Premade Items</h1>
+      <p>Looking for something you can purchase immediately? I offer a growing selection of premade convention accessories, collectibles, and other handmade items that are ready to ship.</p>
+      {{#each PREMADE_SECTIONS}}
+      <article class="art-section">
+        <h2>{{this.title}}</h2>
+        {{#each this.paragraphs}}
+        <p>{{this}}</p>
+        {{/each}}
+        <h4>Details</h4>
+        <ul>
+          {{#each this.details}}
+          <li>{{this}}</li>
+          {{/each}}
+        </ul>
+        <h4>Available Options</h4>
+        <ul>
+          {{#each this.options}}
+          <li>{{this}}</li>
+          {{/each}}
+        </ul>
+        <h4>Important</h4>
+        <ul>
+          {{#each this.important}}
+          <li>{{this}}</li>
+          {{/each}}
+        </ul>
+      </article>
+      {{/each}}
+    </section>
+    <section class="content-panel">
+      <h2>Gallery</h2>
+      <p>
+        Click any image below to view a larger version.
+      </p>
+      <ul class="art-list premade-list">
+        %%PREMADE_GALLERY_IMAGES%%
+      </ul>
+    </section>
+  </main>
+
+  {{> footer}}
+</body>
+</html>
