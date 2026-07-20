@@ -119,6 +119,8 @@ const FURSUIT_TOS_LINK_TEXT   = process.env.FURSUIT_TOS_LINK_TEXT            || 
 const FURSUIT_QUEUE_URL       = (process.env.FURSUIT_QUEUE_URL || '').trim() || 'https://trello.com/b/1NyoDiwp/fursuit-wips';
 const FURSUIT_QUEUE_LINK_TEXT = process.env.FURSUIT_QUEUE_LINK_TEXT          || '📋 Fursuit Queue Trello';
 const FURSUIT_QUEUE_TEXT      = process.env.FURSUIT_QUEUE_TEXT               || 'Track fursuit commission progress here:';
+const ETSY_URL                = (process.env.ETSY_URL || '').trim()          || 'https://coffeezcrafts.etsy.com';
+const ETSY_LINK_TEXT          = process.env.ETSY_LINK_TEXT                   || '🛒 Etsy';
 const TOYHOUSE_URL            = (process.env.TOYHOUSE_URL || '').trim()      || 'https://toyhou.se/CoffeeEX';
 const TOYHOUSE_LINK_TEXT      = process.env.TOYHOUSE_LINK_TEXT               || '🏠 Toyhou.se';
 const INSTAGRAM_URL           = (process.env.INSTAGRAM_URL || '').trim()     || 'https://www.instagram.com/coffeedemonn';
@@ -689,6 +691,8 @@ async function build() {
     FURSUIT_QUEUE_URL,
     FURSUIT_QUEUE_LINK_TEXT,
     FURSUIT_QUEUE_TEXT,
+    ETSY_URL,
+    ETSY_LINK_TEXT,
     TOYHOUSE_URL,
     TOYHOUSE_LINK_TEXT,
     INSTAGRAM_URL,
