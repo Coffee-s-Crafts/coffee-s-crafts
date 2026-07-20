@@ -250,8 +250,7 @@ const PREMADE_SECTIONS = process.env.PREMADE_SECTIONS ? JSON.parse(process.env.P
     ],
     options: [
       'Button badges',
-      'Pin-back options',
-      'Custom requests available'
+      'Laminated badges'
     ],
     important: [
       'Inventory is limited.',
