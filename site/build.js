@@ -14,7 +14,8 @@ const ART_LINK                = process.env.ART_LINK           || 'art.html';
 const FURSUIT_LINK            = process.env.FURSUIT_LINK       || 'fursuit.html';
 const ART_TOS_LINK            = process.env.ART_TOS_LINK       || 'tos.html';
 const FURSUIT_TOS_LINK        = process.env.FURSUIT_TOS_LINK   || 'fursuit-tos.html';
-
+const PREMADE_SRC             = process.env.PREMADE_SOURCE_DIR || 'assets/premades';
+const PREMADE_LINK            = process.env.PREMADE_LINK       || 'premades.html';
 
 // ── Commission status ─────────────────────────────────
 const COMMISSION_OPEN         = (process.env.COMMISSION_STATUS || 'open').toLowerCase() === 'open';
@@ -80,6 +81,9 @@ const GALLERY_MORE_TEXT       = process.env.GALLERY_MORE_TEXT                || 
 const GALLERY_HEADING         = process.env.GALLERY_HEADING                  || 'Gallery';
 const GALLERY_META            = process.env.GALLERY_META                     || 'A selection of original pieces and commission samples.';
 const SAMPLE_COUNT            = parseInt(process.env.SAMPLE_COUNT            || '4', 10);
+// premade page
+const PREMADE_HEADING         = process.env.PREMADE_HEADING                  || 'Premade Items';
+const PREMADE_META            = process.env.PREMADE_META                     || 'Buttons, badges, stickers, and other ready-to-ship creations.';
 // contact page
 const COMMISSIONS_HEADING     = process.env.COMMISSIONS_HEADING              || 'Commissions';
 const COMMISSIONS_INTRO       = process.env.COMMISSIONS_INTRO                || "Interested in a custom piece? I offer a range of commission types. Send me a message with your idea and I'll get back to you as soon as possible.";
@@ -231,6 +235,29 @@ const FURSUIT_PRICES = process.env.FURSUIT_PRICES ? JSON.parse(process.env.FURSU
   { name: '3/4 digi', price: '$1,185' },
   { name: 'Full planti', price: '$1,335' },
   { name: 'Full digi', price: '$1,435' }
+];
+const PREMADE_SECTIONS = process.env.PREMADE_SECTIONS ? JSON.parse(process.env.PREMADE_SECTIONS) : [
+  {
+    title: 'Consent Badges',
+    paragraphs: [
+      'Ready-to-ship convention badges designed to make communication easy and fun.',
+      'Perfect for conventions, local meets, and other furry events.'
+    ],
+    details: [
+      'Professionally printed',
+      'Ready to ship',
+      'Multiple designs available'
+    ],
+    options: [
+      'Button badges',
+      'Pin-back options',
+      'Custom requests available'
+    ],
+    important: [
+      'Inventory is limited.',
+      'Some designs may not be restocked once sold out.'
+    ]
+  }
 ];
 // terms of service pages
 const TOS_TITLE = process.env.TOS_TITLE || "CoffeeEX's Artwork Terms of Service";
@@ -566,9 +593,12 @@ async function build() {
   copyDir(ART_SRC, artDest);
   const fursuitDest = path.join(OUT, FURSUIT_SRC);
   copyDir(FURSUIT_SRC, fursuitDest);
+  const premadeDest = path.join(OUT, PREMADE_SRC);
+  copyDir(PREMADE_SRC, premadeDest);
 
   let allImages = [];
   let fursuitImages = [];
+  let premadeImages = [];
   console.log('Build settings:', { ART_SRC, SAMPLE_COUNT, OUT });
 
   if (fs.existsSync(ART_SRC)) {
@@ -583,12 +613,25 @@ async function build() {
       .map(f => path.posix.join(FURSUIT_SRC.replace(/\\/g, '/'), f));
   }
 
+  if (fs.existsSync(PREMADE_SRC)) {
+    premadeImages = fs.readdirSync(PREMADE_SRC)
+      .filter(f => /\.(png|jpe?g|svg|gif|webp)$/i.test(f))
+      .map(f => path.posix.join(PREMADE_SRC.replace(/\\/g, '/'), f));
+  }
+
   const sampleList = allImages.slice(0, SAMPLE_COUNT);
   const sampleHtml = sampleList.map(i => `<li><img src="${i}" alt="art"/></li>`).join('\n');
   const fursuitSampleList = fursuitImages.slice(0, SAMPLE_COUNT);
   const fursuitSampleHtml = fursuitSampleList.map(i => `<li><img src="${i}" alt="fursuit"/></li>`).join('\n');
   const galleryHtml = allImages.map(i => `<li><img src="${i}" alt="art"/></li>`).join('\n');
   const fursuitGalleryHtml = fursuitImages.map(i => `<li><img src="${i}" alt="fursuit"/></li>`).join('\n');
+  const premadeSampleList = premadeImages.slice(0, SAMPLE_COUNT);
+  const premadeSampleHtml = premadeSampleList
+    .map(i => `<li><img src="${i}" alt="premade"/></li>`)
+    .join('\n');
+  const premadeGalleryHtml = premadeImages
+    .map(i => `<li><img src="${i}" alt="premade"/></li>`)
+    .join('\n');
 
   const vars = {
     SITE_TITLE,
@@ -610,8 +653,11 @@ async function build() {
     ABOUT_CTA_LINK_TEXT,
     FEATURED_HEADING,
     GALLERY_MORE_TEXT,
+    PREMADE_LINK, 
     GALLERY_HEADING,
     GALLERY_META,
+    PREMADE_HEADING,
+    PREMADE_META,
     COMMISSIONS_HEADING,
     COMMISSIONS_INTRO,
     TIER1_TITLE,
@@ -656,6 +702,7 @@ async function build() {
     FURSUIT_LINK,
     ART_TOS_LINK,
     ART_SECTIONS,
+    PREMADE_SECTIONS,
     FURSUIT_PRICES,
     TOS_TITLE,
     TOS_UPDATED,
@@ -667,6 +714,8 @@ async function build() {
     ART_GALLERY_IMAGES: galleryHtml,
     FURSUIT_GALLERY_IMAGES: fursuitGalleryHtml,
     FURSUIT_SAMPLE_IMAGES: fursuitSampleHtml,
+    PREMADE_SAMPLE_IMAGES: premadeSampleHtml,
+    PREMADE_GALLERY_IMAGES: premadeGalleryHtml,
     PROMOTIONS,
     ACTIVE_PROMOTIONS,
     PROMOTIONS_AVAILABLE,
@@ -682,6 +731,7 @@ async function build() {
       FURSUIT_LINK,
       ART_TOS_LINK,
       FURSUIT_TOS_LINK,
+      PREMADE_LINK,
   ].forEach(page => {
       fs.writeFileSync(
           path.join(OUT, page),

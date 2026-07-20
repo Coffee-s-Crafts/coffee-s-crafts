@@ -20,6 +20,11 @@
       <ul class="art-list fursuit-list">
         %%FURSUIT_GALLERY_IMAGES%%
       </ul>
+
+      <h3 style="margin-top:1.5rem">Premade Items</h3>
+      <ul class="art-list premade-list">
+        %%PREMADE_GALLERY_IMAGES%%
+      </ul>
     </section>
   </main>
 
@@ -63,7 +68,7 @@
 
       document.addEventListener('click', function(e){
         const target = e.target;
-        if((target.closest('.art-list') || target.closest('.fursuit-list')) && target.tagName === 'IMG'){
+        if(target.closest('.art-list') && target.tagName === 'IMG'){
           e.preventDefault();
           openModal(target);
         }
