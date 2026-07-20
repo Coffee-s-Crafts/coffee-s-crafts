@@ -159,9 +159,11 @@ section h2{font-size:1.75rem;color:var(--accent);border-bottom:2px solid var(--b
   transition:background .15s;
 }
 .contact-links a:hover{background:var(--accent-lt);text-decoration:none}
-.contact-links p{
-  width: 100%;
-  margin: 0;
+.contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin-bottom: .5rem;
 }
 
 /* ── Footer ────────────────────────────────────── */
