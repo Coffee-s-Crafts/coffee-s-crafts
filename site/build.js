@@ -87,14 +87,6 @@ const PREMADE_META            = process.env.PREMADE_META                     || 
 // contact page
 const COMMISSIONS_HEADING     = process.env.COMMISSIONS_HEADING              || 'Commissions';
 const COMMISSIONS_INTRO       = process.env.COMMISSIONS_INTRO                || "Interested in a custom piece? I offer a range of commission types. Send me a message with your idea and I'll get back to you as soon as possible.";
-const TIER1_TITLE             = process.env.TIER1_TITLE                      || 'Bust';
-const TIER1_DESC              = process.env.TIER1_DESC                       || 'Shoulder-up portrait of your character with paws included.';
-const TIER2_TITLE             = process.env.TIER2_TITLE                      || 'Half Body';
-const TIER2_DESC              = process.env.TIER2_DESC                       || 'Waist-up of your character.';
-const TIER3_TITLE             = process.env.TIER3_TITLE                      || 'Full Body';
-const TIER3_DESC              = process.env.TIER3_DESC                       || 'Full body of your character.';
-const TIER4_TITLE             = process.env.TIER4_TITLE                      || 'Custom / Ask';
-const TIER4_DESC              = process.env.TIER4_DESC                       || 'Something else in mind? Reach out and we can work out a quote together.';
 const CONTACT_HEADING         = process.env.CONTACT_HEADING                  || 'Contact';
 const VGEN_URL                = (process.env.VGEN_URL || '').trim()          || 'https://vgen.co/CoffeeEX';
 const VGEN_LINK_TEXT          = process.env.VGEN_LINK_TEXT                   || '🎨 VGen';
