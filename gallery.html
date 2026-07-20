@@ -50,6 +50,11 @@
 <li><img src="assets/fursuits/8c58a08b.jpg" alt="fursuit"/></li>
 <li><img src="assets/fursuits/nub-tail-ears.jpg" alt="fursuit"/></li>
       </ul>
+
+      <h3 style="margin-top:1.5rem">Premade Items</h3>
+      <ul class="art-list premade-list">
+        
+      </ul>
     </section>
   </main>
 
@@ -93,7 +98,7 @@
 
       document.addEventListener('click', function(e){
         const target = e.target;
-        if((target.closest('.art-list') || target.closest('.fursuit-list')) && target.tagName === 'IMG'){
+        if(target.closest('.art-list') && target.tagName === 'IMG'){
           e.preventDefault();
           openModal(target);
         }
