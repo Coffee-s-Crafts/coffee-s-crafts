@@ -107,8 +107,8 @@ const QUEUE_TRACKING_TEXT     = process.env.QUEUE_TRACKING_TEXT              || 
 const TWITCH_URL              = (process.env.TWITCH_URL || '').trim()        || 'https://twitch.tv/coffeescrafts';
 const TWITCH_LINK_TEXT        = process.env.TWITCH_LINK_TEXT                 || '📺 Twitch';
 // Terms/TOC URLs
-const ART_TOS_LINK_TEXT       = process.env.ART_TOS_LINK_TEXT                || '📄 Terms of Service';
-const FURSUIT_TOS_LINK_TEXT   = process.env.FURSUIT_TOS_LINK_TEXT            || '📄 Fursuit TOS';
+const ART_TOS_LINK_TEXT       = process.env.ART_TOS_LINK_TEXT                || '📄 Art Terms of Service';
+const FURSUIT_TOS_LINK_TEXT   = process.env.FURSUIT_TOS_LINK_TEXT            || '📄 Fursuit Terms of Service';
 const FURSUIT_QUEUE_URL       = (process.env.FURSUIT_QUEUE_URL || '').trim() || 'https://trello.com/b/1NyoDiwp/fursuit-wips';
 const FURSUIT_QUEUE_LINK_TEXT = process.env.FURSUIT_QUEUE_LINK_TEXT          || '📋 Fursuit Queue Trello';
 const FURSUIT_QUEUE_TEXT      = process.env.FURSUIT_QUEUE_TEXT               || 'Track fursuit commission progress here:';
