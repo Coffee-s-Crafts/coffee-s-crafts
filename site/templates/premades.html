@@ -10,7 +10,7 @@
   <main class="page-content">
     <section class="content-panel">
       <h1>Premade Items</h1>
-      <p>Looking for something you can purchase immediately? I offer a growing selection of premade convention accessories, collectibles, and other handmade items that are ready to ship.</p>
+      <p>%%PREMADE_INTRO%%</p>
       {{#each PREMADE_SECTIONS}}
       <article class="art-section">
         <h2>{{this.title}}</h2>
@@ -37,15 +37,6 @@
         </ul>
       </article>
       {{/each}}
-    </section>
-    <section class="content-panel">
-      <h2>Gallery</h2>
-      <p>
-        Click any image below to view a larger version.
-      </p>
-      <ul class="art-list premade-list">
-        %%PREMADE_GALLERY_IMAGES%%
-      </ul>
     </section>
   </main>
 
