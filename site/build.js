@@ -728,8 +728,7 @@ async function build() {
       FURSUIT_LINK,
       ART_TOS_LINK,
       FURSUIT_TOS_LINK,
-      PREMADE_LINK,
-      TABLE_LINK
+      PREMADE_LINK
   ].forEach(page => {
       fs.writeFileSync(
           path.join(OUT, page),
