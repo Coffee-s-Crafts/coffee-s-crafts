@@ -617,6 +617,12 @@ async function build() {
       .map(f => path.posix.join(PREMADE_SRC.replace(/\\/g, '/'), f));
   }
 
+  if (fs.existsSync(TABLE_SRC)) {
+    tableImages = fs.readdirSync(TABLE_SRC)
+      .filter(f => /\.(png|jpe?g|svg|gif|webp)$/i.test(f))
+      .map(f => path.posix.join(TABLE_SRC.replace(/\\/g, '/'), f));
+  }
+
   const sampleList = allImages.slice(0, SAMPLE_COUNT);
   const sampleHtml = sampleList.map(i => `<li><img src="${i}" alt="art"/></li>`).join('\n');
   const fursuitSampleList = fursuitImages.slice(0, SAMPLE_COUNT);
@@ -631,8 +637,12 @@ async function build() {
     .map(i => `<li><img src="${i}" alt="premade"/></li>`)
     .join('\n');
   const tableSampleList = tableImages.slice(0, SAMPLE_COUNT);
-  const tableSampleHtml = tableSampleList.map(i => `<li><img src="${i}" alt="table"/></li>`).join('\n');
-  const tableGalleryHtml = tableImages.map(i => `<li><img src="${i}" alt="table"/></li>`).join('\n');
+  const tableSampleHtml = tableSampleList
+    .map(i => `<li><img src="${i}" alt="table"/></li>`)
+    .join('\n');
+  const tableGalleryHtml = tableImages
+    .map(i => `<li><img src="${i}" alt="table"/></li>`)
+    .join('\n');
 
   const vars = {
     SITE_TITLE,
