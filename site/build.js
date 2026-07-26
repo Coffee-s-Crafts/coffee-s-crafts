@@ -16,6 +16,7 @@ const ART_TOS_LINK            = process.env.ART_TOS_LINK       || 'tos.html';
 const FURSUIT_TOS_LINK        = process.env.FURSUIT_TOS_LINK   || 'fursuit-tos.html';
 const PREMADE_SRC             = process.env.PREMADE_SOURCE_DIR || 'assets/premades';
 const PREMADE_LINK            = process.env.PREMADE_LINK       || 'premades.html';
+const TABLE_SRC               = process.env.TABLE_SOURCE_DIR   || 'assets/tables';
 
 // ── Commission status ─────────────────────────────────
 const COMMISSION_OPEN         = (process.env.COMMISSION_STATUS || 'open').toLowerCase() === 'open';
@@ -589,10 +590,13 @@ async function build() {
   copyDir(FURSUIT_SRC, fursuitDest);
   const premadeDest = path.join(OUT, PREMADE_SRC);
   copyDir(PREMADE_SRC, premadeDest);
+  const tableDest = path.join(OUT, TABLE_SRC);
+  copyDir(TABLE_SRC, tableDest);
 
   let allImages = [];
   let fursuitImages = [];
   let premadeImages = [];
+  let tableImages = [];
   console.log('Build settings:', { ART_SRC, SAMPLE_COUNT, OUT });
 
   if (fs.existsSync(ART_SRC)) {
@@ -626,6 +630,9 @@ async function build() {
   const premadeGalleryHtml = premadeImages
     .map(i => `<li><img src="${i}" alt="premade"/></li>`)
     .join('\n');
+  const tableSampleList = tableImages.slice(0, SAMPLE_COUNT);
+  const tableSampleHtml = tableSampleList.map(i => `<li><img src="${i}" alt="table"/></li>`).join('\n');
+  const tableGalleryHtml = tableImages.map(i => `<li><img src="${i}" alt="table"/></li>`).join('\n');
 
   const vars = {
     SITE_TITLE,
@@ -635,6 +642,7 @@ async function build() {
     GALLERY_IMAGES: galleryHtml,
     INDEX_LINK,
     GALLERY_LINK,
+    PREMADE_LINK,
     CONTACT_LINK,
     VGEN_URL,
     COMMISSION_STATUS_CLASS,
@@ -647,7 +655,6 @@ async function build() {
     ABOUT_CTA_LINK_TEXT,
     FEATURED_HEADING,
     GALLERY_MORE_TEXT,
-    PREMADE_LINK, 
     GALLERY_HEADING,
     GALLERY_META,
     PREMADE_HEADING,
@@ -704,6 +711,8 @@ async function build() {
     FURSUIT_SAMPLE_IMAGES: fursuitSampleHtml,
     PREMADE_SAMPLE_IMAGES: premadeSampleHtml,
     PREMADE_GALLERY_IMAGES: premadeGalleryHtml,
+    TABLE_SAMPLE_IMAGES: tableSampleHtml,
+    TABLE_GALLERY_IMAGES: tableGalleryHtml,
     PROMOTIONS,
     ACTIVE_PROMOTIONS,
     PROMOTIONS_AVAILABLE,
@@ -720,6 +729,7 @@ async function build() {
       ART_TOS_LINK,
       FURSUIT_TOS_LINK,
       PREMADE_LINK,
+      TABLE_LINK
   ].forEach(page => {
       fs.writeFileSync(
           path.join(OUT, page),
