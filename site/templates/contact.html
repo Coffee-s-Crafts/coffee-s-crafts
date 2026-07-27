@@ -22,7 +22,7 @@
           <details open>
             <summary><a href="%%ART_LINK%%">Art Commissions</a></summary>
             <ul>
-              {{#each ART_SECTIONS}}
+              {{#each }}
               <li>{{this.title}}</li>
               {{/each}}
             </ul>
@@ -35,6 +35,17 @@
             <ul>
               {{#each FURSUIT_PRICES}}
               <li>{{this.name}} — {{this.price}}</li>
+              {{/each}}
+            </ul>
+          </details>
+        </div>
+
+        <div class="commission-card">
+          <details open>
+            <summary><a href="%%PREMADE_LINK%%">Premade Items</a></summary>
+            <ul>
+              {{#each PREMADE_SECTIONS}}
+              <li>{{this.title}}</li>
               {{/each}}
             </ul>
           </details>
