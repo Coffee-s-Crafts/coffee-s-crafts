@@ -129,9 +129,9 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
     paragraphs: ['Full body of your character.'],
     details: ['Delivered as a PNG.'],
     addons: [
-      'Commercial usage rights - 35%',
-      'Shading - $20',
-      'Extra Character - $15'
+      'Commercial usage rights — 35%',
+      'Shading — $20',
+      'Extra Character — $15'
     ],
     important: [
       'Please be as detailed as possible when describing what you want, such as pose, expression, etc.',
@@ -143,8 +143,8 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
     paragraphs: ['Shoulder up portrait of your character (paws included).'],
     details: ['Delivered as a PNG.'],
     addons: [
-      'Commercial usage rights - 35%',
-      'Shading - $15'
+      'Commercial usage rights — 35%',
+      'Shading — $15'
     ],
     important: [
       'Please be as detailed as possible when describing what you want, such as pose, expression, etc.',
@@ -156,11 +156,11 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
     paragraphs: ['Headshot of your character.'],
     details: ['Delivered as a PNG.'],
     addons: [
-      'Commercial usage rights - 35%',
-      'Button - $5 + Shipping',
-      'Shading - $10',
-      'Simple color background - Free',
-      'Simple splash background - Free'
+      'Commercial usage rights — 35%',
+      'Button — $5 + Shipping',
+      'Shading — $10',
+      'Simple color background — Free',
+      'Simple splash background — Free'
     ],
     important: [
       'Please be as detailed as possible when describing what you want, such as pose, expression, etc.',
@@ -173,9 +173,9 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
     paragraphs: ['Four frames of your character and a step-by-step setup guide for PNGTuber use.'],
     details: ['File is a .veado file to be used on Veadotube.'],
     addons: [
-      'Commercial usage rights - 35%',
-      'Shading - $15',
-      'Extra frames - $8.50 per frame'
+      'Commercial usage rights — 35%',
+      'Shading — $15',
+      'Extra frames — $8.50 per frame'
     ],
     important: ['Please provide an unshaded reference.']
   },
@@ -184,9 +184,9 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
     paragraphs: ['Scenic drawing of your character. Scenery depends on complexity type.'],
     details: ['Delivered as a PNG.'],
     addons: 
-    ['Commercial usage rights - 35%',
-      'Extra characters - $15',
-      'Background complexity - Ask for quote'
+    ['Commercial usage rights — 35%',
+      'Extra characters — $15',
+      'Background complexity — Ask for quote'
     ],
     important: [
       'Please provide detailed scene description and reference photos when possible.',
@@ -198,17 +198,17 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
     paragraphs: ['Symmetrical front & back of your character.'],
     details: ['Delivered as a PNG.'],
     addons: [
-      'Commercial usage rights - 35%',
-      'Custom Character - $40',
-      'Accessories (Up to 3)- $10',
-      'Add side view - $10', 
-      'Add headshot closeup - $10',
-      'Add eyes closeup - $5',
-      'Asymmetrical front & back - $10',
-      'Symmetrical front & back - Free',
-      'Name, gender, species (text) - Free',
-      'Likes/Dislikes (text) - Free',
-      'Character description (text) - Free'
+      'Commercial usage rights — 35%',
+      'Custom Character — $40',
+      'Accessories (Up to 3) — $10',
+      'Add side view — $10', 
+      'Add headshot closeup — $10',
+      'Add eyes closeup — $5',
+      'Asymmetrical front & back — $10',
+      'Symmetrical front & back — Free',
+      'Name, gender, species (text) — Free',
+      'Likes/Dislikes (text) — Free',
+      'Character description (text) — Free'
     ],
     important: [
       'If requesting a custom character without an existing reference, include the custom character add-on fee.',
@@ -244,8 +244,8 @@ const PREMADE_SECTIONS = process.env.PREMADE_SECTIONS ? JSON.parse(process.env.P
       'Multiple designs available'
     ],
     options: [
-      'Button badges - $2.75',
-      'Laminated badges - $6'
+      'Button badges — $2.75',
+      'Laminated badges — $6'
     ],
     important: [
       'Inventory is limited.',
