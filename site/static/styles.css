@@ -143,26 +143,8 @@ section h2{font-size:1.75rem;color:var(--accent);border-bottom:2px solid var(--b
   padding:1.25rem 1.5rem;
   box-shadow:var(--shadow);
 }
-.commission-card h3{
-  font-size:1rem;
-  color:var(--accent);
-  margin-bottom:.4rem;
-}
-.commission-card p{
-  color:var(--muted);
-  font-size:.9rem;
-  margin:0
-}
-details[open] summary {
-  cursor: default;
-  pointer-events: none;
-}
-details[open] summary::-webkit-details-marker {
-  display: none;
-}
-details[open] summary::marker {
-  content: "";
-}
+.commission-card h3{font-size:1rem;color:var(--accent);margin-bottom:.4rem}
+.commission-card p{color:var(--muted);font-size:.9rem;margin:0}
 
 /* ── Contact links ─────────────────────────────── */
 .contact-links{display:flex;flex-wrap:wrap;gap:1rem;margin-top:1.5rem}
