@@ -78,7 +78,6 @@ const ABOUT_HEADING           = process.env.ABOUT_HEADING                    || 
 const ABOUT_BODY              = process.env.ABOUT_BODY                       || "Welcome! I'm an independent artist specializing in character art, fursuits, and custom commissions. Every piece is crafted with care and skill, with your input always in mind.";
 const ABOUT_CTA_INTRO         = process.env.ABOUT_CTA_INTRO                  || 'Looking for something unique?';
 const ABOUT_CTA_LINK_TEXT     = process.env.ABOUT_CTA_LINK_TEXT              || 'Check commission availability';
-const FEATURED_HEADING        = process.env.FEATURED_HEADING                 || 'Featured Work';
 const GALLERY_MORE_TEXT       = process.env.GALLERY_MORE_TEXT                || 'See all →';
 // gallery page
 const GALLERY_HEADING         = process.env.GALLERY_HEADING                  || 'Gallery';
@@ -667,11 +666,9 @@ async function build() {
     ABOUT_BODY,
     ABOUT_CTA_INTRO,
     ABOUT_CTA_LINK_TEXT,
-    FEATURED_HEADING,
     GALLERY_MORE_TEXT,
     GALLERY_HEADING,
     GALLERY_META,
-    PREMADE_HEADING,
     PREMADE_META,
     COMMISSIONS_HEADING,
     COMMISSIONS_INTRO,
