@@ -27,7 +27,7 @@
   - When adding new template files, ensure `site/build.js` writes them (it currently renders `index.html`, `gallery.html`, `contact.html`, `art.html`, `fursuit.html`, `tos.html`, `fursuit-tos.html`).
 
 **Adding Images to the Gallery**
-- **Where to put images:** place images in `assets/art/` for the main gallery or `assets/fursuits/` for fursuit images. The build copies those folders into the output site.
+- **Where to put images:** place images in the relevant [`assets/`](https://github.com/Coffee-s-Crafts/coffee-s-crafts/tree/main/assets) subfolder. The build copies files from those folders into the output site.
 - **Supported formats:** `png`, `jpg`, `jpeg`, `svg`, `gif`, `webp`.
 - **Automatic listing:** the build script reads files in the source directories and generates `<li><img src="..."></li>` entries for samples and for the full gallery. No template edits required.
 - **Controlling featured samples:** change `SAMPLE_COUNT` to adjust how many images appear in the index/featured areas.
