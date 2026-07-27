@@ -125,7 +125,7 @@ const X_LINK_TEXT             = process.env.X_LINK_TEXT                      || 
 // commission pages
 const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTIONS) : [
   {
-    title: 'Full Body: $20',
+    title: 'Full Body — $20',
     paragraphs: ['Full body of your character.'],
     details: ['Delivered as a PNG.'],
     addons: [
@@ -139,7 +139,7 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
     ]
   },
   {
-    title: 'Bust: $15+',
+    title: 'Bust — $15+',
     paragraphs: ['Shoulder up portrait of your character (paws included).'],
     details: ['Delivered as a PNG.'],
     addons: [
@@ -152,7 +152,7 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
     ]
   },
   {
-    title: 'Headshot: $10',
+    title: 'Headshot — $10',
     paragraphs: ['Headshot of your character.'],
     details: ['Delivered as a PNG.'],
     addons: [
@@ -169,7 +169,7 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
     ]
   },
   {
-    title: 'Furry PNGTuber: $35+',
+    title: 'Furry PNGTuber — $35+',
     paragraphs: ['Four frames of your character and a step-by-step setup guide for PNGTuber use.'],
     details: ['File is a .veado file to be used on Veadotube.'],
     addons: [
@@ -180,7 +180,7 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
     important: ['Please provide an unshaded reference.']
   },
   {
-    title: 'Scenic Furry Commissions: $50+',
+    title: 'Scenic Furry Commissions — $50+',
     paragraphs: ['Scenic drawing of your character. Scenery depends on complexity type.'],
     details: ['Delivered as a PNG.'],
     addons: 
@@ -194,7 +194,7 @@ const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTI
     ]
   },
   {
-    title: 'Furry Reference Sheet: $45+',
+    title: 'Furry Reference Sheet — $45+',
     paragraphs: ['Symmetrical front & back of your character.'],
     details: ['Delivered as a PNG.'],
     addons: [
