@@ -64,11 +64,6 @@ const PROMOTION_STATUS_LABEL = PROMOTIONS_AVAILABLE
   : 'No Promotions';
 
 // ── Configurable settings ─────────────────────────────────────────────────────
-// global site settings
-const FOOTER_YEAR             = _now.getFullYear();
-const SITE_TITLE              = process.env.SITE_TITLE                       || "Coffee's Crafts";
-const CONTACT_EMAIL           = process.env.CONTACT_EMAIL                    || 'coffee@coffeescrafts.com';
-const FOOTER_TEXT             = `© ${FOOTER_YEAR} ${SITE_TITLE} — ${CONTACT_EMAIL}`;
 // index page
 const HERO_TAGLINE            = process.env.HERO_TAGLINE                     || "Original art & custom commissions — made with love ☕";
 const HERO_CTA                = process.env.HERO_CTA                         || 'Browse the Gallery';
@@ -123,6 +118,13 @@ const CARRD_URL               = (process.env.CARRD_URL || '').trim()         || 
 const CARRD_LINK_TEXT         = process.env.CARRD_LINK_TEXT                  || '🌐 Carrd';
 const X_URL                   = (process.env.X_URL || '').trim()             || 'https://x.com/coffeesden';
 const X_LINK_TEXT             = process.env.X_LINK_TEXT                      || '🐦 X / Twitter';
+// global site settings
+const GITHUB_URL              = process.env.GITHUB_URL                       || 'https://github.com/Coffee-s-Crafts/coffee-s-crafts';
+const GITHUB_LINK_TEXT        = process.env.GITHUB_LINK_TEXT                 || '💻 GitHub';
+const FOOTER_YEAR             = _now.getFullYear();
+const SITE_TITLE              = process.env.SITE_TITLE                       || "Coffee's Crafts";
+const CONTACT_EMAIL           = process.env.CONTACT_EMAIL                    || 'coffee@coffeescrafts.com';
+const FOOTER_TEXT             = `© ${FOOTER_YEAR} ${SITE_TITLE}` ;
 // commission pages
 const ART_SECTIONS = process.env.ART_SECTIONS ? JSON.parse(process.env.ART_SECTIONS) : [
   {
@@ -645,6 +647,8 @@ async function build() {
     .join('\n');
 
   const vars = {
+    GITHUB_URL,
+    GITHUB_LINK_TEXT,
     SITE_TITLE,
     CONTACT_EMAIL,
     FOOTER_TEXT,
