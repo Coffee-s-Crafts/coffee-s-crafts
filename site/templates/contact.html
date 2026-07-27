@@ -19,7 +19,7 @@
       <p>%%COMMISSIONS_INTRO%%</p>
       <div class="commission-overview">
         <div class="commission-card">
-          <details>
+          <details open>
             <summary><a href="%%ART_LINK%%">Art Commissions</a></summary>
             <ul>
               {{#each ART_SECTIONS}}
@@ -28,8 +28,9 @@
             </ul>
           </details>
         </div>
+
         <div class="commission-card">
-          <details>
+          <details open>
             <summary><a href="%%FURSUIT_LINK%%">Fursuit Commissions</a></summary>
             <ul>
               {{#each FURSUIT_PRICES}}
