@@ -244,8 +244,8 @@ const PREMADE_SECTIONS = process.env.PREMADE_SECTIONS ? JSON.parse(process.env.P
       'Multiple designs available'
     ],
     options: [
-      'Button badges',
-      'Laminated badges'
+      'Button badges - $2.75',
+      'Laminated badges - $6'
     ],
     important: [
       'Inventory is limited.',
