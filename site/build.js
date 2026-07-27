@@ -84,7 +84,6 @@ const GALLERY_HEADING         = process.env.GALLERY_HEADING                  || 
 const GALLERY_META            = process.env.GALLERY_META                     || 'A selection of original pieces and commission samples.';
 const SAMPLE_COUNT            = parseInt(process.env.SAMPLE_COUNT            || '4', 10);
 // premade page
-const PREMADE_HEADING         = process.env.PREMADE_HEADING                  || 'Premade Items';
 const PREMADE_INTRO           = process.env.PREMADE_INTRO                    || 'Looking for something you can purchase immediately? I offer a growing selection of premade convention accessories, collectibles, and other handmade items that are ready to ship.';
 const PREMADE_META            = process.env.PREMADE_META                     || 'Buttons, badges, stickers, and other ready-to-ship creations.';
 // contact page
@@ -685,14 +684,12 @@ async function build() {
     PAYPAL_URL,
     PAYPAL_LINK_TEXT,
     TRELLO_URL,
-    TRELLO_LINK_TEXT,
     QUEUE_TRACKING_TEXT,
     TWITCH_URL,
     TWITCH_LINK_TEXT,
     FURSUIT_TOS_LINK,
     FURSUIT_TOS_LINK_TEXT,
     FURSUIT_QUEUE_URL,
-    FURSUIT_QUEUE_LINK_TEXT,
     FURSUIT_QUEUE_TEXT,
     ETSY_URL,
     ETSY_LINK_TEXT,
