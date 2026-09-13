@@ -91,7 +91,7 @@ const COMMISSIONS_HEADING     = process.env.COMMISSIONS_HEADING              || 
 const COMMISSIONS_INTRO       = process.env.COMMISSIONS_INTRO                || "Interested in a custom piece? I offer a range of commission types. Send me a message with your idea and I'll get back to you as soon as possible.";
 const CONTACT_HEADING         = process.env.CONTACT_HEADING                  || 'Contact';
 const KOFI_URL                = (process.env.KOFI_URL || '').trim()          || 'https://ko-fi.com/coffeescrafts';
-const KOFI_LINK_TEXT          = process.env.KOFI_LINK_TEXT                   || '🎨 Ko-fi';
+const KOFI_LINK_TEXT          = process.env.KOFI_LINK_TEXT                   || '☕ Ko-fi';
 const KOFI_IFRAME             = (process.env.KOFI_IFRAME || '').trim()       || `<iframe id='kofiframe' src='https://ko-fi.com/coffeescrafts/?hidefeed=true&widget=true&embed=true&preview=true' style='border:none;width:100%;padding:4px;background:#f9f9f9;' height='712' title='coffeescrafts'></iframe>`;
 const VGEN_URL                = (process.env.VGEN_URL || '').trim()          || 'https://vgen.co/CoffeeEX';
 const VGEN_LINK_TEXT          = process.env.VGEN_LINK_TEXT                   || '🎨 VGen';
