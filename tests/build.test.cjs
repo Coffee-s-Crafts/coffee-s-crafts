@@ -38,8 +38,10 @@ test('all configurable values are mapped through workflow vars or secrets', () =
 test('template copy uses content tokens instead of hardcoded words', () => {
   const files = fs.readdirSync('site/templates', { recursive: true }).filter(file => file.endsWith('.html'));
   for (const file of files) {
-    const html = fs.readFileSync(path.join('site/templates', file), 'utf8').replace(/<!--[\s\S]*?-->/g, '');
-    for (const match of html.matchAll(/>([^<]+)</g)) {
+    const html = fs.readFileSync(path.join('site/templates', file), 'utf8');
+    // Inspect text nodes without treating the source scan as an HTML sanitizer.
+    for (const match of html.matchAll(/<!--[\s\S]*?-->|>([^<]+)</g)) {
+      if (match[1] === undefined) continue;
       const text = match[1].replace(/%%\w+%%|\{\{[^}]*\}\}/g, '').trim();
       assert.equal(/\p{L}/u.test(text), false, `${file}: hardcoded copy ${text}`);
     }
