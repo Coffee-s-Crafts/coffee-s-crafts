@@ -1,9 +1,18 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Contact — Coffee's Crafts</title>
+  <title>Contact — Coffee&#39;s Crafts</title>
     <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Interested in a custom piece? I offer a range of commission types. Send me a message with your idea and I&#39;ll get back to you as soon as possible.">
+  <link rel="canonical" href="https://coffeescrafts.com/contact.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Contact — Coffee&#39;s Crafts">
+  <meta property="og:description" content="Interested in a custom piece? I offer a range of commission types. Send me a message with your idea and I&#39;ll get back to you as soon as possible.">
+  <meta property="og:url" content="https://coffeescrafts.com/contact.html">
+  <meta property="og:image" content="https://coffeescrafts.com/assets/art/anthrocon-2026-badges.jpg">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&family=Shrikhand&display=swap">
   <link rel="stylesheet" href="styles.css">
@@ -11,8 +20,8 @@
 </head>
 <body>
     <header class="site-header">
-    <span class="brand">Coffee's Crafts</span>
-    <nav>
+    <span class="brand">Coffee&#39;s Crafts</span>
+    <nav aria-label="Main navigation">
       <a href="index.html">Home</a>
       <a href="gallery.html">Gallery</a>
       <a href="art.html">Art</a>
@@ -25,16 +34,19 @@
 
   <main>
     <section>
-      <h2>Commissions</h2>
+      <h1>Commissions</h1>
 
       <span class="commission-status open">Commissions Open</span>
       
 
-      <p>Interested in a custom piece? I offer a range of commission types. Send me a message with your idea and I'll get back to you as soon as possible.</p>
+      <p>Interested in a custom piece? I offer a range of commission types. Send me a message with your idea and I&#39;ll get back to you as soon as possible.</p>
       <div class="commission-overview">
         <div class="commission-card">
+          <h2><a href="art.html">Art Commissions</a></h2>
           <details open>
-            <summary><a href="art.html">Art Commissions</a></summary>
+            <summary>Details</summary>
+            <p class="commission-status open">Commissions Open</p>
+            <p>Share your idea and an unshaded reference for an availability check and quote.</p>
             <ul>
               
               <li>Full Body — $20</li>
@@ -54,8 +66,11 @@
         </div>
 
         <div class="commission-card">
+          <h2><a href="fursuit.html">Fursuit Commissions</a></h2>
           <details open>
-            <summary><a href="fursuit.html">Fursuit Commissions</a></summary>
+            <summary>Details</summary>
+            <p class="commission-status open">Commissions Open</p>
+            <p>Complete the fursuit commission form for an availability check and written quote.</p>
             <ul>
               
               <li>Head only — $465</li>
@@ -89,8 +104,11 @@
         </div>
 
         <div class="commission-card">
+          <h2><a href="premades.html">Premade Items</a></h2>
           <details open>
-            <summary><a href="premades.html">Premade Items</a></summary>
+            <summary>Details</summary>
+            <p>Check shop inventory</p>
+            <p>Visit the shop for current stock and shipping details.</p>
             <ul>
               
               <li>Consent Badges</li>
@@ -104,11 +122,35 @@
       <p><a href="https://trello.com/b/1NyoDiwp/fursuit-wips" target="_blank" rel="noopener">📋 Fursuit Queue Trello</a></p>
       <p><a href="https://docs.google.com/forms/d/e/1FAIpQLSeEx9FHGEsBr2daUPxyiUdujYJLatGylw0vb2Q9ykOv8MUBsQ/viewform?usp=publish-editor" target="_blank" rel="noopener">📝 Fursuit Commission Form</a></p>
 
+      <section class="commission-brief">
+        <h2>Plan your commission</h2>
+        <p>Choose a service and prepare a brief to share by email. Sending a brief does not reserve a slot; availability and a quote are confirmed before booking.</p>
+        <form id="commissionBrief" action="#" data-email="coffee@coffeescrafts.com" data-subject="Commission inquiry">
+          <label for="briefService">Service</label>
+          <select id="briefService" name="service">
+            <option value="Art Commissions">Art Commissions — Commissions Open</option><option value="Fursuit Commissions">Fursuit Commissions — Commissions Open</option><option value="Premade Items">Premade Items — Check shop inventory</option>
+          </select>
+          <label for="briefIdea">Your idea and reference links</label>
+          <textarea id="briefIdea" name="idea" rows="5" required></textarea>
+          <label for="briefBudget">Budget</label>
+          <input id="briefBudget" name="budget" type="text">
+          <label for="briefDeadline">Preferred deadline</label>
+          <input id="briefDeadline" name="deadline" type="text">
+          <button type="submit">Prepare email</button>
+        </form>
+        <div id="briefResult" hidden>
+          <p>Review the draft below, then open it in your email app. You can also copy it and use one of the contact links. Nothing is sent from this page.</p>
+          <label for="briefPreview">Your brief</label>
+          <textarea id="briefPreview" rows="10" readonly></textarea>
+          <a id="briefEmail">Open email draft</a>
+        </div>
+      </section>
+
       <h2>Contact</h2>
       <div class="contact-links">
         <div class="contact-row">
           <a href="https://www.discord.com/users/339092532162068481" target="_blank" rel="noopener">💬 Discord: coffee.ex</a>
-          <a href="https://t.me/coffeescrafts" target="_blank" rel="noopener">📨 Telegram: Coffee's Crafts</a>
+          <a href="https://t.me/coffeescrafts" target="_blank" rel="noopener">📨 Telegram: Coffee&#39;s Crafts</a>
           <a href="mailto:coffee@coffeescrafts.com">✉️ Email: coffee@coffeescrafts.com</a>
         </div>
         <div class="contact-row">
@@ -128,12 +170,13 @@
   </main>
 
     <footer class="site-footer">
-    <p>© 2026 Coffee's Crafts — <a href="mailto:coffee@coffeescrafts.com">✉️ Email: coffee@coffeescrafts.com</a> — <a href="tos.html">📄 Art Terms of Service</a> | <a href="fursuit-tos.html">📄 Fursuit Terms of Service</a> — <a href="https://github.com/Coffee-s-Crafts/coffee-s-crafts">💻 GitHub</a> — <a href="https://ko-fi.com/coffeescrafts">☕ Ko-fi</a></p>
+    <p>© 2026 Coffee&#39;s Crafts — <a href="mailto:coffee@coffeescrafts.com">✉️ Email: coffee@coffeescrafts.com</a> — <a href="tos.html">📄 Art Terms of Service</a> | <a href="fursuit-tos.html">📄 Fursuit Terms of Service</a> — <a href="https://github.com/Coffee-s-Crafts/coffee-s-crafts">💻 GitHub</a> — <a href="https://ko-fi.com/coffeescrafts">☕ Ko-fi</a></p>
     <p>
       <span class="commission-status open">Commissions Open</span>
       
     </p>
   </footer>
 
+  <script src="brief.js" defer></script>
 </body>
 </html>
