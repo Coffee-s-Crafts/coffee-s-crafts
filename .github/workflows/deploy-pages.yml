@@ -114,6 +114,13 @@ jobs:
       NAV_LABEL: ${{ vars.NAV_LABEL || secrets.NAV_LABEL }}
       NAV_PREMADE: ${{ vars.NAV_PREMADE || secrets.NAV_PREMADE }}
       OG_IMAGE_URL: ${{ vars.OG_IMAGE_URL || secrets.OG_IMAGE_URL }}
+      # Preview images must be HTTP(S) raster URLs, or paths to published raster assets.
+      # The build rejects missing local media, LFS pointers and payloads over 3000 bytes.
+      PREVIEW_ART_IMAGE_URL: ${{ vars.PREVIEW_ART_IMAGE_URL || secrets.PREVIEW_ART_IMAGE_URL }}
+      PREVIEW_FURSUIT_IMAGE_URL: ${{ vars.PREVIEW_FURSUIT_IMAGE_URL || secrets.PREVIEW_FURSUIT_IMAGE_URL }}
+      PREVIEW_PREMADE_IMAGE_URL: ${{ vars.PREVIEW_PREMADE_IMAGE_URL || secrets.PREVIEW_PREMADE_IMAGE_URL }}
+      PREVIEW_IMAGE_ALT: ${{ vars.PREVIEW_IMAGE_ALT || secrets.PREVIEW_IMAGE_ALT }}
+      PREVIEW_COLOR: ${{ vars.PREVIEW_COLOR || secrets.PREVIEW_COLOR }}
       OPTIONS_HEADING: ${{ vars.OPTIONS_HEADING || secrets.OPTIONS_HEADING }}
       PAYPAL_LINK_TEXT: ${{ vars.PAYPAL_LINK_TEXT || secrets.PAYPAL_LINK_TEXT }}
       PAYPAL_URL: ${{ vars.PAYPAL_URL || secrets.PAYPAL_URL }}

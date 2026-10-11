@@ -9,6 +9,37 @@ test.beforeEach(async ({ page }) => {
   await page.route(url => url.hostname !== '127.0.0.1', route => route.fulfill({ status: 200, body: '' }));
 });
 
+test('crawler receives inline previews and raster fallbacks without client scripts', async ({ page, request }) => {
+  const { serializeEmbed } = require('../../site/previews');
+  for (const [, filename] of PAGES) {
+    const response = await request.get('/' + filename, { headers: {
+      'User-Agent': 'Mozilla/5.0 (compatible; Discordbot/2.0; +https://discordapp.com)',
+    } });
+    expect(response.status()).toBe(200);
+    expect(response.headers()['content-type']).toContain('text/html');
+    expect(response.headers()['content-disposition']).toBeUndefined();
+    const html = await response.text();
+    const match = html.split('</head>')[0].match(/<script id="discord:component-embed" type="application\/json">([\s\S]*?)<\/script>/);
+    expect(match).not.toBeNull();
+    expect(serializeEmbed(JSON.parse(match[1]))).toBe(match[1]);
+    await page.goto('/' + filename);
+    const imageUrl = await page.locator('meta[property="og:image"]').getAttribute('content');
+    const asset = await request.get(new URL(imageUrl).pathname);
+    expect(asset.status()).toBe(200);
+    expect(asset.headers()['content-type']).toMatch(/^image\/(jpeg|png|webp|gif|avif)/);
+    await page.evaluate(() => document.getElementById('discord:component-embed').remove());
+    expect(await page.locator('meta[property="og:title"]').getAttribute('content')).toBeTruthy();
+    expect(await page.locator('meta[name="twitter:image"]').getAttribute('content')).toBe(imageUrl);
+    const dimensions = await page.evaluate(async src => {
+      const image = new Image();
+      image.src = new URL(src).pathname;
+      await image.decode();
+      return [image.naturalWidth, image.naturalHeight];
+    }, imageUrl);
+    expect(dimensions.every(value => value > 0)).toBe(true);
+  }
+});
+
 for (const width of [390, 1280]) {
   test(`pages, local navigation and accessibility at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
