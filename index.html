@@ -31,40 +31,41 @@
     <header class="site-header">
     <span class="brand">Coffee&#39;s Crafts</span>
     <nav aria-label="Main navigation">
-      <a href="index.html">Home</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="art.html">Art</a>
-      <a href="fursuit.html">Fursuits</a>
-      <a href="premades.html">Premades</a>
-      <a href="contact.html">Contact</a>
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="gallery.html" aria-current="false">Gallery</a>
+      <a href="art.html" aria-current="false">Art</a>
+      <a href="fursuit.html" aria-current="false">Fursuits</a>
+      <a href="premades.html" aria-current="false">Premades</a>
+      <a href="contact.html" aria-current="false">Contact</a>
     </nav>
   </header>
 
 
   <div class="hero">
-    <h1>Coffee&#39;s Crafts</h1>
-    <p class="tagline">Original art &amp; custom commissions — made with love ☕</p>
-    <a href="gallery.html" class="btn">Browse the Gallery</a>
+    <div class="hero-copy">
+      <p class="eyebrow">Character art · Fursuits · Handmade goods</p>
+      <h1>Art with a little extra character.</h1>
+      <p class="tagline">Original art &amp; custom commissions — made with love ☕</p>
+      <div class="hero-actions">
+        <a href="gallery.html" class="btn">Browse the Gallery</a>
+        <a href="contact.html" class="button-secondary">Commission a piece</a>
+      </div>
+      <span class="commission-status open">Commissions Open</span>
+    </div>
+    
+    <figure class="hero-art">
+      <img src="assets/art/444e3600-b841-446d-b942-d8f66a0d4fdc.webp" alt="A green and cream dragon with colorful speckles lies in a meadow of yellow flowers." fetchpriority="high">
+      <figcaption>Among the wildflowers</figcaption>
+    </figure>
+    
   </div>
 
-  <main>
-    <section>
-      <h2>About</h2>
-      <div class="about-blurb">
-        <p>Welcome! I&#39;m an independent artist specializing in character art, fursuits, and custom commissions. Every piece is crafted with care and skill, with your input always in mind.</p>
-        <p>Looking for something unique? <a href="contact.html">Check commission availability</a>.</p>
+  <main class="home-main">
+    <section class="selected-work">
+      <div class="section-heading">
+        <h2>A few favorites</h2>
+        <a href="gallery.html">Explore the gallery →</a>
       </div>
-    </section>
-
-    <section>
-      <h2>Support Me on Ko-fi</h2>
-      <div class="kofi-iframe">
-        <iframe id="kofiframe" src="https://ko-fi.com/coffeescrafts/?hidefeed=true&amp;widget=true&amp;embed=true&amp;preview=true" title="Support Coffee’s Crafts on Ko-fi" height="712" loading="lazy"></iframe>
-
-      </div>
-    </section>
-
-    <section>
       <h3>Art</h3>
       <ul class="art-list">
         <li><figure><a class="gallery-image" href="assets/art/278c7891-3861-4ac5-a751-aa7fe782e9b5.webp" data-caption="Dreaming in the clouds"><img src="assets/art/278c7891-3861-4ac5-a751-aa7fe782e9b5.webp" alt="An orange horned dragon with stitched markings sleeps among white clouds." loading="lazy"></a><figcaption>Dreaming in the clouds</figcaption></figure></li>
@@ -101,7 +102,21 @@
         
         <li><figure><a class="gallery-image" href="assets/tables/01_Furbowl_DE_2026.jpg" data-caption="Furbowl 2026 table"><img src="assets/tables/01_Furbowl_DE_2026.jpg" alt="A blue-covered vendor table displaying a purple fursuit head, paws, and colorful button badges." loading="lazy"></a><figcaption>Furbowl 2026 table</figcaption></figure></li>
         </ul>
-      <p class="gallery-more"><a href="gallery.html">See all →</a></p>
+    </section>
+
+    <section>
+      <h2>About</h2>
+      <div class="about-blurb">
+        <p>Welcome! I&#39;m an independent artist specializing in character art, fursuits, and custom commissions. Every piece is crafted with care and skill, with your input always in mind.</p>
+        <p>Looking for something unique? <a href="contact.html">Check commission availability</a>.</p>
+      </div>
+    </section>
+
+    <section class="support-section">
+      <h2>Support Me on Ko-fi</h2>
+      <a class="support-link" href="https://ko-fi.com/coffeescrafts" target="_blank" rel="noopener">Support Coffee’s Crafts on Ko-fi →</a>
+      <div class="kofi-iframe"><iframe id="kofiframe" src="https://ko-fi.com/coffeescrafts/?hidefeed=true&amp;widget=true&amp;embed=true&amp;preview=true" title="Support Coffee’s Crafts on Ko-fi" height="712" loading="lazy"></iframe>
+</div>
     </section>
   </main>
 
