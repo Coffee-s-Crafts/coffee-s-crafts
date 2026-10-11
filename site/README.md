@@ -45,6 +45,11 @@ Keep `INDEX_LINK=index.html` for the normal Pages root entry point. The build do
 delete old output files; use a fresh output directory after renaming pages/removing art.
 CI starts with a fresh checkout.
 
+Generated pages reference CSS and JavaScript with a content-derived `?v=` cache key.
+When an asset changes, browsers request a new URL rather than reusing an older cached
+file. Unchanged assets keep the same key. Original filenames remain available for
+older pages and bookmarks; hashing does not change the Pages publishing configuration.
+
 `NAV_*`, `*_HEADING`, `*_CATEGORY`, `*_LINK_TEXT`, and existing copy settings control
 labels. `FOOTER_TEXT` supports `{year}` and `{title}`. Structured arrays such as
 `ART_SECTIONS`, `FURSUIT_PRICES`, `PREMADE_SECTIONS`, `TOS_SECTIONS`, and

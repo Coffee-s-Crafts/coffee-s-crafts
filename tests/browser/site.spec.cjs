@@ -128,3 +128,16 @@ test('featured artwork and gallery category shortcuts survive keyboard navigatio
   await page.goBack();
   await expect(page.locator('.category-nav a').first()).toHaveAttribute('aria-current', 'location');
 });
+
+test('new HTML avoids the legacy unversioned stylesheet cache key', async ({ page }) => {
+  let legacyRequests = 0;
+  // Emulate an old stylesheet being returned at the previous URL.
+  await page.route(url => url.pathname === '/styles.css' && !url.search, route => {
+    legacyRequests++;
+    return route.fulfill({ contentType: 'text/css', body: '.hero { display: block; background: orange; }' });
+  });
+  await page.goto('/' + PAGES[0][1]);
+  await expect(page.locator('link[rel="stylesheet"][href^="styles.css"]')).toHaveAttribute('href', /^styles\.css\?v=[a-f0-9]{16}$/);
+  await expect(page.locator('.hero')).toHaveCSS('display', 'grid');
+  expect(legacyRequests).toBe(0);
+});
