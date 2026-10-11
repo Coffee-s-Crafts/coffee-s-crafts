@@ -48,8 +48,8 @@ for (const width of [390, 1280]) {
     for (const [, filename] of PAGES) {
       const response = await page.goto('/' + filename);
       expect(response.status()).toBe(200);
-      await expect(page.locator('nav a')).toHaveCount(6);
-      await page.locator('nav a').first().click();
+      await expect(page.locator('.site-header nav a')).toHaveCount(6);
+      await page.locator('.site-header nav a').first().click();
       await expect(page).toHaveURL(new RegExp(PAGES[0][1].replace('.', '\\.')));
       await page.goto('/' + filename);
       const brokenImages = await page.evaluate(async () => {
@@ -64,7 +64,7 @@ for (const width of [390, 1280]) {
       expect(report.violations).toEqual([]);
     }
     expect(errors).toEqual([]);
-    for (const filename of [galleryPath, contactPath]) {
+    for (const filename of [PAGES[0][1], galleryPath, contactPath]) {
       await page.goto('/' + filename);
       await page.evaluate(async () => {
         const images = [...document.images];
@@ -113,4 +113,18 @@ test('commission brief creates a reviewable email without sending', async ({ pag
   expect(draft.protocol).toBe('mailto:');
   expect(draft.searchParams.get('body')).toContain('$100');
   expect(draft.searchParams.get('body')).toContain('Flexible');
+});
+
+test('featured artwork and gallery category shortcuts survive keyboard navigation', async ({ page }) => {
+  await page.goto('/' + PAGES[0][1]);
+  await expect(page.locator('.hero-art img')).toBeVisible();
+  await expect(page.locator('.site-header [aria-current="page"]')).toHaveAttribute('href', PAGES[0][1]);
+  await page.goto('/' + galleryPath);
+  const shortcut = page.locator('.category-nav a[href="#gallery-fursuits"]');
+  await shortcut.focus();
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/#gallery-fursuits$/);
+  await expect(shortcut).toHaveAttribute('aria-current', 'location');
+  await page.goBack();
+  await expect(page.locator('.category-nav a').first()).toHaveAttribute('aria-current', 'location');
 });

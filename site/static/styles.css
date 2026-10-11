@@ -1,212 +1,138 @@
-/* ── Variables ─────────────────────────────────── */
-:root{
-  --bg:        #fdf6f0;
-  --surface:   #fff;
-  --text:      #2d1a0e;
-  --muted:     #7a5c46;
-  --accent:    #8b3a1e;
-  --accent-lt: #c4622d;
-  --border:    #e8d8cb;
-  --radius:    10px;
-  --shadow:    0 2px 10px rgba(45,26,14,.10);
-}
-
-/* ── Reset / Base ──────────────────────────────── */
+/* Base */
 *,*::before,*::after{box-sizing:border-box}
-body{
-  font-family:'Bitter',Georgia,serif;
-  line-height:1.6;
-  color:var(--text);
-  background:var(--bg);
-  margin:0;padding:0;
-}
+body{margin:0;padding:0;background:var(--bg);color:var(--text)}
 img{display:block;max-width:100%}
-a{color:var(--accent);text-decoration:none}
-a:hover{text-decoration:underline}
-p a{text-decoration:underline}
-h1,h2,h3{
-  font-family:'Shrikhand',Georgia,serif;
-  font-weight:400;
-  line-height:1.2;
-  margin:0 0 .5rem;
-}
+a{text-decoration:none}a:hover{text-decoration:underline}p a{text-decoration:underline}
+h1,h2,h3{margin:0 0 .5rem;line-height:1.2}
+.site-header{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.site-header .brand{font-family:'Shrikhand',Georgia,serif;color:var(--accent);white-space:nowrap}
+.site-header nav{display:flex;flex-wrap:wrap}
+.art-list{list-style:none;padding:0;margin:0;display:grid}
+.art-list figure{margin:0}
+.commission-status{display:inline-flex;align-items:center;gap:.5rem;border-radius:999px}
+.commission-status.open{background:#d4edda;color:#155724;border:1px solid #c3e6cb}
+.commission-status.closed{background:#f8d7da;color:#721c24;border:1px solid #f5c6cb}
+.commission-status.inventory{background:#ece5d9;color:#524336;border:1px solid #ddd1c0}
+.commission-status::before{content:'';width:.6rem;height:.6rem;border-radius:50%;background:currentColor}
+.commission-overview,.prices-list{display:grid}.prices-list{list-style:none;padding:0;margin:0}
+.prices-list li{background:var(--surface);border:1px solid var(--border);padding:1rem;border-radius:8px}
+.commission-brief form{display:grid;gap:.6rem}
+.commission-brief input,.commission-brief select,.commission-brief textarea{width:100%;min-width:0;font:inherit;color:var(--text);border:1px solid}
+.commission-brief button{justify-self:start}
+#briefResult{margin-top:1rem}
+.site-footer{text-align:center}
+.contact-row{display:flex;flex-wrap:wrap}
+.site-footer,.contact-links a,.art-list figcaption{overflow-wrap:anywhere}
+.tos .updated{color:var(--muted)}
+.tos-section{margin-bottom:1.5rem;max-width:850px}.tos-section p{color:var(--muted)}
+.tos .tos-section h2{font-size:1.25rem}
+@media(max-width:760px){.site-header{flex-direction:column}}
 
-/* ── Header / Nav ──────────────────────────────── */
-.site-header{
-  position:sticky;top:0;z-index:100;
-  background:var(--surface);
-  border-bottom:2px solid var(--border);
-  box-shadow:var(--shadow);
-  padding:.75rem 2rem;
-  display:flex;align-items:center;justify-content:space-between;
-  gap:1rem;
+:root{--bg:#faf6ef;--surface:#fffdf9;--text:#322a25;--muted:#6c6057;--accent:#843e2d;--border:#e7ddd2;--radius:16px;--shadow:0 4px 18px rgba(53,36,25,.04)}
+body{font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.65}
+h1,h2,h3{font-family:'Bitter',Georgia,serif;font-style:normal;color:var(--text);letter-spacing:-.045em}
+h1{font-size:clamp(2.4rem,5vw,3.5rem);line-height:1.13;font-weight:700}
+h2{font-size:1.85rem;font-weight:700}h3{font-size:1.3rem;font-weight:700}
+a{color:var(--accent)}
+.site-header{min-height:88px;max-width:100%;padding:1.1rem max(24px,calc((100vw - 1240px)/2));background:var(--bg);border-bottom:1px solid var(--border);box-shadow:none;position:relative}
+.site-header .brand{font-size:1.6rem;letter-spacing:-.02em}
+.site-header nav{gap:1.7rem;align-items:center}
+.site-header nav a{font-size:.9rem;letter-spacing:0;text-transform:none;color:var(--muted);font-weight:600;padding:.3rem 0}
+.site-header nav a[aria-current="page"]{color:var(--text);border-bottom:2px solid var(--accent)}
+.site-header nav a:last-child{background:var(--accent);color:#fff;padding:.65rem 1.1rem;border-radius:7px;border:0}
+main{max-width:1288px;padding:2.8rem 24px;margin:auto}
+section{margin-bottom:3.5rem}
+section h2{border:0;padding:0;margin-bottom:1.2rem;font-size:1.75rem;color:var(--text)}
+.page-intro{max-width:720px;font-size:1.05rem;color:var(--muted);margin:.8rem 0 1.8rem}
+.eyebrow{font-family:Arial,Helvetica,sans-serif;font-size:.72rem!important;font-weight:700;letter-spacing:.14em;color:var(--accent);text-transform:uppercase;margin:0 0 1rem}
+.hero{max-width:1288px;margin:auto;background:none;color:var(--text);padding:3.6rem 24px 3rem;display:grid;grid-template-columns:1.1fr 1fr;align-items:center;gap:6rem;text-align:left}
+.hero h1{font-family:'Bitter',Georgia,serif;color:var(--text);font-weight:700;font-size:clamp(2.5rem,4.7vw,4.2rem);letter-spacing:-.055em;line-height:1.09;margin:0 0 1.25rem;max-width:650px}
+.hero .tagline{font-size:1.05rem;line-height:1.7;font-style:normal;opacity:1;color:var(--muted);margin:0 0 1.5rem;max-width:470px}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+.hero .btn,.button-primary{font-family:Arial,Helvetica,sans-serif;font-size:.92rem;font-weight:600;background:var(--accent);color:white;padding:.8rem 1.2rem;border:0;border-radius:7px;box-shadow:none;display:inline-flex;align-items:center;text-decoration:none}
+.button-secondary{font-size:.9rem;font-weight:600;text-decoration:underline;text-underline-offset:5px}
+.hero-art{margin:0;position:relative}
+.hero-art img{aspect-ratio:1;width:100%;height:auto;max-height:470px;object-fit:contain;background:#eee7d6;border-radius:20px}
+.hero-art figcaption{font-size:.8rem;margin-top:.6rem;color:var(--muted);text-align:right}
+.hero .commission-status{font-family:Arial,Helvetica,sans-serif;margin:1.5rem 0 0;font-size:.8rem;padding:.25rem .65rem}
+.home-main{padding-top:1rem}
+.section-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem}
+.section-heading h2{margin:0}.section-heading a{font-size:.88rem;font-weight:600;text-decoration:underline;text-underline-offset:4px}
+.art-list{gap:24px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.art-list li{box-shadow:none;border:0;background:none;overflow:visible;border-radius:0}
+.art-list li:hover{transform:none;box-shadow:none}
+.art-list img{height:auto;aspect-ratio:1;object-fit:contain;border-radius:12px;background:#eee8de}
+.art-list figcaption{padding:.65rem 0 0;font-size:.88rem;font-weight:500;color:var(--text)}
+.gallery-category{margin-top:2.5rem}
+.gallery-meta{font-size:1rem;margin:1rem 0 1.6rem;max-width:620px}
+.category-nav{display:flex;gap:.65rem;flex-wrap:wrap;margin:0 0 2rem}
+.category-nav a{padding:.5rem .9rem;border:1px solid var(--border);border-radius:999px;font-size:.85rem;color:var(--muted);background:var(--surface)}
+.category-nav a[aria-current="location"]{background:var(--accent);color:white;border-color:var(--accent)}
+.gallery-page .art-list{grid-template-columns:repeat(3,minmax(0,1fr));gap:2rem}
+.gallery-page h2{margin:2.7rem 0 1.25rem}
+.gallery-page .category-nav+h2{margin-top:0}
+.about-blurb{border:0;box-shadow:none;background:none;padding:0;max-width:760px;font-size:1rem;color:var(--muted)}
+.home-main>section:not(.selected-work){padding-top:2rem;border-top:1px solid var(--border)}
+.support-link{display:inline-flex;border-bottom:1px solid var(--accent);font-weight:600}
+.support-section .kofi-iframe{max-width:760px;margin-top:1.5rem}
+.commission-status{font-family:Arial,Helvetica,sans-serif;font-size:.8rem;font-weight:600;margin:0 0 1rem;padding:.3rem .7rem}
+.commission-overview{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start;margin:2rem 0 2.5rem}
+.commission-card{padding:1.35rem;background:var(--surface);border:1px solid var(--border);box-shadow:none;border-radius:12px}
+.commission-card h2{font-size:1.5rem;letter-spacing:-.03em;margin:1rem 0 .8rem;line-height:1.2}
+.commission-card h2 a{color:var(--text)}
+.commission-card p{font-size:.92rem;line-height:1.55;margin:0 0 1rem}
+.service-image{height:135px;width:100%;object-fit:cover;border-radius:8px}
+.service-price{font-size:1.25rem!important;color:var(--text)!important;font-weight:600;margin:.7rem 0!important}
+.service-price small{font-size:.76rem;font-weight:400;color:var(--muted)}
+.service-link{font-weight:600;font-size:.84rem;text-decoration:underline;text-underline-offset:4px}
+.inquiry-layout{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:3rem;padding-top:2.7rem;border-top:1px solid var(--border);align-items:start}
+.commission-brief{margin:0;max-width:none;padding:0;border:0}
+.commission-brief h2{font-size:1.85rem;margin-bottom:.8rem}
+.commission-brief>p{font-size:.93rem;color:var(--muted);max-width:560px}
+.commission-brief label{font-size:.85rem;font-weight:600;margin-top:.3rem}
+.commission-brief input,.commission-brief textarea,.commission-brief select{padding:.7rem .85rem;background:var(--surface);border-color:#b6a89a;border-radius:7px}
+.commission-brief button{background:var(--accent);color:white;border:0;border-radius:7px;padding:.8rem 1.2rem;font-weight:600;font-size:.9rem;margin-top:.5rem}
+.inquiry-aside{padding:1.6rem;background:#f0e8dc;border-radius:12px;margin-top:.3rem}
+.inquiry-aside h2{font-size:1.45rem;margin-bottom:1rem}
+.inquiry-aside p{font-size:.9rem;line-height:1.65;margin:.8rem 0}
+.inquiry-aside a{font-weight:500;text-decoration:underline;text-underline-offset:3px}
+.contact-links{margin-top:1rem;gap:.5rem;display:flex;flex-direction:column}
+.contact-row{margin:0;gap:.4rem}
+.contact-links a{background:none;color:var(--accent);padding:.2rem 0;border:0;font-size:.85rem;margin-right:.7rem;font-weight:500;text-decoration:underline}
+.contact-links a:hover{background:none}
+.art-section{padding:1.5rem;margin-bottom:1rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:none}
+.art-section h2{font-size:1.4rem}.art-section h3{font-family:Arial,Helvetica,sans-serif;letter-spacing:0;font-size:.78rem;text-transform:uppercase;color:var(--muted);margin:1.2rem 0 .5rem}
+.art-section ul{font-size:.92rem}.art-section p{color:var(--text)}
+.prices-list{grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+.site-footer{background:var(--bg);font-size:.8rem;border-top:1px solid var(--border);padding:1.8rem 24px;color:var(--muted)}
+.site-footer .commission-status{font-size:.75rem}
+@media(max-width:760px){
+ .site-header{padding:1.1rem 20px;align-items:flex-start;gap:.8rem;min-height:0}
+ .site-header .brand{font-size:1.35rem}
+ .site-header nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;gap:.15rem .65rem}
+ .site-header nav a{font-size:.82rem;padding:.3rem 0;min-height:44px;display:flex;align-items:center;justify-content:flex-start}
+ .site-header nav a:last-child{padding:.35rem .8rem}
+ main{padding:2rem 20px}
+ .hero{grid-template-columns:1fr;gap:1.6rem;padding:2.2rem 20px 1.8rem}
+ .hero h1{font-size:2.8rem;max-width:350px}
+ .hero .tagline{font-size:.98rem;line-height:1.6}
+ .hero-art img{max-height:330px;aspect-ratio:1;object-fit:contain}
+ .hero-art figcaption{font-size:.75rem}
+ .hero .commission-status{margin-top:1rem}
+ .hero .btn{font-size:.85rem;padding:.7rem 1rem}
+ .hero-actions{gap:.9rem}.button-secondary{font-size:.85rem}
+ .home-main{padding-top:1rem}
+ .art-list,.gallery-page .art-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+ .art-list figcaption{font-size:.8rem}
+ .category-nav{gap:.4rem}.category-nav a{font-size:.77rem;padding:.4rem .65rem}
+ .commission-overview{grid-template-columns:1fr;gap:1rem}
+ .service-image{height:170px}.commission-card{padding:1.1rem}
+ .inquiry-layout{grid-template-columns:1fr;gap:2rem;padding-top:1.8rem}
+ .prices-list{grid-template-columns:1fr}
+ .section-heading h2{font-size:1.45rem}.section-heading a{font-size:.75rem}
 }
-.site-header .brand{
-  font-family:'Shrikhand',Georgia,serif;
-  font-size:1.35rem;
-  color:var(--accent);
-  white-space:nowrap;
-}
-.site-header nav{display:flex;gap:1.5rem;flex-wrap:wrap}
-.site-header nav a{
-  color:var(--muted);
-  font-size:.9rem;
-  font-weight:bold;
-  letter-spacing:.04em;
-  text-transform:uppercase;
-  transition:color .15s;
-}
-.site-header nav a:hover{color:var(--accent);text-decoration:none}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 
-/* ── Hero ──────────────────────────────────────── */
-.hero{
-  background:linear-gradient(135deg,#4a1c0a 0%,#8b3a1e 50%,#c4622d 100%);
-  color:#fff;
-  padding:4rem 2rem;
-  text-align:center;
-}
-.hero h1{font-size:clamp(2rem,5vw,3.5rem);color:#fff;margin-bottom:.75rem}
-.hero .tagline{font-size:1.15rem;opacity:.85;margin-bottom:2rem;font-style:italic}
-.hero .btn{
-  display:inline-block;
-  background:#fff;
-  color:var(--accent);
-  font-family:'Shrikhand',Georgia,serif;
-  font-size:1rem;
-  padding:.65rem 1.75rem;
-  border-radius:var(--radius);
-  box-shadow:0 3px 12px rgba(0,0,0,.2);
-  transition:transform .15s,box-shadow .15s;
-}
-.hero .btn:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.3);text-decoration:none}
-
-/* ── Section common ────────────────────────────── */
-main{max-width:1100px;margin:0 auto;padding:2rem 1.5rem}
-section{margin-bottom:3rem}
-section h2{font-size:1.75rem;color:var(--accent);border-bottom:2px solid var(--border);padding-bottom:.4rem;margin-bottom:1.25rem}
-
-/* ── About blurb ───────────────────────────────── */
-.about-blurb{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:1.5rem 2rem;
-  font-size:1.05rem;
-  color:var(--muted);
-  box-shadow:var(--shadow);
-}
-
-/* ── Art grid / gallery ────────────────────────── */
-.art-list{
-  list-style:none;padding:0;margin:0;
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-  gap:16px;
-}
-.art-list li{
-  background:var(--surface);
-  border-radius:var(--radius);
-  overflow:hidden;
-  border:1px solid var(--border);
-  box-shadow:var(--shadow);
-  transition:transform .2s,box-shadow .2s;
-}
-.art-list li:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(45,26,14,.15)}
-.art-list img{width:100%;height:200px;object-fit:cover}
-
-/* ── Gallery page label ────────────────────────── */
-.gallery-meta{color:var(--muted);font-size:.9rem;margin-bottom:1.25rem}
-.gallery-category{margin-top:1.5rem}
-.gallery-more{margin-top:1rem}
-
-/* ── Commission status badge ───────────────────── */
-.commission-status{
-  display:inline-flex;align-items:center;gap:.5rem;
-  font-family:'Shrikhand',Georgia,serif;
-  font-size:1rem;
-  padding:.4rem 1.1rem;
-  border-radius:999px;
-  margin-bottom:1.5rem;
-}
-.commission-status.open{background:#d4edda;color:#155724;border:1.5px solid #c3e6cb}
-.commission-status.closed{background:#f8d7da;color:#721c24;border:1.5px solid #f5c6cb}
-.commission-status::before{content:'';display:inline-block;width:.6rem;height:.6rem;border-radius:50%;background:currentColor;opacity:.8}
-
-/* ── Commission info cards ─────────────────────── */
-.commission-info{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-  gap:1rem;
-  margin-bottom:2rem;
-}
-.commission-card{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:1.25rem 1.5rem;
-  box-shadow:var(--shadow);
-}
-.commission-card h3{font-size:1rem;color:var(--accent);margin-bottom:.4rem}
-.commission-card p{color:var(--muted);font-size:.9rem;margin:0}
-
-/* ── Contact links ─────────────────────────────── */
-.contact-links{display:flex;flex-wrap:wrap;gap:1rem;margin-top:1.5rem}
-.contact-links a{
-  display:inline-flex;align-items:center;gap:.4rem;
-  background:var(--accent);
-  color:#fff;
-  padding:.55rem 1.3rem;
-  border-radius:var(--radius);
-  font-size:.9rem;
-  font-weight:bold;
-  transition:background .15s;
-}
-.contact-links a:hover{background:var(--accent);text-decoration:underline}
-.contact-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .5rem;
-    margin-bottom: .5rem;
-}
-
-/* ── Footer ────────────────────────────────────── */
-.site-footer{
-  text-align:center;
-  padding:1.5rem 1rem;
-  border-top:2px solid var(--border);
-  background:var(--surface);
-  color:var(--muted);
-  font-size:.85rem;
-  margin-top:2rem;
-}
-
-/* ── Responsive ────────────────────────────────── */
-@media(max-width:600px){
-  .site-header{flex-direction:column;align-items:flex-start;padding:.75rem 1rem}
-  .hero{padding:2.5rem 1rem}
-  main{padding:1.25rem 1rem}
-  .commission-info{grid-template-columns:1fr}
-}
-
-/* ── New components styling ───────────────────── */
-.commission-overview{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-bottom:1.25rem}
-.commission-overview .commission-card{cursor:default}
-.commission-overview details{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.75rem;box-shadow:var(--shadow)}
-.commission-overview summary{font-weight:700;color:var(--accent);list-style:none;cursor:pointer}
-.commission-overview summary a{color:inherit}
-.commission-overview ul{margin:.5rem 0 0;padding-left:1.25rem;color:var(--muted)}
-
-.prices-list{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.5rem}
-.prices-list li{background:var(--surface);border:1px solid var(--border);padding:.75rem;border-radius:8px}
-
-.art-section{background:var(--surface);border:1px solid var(--border);padding:1rem;border-radius:8px;margin-bottom:.75rem;box-shadow:var(--shadow)}
-.art-section h2{font-size:1.15rem;color:var(--accent);margin-bottom:.5rem}
-.art-section p{color:var(--muted);margin:0 0 .5rem}
-
-.tos .updated{color:var(--muted);font-size:.95rem;margin-bottom:1rem}
-.tos .tos-section{background:var(--surface);border:1px solid var(--border);padding:1rem;border-radius:8px;margin-bottom:.75rem}
-.tos .tos-section h2{font-size:1rem;color:var(--accent);margin-bottom:.45rem}
-.tos .tos-section p{margin:0;color:var(--muted)}
 
 /* Native dialog keeps background controls inert and contains keyboard focus. */
 #imageModal{border:0;background:transparent;color:#fff;max-width:95vw;max-height:95vh;padding:0}
@@ -224,11 +150,10 @@ button{cursor:pointer}
 .art-list figcaption{padding:.6rem;overflow-wrap:anywhere;color:var(--muted)}
 .gallery-image{display:block}
 .gallery-image:focus-visible{outline-offset:-4px}
-.commission-brief{max-width:42rem;margin-top:2rem}
-.commission-brief form{display:grid;gap:.6rem}
-.commission-brief input,.commission-brief select,.commission-brief textarea{width:100%;min-width:0;padding:.6rem;border:1px solid var(--muted);border-radius:6px;background:var(--surface);color:var(--text)}
-.commission-brief button{justify-self:start;padding:.6rem 1rem}
-#briefResult{margin-top:1rem}
+
+button,input,textarea,select{font:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+#imageModal :focus-visible{outline-color:#fff}
+.gallery-image{display:block}.gallery-image:focus-visible{outline-offset:3px}
+.gallery-page h2{scroll-margin-top:24px}
 #kofiframe{border:0;width:100%;padding:4px;background:#f9f9f9}
-.commission-overview{grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
-.site-footer,.contact-links a{overflow-wrap:anywhere}

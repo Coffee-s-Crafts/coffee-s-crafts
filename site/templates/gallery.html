@@ -4,35 +4,41 @@
   <title>%%PAGE_TITLE%%</title>
   {{> head}}
 </head>
-<body>
+<body class="gallery-page">
   {{> header}}
 
   <main>
     <section>
       <h1>%%GALLERY_HEADING%%</h1>
       <p class="gallery-meta">%%GALLERY_META%%</p>
-      <h3>%%ART_CATEGORY%%</h3>
+      <nav class="category-nav" aria-label="%%GALLERY_CATEGORIES_LABEL%%">
+        <a href="#gallery-art" aria-current="location">%%ART_CATEGORY%%</a>
+        <a href="#gallery-fursuits">%%FURSUIT_CATEGORY%%</a>
+        <a href="#gallery-premades">%%PREMADE_HEADING%%</a>
+        <a href="#gallery-tables">%%TABLE_CATEGORY%%</a>
+      </nav>
+      <h2 id="gallery-art">%%ART_CATEGORY%%</h2>
       <ul class="art-list">
         {{#each ART_GALLERY_IMAGES}}
         <li><figure><a class="gallery-image" href="{{this.src}}" data-caption="{{this.caption}}"><img src="{{this.src}}" alt="{{this.alt}}" loading="lazy"></a><figcaption>{{this.caption}}</figcaption></figure></li>
         {{/each}}
       </ul>
 
-      <h3 class="gallery-category">%%FURSUIT_CATEGORY%%</h3>
+      <h2 class="gallery-category" id="gallery-fursuits">%%FURSUIT_CATEGORY%%</h2>
       <ul class="art-list fursuit-list">
         {{#each FURSUIT_GALLERY_IMAGES}}
         <li><figure><a class="gallery-image" href="{{this.src}}" data-caption="{{this.caption}}"><img src="{{this.src}}" alt="{{this.alt}}" loading="lazy"></a><figcaption>{{this.caption}}</figcaption></figure></li>
         {{/each}}
       </ul>
 
-      <h3 class="gallery-category">%%PREMADE_HEADING%%</h3>
+      <h2 class="gallery-category" id="gallery-premades">%%PREMADE_HEADING%%</h2>
       <ul class="art-list premade-list">
         {{#each PREMADE_GALLERY_IMAGES}}
         <li><figure><a class="gallery-image" href="{{this.src}}" data-caption="{{this.caption}}"><img src="{{this.src}}" alt="{{this.alt}}" loading="lazy"></a><figcaption>{{this.caption}}</figcaption></figure></li>
         {{/each}}
       </ul>
 
-      <h3 class="gallery-category">%%TABLE_CATEGORY%%</h3>
+      <h2 class="gallery-category" id="gallery-tables">%%TABLE_CATEGORY%%</h2>
       <ul class="art-list table-list">
         {{#each TABLE_GALLERY_IMAGES}}
         <li><figure><a class="gallery-image" href="{{this.src}}" data-caption="{{this.caption}}"><img src="{{this.src}}" alt="{{this.alt}}" loading="lazy"></a><figcaption>{{this.caption}}</figcaption></figure></li>
