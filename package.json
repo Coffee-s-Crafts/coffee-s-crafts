@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "node site/build.js",
-    "check:syntax": "node --check site/build.js && node --check site/previews.js && node --check site/promotions.js && node --check site/static/gallery.js && node --check site/static/brief.js",
+    "check:syntax": "node --check site/build.js && node --check site/assets.js && node --check site/previews.js && node --check site/promotions.js && node --check site/static/gallery.js && node --check site/static/brief.js",
     "test": "node --test tests/*.test.cjs",
     "check:output": "node scripts/check-output.cjs",
     "check:browser": "playwright test",

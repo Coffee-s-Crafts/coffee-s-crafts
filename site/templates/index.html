@@ -8,28 +8,30 @@
   {{> header}}
 
   <div class="hero">
-    <h1>%%SITE_TITLE%%</h1>
-    <p class="tagline">%%HERO_TAGLINE%%</p>
-    <a href="%%GALLERY_LINK%%" class="btn">%%HERO_CTA%%</a>
+    <div class="hero-copy">
+      <p class="eyebrow">%%HERO_EYEBROW%%</p>
+      <h1>%%HERO_HEADING%%</h1>
+      <p class="tagline">%%HERO_TAGLINE%%</p>
+      <div class="hero-actions">
+        <a href="%%GALLERY_LINK%%" class="btn">%%HERO_CTA%%</a>
+        <a href="%%CONTACT_LINK%%" class="button-secondary">%%HERO_SECONDARY_CTA%%</a>
+      </div>
+      <span class="commission-status %%COMMISSION_STATUS_CLASS%%">%%COMMISSION_STATUS_LABEL%%</span>
+    </div>
+    {{#each HERO_IMAGES}}
+    <figure class="hero-art">
+      <img src="{{this.src}}" alt="{{this.alt}}" fetchpriority="high">
+      <figcaption>{{this.caption}}</figcaption>
+    </figure>
+    {{/each}}
   </div>
 
-  <main>
-    <section>
-      <h2>%%ABOUT_HEADING%%</h2>
-      <div class="about-blurb">
-        <p>%%ABOUT_BODY%%</p>
-        <p>%%ABOUT_CTA_INTRO%% <a href="%%CONTACT_LINK%%">%%ABOUT_CTA_LINK_TEXT%%</a>.</p>
+  <main class="home-main">
+    <section class="selected-work">
+      <div class="section-heading">
+        <h2>%%FEATURED_HEADING%%</h2>
+        <a href="%%GALLERY_LINK%%">%%FEATURED_LINK_TEXT%%</a>
       </div>
-    </section>
-
-    <section>
-      <h2>%%SUPPORT_HEADING%%</h2>
-      <div class="kofi-iframe">
-        %%KOFI_WIDGET%%
-      </div>
-    </section>
-
-    <section>
       <h3>%%ART_CATEGORY%%</h3>
       <ul class="art-list">{{#each SAMPLE_IMAGES}}
         <li><figure><a class="gallery-image" href="{{this.src}}" data-caption="{{this.caption}}"><img src="{{this.src}}" alt="{{this.alt}}" loading="lazy"></a><figcaption>{{this.caption}}</figcaption></figure></li>
@@ -46,7 +48,20 @@
       <ul class="art-list">{{#each TABLE_SAMPLE_IMAGES}}
         <li><figure><a class="gallery-image" href="{{this.src}}" data-caption="{{this.caption}}"><img src="{{this.src}}" alt="{{this.alt}}" loading="lazy"></a><figcaption>{{this.caption}}</figcaption></figure></li>
         {{/each}}</ul>
-      <p class="gallery-more"><a href="%%GALLERY_LINK%%">%%GALLERY_MORE_TEXT%%</a></p>
+    </section>
+
+    <section>
+      <h2>%%ABOUT_HEADING%%</h2>
+      <div class="about-blurb">
+        <p>%%ABOUT_BODY%%</p>
+        <p>%%ABOUT_CTA_INTRO%% <a href="%%CONTACT_LINK%%">%%ABOUT_CTA_LINK_TEXT%%</a>.</p>
+      </div>
+    </section>
+
+    <section class="support-section">
+      <h2>%%SUPPORT_HEADING%%</h2>
+      <a class="support-link" href="%%KOFI_URL%%" target="_blank" rel="noopener">%%SUPPORT_LINK_TEXT%%</a>
+      {{#each KOFI_WIDGETS}}<div class="kofi-iframe">%%KOFI_WIDGET%%</div>{{/each}}
     </section>
   </main>
 

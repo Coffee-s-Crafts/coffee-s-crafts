@@ -45,6 +45,11 @@ Keep `INDEX_LINK=index.html` for the normal Pages root entry point. The build do
 delete old output files; use a fresh output directory after renaming pages/removing art.
 CI starts with a fresh checkout.
 
+Generated pages reference CSS and JavaScript with a content-derived `?v=` cache key.
+When an asset changes, browsers request a new URL rather than reusing an older cached
+file. Unchanged assets keep the same key. Original filenames remain available for
+older pages and bookmarks; hashing does not change the Pages publishing configuration.
+
 `NAV_*`, `*_HEADING`, `*_CATEGORY`, `*_LINK_TEXT`, and existing copy settings control
 labels. `FOOTER_TEXT` supports `{year}` and `{title}`. Structured arrays such as
 `ART_SECTIONS`, `FURSUIT_PRICES`, `PREMADE_SECTIONS`, `TOS_SECTIONS`, and
@@ -52,7 +57,9 @@ labels. `FOOTER_TEXT` supports `{year}` and `{title}`. Structured arrays such as
 include `links: [{"url":"https://example.com","text":"Link label"}]` rather than HTML
 in paragraphs. Structural HTML lives in templates.
 
-The Ko-fi iframe lives in `templates/partials/kofi.html`; use `KOFI_EMBED_URL` and
+The homepage shows the Ko-fi link and widget in the support section after the portfolio
+and About content. Set `KOFI_EMBED_ENABLED=false` to hide the widget. The Ko-fi iframe lives
+in `templates/partials/kofi.html`; use `KOFI_EMBED_URL` and
 `KOFI_EMBED_TITLE`. `KOFI_IFRAME` remains a legacy trusted HTML override, also subject
 to the HTML checker. Prefer the structured settings.
 
@@ -106,3 +113,20 @@ field labels, and email subject. Visitors prepare and review a brief locally, th
 open a mailto draft addressed to `CONTACT_EMAIL`, or copy it into another contact
 channel. The site does not submit, send, or store inquiries. Availability and booking
 are confirmed by the artist. `FURSUIT_FORM_URL` remains the hosted inquiry-form link.
+
+## Visual layout settings
+
+`HERO_HEADING`, `HERO_EYEBROW`, and `HERO_SECONDARY_CTA` control the artwork-led hero.
+`FEATURED_HEADING` and `FEATURED_LINK_TEXT` label the portfolio section. `HERO_IMAGE`,
+`ART_PREVIEW_IMAGE`, `FURSUIT_PREVIEW_IMAGE`, and `PREMADE_PREVIEW_IMAGE` select original
+source paths within their respective image directories. If a preferred image is
+unavailable, the build uses the first available image; empty directories omit previews.
+Captions and alt text use the same `IMAGE_METADATA` configuration as the gallery.
+
+`ART_PRICE_SUMMARY`, `FURSUIT_PRICE_SUMMARY`, and `PREMADE_PRICE_SUMMARY` are display
+summaries on the contact page. Keep them aligned with your configured pricing arrays;
+the generator does not infer prices from free-form tier descriptions.
+`SERVICE_PRICE_NOTE`, `SERVICE_PRICING_LINK_TEXT`, `PREMADE_BROWSE_TEXT`, and
+`INQUIRY_ASIDE_*` control the accompanying notes, actions, and contact instructions.
+Full prices remain on their dedicated pages. Gallery category shortcuts use native
+anchors and retain navigation without JavaScript.

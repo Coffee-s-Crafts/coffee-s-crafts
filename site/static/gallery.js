@@ -1,4 +1,14 @@
 (() => {
+  const categoryLinks = [...document.querySelectorAll('.category-nav a')];
+  function markCategory() {
+    const selected = categoryLinks.find(link => link.hash === location.hash) || categoryLinks[0];
+    categoryLinks.forEach(link => {
+      if (link === selected) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+  }
+  markCategory();
+  window.addEventListener('hashchange', markCategory);
   const dialog = document.getElementById('imageModal');
   const image = document.getElementById('modalImg');
   const placeholder = image.src;
