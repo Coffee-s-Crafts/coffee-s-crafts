@@ -1,7 +1,7 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>%%SITE_TITLE%%</title>
+  <title>%%PAGE_TITLE%%</title>
   {{> head}}
 </head>
 <body>
@@ -23,22 +23,30 @@
     </section>
 
     <section>
-      <h2>Support Me on Ko-fi</h2>
+      <h2>%%SUPPORT_HEADING%%</h2>
       <div class="kofi-iframe">
-        %%KOFI_IFRAME%%
+        %%KOFI_WIDGET%%
       </div>
     </section>
 
     <section>
-      <h3>Art</h3>
-      <ul class="art-list">%%SAMPLE_IMAGES%%</ul>
-      <h3 style="margin-top:1.25rem">Fursuits</h3>
-      <ul class="art-list">%%FURSUIT_SAMPLE_IMAGES%%</ul>
-      <h3 style="margin-top:1.25rem">Premades</h3>
-      <ul class="art-list">%%PREMADE_SAMPLE_IMAGES%%</ul>
-      <h3 style="margin-top:1.25rem">Conventions</h3>
-      <ul class="art-list">%%TABLE_SAMPLE_IMAGES%%</ul>
-      <p style="margin-top:1rem"><a href="%%GALLERY_LINK%%">%%GALLERY_MORE_TEXT%%</a></p>
+      <h3>%%ART_CATEGORY%%</h3>
+      <ul class="art-list">{{#each SAMPLE_IMAGES}}
+        <li><figure><a class="gallery-image" href="{{this.src}}" data-caption="{{this.caption}}"><img src="{{this.src}}" alt="{{this.alt}}" loading="lazy"></a><figcaption>{{this.caption}}</figcaption></figure></li>
+        {{/each}}</ul>
+      <h3 class="gallery-category">%%FURSUIT_CATEGORY%%</h3>
+      <ul class="art-list">{{#each FURSUIT_SAMPLE_IMAGES}}
+        <li><figure><a class="gallery-image" href="{{this.src}}" data-caption="{{this.caption}}"><img src="{{this.src}}" alt="{{this.alt}}" loading="lazy"></a><figcaption>{{this.caption}}</figcaption></figure></li>
+        {{/each}}</ul>
+      <h3 class="gallery-category">%%NAV_PREMADE%%</h3>
+      <ul class="art-list">{{#each PREMADE_SAMPLE_IMAGES}}
+        <li><figure><a class="gallery-image" href="{{this.src}}" data-caption="{{this.caption}}"><img src="{{this.src}}" alt="{{this.alt}}" loading="lazy"></a><figcaption>{{this.caption}}</figcaption></figure></li>
+        {{/each}}</ul>
+      <h3 class="gallery-category">%%TABLE_CATEGORY%%</h3>
+      <ul class="art-list">{{#each TABLE_SAMPLE_IMAGES}}
+        <li><figure><a class="gallery-image" href="{{this.src}}" data-caption="{{this.caption}}"><img src="{{this.src}}" alt="{{this.alt}}" loading="lazy"></a><figcaption>{{this.caption}}</figcaption></figure></li>
+        {{/each}}</ul>
+      <p class="gallery-more"><a href="%%GALLERY_LINK%%">%%GALLERY_MORE_TEXT%%</a></p>
     </section>
   </main>
 

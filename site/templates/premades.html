@@ -1,7 +1,7 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>%%SITE_TITLE%% — Premade Items</title>
+  <title>%%PAGE_TITLE%%</title>
   {{> head}}
 </head>
 <body>
@@ -9,7 +9,7 @@
 
   <main class="page-content">
     <section class="content-panel">
-      <h1>Premade Items</h1>
+      <h1>%%PREMADE_HEADING%%</h1>
       <p>%%PREMADE_INTRO%%</p>
       {{#each PREMADE_SECTIONS}}
       <article class="art-section">
@@ -17,19 +17,19 @@
         {{#each this.paragraphs}}
         <p>{{this}}</p>
         {{/each}}
-        <h4>Details</h4>
+        <h3>%%DETAILS_HEADING%%</h3>
         <ul>
           {{#each this.details}}
           <li>{{this}}</li>
           {{/each}}
         </ul>
-        <h4>Available Options</h4>
+        <h3>%%OPTIONS_HEADING%%</h3>
         <ul>
           {{#each this.options}}
           <li>{{this}}</li>
           {{/each}}
         </ul>
-        <h4>Important</h4>
+        <h3>%%IMPORTANT_HEADING%%</h3>
         <ul>
           {{#each this.important}}
           <li>{{this}}</li>

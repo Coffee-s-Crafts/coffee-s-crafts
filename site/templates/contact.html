@@ -1,7 +1,7 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>%%CONTACT_HEADING%% — %%SITE_TITLE%%</title>
+  <title>%%PAGE_TITLE%%</title>
   {{> head}}
 </head>
 <body>
@@ -9,7 +9,7 @@
 
   <main>
     <section>
-      <h2>%%COMMISSIONS_HEADING%%</h2>
+      <h1>%%COMMISSIONS_HEADING%%</h1>
 
       <span class="commission-status %%COMMISSION_STATUS_CLASS%%">%%COMMISSION_STATUS_LABEL%%</span>
       {{#each ACTIVE_PROMOTIONS}}
@@ -19,8 +19,11 @@
       <p>%%COMMISSIONS_INTRO%%</p>
       <div class="commission-overview">
         <div class="commission-card">
+          <h2><a href="%%ART_LINK%%">%%ART_HEADING%%</a></h2>
           <details open>
-            <summary><a href="%%ART_LINK%%">Art Commissions</a></summary>
+            <summary>%%DETAILS_HEADING%%</summary>
+            <p class="commission-status %%ART_COMMISSION_STATUS%%">%%ART_AVAILABILITY%%</p>
+            <p>%%ART_NEXT_STEPS%%</p>
             <ul>
               {{#each ART_SECTIONS}}
               <li>{{this.title}}</li>
@@ -30,8 +33,11 @@
         </div>
 
         <div class="commission-card">
+          <h2><a href="%%FURSUIT_LINK%%">%%FURSUIT_COMMISSION_HEADING%%</a></h2>
           <details open>
-            <summary><a href="%%FURSUIT_LINK%%">Fursuit Commissions</a></summary>
+            <summary>%%DETAILS_HEADING%%</summary>
+            <p class="commission-status %%FURSUIT_COMMISSION_STATUS%%">%%FURSUIT_AVAILABILITY%%</p>
+            <p>%%FURSUIT_NEXT_STEPS%%</p>
             <ul>
               {{#each FURSUIT_PRICES}}
               <li>{{this.name}} — {{this.price}}</li>
@@ -41,8 +47,11 @@
         </div>
 
         <div class="commission-card">
+          <h2><a href="%%PREMADE_LINK%%">%%PREMADE_HEADING%%</a></h2>
           <details open>
-            <summary><a href="%%PREMADE_LINK%%">Premade Items</a></summary>
+            <summary>%%DETAILS_HEADING%%</summary>
+            <p>%%PREMADE_AVAILABILITY%%</p>
+            <p>%%PREMADE_NEXT_STEPS%%</p>
             <ul>
               {{#each PREMADE_SECTIONS}}
               <li>{{this.title}}</li>
@@ -56,12 +65,36 @@
       <p><a href="%%FURSUIT_QUEUE_URL%%" target="_blank" rel="noopener">%%FURSUIT_QUEUE_LINK_TEXT%%</a></p>
       <p><a href="%%FURSUIT_FORM_URL%%" target="_blank" rel="noopener">%%FURSUIT_FORM_TEXT%%</a></p>
 
+      <section class="commission-brief">
+        <h2>%%BRIEF_HEADING%%</h2>
+        <p>%%BRIEF_INTRO%%</p>
+        <form id="commissionBrief" action="#" data-email="%%CONTACT_EMAIL%%" data-subject="%%BRIEF_SUBJECT%%">
+          <label for="briefService">%%BRIEF_SERVICE_LABEL%%</label>
+          <select id="briefService" name="service">
+            {{#each SERVICES}}<option value="{{this.name}}">{{this.name}} — {{this.availability}}</option>{{/each}}
+          </select>
+          <label for="briefIdea">%%BRIEF_IDEA_LABEL%%</label>
+          <textarea id="briefIdea" name="idea" rows="5" required></textarea>
+          <label for="briefBudget">%%BRIEF_BUDGET_LABEL%%</label>
+          <input id="briefBudget" name="budget" type="text">
+          <label for="briefDeadline">%%BRIEF_DEADLINE_LABEL%%</label>
+          <input id="briefDeadline" name="deadline" type="text">
+          <button type="submit">%%BRIEF_PREPARE_LABEL%%</button>
+        </form>
+        <div id="briefResult" hidden>
+          <p>%%BRIEF_NEXT_STEPS%%</p>
+          <label for="briefPreview">%%BRIEF_PREVIEW_LABEL%%</label>
+          <textarea id="briefPreview" rows="10" readonly></textarea>
+          <a id="briefEmail">%%BRIEF_SEND_LABEL%%</a>
+        </div>
+      </section>
+
       <h2>%%CONTACT_HEADING%%</h2>
       <div class="contact-links">
         <div class="contact-row">
           <a href="%%DISCORD_URL%%" target="_blank" rel="noopener">%%DISCORD_LINK_TEXT%%</a>
           <a href="%%TELEGRAM_URL%%" target="_blank" rel="noopener">%%TELEGRAM_LINK_TEXT%%</a>
-          <a href="mailto:%%CONTACT_EMAIL%%">%%EMAIL_LINK_TEXT%%</a>
+          <a href="%%EMAIL_URL%%">%%EMAIL_LINK_TEXT%%</a>
         </div>
         <div class="contact-row">
           <a href="%%KOFI_URL%%" target="_blank" rel="noopener">%%KOFI_LINK_TEXT%%</a>
@@ -80,5 +113,6 @@
   </main>
 
   {{> footer}}
+  <script src="brief.js" defer></script>
 </body>
 </html>

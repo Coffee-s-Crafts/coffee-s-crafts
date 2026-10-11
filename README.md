@@ -24,12 +24,12 @@
 - **Best practices:**
   - Keep structural HTML in templates and place text/content in env vars or JSON variables so the deployed site is configurable without editing templates.
   - Use partials for header/footer/meta to avoid duplication.
-  - When adding new template files, ensure `site/build.js` writes them (it currently renders `index.html`, `gallery.html`, `contact.html`, `art.html`, `fursuit.html`, `tos.html`, `fursuit-tos.html`).
+  - When adding new pages, add a fixed template/output mapping to `PAGES` in `site/build.js`. It currently renders eight pages, including `premades.html`.
 
 **Adding Images to the Gallery**
 - **Where to put images:** place images in the relevant [`assets/`](https://github.com/Coffee-s-Crafts/coffee-s-crafts/tree/main/assets) subfolder. The build copies files from those folders into the output site.
 - **Supported formats:** `png`, `jpg`, `jpeg`, `svg`, `gif`, `webp`.
-- **Automatic listing:** the build script reads files in the source directories and generates `<li><img src="..."></li>` entries for samples and for the full gallery. No template edits required.
+- **Automatic listing:** the build provides structured image data to templates, which render linked images with captions and alt text. Use `IMAGE_METADATA` to override descriptions without editing templates.
 - **Controlling featured samples:** change `SAMPLE_COUNT` to adjust how many images appear in the index/featured areas.
 - **Filename tips:** avoid spaces and use short, descriptive names (e.g., `char-name_pose.png`). If ordering matters, you can prefix filenames with numbers (`01-`, `02-`), the script uses directory order.
 
@@ -58,6 +58,11 @@ node site/build.js
 ```
 
 **Troubleshooting & Notes**
+
+See [the build and configuration guide](site/README.md) for verification commands,
+configurable page filenames, image descriptions, promotion dates, SEO, and commission
+brief settings. CI uses Node 24 and `npm ci`, validates built HTML/local links, and
+runs responsive keyboard/accessibility checks before publishing from `main`.
 - If pages don’t reflect new text, check the corresponding env var name in `site/build.js` and restart the build.
 - To change default copy, either edit the env variables where the site is built (CI/workflow) or change the fallback strings in `site/build.js`.
 - The build writes a `build-info.json` into the output folder with diagnostics (image count, sample list, build timestamp).

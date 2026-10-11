@@ -23,6 +23,7 @@ body{
 img{display:block;max-width:100%}
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
+p a{text-decoration:underline}
 h1,h2,h3{
   font-family:'Shrikhand',Georgia,serif;
   font-weight:400;
@@ -115,6 +116,8 @@ section h2{font-size:1.75rem;color:var(--accent);border-bottom:2px solid var(--b
 
 /* ── Gallery page label ────────────────────────── */
 .gallery-meta{color:var(--muted);font-size:.9rem;margin-bottom:1.25rem}
+.gallery-category{margin-top:1.5rem}
+.gallery-more{margin-top:1rem}
 
 /* ── Commission status badge ───────────────────── */
 .commission-status{
@@ -158,7 +161,7 @@ section h2{font-size:1.75rem;color:var(--accent);border-bottom:2px solid var(--b
   font-weight:bold;
   transition:background .15s;
 }
-.contact-links a:hover{background:var(--accent-lt);text-decoration:none}
+.contact-links a:hover{background:var(--accent);text-decoration:underline}
 .contact-row {
     display: flex;
     flex-wrap: wrap;
@@ -205,10 +208,27 @@ section h2{font-size:1.75rem;color:var(--accent);border-bottom:2px solid var(--b
 .tos .tos-section h2{font-size:1rem;color:var(--accent);margin-bottom:.45rem}
 .tos .tos-section p{margin:0;color:var(--muted)}
 
-/* Image modal */
-.modal-overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.75);z-index:99999}
-.modal-overlay.open{display:flex}
-.modal-content{position:relative;background:transparent;padding:1rem;max-width:95%;max-height:90%;display:flex;flex-direction:column;align-items:center;gap:.5rem}
-.modal-content img{max-width:100%;max-height:80vh;border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,.6)}
-.modal-caption{color:#fff;font-size:.95rem;background:rgba(0,0,0,.45);padding:.35rem .6rem;border-radius:6px}
+/* Native dialog keeps background controls inert and contains keyboard focus. */
+#imageModal{border:0;background:transparent;color:#fff;max-width:95vw;max-height:95vh;padding:0}
+#imageModal::backdrop{background:rgba(0,0,0,.75)}
+.modal-content{position:relative;padding:1rem;display:flex;flex-direction:column;align-items:center;gap:.5rem}
+.modal-content img{max-width:100%;max-height:70vh;object-fit:contain;border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,.6)}
+.modal-caption{color:#fff;font-size:.95rem;background:#2d1a0e;padding:.35rem .6rem;border-radius:6px}
 .modal-close{position:absolute;right:8px;top:8px;background:rgba(255,255,255,.95);border-radius:999px;border:0;padding:.35rem .6rem;cursor:pointer;font-weight:bold}
+.modal-controls{display:flex;gap:1rem}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+#imageModal :focus-visible{outline-color:#fff}
+.art-list figure{margin:0}
+.art-list figcaption{padding:.6rem;overflow-wrap:anywhere;color:var(--muted)}
+.gallery-image{display:block}
+.gallery-image:focus-visible{outline-offset:-4px}
+.commission-brief{max-width:42rem;margin-top:2rem}
+.commission-brief form{display:grid;gap:.6rem}
+.commission-brief input,.commission-brief select,.commission-brief textarea{width:100%;min-width:0;padding:.6rem;border:1px solid var(--muted);border-radius:6px;background:var(--surface);color:var(--text)}
+.commission-brief button{justify-self:start;padding:.6rem 1rem}
+#briefResult{margin-top:1rem}
+#kofiframe{border:0;width:100%;padding:4px;background:#f9f9f9}
+.commission-overview{grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+.site-footer,.contact-links a{overflow-wrap:anywhere}

@@ -1,7 +1,7 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>%%TOS_TITLE%% — %%SITE_TITLE%%</title>
+  <title>%%PAGE_TITLE%%</title>
   {{> head}}
 </head>
 <body>
@@ -16,6 +16,7 @@
       <article class="tos-section">
         <h2>{{this.heading}}</h2>
         {{#each this.paragraphs}}<p>{{this}}</p>{{/each}}
+        {{#each this.links}}<p><a href="{{this.url}}" target="_blank" rel="noopener">{{this.text}}</a></p>{{/each}}
       </article>
       {{/each}}
 
