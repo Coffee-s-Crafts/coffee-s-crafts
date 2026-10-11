@@ -1,6 +1,36 @@
 const fs = require('fs');
 const path = require('path');
 const _now = new Date();
+const { isPromotionActive, safeParsePromotions } = require('./promotions');
+
+// All interface copy is environment-backed; defaults contain data, never layout.
+const UI_DEFAULTS = {
+  NAV_LABEL: 'Main navigation', NAV_HOME: 'Home', NAV_GALLERY: 'Gallery',
+  NAV_ART: 'Art', NAV_FURSUIT: 'Fursuits', NAV_PREMADE: 'Premades', NAV_CONTACT: 'Contact',
+  ART_HEADING: 'Art Commissions', FURSUIT_HEADING: 'Fursuit Pricing',
+  FURSUIT_COMMISSION_HEADING: 'Fursuit Commissions', PREMADE_HEADING: 'Premade Items',
+  ART_CATEGORY: 'Art', FURSUIT_CATEGORY: 'Fursuits', PREMADE_CATEGORY: 'Premade Items',
+  TABLE_CATEGORY: 'Convention Table Setups', SUPPORT_HEADING: 'Support Me on Ko-fi',
+  DETAILS_HEADING: 'Details', ADDONS_HEADING: 'Add-ons', IMPORTANT_HEADING: 'Important',
+  OPTIONS_HEADING: 'Available Options', LIGHTBOX_LABEL: 'Image preview',
+  LIGHTBOX_CLOSE: 'Close image preview', LIGHTBOX_PREVIOUS: 'Previous image',
+  LIGHTBOX_NEXT: 'Next image', IMAGE_ALT_FORMAT: '{category}: {name}',
+  COMMISSION_OPEN_LABEL: 'Commissions Open', COMMISSION_CLOSED_LABEL: 'Commissions Closed',
+  PROMOTION_PERCENT_LABEL: '{amount}% off', PROMOTION_FLAT_LABEL: '${amount} off',
+  PROMOTION_NONE_LABEL: 'No Promotions',
+  BRIEF_HEADING: 'Plan your commission',
+  BRIEF_INTRO: 'Choose a service and prepare a brief to share by email. Sending a brief does not reserve a slot; availability and a quote are confirmed before booking.',
+  BRIEF_SERVICE_LABEL: 'Service', BRIEF_IDEA_LABEL: 'Your idea and reference links',
+  BRIEF_BUDGET_LABEL: 'Budget', BRIEF_DEADLINE_LABEL: 'Preferred deadline',
+  BRIEF_PREPARE_LABEL: 'Prepare email', BRIEF_SEND_LABEL: 'Open email draft',
+  BRIEF_PREVIEW_LABEL: 'Your brief', BRIEF_SUBJECT: 'Commission inquiry',
+  BRIEF_NEXT_STEPS: 'Review the draft below, then open it in your email app. You can also copy it and use one of the contact links. Nothing is sent from this page.',
+  ART_NEXT_STEPS: 'Share your idea and an unshaded reference for an availability check and quote.',
+  FURSUIT_NEXT_STEPS: 'Complete the fursuit commission form for an availability check and written quote.',
+  PREMADE_AVAILABILITY: 'Check shop inventory', PREMADE_NEXT_STEPS: 'Visit the shop for current stock and shipping details.',
+  KOFI_EMBED_TITLE: 'Support Coffee’s Crafts on Ko-fi',
+};
+const UI = Object.fromEntries(Object.entries(UI_DEFAULTS).map(([key, fallback]) => [key, process.env[key] || fallback]));
 
 // ── Paths ─────────────────────────────────────────────
 const OUT                     = process.env.OUTPUT_DIR         || 'dist';
@@ -21,47 +51,18 @@ const TABLE_SRC               = process.env.TABLE_SOURCE_DIR   || 'assets/tables
 // ── Commission status ─────────────────────────────────
 const COMMISSION_OPEN         = (process.env.COMMISSION_STATUS || 'open').toLowerCase() === 'open';
 const COMMISSION_STATUS_CLASS = COMMISSION_OPEN ? 'open' : 'closed';
-const COMMISSION_STATUS_LABEL = COMMISSION_OPEN ? 'Commissions Open' : 'Commissions Closed';
+const COMMISSION_STATUS_LABEL = COMMISSION_OPEN ? UI.COMMISSION_OPEN_LABEL : UI.COMMISSION_CLOSED_LABEL;
 
 // ── Promotions (configurable via env PROMOTIONS as JSON array) ─────────────────
 // Each promotion: { id, name, type: 'flat'|'percent', amount, start: 'YYYY-MM-DD', end: 'YYYY-MM-DD', badgeText }
-function safeParsePromotions(raw) {
-  if (!raw) return [];
-  try {
-    const arr = JSON.parse(raw);
-    if (!Array.isArray(arr)) return [];
-    return arr.map(p => ({
-      id: p.id || (p.name || '').toLowerCase().replace(/\s+/g, '-'),
-      name: p.name || '',
-      type: p.type === 'percent' ? 'percent' : 'flat',
-      amount: Number(p.amount) || 0,
-      start: p.start || null,
-      end: p.end || null,
-      badgeText: p.badgeText || null
-    }));
-  } catch (e) {
-    return [];
-  }
-}
-
-const PROMOTIONS = safeParsePromotions(process.env.PROMOTIONS);
-function isPromotionActive(p, now) {
-  if (!p) return false;
-  const start = p.start ? new Date(p.start) : null;
-  const end = p.end ? new Date(p.end) : null;
-  if (start && isNaN(start.getTime())) return false;
-  if (end && isNaN(end.getTime())) return false;
-  if (start && now < start) return false;
-  if (end && now > end) return false;
-  return true;
-}
+const PROMOTIONS = safeParsePromotions(process.env.PROMOTIONS, { percent: UI.PROMOTION_PERCENT_LABEL, flat: UI.PROMOTION_FLAT_LABEL });
 
 const ACTIVE_PROMOTIONS = PROMOTIONS.filter(p => isPromotionActive(p, _now));
 const PROMOTIONS_AVAILABLE = ACTIVE_PROMOTIONS.length > 0;
 const PROMOTION_STATUS_CLASS = PROMOTIONS_AVAILABLE ? 'active' : 'none';
 const PROMOTION_STATUS_LABEL = PROMOTIONS_AVAILABLE
-  ? (ACTIVE_PROMOTIONS.map(p => (p.badgeText || (p.type === 'percent' ? `${p.amount}% off` : `$${p.amount} off`))).join(', '))
-  : 'No Promotions';
+  ? ACTIVE_PROMOTIONS.map(p => p.badgeText).join(', ')
+  : UI.PROMOTION_NONE_LABEL;
 
 // ── Configurable settings ─────────────────────────────────────────────────────
 // global site settings
@@ -70,7 +71,7 @@ const GITHUB_LINK_TEXT        = process.env.GITHUB_LINK_TEXT                 || 
 const FOOTER_YEAR             = _now.getFullYear();
 const SITE_TITLE              = process.env.SITE_TITLE                       || "Coffee's Crafts";
 const CONTACT_EMAIL           = process.env.CONTACT_EMAIL                    || 'coffee@coffeescrafts.com';
-const FOOTER_TEXT             = `© ${FOOTER_YEAR} ${SITE_TITLE}` ;
+const FOOTER_TEXT             = (process.env.FOOTER_TEXT || '© {year} {title}').replace('{year}', FOOTER_YEAR).replace('{title}', SITE_TITLE);
 // index page
 const HERO_TAGLINE            = process.env.HERO_TAGLINE                     || "Original art & custom commissions — made with love ☕";
 const HERO_CTA                = process.env.HERO_CTA                         || 'Browse the Gallery';
@@ -92,7 +93,53 @@ const COMMISSIONS_INTRO       = process.env.COMMISSIONS_INTRO                || 
 const CONTACT_HEADING         = process.env.CONTACT_HEADING                  || 'Contact';
 const KOFI_URL                = (process.env.KOFI_URL || '').trim()          || 'https://ko-fi.com/coffeescrafts';
 const KOFI_LINK_TEXT          = process.env.KOFI_LINK_TEXT                   || '☕ Ko-fi';
-const KOFI_IFRAME             = (process.env.KOFI_IFRAME || '').trim()       || `<iframe id='kofiframe' src='https://ko-fi.com/coffeescrafts/?hidefeed=true&widget=true&embed=true&preview=true' style='border:none;width:100%;padding:4px;background:#f9f9f9;' height='712' title='coffeescrafts'></iframe>`;
+// Legacy trusted HTML override; prefer the structured embed URL/title settings.
+const KOFI_IFRAME             = (process.env.KOFI_IFRAME || '').trim();
+const KOFI_EMBED_URL          = process.env.KOFI_EMBED_URL || 'https://ko-fi.com/coffeescrafts/?hidefeed=true&widget=true&embed=true&preview=true';
+const SITE_URL               = process.env.SITE_URL || 'https://coffeescrafts.com';
+const SITE_DESCRIPTION       = process.env.SITE_DESCRIPTION || HERO_TAGLINE;
+const ART_DESCRIPTION        = process.env.ART_DESCRIPTION || 'Character art commissions, pricing, and available add-ons.';
+const FURSUIT_DESCRIPTION     = process.env.FURSUIT_DESCRIPTION || 'Custom fursuit packages and base pricing.';
+const CONTACT_DESCRIPTION    = process.env.CONTACT_DESCRIPTION || COMMISSIONS_INTRO;
+const TOS_DESCRIPTION        = process.env.TOS_DESCRIPTION || 'Terms for booking and receiving art commissions.';
+const FURSUIT_TOS_DESCRIPTION = process.env.FURSUIT_TOS_DESCRIPTION || 'Terms for booking and receiving fursuit commissions.';
+const OG_IMAGE_URL           = process.env.OG_IMAGE_URL || `${ART_SRC}/anthrocon-2026-badges.jpg`;
+const FAVICON_URL            = process.env.FAVICON_URL || 'favicon.svg';
+const IMAGE_METADATA_DEFAULTS = {
+  'assets/art/278c7891-3861-4ac5-a751-aa7fe782e9b5.webp': { caption: 'Dreaming in the clouds', alt: 'An orange horned dragon with stitched markings sleeps among white clouds.' },
+  'assets/art/3eb40aca-ecde-4d38-84c9-938915cebbde.webp': { caption: 'Sunset companions', alt: 'An orange animal rests beneath a tree beside a glowing companion at sunset.' },
+  'assets/art/444e3600-b841-446d-b942-d8f66a0d4fdc.webp': { caption: 'Among the wildflowers', alt: 'A green and cream dragon with colorful speckles lies in a meadow of yellow flowers.' },
+  'assets/art/451197ce-dc86-4862-9600-0fa16b1ca379.webp': { caption: 'Electric character portrait', alt: 'A teal creature with purple paws and sharp teeth poses against a lightning-filled sky.' },
+  'assets/art/b27dec81-f6c2-4a12-9d04-a4147fe403cb.webp': { caption: 'Pink cloud nap', alt: 'A pink creature curls up asleep among pink clouds against a purple sky.' },
+  'assets/art/anthrocon-2026-badges.jpg': { caption: 'Anthrocon 2026 character badges', alt: 'A hand holds several laminated animal character badges in front of a printer.' },
+  'assets/art/boyo.png': { caption: 'Horned character headshot', alt: 'A smiling black and brown character with a red horn, pink eyes, and gold piercings.' },
+  'assets/art/eeeee.png': { caption: 'Character badge headshot', alt: 'A brown canine character with red eyes, cream hair, and gold facial piercings.' },
+  'assets/art/Layer_3.png': { caption: 'Dragon character illustration', alt: 'A standing pink and purple dragon character with blue spikes and a long curled tail.' },
+  'assets/art/reki.png': { caption: 'Forest at sunset', alt: 'A pink and black animal character walks through a sunset forest surrounded by fireflies.' },
+  'assets/fursuits/00_splankie_fursuit_mini_partial.jpg': { caption: 'Splankie mini partial', alt: 'A purple and white fursuit head with matching paws and rainbow fur accents.' },
+  'assets/fursuits/01_sp00kypaw_head_furring_feetpaws.png': { caption: 'Sp00kypaw head', alt: 'A brown and white fursuit head with large ears and heart-shaped eye highlights.' },
+  'assets/fursuits/02_muscleangry.png': { caption: 'Fursuit in motion', alt: 'A person wearing a dark fursuit head and matching paws raises both arms.' },
+  'assets/fursuits/103eba98.jpg': { caption: 'Rainbow tail', alt: 'A long fluffy tail with white fur beside purple, blue, yellow, and orange bands.' },
+  'assets/fursuits/49de6831.jpg': { caption: 'Head and paws outdoors', alt: 'A person wears a gray and white fursuit head and raises paws with bright red pads.' },
+  'assets/fursuits/5170618d.jpg': { caption: 'White paws with red pads', alt: 'White furry hand paws with red paw pads and black claws rest on a desk.' },
+  'assets/fursuits/73ed15db.jpg': { caption: 'Purple fursuit head', alt: 'A purple fursuit head with white spots, a turquoise muzzle, and a red nose.' },
+  'assets/fursuits/7ccbd6fe.jpg': { caption: 'Fursuit head detail', alt: 'A white and brown fursuit head with blue ear accents and a pink nose.' },
+  'assets/fursuits/8c58a08b.jpg': { caption: 'Skull-style fursuit head', alt: 'Side view of a skull-style fursuit head with brown and black fur and white teeth.' },
+  'assets/fursuits/nub-tail-ears.jpg': { caption: 'Tail and ears set', alt: 'A black and cream furry tail and matching ears on a wire headband.' },
+  'assets/premades/00_20260720_222654.jpg': { caption: 'Communication button collection', alt: 'Colorful animal-themed buttons with messages including Hug me, Ask to hug, Silent Suiter, Low battery, No touch, and Come chat.' },
+  'assets/premades/01_20260720_222532.jpg': { caption: 'Consent and communication buttons', alt: 'A row of colorful buttons expressing touch preferences and communication needs.' },
+  'assets/premades/02_20260720_222548.jpg': { caption: 'Low battery button', alt: 'An orange Low battery button featuring a sleeping gray animal.' },
+  'assets/premades/03_20260720_222603.jpg': { caption: 'Button pin backing', alt: 'The white reverse of a round button with its metal safety-pin clasp.' },
+  'assets/premades/photo_2026-07-19_21-05-02.jpg': { caption: 'Pronoun button collection', alt: 'Four colorful buttons with green characters labeled he/him, they/them, it/its, and she/her.' },
+  'assets/premades/photo_2026-07-19_21-05-02 (2).jpg': { caption: 'They/them button', alt: 'A blue they/them button with white stars and a smiling green character.' },
+  'assets/premades/photo_2026-07-19_21-05-02 (3).jpg': { caption: 'Pronoun button backing', alt: 'The white reverse of a blue-edged pronoun button with a metal safety-pin clasp.' },
+  'assets/tables/00_Anthrocon_PA_2026.jpg': { caption: 'Anthrocon 2026 table', alt: 'A convention artist table with a Coffee’s Crafts chalkboard, portfolio, tip jar, and character badge display.' },
+  'assets/tables/01_Furbowl_DE_2026.jpg': { caption: 'Furbowl 2026 table', alt: 'A blue-covered vendor table displaying a purple fursuit head, paws, and colorful button badges.' },
+};
+const IMAGE_METADATA = JSON.parse(process.env.IMAGE_METADATA || '{}');
+if (!IMAGE_METADATA || typeof IMAGE_METADATA !== 'object' || Array.isArray(IMAGE_METADATA)) throw new Error('IMAGE_METADATA must be a JSON object keyed by image source path.');
+const ART_COMMISSION_STATUS  = process.env.ART_COMMISSION_STATUS || (COMMISSION_OPEN ? 'open' : 'closed');
+const FURSUIT_COMMISSION_STATUS = process.env.FURSUIT_COMMISSION_STATUS || (COMMISSION_OPEN ? 'open' : 'closed');
 const VGEN_URL                = (process.env.VGEN_URL || '').trim()          || 'https://vgen.co/CoffeeEX';
 const VGEN_LINK_TEXT          = process.env.VGEN_LINK_TEXT                   || '🎨 VGen';
 const EMAIL_URL               = (process.env.EMAIL_URL || '').trim()         || `mailto:${CONTACT_EMAIL}`;
@@ -379,9 +426,10 @@ const TOS_SECTIONS = process.env.TOS_SECTIONS ? JSON.parse(process.env.TOS_SECTI
   {
     heading: 'CONTACT & MISC',
     paragraphs: [
-      `For quotes, inquiries, and urgent matters: <a href="${DISCORD_URL}" target="_blank" rel="noopener">Discord</a>, <a href="${TELEGRAM_URL}" target="_blank" rel="noopener">Telegram</a>, <a href="${PAYPAL_URL}" target="_blank" rel="noopener">PayPal</a>, or <a href="mailto:${CONTACT_EMAIL}">email</a>.`,
+      'For quotes, inquiries, and urgent matters, use the contact links below.',
       'Thank you for supporting my small business.'
-    ]
+    ],
+    links: [{ url: DISCORD_URL, text: DISCORD_LINK_TEXT }, { url: TELEGRAM_URL, text: TELEGRAM_LINK_TEXT }, { url: PAYPAL_URL, text: PAYPAL_LINK_TEXT }, { url: EMAIL_URL, text: EMAIL_LINK_TEXT }]
   }
 ];
 const FURSUIT_TOS_TITLE = process.env.FURSUIT_TOS_TITLE || "CoffeeEX's Fursuit Terms of Service";
@@ -409,8 +457,9 @@ const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(proce
   {
     heading: 'QUOTES & PRICING',
     paragraphs: [
-      `Quotes are estimates based on the information provided and are subject to change after a full evaluation. Base pricing and package options are published on the <a href="${FURSUIT_LINK}" target="_blank" rel="noopener">fursuit pricing page</a>. A formal, written quote will be issued prior to requesting payment; the quoted amount at booking is the final binding price.`
-    ]
+      'Quotes are estimates based on the information provided and are subject to change after a full evaluation. Base pricing and package options are published on the fursuit pricing page. A formal, written quote will be issued prior to requesting payment; the quoted amount at booking is the final binding price.'
+    ],
+    links: [{ url: FURSUIT_LINK, text: UI.FURSUIT_HEADING }]
   },
   {
     heading: 'REVISIONS',
@@ -423,11 +472,12 @@ const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(proce
   {
     heading: 'PAYMENTS',
     paragraphs: [
-      `Payments for fursuit commissions are accepted via <a href="${CASHAPP_URL}" target="_blank" rel="noopener">CashApp</a> or <a href="${PAYPAL_URL}" target="_blank" rel="noopener">PayPal</a>.`,
+      'Payments for fursuit commissions are accepted via CashApp or PayPal.',
       "A non-refundable deposit or full payment may be required to secure a commission slot.",
       "The buyer is responsible for any payment-processor fees and for ensuring payments clear.",
       "Work will not begin until the required payment or deposit is received."
-    ]
+    ],
+    links: [{ url: CASHAPP_URL, text: CASHAPP_HANDLE }, { url: PAYPAL_URL, text: PAYPAL_LINK_TEXT }]
   },
   {
     heading: 'PAYMENT PLANS',
@@ -489,13 +539,44 @@ const FURSUIT_TOS_SECTIONS = process.env.FURSUIT_TOS_SECTIONS ? JSON.parse(proce
   {
     heading: 'CONTACT & MISC',
     paragraphs: [
-      `For quotes, inquiries, and urgent matters: <a href="${DISCORD_URL}" target="_blank" rel="noopener">Discord</a>, <a href="${TELEGRAM_URL}" target="_blank" rel="noopener">Telegram</a>, <a href="${PAYPAL_URL}" target="_blank" rel="noopener">PayPal</a>, or <a href="mailto:${CONTACT_EMAIL}">email</a>.`,
+      'For quotes, inquiries, and urgent matters, use the contact links below.',
       'Thank you for supporting my small business.'
-    ]
+    ],
+    links: [{ url: DISCORD_URL, text: DISCORD_LINK_TEXT }, { url: TELEGRAM_URL, text: TELEGRAM_LINK_TEXT }, { url: PAYPAL_URL, text: PAYPAL_LINK_TEXT }, { url: EMAIL_URL, text: EMAIL_LINK_TEXT }]
   }
 ];
 
 // ── Build functions ───────────────────────────────────────────────────────
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+}
+
+const PAGES = [
+  ['index.html', INDEX_LINK, SITE_TITLE, SITE_DESCRIPTION],
+  ['gallery.html', GALLERY_LINK, GALLERY_HEADING, GALLERY_META],
+  ['contact.html', CONTACT_LINK, CONTACT_HEADING, CONTACT_DESCRIPTION],
+  ['art.html', ART_LINK, UI.ART_HEADING, ART_DESCRIPTION],
+  ['fursuit.html', FURSUIT_LINK, UI.FURSUIT_HEADING, FURSUIT_DESCRIPTION],
+  ['tos.html', ART_TOS_LINK, TOS_TITLE, TOS_DESCRIPTION],
+  ['fursuit-tos.html', FURSUIT_TOS_LINK, FURSUIT_TOS_TITLE, FURSUIT_TOS_DESCRIPTION],
+  ['premades.html', PREMADE_LINK, UI.PREMADE_HEADING, PREMADE_META],
+];
+const pageNames = PAGES.map(page => page[1]);
+if (pageNames.some(name => !/^[\w-]+\.html$/.test(name)) || new Set(pageNames).size !== pageNames.length) {
+  throw new Error('Page *_LINK settings must be distinct root-level .html filenames containing letters, numbers, underscores, or hyphens.');
+}
+const baseUrl = new URL(SITE_URL.endsWith('/') ? SITE_URL : `${SITE_URL}/`);
+if (!['http:', 'https:'].includes(baseUrl.protocol) || baseUrl.search || baseUrl.hash) throw new Error('SITE_URL must be an HTTP(S) site base URL.');
+const absoluteUrl = value => new URL(value, baseUrl).href;
+
+function imageData(src, category) {
+  const metadata = { ...IMAGE_METADATA_DEFAULTS[src], ...IMAGE_METADATA[src] };
+  const name = path.basename(src, path.extname(src)).replace(/[_-]+/g, ' ');
+  return { src: src.split('/').map(encodeURIComponent).join('/'),
+    alt: metadata.alt || UI.IMAGE_ALT_FORMAT.replace('{category}', category).replace('{name}', name),
+    caption: metadata.caption || name };
+}
 
 function ensureDir(p) {
   if (!fs.existsSync(p)) fs.mkdirSync(p, { recursive: true });
@@ -568,16 +649,19 @@ function renderTemplate(name, vars) {
 
     // replace simple placeholders like {{this.prop}}, {{this}} or {{KEY}}
     str = str.replace(/\{\{\s*([\w\.]+)\s*\}\}/g, (_, key) => {
-      if (key === 'this') return ctxThis != null ? String(ctxThis) : '';
+      if (key === 'this') return ctxThis != null ? escapeHtml(ctxThis) : '';
       if (key.indexOf('this.') === 0) {
         const prop = key.slice(5);
-        return ctxThis && ctxThis[prop] != null ? String(ctxThis[prop]) : '';
+        return ctxThis && ctxThis[prop] != null ? escapeHtml(ctxThis[prop]) : '';
       }
-      return vars[key] != null ? String(vars[key]) : '';
+      return vars[key] != null ? escapeHtml(vars[key]) : '';
     });
 
     // handle %%TOKENS%%
-    str = str.replace(/%%(\w+)%%/g, (_, key) => vars[key] != null ? vars[key] : '');
+    str = str.replace(/%%(\w+)%%/g, (_, key) => {
+      if (vars[key] == null) throw new Error(`Unresolved template token: ${key}`);
+      return key === 'KOFI_WIDGET' ? vars[key] : escapeHtml(vars[key]);
+    });
     return str;
   }
 
@@ -627,35 +711,29 @@ async function build() {
       .map(f => path.posix.join(TABLE_SRC.replace(/\\/g, '/'), f));
   }
 
-  const sampleList = allImages.slice(0, SAMPLE_COUNT);
-  const sampleHtml = sampleList.map(i => `<li><img src="${i}" alt="art"/></li>`).join('\n');
-  const fursuitSampleList = fursuitImages.slice(0, SAMPLE_COUNT);
-  const fursuitSampleHtml = fursuitSampleList.map(i => `<li><img src="${i}" alt="fursuit"/></li>`).join('\n');
-  const galleryHtml = allImages.map(i => `<li><img src="${i}" alt="art"/></li>`).join('\n');
-  const fursuitGalleryHtml = fursuitImages.map(i => `<li><img src="${i}" alt="fursuit"/></li>`).join('\n');
-  const premadeSampleList = premadeImages.slice(0, SAMPLE_COUNT);
-  const premadeSampleHtml = premadeSampleList
-    .map(i => `<li><img src="${i}" alt="premade"/></li>`)
-    .join('\n');
-  const premadeGalleryHtml = premadeImages
-    .map(i => `<li><img src="${i}" alt="premade"/></li>`)
-    .join('\n');
-  const tableSampleList = tableImages.slice(0, SAMPLE_COUNT);
-  const tableSampleHtml = tableSampleList
-    .map(i => `<li><img src="${i}" alt="table"/></li>`)
-    .join('\n');
-  const tableGalleryHtml = tableImages
-    .map(i => `<li><img src="${i}" alt="table"/></li>`)
-    .join('\n');
+  const art = allImages.map(src => imageData(src, UI.ART_CATEGORY));
+  const fursuits = fursuitImages.map(src => imageData(src, UI.FURSUIT_CATEGORY));
+  const premades = premadeImages.map(src => imageData(src, UI.PREMADE_CATEGORY));
+  const tables = tableImages.map(src => imageData(src, UI.TABLE_CATEGORY));
+  const services = [
+    { name: UI.ART_HEADING, availability: ART_COMMISSION_STATUS === 'open' ? UI.COMMISSION_OPEN_LABEL : UI.COMMISSION_CLOSED_LABEL, nextSteps: UI.ART_NEXT_STEPS },
+    { name: UI.FURSUIT_COMMISSION_HEADING, availability: FURSUIT_COMMISSION_STATUS === 'open' ? UI.COMMISSION_OPEN_LABEL : UI.COMMISSION_CLOSED_LABEL, nextSteps: UI.FURSUIT_NEXT_STEPS },
+    { name: UI.PREMADE_HEADING, availability: UI.PREMADE_AVAILABILITY, nextSteps: UI.PREMADE_NEXT_STEPS },
+  ];
 
   const vars = {
+    ...UI, SERVICES: services, PREMADE_INTRO,
+    KOFI_WIDGET: KOFI_IFRAME || renderTemplate('partials/kofi.html', { ...UI, KOFI_EMBED_URL }),
+    FAVICON_URL, OG_IMAGE_URL: absoluteUrl(OG_IMAGE_URL),
+    ART_AVAILABILITY: services[0].availability, FURSUIT_AVAILABILITY: services[1].availability,
+    ART_COMMISSION_STATUS, FURSUIT_COMMISSION_STATUS,
     GITHUB_URL,
     GITHUB_LINK_TEXT,
     SITE_TITLE,
     CONTACT_EMAIL,
     FOOTER_TEXT,
-    SAMPLE_IMAGES: sampleHtml,
-    GALLERY_IMAGES: galleryHtml,
+    SAMPLE_IMAGES: art.slice(0, SAMPLE_COUNT),
+    GALLERY_IMAGES: art,
     INDEX_LINK,
     GALLERY_LINK,
     PREMADE_LINK,
@@ -724,13 +802,13 @@ async function build() {
     FURSUIT_TOS_UPDATED,
     FURSUIT_TOS_SECTIONS,
     ART_TOS_LINK_TEXT,
-    ART_GALLERY_IMAGES: galleryHtml,
-    FURSUIT_GALLERY_IMAGES: fursuitGalleryHtml,
-    FURSUIT_SAMPLE_IMAGES: fursuitSampleHtml,
-    PREMADE_SAMPLE_IMAGES: premadeSampleHtml,
-    PREMADE_GALLERY_IMAGES: premadeGalleryHtml,
-    TABLE_SAMPLE_IMAGES: tableSampleHtml,
-    TABLE_GALLERY_IMAGES: tableGalleryHtml,
+    ART_GALLERY_IMAGES: art,
+    FURSUIT_GALLERY_IMAGES: fursuits,
+    FURSUIT_SAMPLE_IMAGES: fursuits.slice(0, SAMPLE_COUNT),
+    PREMADE_SAMPLE_IMAGES: premades.slice(0, SAMPLE_COUNT),
+    PREMADE_GALLERY_IMAGES: premades,
+    TABLE_SAMPLE_IMAGES: tables.slice(0, SAMPLE_COUNT),
+    TABLE_GALLERY_IMAGES: tables,
     PROMOTIONS,
     ACTIVE_PROMOTIONS,
     PROMOTIONS_AVAILABLE,
@@ -738,21 +816,17 @@ async function build() {
     PROMOTION_STATUS_LABEL,
   };
 
-  [
-      INDEX_LINK,
-      GALLERY_LINK,
-      CONTACT_LINK,
-      ART_LINK,
-      FURSUIT_LINK,
-      ART_TOS_LINK,
-      FURSUIT_TOS_LINK,
-      PREMADE_LINK
-  ].forEach(page => {
-      fs.writeFileSync(
-          path.join(OUT, page),
-          renderTemplate(page, vars)
-      );
-  });
+  for (const [template, filename, title, description] of PAGES) {
+    fs.writeFileSync(path.join(OUT, filename), renderTemplate(template, {
+      ...vars, PAGE_TITLE: title === SITE_TITLE ? title : title + ' — ' + SITE_TITLE,
+      PAGE_DESCRIPTION: description, CANONICAL_URL: absoluteUrl(filename),
+    }));
+  }
+  fs.writeFileSync(path.join(OUT, 'CNAME'), 'coffeescrafts.com\n');
+  fs.writeFileSync(path.join(OUT, 'sitemap.xml'), renderTemplate('sitemap.xml', {
+    PAGES: PAGES.map(page => ({ url: absoluteUrl(page[1]) })),
+  }));
+  fs.writeFileSync(path.join(OUT, 'robots.txt'), 'User-agent: *\nAllow: /\nSitemap: ' + absoluteUrl('sitemap.xml') + '\n');
 
   try {
     const diag = {
@@ -772,7 +846,9 @@ async function build() {
   console.log('Site built to', OUT);
 }
 
-build().catch(err => {
+module.exports = { build, UI_DEFAULTS, PAGES };
+
+if (require.main === module) build().catch(err => {
   console.error('Build failed:', err && err.stack ? err.stack : err);
   process.exit(1);
 });

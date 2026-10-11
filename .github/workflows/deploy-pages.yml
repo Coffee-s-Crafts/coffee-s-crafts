@@ -12,39 +12,148 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    # All build settings can be overridden in repository Variables or Secrets.
+    # Empty values use defaults in site/build.js; Variables take precedence.
     env:
-      SITE_TITLE: ${{ secrets.SITE_TITLE }}
-      CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}
-      ART_SOURCE_DIR: ${{ secrets.ART_SOURCE_DIR }}
       OUTPUT_DIR: 'dist'
-      INDEX_LINK: 'index.html'
-      GALLERY_LINK: 'gallery.html'
-      CONTACT_LINK: 'contact.html'
-      VGEN_URL: ${{ secrets.VGEN_URL }}
-      DISCORD_URL: ${{ vars.DISCORD_URL }}
-      DISCORD_LINK_TEXT: ${{ vars.DISCORD_LINK_TEXT }}
-      TELEGRAM_URL: ${{ vars.TELEGRAM_URL }}
-      TELEGRAM_LINK_TEXT: ${{ vars.TELEGRAM_LINK_TEXT }}
-      TRELLO_URL: ${{ vars.TRELLO_URL }}
-      TRELLO_LINK_TEXT: ${{ vars.TRELLO_LINK_TEXT }}
-      QUEUE_TRACKING_TEXT: ${{ vars.QUEUE_TRACKING_TEXT }}
-      TWITCH_URL: ${{ vars.TWITCH_URL }}
-      TWITCH_LINK_TEXT: ${{ vars.TWITCH_LINK_TEXT }}
-      FURSUIT_TOS_LINK: ${{ vars.FURSUIT_TOS_LINK }}
-      FURSUIT_TOS_LINK_TEXT: ${{ vars.FURSUIT_TOS_LINK_TEXT }}
-      FURSUIT_QUEUE_URL: ${{ vars.FURSUIT_QUEUE_URL }}
-      FURSUIT_QUEUE_LINK_TEXT: ${{ vars.FURSUIT_QUEUE_LINK_TEXT }}
-      FURSUIT_QUEUE_TEXT: ${{ vars.FURSUIT_QUEUE_TEXT }}
-      TOYHOUSE_URL: ${{ vars.TOYHOUSE_URL }}
-      TOYHOUSE_LINK_TEXT: ${{ vars.TOYHOUSE_LINK_TEXT }}
-      INSTAGRAM_URL: ${{ vars.INSTAGRAM_URL }}
-      INSTAGRAM_LINK_TEXT: ${{ vars.INSTAGRAM_LINK_TEXT }}
-      CARRD_URL: ${{ vars.CARRD_URL }}
-      CARRD_LINK_TEXT: ${{ vars.CARRD_LINK_TEXT }}
-      X_URL: ${{ vars.X_URL }}
-      X_LINK_TEXT: ${{ vars.X_LINK_TEXT }}
-      COMMISSION_STATUS: ${{ secrets.COMMISSION_STATUS }}
-      SAMPLE_COUNT: ${{ secrets.SAMPLE_COUNT }}
+      ABOUT_BODY: ${{ vars.ABOUT_BODY || secrets.ABOUT_BODY }}
+      ABOUT_CTA_INTRO: ${{ vars.ABOUT_CTA_INTRO || secrets.ABOUT_CTA_INTRO }}
+      ABOUT_CTA_LINK_TEXT: ${{ vars.ABOUT_CTA_LINK_TEXT || secrets.ABOUT_CTA_LINK_TEXT }}
+      ABOUT_HEADING: ${{ vars.ABOUT_HEADING || secrets.ABOUT_HEADING }}
+      ADDONS_HEADING: ${{ vars.ADDONS_HEADING || secrets.ADDONS_HEADING }}
+      ART_CATEGORY: ${{ vars.ART_CATEGORY || secrets.ART_CATEGORY }}
+      ART_COMMISSION_STATUS: ${{ vars.ART_COMMISSION_STATUS || secrets.ART_COMMISSION_STATUS }}
+      ART_DESCRIPTION: ${{ vars.ART_DESCRIPTION || secrets.ART_DESCRIPTION }}
+      ART_HEADING: ${{ vars.ART_HEADING || secrets.ART_HEADING }}
+      ART_LINK: ${{ vars.ART_LINK || secrets.ART_LINK }}
+      ART_NEXT_STEPS: ${{ vars.ART_NEXT_STEPS || secrets.ART_NEXT_STEPS }}
+      ART_SECTIONS: ${{ vars.ART_SECTIONS || secrets.ART_SECTIONS }}
+      ART_SOURCE_DIR: ${{ vars.ART_SOURCE_DIR || secrets.ART_SOURCE_DIR }}
+      ART_TOS_LINK: ${{ vars.ART_TOS_LINK || secrets.ART_TOS_LINK }}
+      ART_TOS_LINK_TEXT: ${{ vars.ART_TOS_LINK_TEXT || secrets.ART_TOS_LINK_TEXT }}
+      BRIEF_BUDGET_LABEL: ${{ vars.BRIEF_BUDGET_LABEL || secrets.BRIEF_BUDGET_LABEL }}
+      BRIEF_DEADLINE_LABEL: ${{ vars.BRIEF_DEADLINE_LABEL || secrets.BRIEF_DEADLINE_LABEL }}
+      BRIEF_HEADING: ${{ vars.BRIEF_HEADING || secrets.BRIEF_HEADING }}
+      BRIEF_IDEA_LABEL: ${{ vars.BRIEF_IDEA_LABEL || secrets.BRIEF_IDEA_LABEL }}
+      BRIEF_INTRO: ${{ vars.BRIEF_INTRO || secrets.BRIEF_INTRO }}
+      BRIEF_NEXT_STEPS: ${{ vars.BRIEF_NEXT_STEPS || secrets.BRIEF_NEXT_STEPS }}
+      BRIEF_PREPARE_LABEL: ${{ vars.BRIEF_PREPARE_LABEL || secrets.BRIEF_PREPARE_LABEL }}
+      BRIEF_PREVIEW_LABEL: ${{ vars.BRIEF_PREVIEW_LABEL || secrets.BRIEF_PREVIEW_LABEL }}
+      BRIEF_SEND_LABEL: ${{ vars.BRIEF_SEND_LABEL || secrets.BRIEF_SEND_LABEL }}
+      BRIEF_SERVICE_LABEL: ${{ vars.BRIEF_SERVICE_LABEL || secrets.BRIEF_SERVICE_LABEL }}
+      BRIEF_SUBJECT: ${{ vars.BRIEF_SUBJECT || secrets.BRIEF_SUBJECT }}
+      CARRD_LINK_TEXT: ${{ vars.CARRD_LINK_TEXT || secrets.CARRD_LINK_TEXT }}
+      CARRD_URL: ${{ vars.CARRD_URL || secrets.CARRD_URL }}
+      CASHAPP_HANDLE: ${{ vars.CASHAPP_HANDLE || secrets.CASHAPP_HANDLE }}
+      CASHAPP_URL: ${{ vars.CASHAPP_URL || secrets.CASHAPP_URL }}
+      COMMISSIONS_HEADING: ${{ vars.COMMISSIONS_HEADING || secrets.COMMISSIONS_HEADING }}
+      COMMISSIONS_INTRO: ${{ vars.COMMISSIONS_INTRO || secrets.COMMISSIONS_INTRO }}
+      COMMISSION_CLOSED_LABEL: ${{ vars.COMMISSION_CLOSED_LABEL || secrets.COMMISSION_CLOSED_LABEL }}
+      COMMISSION_OPEN_LABEL: ${{ vars.COMMISSION_OPEN_LABEL || secrets.COMMISSION_OPEN_LABEL }}
+      COMMISSION_STATUS: ${{ vars.COMMISSION_STATUS || secrets.COMMISSION_STATUS }}
+      CONTACT_DESCRIPTION: ${{ vars.CONTACT_DESCRIPTION || secrets.CONTACT_DESCRIPTION }}
+      CONTACT_EMAIL: ${{ vars.CONTACT_EMAIL || secrets.CONTACT_EMAIL }}
+      CONTACT_HEADING: ${{ vars.CONTACT_HEADING || secrets.CONTACT_HEADING }}
+      CONTACT_LINK: ${{ vars.CONTACT_LINK || secrets.CONTACT_LINK }}
+      DETAILS_HEADING: ${{ vars.DETAILS_HEADING || secrets.DETAILS_HEADING }}
+      DISCORD_LINK_TEXT: ${{ vars.DISCORD_LINK_TEXT || secrets.DISCORD_LINK_TEXT }}
+      DISCORD_URL: ${{ vars.DISCORD_URL || secrets.DISCORD_URL }}
+      EMAIL_LINK_TEXT: ${{ vars.EMAIL_LINK_TEXT || secrets.EMAIL_LINK_TEXT }}
+      EMAIL_URL: ${{ vars.EMAIL_URL || secrets.EMAIL_URL }}
+      ETSY_LINK_TEXT: ${{ vars.ETSY_LINK_TEXT || secrets.ETSY_LINK_TEXT }}
+      ETSY_URL: ${{ vars.ETSY_URL || secrets.ETSY_URL }}
+      FAVICON_URL: ${{ vars.FAVICON_URL || secrets.FAVICON_URL }}
+      FOOTER_TEXT: ${{ vars.FOOTER_TEXT || secrets.FOOTER_TEXT }}
+      FURSUIT_CATEGORY: ${{ vars.FURSUIT_CATEGORY || secrets.FURSUIT_CATEGORY }}
+      FURSUIT_COMMISSION_HEADING: ${{ vars.FURSUIT_COMMISSION_HEADING || secrets.FURSUIT_COMMISSION_HEADING }}
+      FURSUIT_COMMISSION_STATUS: ${{ vars.FURSUIT_COMMISSION_STATUS || secrets.FURSUIT_COMMISSION_STATUS }}
+      FURSUIT_DESCRIPTION: ${{ vars.FURSUIT_DESCRIPTION || secrets.FURSUIT_DESCRIPTION }}
+      FURSUIT_FORM_TEXT: ${{ vars.FURSUIT_FORM_TEXT || secrets.FURSUIT_FORM_TEXT }}
+      FURSUIT_FORM_URL: ${{ vars.FURSUIT_FORM_URL || secrets.FURSUIT_FORM_URL }}
+      FURSUIT_HEADING: ${{ vars.FURSUIT_HEADING || secrets.FURSUIT_HEADING }}
+      FURSUIT_LINK: ${{ vars.FURSUIT_LINK || secrets.FURSUIT_LINK }}
+      FURSUIT_NEXT_STEPS: ${{ vars.FURSUIT_NEXT_STEPS || secrets.FURSUIT_NEXT_STEPS }}
+      FURSUIT_PRICES: ${{ vars.FURSUIT_PRICES || secrets.FURSUIT_PRICES }}
+      FURSUIT_QUEUE_LINK_TEXT: ${{ vars.FURSUIT_QUEUE_LINK_TEXT || secrets.FURSUIT_QUEUE_LINK_TEXT }}
+      FURSUIT_QUEUE_URL: ${{ vars.FURSUIT_QUEUE_URL || secrets.FURSUIT_QUEUE_URL }}
+      FURSUIT_SOURCE_DIR: ${{ vars.FURSUIT_SOURCE_DIR || secrets.FURSUIT_SOURCE_DIR }}
+      FURSUIT_TOS_DESCRIPTION: ${{ vars.FURSUIT_TOS_DESCRIPTION || secrets.FURSUIT_TOS_DESCRIPTION }}
+      FURSUIT_TOS_LINK: ${{ vars.FURSUIT_TOS_LINK || secrets.FURSUIT_TOS_LINK }}
+      FURSUIT_TOS_LINK_TEXT: ${{ vars.FURSUIT_TOS_LINK_TEXT || secrets.FURSUIT_TOS_LINK_TEXT }}
+      FURSUIT_TOS_SECTIONS: ${{ vars.FURSUIT_TOS_SECTIONS || secrets.FURSUIT_TOS_SECTIONS }}
+      FURSUIT_TOS_TITLE: ${{ vars.FURSUIT_TOS_TITLE || secrets.FURSUIT_TOS_TITLE }}
+      FURSUIT_TOS_UPDATED: ${{ vars.FURSUIT_TOS_UPDATED || secrets.FURSUIT_TOS_UPDATED }}
+      GALLERY_HEADING: ${{ vars.GALLERY_HEADING || secrets.GALLERY_HEADING }}
+      GALLERY_LINK: ${{ vars.GALLERY_LINK || secrets.GALLERY_LINK }}
+      GALLERY_META: ${{ vars.GALLERY_META || secrets.GALLERY_META }}
+      GALLERY_MORE_TEXT: ${{ vars.GALLERY_MORE_TEXT || secrets.GALLERY_MORE_TEXT }}
+      GITHUB_LINK_TEXT: ${{ vars.GITHUB_LINK_TEXT || secrets.GITHUB_LINK_TEXT }}
+      GITHUB_URL: ${{ vars.GITHUB_URL || secrets.GITHUB_URL }}
+      HERO_CTA: ${{ vars.HERO_CTA || secrets.HERO_CTA }}
+      HERO_TAGLINE: ${{ vars.HERO_TAGLINE || secrets.HERO_TAGLINE }}
+      IMAGE_ALT_FORMAT: ${{ vars.IMAGE_ALT_FORMAT || secrets.IMAGE_ALT_FORMAT }}
+      IMAGE_METADATA: ${{ vars.IMAGE_METADATA || secrets.IMAGE_METADATA }}
+      IMPORTANT_HEADING: ${{ vars.IMPORTANT_HEADING || secrets.IMPORTANT_HEADING }}
+      INDEX_LINK: ${{ vars.INDEX_LINK || secrets.INDEX_LINK }}
+      INSTAGRAM_LINK_TEXT: ${{ vars.INSTAGRAM_LINK_TEXT || secrets.INSTAGRAM_LINK_TEXT }}
+      INSTAGRAM_URL: ${{ vars.INSTAGRAM_URL || secrets.INSTAGRAM_URL }}
+      KOFI_EMBED_TITLE: ${{ vars.KOFI_EMBED_TITLE || secrets.KOFI_EMBED_TITLE }}
+      KOFI_EMBED_URL: ${{ vars.KOFI_EMBED_URL || secrets.KOFI_EMBED_URL }}
+      KOFI_IFRAME: ${{ vars.KOFI_IFRAME || secrets.KOFI_IFRAME }}
+      KOFI_LINK_TEXT: ${{ vars.KOFI_LINK_TEXT || secrets.KOFI_LINK_TEXT }}
+      KOFI_URL: ${{ vars.KOFI_URL || secrets.KOFI_URL }}
+      LIGHTBOX_CLOSE: ${{ vars.LIGHTBOX_CLOSE || secrets.LIGHTBOX_CLOSE }}
+      LIGHTBOX_LABEL: ${{ vars.LIGHTBOX_LABEL || secrets.LIGHTBOX_LABEL }}
+      LIGHTBOX_NEXT: ${{ vars.LIGHTBOX_NEXT || secrets.LIGHTBOX_NEXT }}
+      LIGHTBOX_PREVIOUS: ${{ vars.LIGHTBOX_PREVIOUS || secrets.LIGHTBOX_PREVIOUS }}
+      NAV_ART: ${{ vars.NAV_ART || secrets.NAV_ART }}
+      NAV_CONTACT: ${{ vars.NAV_CONTACT || secrets.NAV_CONTACT }}
+      NAV_FURSUIT: ${{ vars.NAV_FURSUIT || secrets.NAV_FURSUIT }}
+      NAV_GALLERY: ${{ vars.NAV_GALLERY || secrets.NAV_GALLERY }}
+      NAV_HOME: ${{ vars.NAV_HOME || secrets.NAV_HOME }}
+      NAV_LABEL: ${{ vars.NAV_LABEL || secrets.NAV_LABEL }}
+      NAV_PREMADE: ${{ vars.NAV_PREMADE || secrets.NAV_PREMADE }}
+      OG_IMAGE_URL: ${{ vars.OG_IMAGE_URL || secrets.OG_IMAGE_URL }}
+      OPTIONS_HEADING: ${{ vars.OPTIONS_HEADING || secrets.OPTIONS_HEADING }}
+      PAYPAL_LINK_TEXT: ${{ vars.PAYPAL_LINK_TEXT || secrets.PAYPAL_LINK_TEXT }}
+      PAYPAL_URL: ${{ vars.PAYPAL_URL || secrets.PAYPAL_URL }}
+      PREMADE_AVAILABILITY: ${{ vars.PREMADE_AVAILABILITY || secrets.PREMADE_AVAILABILITY }}
+      PREMADE_CATEGORY: ${{ vars.PREMADE_CATEGORY || secrets.PREMADE_CATEGORY }}
+      PREMADE_HEADING: ${{ vars.PREMADE_HEADING || secrets.PREMADE_HEADING }}
+      PREMADE_INTRO: ${{ vars.PREMADE_INTRO || secrets.PREMADE_INTRO }}
+      PREMADE_LINK: ${{ vars.PREMADE_LINK || secrets.PREMADE_LINK }}
+      PREMADE_META: ${{ vars.PREMADE_META || secrets.PREMADE_META }}
+      PREMADE_NEXT_STEPS: ${{ vars.PREMADE_NEXT_STEPS || secrets.PREMADE_NEXT_STEPS }}
+      PREMADE_SECTIONS: ${{ vars.PREMADE_SECTIONS || secrets.PREMADE_SECTIONS }}
+      PREMADE_SOURCE_DIR: ${{ vars.PREMADE_SOURCE_DIR || secrets.PREMADE_SOURCE_DIR }}
+      PROMOTIONS: ${{ vars.PROMOTIONS || secrets.PROMOTIONS }}
+      PROMOTION_FLAT_LABEL: ${{ vars.PROMOTION_FLAT_LABEL || secrets.PROMOTION_FLAT_LABEL }}
+      PROMOTION_NONE_LABEL: ${{ vars.PROMOTION_NONE_LABEL || secrets.PROMOTION_NONE_LABEL }}
+      PROMOTION_PERCENT_LABEL: ${{ vars.PROMOTION_PERCENT_LABEL || secrets.PROMOTION_PERCENT_LABEL }}
+      QUEUE_TRACKING_TEXT: ${{ vars.QUEUE_TRACKING_TEXT || secrets.QUEUE_TRACKING_TEXT }}
+      SAMPLE_COUNT: ${{ vars.SAMPLE_COUNT || secrets.SAMPLE_COUNT }}
+      SITE_DESCRIPTION: ${{ vars.SITE_DESCRIPTION || secrets.SITE_DESCRIPTION }}
+      SITE_TITLE: ${{ vars.SITE_TITLE || secrets.SITE_TITLE }}
+      SITE_URL: ${{ vars.SITE_URL || secrets.SITE_URL }}
+      SUPPORT_HEADING: ${{ vars.SUPPORT_HEADING || secrets.SUPPORT_HEADING }}
+      TABLE_CATEGORY: ${{ vars.TABLE_CATEGORY || secrets.TABLE_CATEGORY }}
+      TABLE_SOURCE_DIR: ${{ vars.TABLE_SOURCE_DIR || secrets.TABLE_SOURCE_DIR }}
+      TELEGRAM_LINK_TEXT: ${{ vars.TELEGRAM_LINK_TEXT || secrets.TELEGRAM_LINK_TEXT }}
+      TELEGRAM_URL: ${{ vars.TELEGRAM_URL || secrets.TELEGRAM_URL }}
+      TOS_DESCRIPTION: ${{ vars.TOS_DESCRIPTION || secrets.TOS_DESCRIPTION }}
+      TOS_SECTIONS: ${{ vars.TOS_SECTIONS || secrets.TOS_SECTIONS }}
+      TOS_TITLE: ${{ vars.TOS_TITLE || secrets.TOS_TITLE }}
+      TOS_UPDATED: ${{ vars.TOS_UPDATED || secrets.TOS_UPDATED }}
+      TOYHOUSE_LINK_TEXT: ${{ vars.TOYHOUSE_LINK_TEXT || secrets.TOYHOUSE_LINK_TEXT }}
+      TOYHOUSE_URL: ${{ vars.TOYHOUSE_URL || secrets.TOYHOUSE_URL }}
+      TRELLO_LINK_TEXT: ${{ vars.TRELLO_LINK_TEXT || secrets.TRELLO_LINK_TEXT }}
+      TRELLO_URL: ${{ vars.TRELLO_URL || secrets.TRELLO_URL }}
+      TWITCH_LINK_TEXT: ${{ vars.TWITCH_LINK_TEXT || secrets.TWITCH_LINK_TEXT }}
+      TWITCH_URL: ${{ vars.TWITCH_URL || secrets.TWITCH_URL }}
+      VGEN_LINK_TEXT: ${{ vars.VGEN_LINK_TEXT || secrets.VGEN_LINK_TEXT }}
+      VGEN_URL: ${{ vars.VGEN_URL || secrets.VGEN_URL }}
+      X_LINK_TEXT: ${{ vars.X_LINK_TEXT || secrets.X_LINK_TEXT }}
+      X_URL: ${{ vars.X_URL || secrets.X_URL }}
 
     steps:
       - name: Checkout
@@ -55,24 +164,36 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '24'
+          cache: npm
 
       - name: Install dependencies
-        run: npm install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund
 
-      - name: Show build environment
+      - name: Check syntax and build contracts
         run: |
-          echo "--- Build environment ---"
-          env | grep -E 'ART_SOURCE_DIR|OUTPUT_DIR|SAMPLE_COUNT|GITHUB_ACTIONS' || true
-          node -e "console.log('NODE ENV vars:', { GITHUB_ACTIONS: process.env.GITHUB_ACTIONS, ART_SOURCE_DIR: process.env.ART_SOURCE_DIR })"
+          npm run check:syntax
+          npm test
 
       - name: Build site
-        run: |
-          node site/build.js
+        run: npm run build
 
-      - name: Archive dist
-        run: |
-          echo "dist contents:" && ls -la dist || true
+      - name: Check built HTML, links and assets
+        run: npm run check:output
+
+      - name: Install test browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Check responsive pages, keyboard controls and accessibility
+        run: npm run check:browser
+
+      - name: Save browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-evidence
+          path: test-results/
+          if-no-files-found: ignore
 
       - name: Deploy to gh-pages branch
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
