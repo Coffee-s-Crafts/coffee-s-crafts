@@ -1,6 +1,6 @@
 /* Base */
 *,*::before,*::after{box-sizing:border-box}
-body{margin:0;padding:0}
+body{margin:0;padding:0;background:var(--bg);color:var(--text)}
 img{display:block;max-width:100%}
 a{text-decoration:none}a:hover{text-decoration:underline}p a{text-decoration:underline}
 h1,h2,h3{margin:0 0 .5rem;line-height:1.2}
@@ -76,7 +76,7 @@ section h2{border:0;padding:0;margin-bottom:1.2rem;font-size:1.75rem;color:var(-
 .support-link{display:inline-flex;border-bottom:1px solid var(--accent);font-weight:600}
 .commission-status{font-family:Arial,Helvetica,sans-serif;font-size:.8rem;font-weight:600;margin:0 0 1rem;padding:.3rem .7rem}
 .commission-overview{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start;margin:2rem 0 2.5rem}
-.commission-card{padding:1.35rem;background:var(--surface);box-shadow:none;border-radius:12px}
+.commission-card{padding:1.35rem;background:var(--surface);border:1px solid var(--border);box-shadow:none;border-radius:12px}
 .commission-card h2{font-size:1.5rem;letter-spacing:-.03em;margin:1rem 0 .8rem;line-height:1.2}
 .commission-card h2 a{color:var(--text)}
 .commission-card p{font-size:.92rem;line-height:1.55;margin:0 0 1rem}
