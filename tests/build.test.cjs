@@ -75,8 +75,15 @@ test('custom filenames, escaped copy, image metadata and promotions generate val
     assert.match(home, /Custom &lt;headline&gt;/);
     assert.match(home, /class="hero-art">\s*<img src="assets\/art\/reki.png"/);
     assert.match(home, /href="home.html" aria-current="page"/);
+    assert.match(home, /class="support-section">[\s\S]*id="kofiframe"/);
+    assert.ok(home.indexOf('id="kofiframe"') > home.indexOf('class="selected-work"'));
     assert.match(fs.readFileSync(path.join(root, 'sitemap.xml'), 'utf8'), /portfolio.html/);
     await checkOutput(root);
+    const withoutWidget = spawnSync(process.execPath, ['site/build.js'], { env: { ...env, KOFI_EMBED_ENABLED: 'false' }, encoding: 'utf8' });
+    assert.equal(withoutWidget.status, 0, withoutWidget.stderr);
+    const linkOnlyHome = fs.readFileSync(path.join(root, 'home.html'), 'utf8');
+    assert.doesNotMatch(linkOnlyHome, /id="kofiframe"/);
+    assert.match(linkOnlyHome, /class="support-link"/);
     for (const override of [{ GALLERY_LINK: '../escape.html' }, { GALLERY_LINK: 'home.html' }]) {
       const invalid = spawnSync(process.execPath, ['site/build.js'], { env: { ...env, ...override }, encoding: 'utf8' });
       assert.notEqual(invalid.status, 0);

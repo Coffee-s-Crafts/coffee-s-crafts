@@ -52,8 +52,8 @@ labels. `FOOTER_TEXT` supports `{year}` and `{title}`. Structured arrays such as
 include `links: [{"url":"https://example.com","text":"Link label"}]` rather than HTML
 in paragraphs. Structural HTML lives in templates.
 
-The homepage shows a lightweight Ko-fi link after the portfolio. Set
-`KOFI_EMBED_ENABLED=true` to include the optional widget there. The Ko-fi iframe lives
+The homepage shows the Ko-fi link and widget in the support section after the portfolio
+and About content. Set `KOFI_EMBED_ENABLED=false` to hide the widget. The Ko-fi iframe lives
 in `templates/partials/kofi.html`; use `KOFI_EMBED_URL` and
 `KOFI_EMBED_TITLE`. `KOFI_IFRAME` remains a legacy trusted HTML override, also subject
 to the HTML checker. Prefer the structured settings.

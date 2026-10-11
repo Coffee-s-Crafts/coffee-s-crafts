@@ -74,6 +74,7 @@ section h2{border:0;padding:0;margin-bottom:1.2rem;font-size:1.75rem;color:var(-
 .about-blurb{border:0;box-shadow:none;background:none;padding:0;max-width:760px;font-size:1rem;color:var(--muted)}
 .home-main>section:not(.selected-work){padding-top:2rem;border-top:1px solid var(--border)}
 .support-link{display:inline-flex;border-bottom:1px solid var(--accent);font-weight:600}
+.support-section .kofi-iframe{max-width:760px;margin-top:1.5rem}
 .commission-status{font-family:Arial,Helvetica,sans-serif;font-size:.8rem;font-weight:600;margin:0 0 1rem;padding:.3rem .7rem}
 .commission-overview{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start;margin:2rem 0 2.5rem}
 .commission-card{padding:1.35rem;background:var(--surface);border:1px solid var(--border);box-shadow:none;border-radius:12px}

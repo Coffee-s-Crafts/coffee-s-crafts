@@ -112,7 +112,7 @@ const KOFI_LINK_TEXT          = process.env.KOFI_LINK_TEXT                   || 
 // Legacy trusted HTML override; prefer the structured embed URL/title settings.
 const KOFI_IFRAME             = (process.env.KOFI_IFRAME || '').trim();
 const KOFI_EMBED_URL          = process.env.KOFI_EMBED_URL || 'https://ko-fi.com/coffeescrafts/?hidefeed=true&widget=true&embed=true&preview=true';
-const KOFI_EMBED_ENABLED      = (process.env.KOFI_EMBED_ENABLED || 'false').toLowerCase() === 'true';
+const KOFI_EMBED_ENABLED      = (process.env.KOFI_EMBED_ENABLED || 'true').toLowerCase() === 'true';
 const SITE_URL               = process.env.SITE_URL || 'https://coffeescrafts.com';
 const SITE_DESCRIPTION       = process.env.SITE_DESCRIPTION || HERO_TAGLINE;
 const ART_DESCRIPTION        = process.env.ART_DESCRIPTION || 'Character art commissions, pricing, and available add-ons.';
