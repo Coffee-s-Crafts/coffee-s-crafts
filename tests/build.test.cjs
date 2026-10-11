@@ -7,6 +7,20 @@ const { spawnSync } = require('node:child_process');
 const { isPromotionActive, safeParsePromotions } = require('../site/promotions');
 const { UI_DEFAULTS } = require('../site/build');
 const { checkOutput } = require('../scripts/check-output.cjs');
+const { versionedAssetUrl } = require('../site/assets');
+
+test('asset cache keys are stable until their contents change', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'coffee-assets-'));
+  try {
+    fs.writeFileSync(path.join(root, 'styles.css'), '.hero { display: block; }');
+    const first = versionedAssetUrl(root, 'styles.css');
+    assert.match(first, /^styles\.css\?v=[a-f0-9]{16}$/);
+    assert.equal(versionedAssetUrl(root, 'styles.css'), first);
+    fs.writeFileSync(path.join(root, 'styles.css'), '.hero { display: grid; }');
+    assert.notEqual(versionedAssetUrl(root, 'styles.css'), first);
+    assert.throws(() => versionedAssetUrl(root, 'missing.css'), /ENOENT/);
+  } finally { fs.rmSync(root, { recursive: true, force: true }); }
+});
 
 test('promotion calendar boundaries, timestamps and invalid dates', () => {
   const p = { start: '2026-10-09', end: '2026-10-10' };
@@ -75,6 +89,12 @@ test('custom filenames, escaped copy, image metadata and promotions generate val
     assert.match(home, /Custom &lt;headline&gt;/);
     assert.match(home, /class="hero-art">\s*<img src="assets\/art\/reki.png"/);
     assert.match(home, /href="home.html" aria-current="page"/);
+    const stylesheet = versionedAssetUrl(root, 'styles.css');
+    for (const filename of fs.readdirSync(root).filter(name => name.endsWith('.html'))) {
+      assert.ok(fs.readFileSync(path.join(root, filename), 'utf8').includes(`href="${stylesheet}"`), `${filename} must use the built stylesheet's cache key`);
+    }
+    assert.ok(gallery.includes(`src="${versionedAssetUrl(root, 'gallery.js')}"`));
+    assert.ok(contact.includes(`src="${versionedAssetUrl(root, 'brief.js')}"`));
     assert.match(home, /class="support-section">[\s\S]*id="kofiframe"/);
     assert.ok(home.indexOf('id="kofiframe"') > home.indexOf('class="selected-work"'));
     assert.match(fs.readFileSync(path.join(root, 'sitemap.xml'), 'utf8'), /portfolio.html/);

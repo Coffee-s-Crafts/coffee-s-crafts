@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { versionedAssetUrl } = require('./assets');
 const _now = new Date();
 const { isPromotionActive, safeParsePromotions } = require('./promotions');
 const { httpUrl, createEmbed } = require('./previews');
@@ -760,6 +761,9 @@ async function build() {
   ];
 
   const vars = {
+    STYLESHEET_URL: versionedAssetUrl(OUT, 'styles.css'),
+    GALLERY_SCRIPT_URL: versionedAssetUrl(OUT, 'gallery.js'),
+    BRIEF_SCRIPT_URL: versionedAssetUrl(OUT, 'brief.js'),
     ...UI, SERVICES: services, PREMADE_INTRO,
     HERO_IMAGES: previewImages(HERO_IMAGE, allImages, UI.ART_CATEGORY),
     KOFI_WIDGET: KOFI_IFRAME || renderTemplate('partials/kofi.html', { ...UI, KOFI_EMBED_URL }),
