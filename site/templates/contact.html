@@ -16,55 +16,21 @@
       <span class="promotion-status active">{{this.badgeText}}</span>
       {{/each}}
 
-      <p>%%COMMISSIONS_INTRO%%</p>
+      <p class="page-intro">%%COMMISSIONS_INTRO%%</p>
       <div class="commission-overview">
-        <div class="commission-card">
-          <h2><a href="%%ART_LINK%%">%%ART_HEADING%%</a></h2>
-          <details open>
-            <summary>%%DETAILS_HEADING%%</summary>
-            <p class="commission-status %%ART_COMMISSION_STATUS%%">%%ART_AVAILABILITY%%</p>
-            <p>%%ART_NEXT_STEPS%%</p>
-            <ul>
-              {{#each ART_SECTIONS}}
-              <li>{{this.title}}</li>
-              {{/each}}
-            </ul>
-          </details>
-        </div>
-
-        <div class="commission-card">
-          <h2><a href="%%FURSUIT_LINK%%">%%FURSUIT_COMMISSION_HEADING%%</a></h2>
-          <details open>
-            <summary>%%DETAILS_HEADING%%</summary>
-            <p class="commission-status %%FURSUIT_COMMISSION_STATUS%%">%%FURSUIT_AVAILABILITY%%</p>
-            <p>%%FURSUIT_NEXT_STEPS%%</p>
-            <ul>
-              {{#each FURSUIT_PRICES}}
-              <li>{{this.name}} — {{this.price}}</li>
-              {{/each}}
-            </ul>
-          </details>
-        </div>
-
-        <div class="commission-card">
-          <h2><a href="%%PREMADE_LINK%%">%%PREMADE_HEADING%%</a></h2>
-          <details open>
-            <summary>%%DETAILS_HEADING%%</summary>
-            <p>%%PREMADE_AVAILABILITY%%</p>
-            <p>%%PREMADE_NEXT_STEPS%%</p>
-            <ul>
-              {{#each PREMADE_SECTIONS}}
-              <li>{{this.title}}</li>
-              {{/each}}
-            </ul>
-          </details>
-        </div>
+        {{#each SERVICES}}
+        <article class="commission-card">
+          {{#each this.images}}<img class="service-image" src="{{this.src}}" alt="{{this.alt}}" loading="lazy">{{/each}}
+          <h2><a href="{{this.href}}">{{this.name}}</a></h2>
+          <span class="commission-status {{this.status}}">{{this.availability}}</span>
+          <p class="service-price">{{this.price}}{{#each this.notes}} <small>· {{this}}</small>{{/each}}</p>
+          <p>{{this.nextSteps}}</p>
+          <a class="service-link" href="{{this.href}}">{{this.linkText}}</a>
+        </article>
+        {{/each}}
       </div>
 
-      <p><a href="%%TRELLO_URL%%" target="_blank" rel="noopener">%%TRELLO_LINK_TEXT%%</a></p>
-      <p><a href="%%FURSUIT_QUEUE_URL%%" target="_blank" rel="noopener">%%FURSUIT_QUEUE_LINK_TEXT%%</a></p>
-      <p><a href="%%FURSUIT_FORM_URL%%" target="_blank" rel="noopener">%%FURSUIT_FORM_TEXT%%</a></p>
-
+      <div class="inquiry-layout">
       <section class="commission-brief">
         <h2>%%BRIEF_HEADING%%</h2>
         <p>%%BRIEF_INTRO%%</p>
@@ -88,8 +54,9 @@
           <a id="briefEmail">%%BRIEF_SEND_LABEL%%</a>
         </div>
       </section>
-
-      <h2>%%CONTACT_HEADING%%</h2>
+        <aside class="inquiry-aside">
+          <h2>%%INQUIRY_ASIDE_HEADING%%</h2>
+          <p>%%INQUIRY_ASIDE_BODY%%</p>
       <div class="contact-links">
         <div class="contact-row">
           <a href="%%DISCORD_URL%%" target="_blank" rel="noopener">%%DISCORD_LINK_TEXT%%</a>
@@ -108,6 +75,12 @@
           <a href="%%INSTAGRAM_URL%%" target="_blank" rel="noopener">%%INSTAGRAM_LINK_TEXT%%</a>
           <a href="%%X_URL%%" target="_blank" rel="noopener">%%X_LINK_TEXT%%</a>
         </div>
+      </div>
+          <h3>%%INQUIRY_LINKS_HEADING%%</h3>
+          <p><a href="%%TRELLO_URL%%" target="_blank" rel="noopener">%%TRELLO_LINK_TEXT%%</a></p>
+          <p><a href="%%FURSUIT_QUEUE_URL%%" target="_blank" rel="noopener">%%FURSUIT_QUEUE_LINK_TEXT%%</a></p>
+          <p><a href="%%FURSUIT_FORM_URL%%" target="_blank" rel="noopener">%%FURSUIT_FORM_TEXT%%</a></p>
+        </aside>
       </div>
     </section>
   </main>

@@ -29,6 +29,18 @@ const UI_DEFAULTS = {
   FURSUIT_NEXT_STEPS: 'Complete the fursuit commission form for an availability check and written quote.',
   PREMADE_AVAILABILITY: 'Check shop inventory', PREMADE_NEXT_STEPS: 'Visit the shop for current stock and shipping details.',
   KOFI_EMBED_TITLE: 'Support Coffee’s Crafts on Ko-fi',
+  HERO_EYEBROW: 'Character art · Fursuits · Handmade goods',
+  HERO_HEADING: 'Art with a little extra character.',
+  HERO_SECONDARY_CTA: 'Commission a piece',
+  FEATURED_HEADING: 'A few favorites', FEATURED_LINK_TEXT: 'Explore the gallery →',
+  SUPPORT_LINK_TEXT: 'Support Coffee’s Crafts on Ko-fi →',
+  GALLERY_CATEGORIES_LABEL: 'Gallery categories',
+  ART_PRICE_SUMMARY: 'From $10', FURSUIT_PRICE_SUMMARY: 'Heads from $465',
+  PREMADE_PRICE_SUMMARY: 'Ready-to-ship pieces', SERVICE_PRICE_NOTE: 'Base pricing',
+  SERVICE_PRICING_LINK_TEXT: 'View options & pricing →', PREMADE_BROWSE_TEXT: 'Browse premade items →',
+  INQUIRY_ASIDE_HEADING: 'Prefer to message first?',
+  INQUIRY_ASIDE_BODY: 'Share your idea, references, budget, and preferred deadline. We’ll confirm availability and the next steps.',
+  INQUIRY_LINKS_HEADING: 'Forms & progress',
 };
 const UI = Object.fromEntries(Object.entries(UI_DEFAULTS).map(([key, fallback]) => [key, process.env[key] || fallback]));
 
@@ -47,6 +59,10 @@ const FURSUIT_TOS_LINK        = process.env.FURSUIT_TOS_LINK   || 'fursuit-tos.h
 const PREMADE_SRC             = process.env.PREMADE_SOURCE_DIR || 'assets/premades';
 const PREMADE_LINK            = process.env.PREMADE_LINK       || 'premades.html';
 const TABLE_SRC               = process.env.TABLE_SOURCE_DIR   || 'assets/tables';
+const HERO_IMAGE = process.env.HERO_IMAGE || `${ART_SRC}/444e3600-b841-446d-b942-d8f66a0d4fdc.webp`;
+const ART_PREVIEW_IMAGE = process.env.ART_PREVIEW_IMAGE || `${ART_SRC}/boyo.png`;
+const FURSUIT_PREVIEW_IMAGE = process.env.FURSUIT_PREVIEW_IMAGE || `${FURSUIT_SRC}/00_splankie_fursuit_mini_partial.jpg`;
+const PREMADE_PREVIEW_IMAGE = process.env.PREMADE_PREVIEW_IMAGE || `${PREMADE_SRC}/00_20260720_222654.jpg`;
 
 // ── Commission status ─────────────────────────────────
 const COMMISSION_OPEN         = (process.env.COMMISSION_STATUS || 'open').toLowerCase() === 'open';
@@ -96,6 +112,7 @@ const KOFI_LINK_TEXT          = process.env.KOFI_LINK_TEXT                   || 
 // Legacy trusted HTML override; prefer the structured embed URL/title settings.
 const KOFI_IFRAME             = (process.env.KOFI_IFRAME || '').trim();
 const KOFI_EMBED_URL          = process.env.KOFI_EMBED_URL || 'https://ko-fi.com/coffeescrafts/?hidefeed=true&widget=true&embed=true&preview=true';
+const KOFI_EMBED_ENABLED      = (process.env.KOFI_EMBED_ENABLED || 'false').toLowerCase() === 'true';
 const SITE_URL               = process.env.SITE_URL || 'https://coffeescrafts.com';
 const SITE_DESCRIPTION       = process.env.SITE_DESCRIPTION || HERO_TAGLINE;
 const ART_DESCRIPTION        = process.env.ART_DESCRIPTION || 'Character art commissions, pricing, and available add-ons.';
@@ -715,15 +732,30 @@ async function build() {
   const fursuits = fursuitImages.map(src => imageData(src, UI.FURSUIT_CATEGORY));
   const premades = premadeImages.map(src => imageData(src, UI.PREMADE_CATEGORY));
   const tables = tableImages.map(src => imageData(src, UI.TABLE_CATEGORY));
+  function previewImages(preferred, sources, category) {
+    const source = sources.includes(preferred) ? preferred : sources[0];
+    return source ? [imageData(source, category)] : [];
+  }
   const services = [
-    { name: UI.ART_HEADING, availability: ART_COMMISSION_STATUS === 'open' ? UI.COMMISSION_OPEN_LABEL : UI.COMMISSION_CLOSED_LABEL, nextSteps: UI.ART_NEXT_STEPS },
-    { name: UI.FURSUIT_COMMISSION_HEADING, availability: FURSUIT_COMMISSION_STATUS === 'open' ? UI.COMMISSION_OPEN_LABEL : UI.COMMISSION_CLOSED_LABEL, nextSteps: UI.FURSUIT_NEXT_STEPS },
-    { name: UI.PREMADE_HEADING, availability: UI.PREMADE_AVAILABILITY, nextSteps: UI.PREMADE_NEXT_STEPS },
+    { name: UI.ART_HEADING, availability: ART_COMMISSION_STATUS === 'open' ? UI.COMMISSION_OPEN_LABEL : UI.COMMISSION_CLOSED_LABEL,
+      status: ART_COMMISSION_STATUS, nextSteps: UI.ART_NEXT_STEPS, price: UI.ART_PRICE_SUMMARY,
+      notes: [UI.SERVICE_PRICE_NOTE], href: ART_LINK, linkText: UI.SERVICE_PRICING_LINK_TEXT,
+      images: previewImages(ART_PREVIEW_IMAGE, allImages, UI.ART_CATEGORY) },
+    { name: UI.FURSUIT_COMMISSION_HEADING, availability: FURSUIT_COMMISSION_STATUS === 'open' ? UI.COMMISSION_OPEN_LABEL : UI.COMMISSION_CLOSED_LABEL,
+      status: FURSUIT_COMMISSION_STATUS, nextSteps: UI.FURSUIT_NEXT_STEPS, price: UI.FURSUIT_PRICE_SUMMARY,
+      notes: [UI.SERVICE_PRICE_NOTE], href: FURSUIT_LINK, linkText: UI.SERVICE_PRICING_LINK_TEXT,
+      images: previewImages(FURSUIT_PREVIEW_IMAGE, fursuitImages, UI.FURSUIT_CATEGORY) },
+    { name: UI.PREMADE_HEADING, availability: UI.PREMADE_AVAILABILITY, status: 'inventory',
+      nextSteps: UI.PREMADE_NEXT_STEPS, price: UI.PREMADE_PRICE_SUMMARY, notes: [],
+      href: PREMADE_LINK, linkText: UI.PREMADE_BROWSE_TEXT,
+      images: previewImages(PREMADE_PREVIEW_IMAGE, premadeImages, UI.PREMADE_CATEGORY) },
   ];
 
   const vars = {
     ...UI, SERVICES: services, PREMADE_INTRO,
+    HERO_IMAGES: previewImages(HERO_IMAGE, allImages, UI.ART_CATEGORY),
     KOFI_WIDGET: KOFI_IFRAME || renderTemplate('partials/kofi.html', { ...UI, KOFI_EMBED_URL }),
+    KOFI_WIDGETS: KOFI_EMBED_ENABLED ? [{}] : [],
     FAVICON_URL, OG_IMAGE_URL: absoluteUrl(OG_IMAGE_URL),
     ART_AVAILABILITY: services[0].availability, FURSUIT_AVAILABILITY: services[1].availability,
     ART_COMMISSION_STATUS, FURSUIT_COMMISSION_STATUS,
@@ -820,6 +852,12 @@ async function build() {
     fs.writeFileSync(path.join(OUT, filename), renderTemplate(template, {
       ...vars, PAGE_TITLE: title === SITE_TITLE ? title : title + ' — ' + SITE_TITLE,
       PAGE_DESCRIPTION: description, CANONICAL_URL: absoluteUrl(filename),
+      NAV_HOME_CURRENT: template === 'index.html' ? 'page' : 'false',
+      NAV_GALLERY_CURRENT: template === 'gallery.html' ? 'page' : 'false',
+      NAV_ART_CURRENT: template === 'art.html' ? 'page' : 'false',
+      NAV_FURSUIT_CURRENT: template === 'fursuit.html' ? 'page' : 'false',
+      NAV_PREMADE_CURRENT: template === 'premades.html' ? 'page' : 'false',
+      NAV_CONTACT_CURRENT: template === 'contact.html' ? 'page' : 'false',
     }));
   }
   fs.writeFileSync(path.join(OUT, 'CNAME'), 'coffeescrafts.com\n');

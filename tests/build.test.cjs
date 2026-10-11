@@ -57,6 +57,7 @@ test('custom filenames, escaped copy, image metadata and promotions generate val
     const env = { ...defaults, OUTPUT_DIR: root, INDEX_LINK: 'home.html', GALLERY_LINK: 'portfolio.html', CONTACT_LINK: 'inquire.html',
       ART_LINK: 'drawing.html', FURSUIT_LINK: 'suits.html', ART_TOS_LINK: 'art-terms.html', FURSUIT_TOS_LINK: 'suit-terms.html', PREMADE_LINK: 'shop.html',
       SITE_TITLE: 'Coffee & "Friends" <Studio>',
+      HERO_HEADING: 'Custom <headline>', HERO_IMAGE: 'assets/art/reki.png', ART_PRICE_SUMMARY: 'From €30',
       IMAGE_METADATA: JSON.stringify({ 'assets/art/reki.png': { alt: 'Character portrait & details', caption: 'R eki <example>' } }),
       PROMOTIONS: '[{"type":"percent","amount":15}]' };
     const result = spawnSync(process.execPath, ['site/build.js'], { env, encoding: 'utf8' });
@@ -69,6 +70,11 @@ test('custom filenames, escaped copy, image metadata and promotions generate val
     assert.match(contact, /15% off/);
     assert.equal([...contact.matchAll(/class="promotion-status active">15% off<\/span>/g)].length, 2, 'Contact and footer must both render the fallback badge');
     assert.match(contact, /Coffee &amp; &quot;Friends&quot; &lt;Studio&gt;/);
+    assert.match(contact, /From €30/);
+    const home = fs.readFileSync(path.join(root, 'home.html'), 'utf8');
+    assert.match(home, /Custom &lt;headline&gt;/);
+    assert.match(home, /class="hero-art">\s*<img src="assets\/art\/reki.png"/);
+    assert.match(home, /href="home.html" aria-current="page"/);
     assert.match(fs.readFileSync(path.join(root, 'sitemap.xml'), 'utf8'), /portfolio.html/);
     await checkOutput(root);
     for (const override of [{ GALLERY_LINK: '../escape.html' }, { GALLERY_LINK: 'home.html' }]) {
