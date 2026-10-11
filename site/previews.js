@@ -2,7 +2,7 @@
 const IMAGE_EXTENSION = /\.(png|gif|jpe?g|webp|avif)$/i;
 
 function httpUrl(value, image = false) {
-  if (typeof value !== 'string' || value.length > 2048) throw new Error('Preview URL must be at most 2048 characters');
+  if (typeof value !== 'string' || value.length > 2048 || /\s/.test(value)) throw new Error('Preview URL must be at most 2048 characters without whitespace');
   const url = new URL(value);
   if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password) throw new Error('Preview URL must use HTTP(S) without credentials');
   if (image && !IMAGE_EXTENSION.test(url.pathname)) throw new Error('Preview image must use a supported raster format');
@@ -21,7 +21,7 @@ function serializeEmbed(payload) {
     1: ['type', 'components'], 2: ['type', 'style', 'url', 'label'],
   };
   function walk(component, parent) {
-    if (!object(component) || !allowed[component.type]) fail('unsupported display component');
+    if (!object(component) || !Number.isInteger(component.type) || !allowed[component.type]) fail('unsupported display component');
     if (++count > 40) fail('more than 40 components');
     if (Object.keys(component).some(key => !allowed[component.type].includes(key))) fail('unsupported component field');
     switch (component.type) {

@@ -33,7 +33,7 @@ test('component count includes root, galleries have an aggregate limit', () => {
 
 test('rejects invalid roots, nesting, controls, fields, URLs and media', () => {
   for (const value of [null, {}, { components: [] }, { ...payload([text('ok')]), extra: true },
-    payload([payload([text('nested')]).component]), payload([{ type: 3 }]),
+    payload([payload([text('nested')]).component]), payload([{ type: 3 }]), payload([{ type: '10', content: 'invalid' }]),
     payload([{ type: 1, components: [{ type: 2, style: 1, label: 'Go', url: 'https://example.com' }] }]),
     payload([{ type: 1, components: [{ type: 2, style: 5, label: 'Go', url: 'https://example.com', custom_id: 'bad' }] }]),
     payload([{ type: 2, style: 5, label: 'Go', url: 'https://example.com' }]),
