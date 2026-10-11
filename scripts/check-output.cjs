@@ -1,6 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { HtmlValidate } = require('html-validate');
+const { serializeEmbed, httpUrl } = require('../site/previews');
 
 async function checkOutput(root = process.env.OUTPUT_DIR || 'dist') {
   root = path.resolve(root);
@@ -18,6 +19,17 @@ async function checkOutput(root = process.env.OUTPUT_DIR || 'dist') {
     if (prefix.toString().startsWith('version https://git-lfs.github.com/spec/')) errors.push(`${file}: published LFS pointer`);
     if (!file.endsWith('.html')) continue;
     const html = fs.readFileSync(filename, 'utf8');
+    try {
+      const head = html.split('</head>')[0];
+      const embeds = [...head.matchAll(/<script id="discord:component-embed" type="application\/json">([\s\S]*?)<\/script>/g)];
+      if (embeds.length !== 1) throw new Error('one server-rendered component embed required');
+      if (serializeEmbed(JSON.parse(embeds[0][1])) !== embeds[0][1]) throw new Error('unsafe or noncanonical embed JSON');
+      for (const key of ['og:title', 'og:description', 'og:url', 'og:site_name', 'og:image', 'twitter:title', 'twitter:description', 'twitter:image']) {
+        const meta = head.match(new RegExp(`<meta (?:property|name)="${key}" content="([^"]+)">`));
+        if (!meta) throw new Error(`missing fallback ${key}`);
+        if (key.endsWith(':image')) httpUrl(meta[1].replaceAll('&amp;', '&'), true);
+      }
+    } catch (error) { errors.push(`${file}: ${error.message}`); }
     if (/%%\w+%%|\{\{[#/>\w]/.test(html)) errors.push(`${file}: unresolved template token`);
     const report = await validator.validateString(html, file);
     for (const result of report.results) for (const message of result.messages) {

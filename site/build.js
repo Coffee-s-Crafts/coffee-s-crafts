@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const _now = new Date();
 const { isPromotionActive, safeParsePromotions } = require('./promotions');
+const { httpUrl, createEmbed } = require('./previews');
 
 // All interface copy is environment-backed; defaults contain data, never layout.
 const UI_DEFAULTS = {
@@ -104,6 +105,12 @@ const CONTACT_DESCRIPTION    = process.env.CONTACT_DESCRIPTION || COMMISSIONS_IN
 const TOS_DESCRIPTION        = process.env.TOS_DESCRIPTION || 'Terms for booking and receiving art commissions.';
 const FURSUIT_TOS_DESCRIPTION = process.env.FURSUIT_TOS_DESCRIPTION || 'Terms for booking and receiving fursuit commissions.';
 const OG_IMAGE_URL           = process.env.OG_IMAGE_URL || `${ART_SRC}/anthrocon-2026-badges.jpg`;
+const PREVIEW_ART_IMAGE_URL = process.env.PREVIEW_ART_IMAGE_URL || OG_IMAGE_URL;
+const PREVIEW_FURSUIT_IMAGE_URL = process.env.PREVIEW_FURSUIT_IMAGE_URL || `${FURSUIT_SRC}/00_splankie_fursuit_mini_partial.jpg`;
+const PREVIEW_PREMADE_IMAGE_URL = process.env.PREVIEW_PREMADE_IMAGE_URL || `${PREMADE_SRC}/00_20260720_222654.jpg`;
+const PREVIEW_IMAGE_ALT = process.env.PREVIEW_IMAGE_ALT || SITE_TITLE;
+const PREVIEW_COLOR = process.env.PREVIEW_COLOR || '#8b3a1e';
+if (!/^#[0-9a-f]{6}$/i.test(PREVIEW_COLOR)) throw new Error('PREVIEW_COLOR must be #RRGGBB');
 const FAVICON_URL            = process.env.FAVICON_URL || 'favicon.svg';
 const IMAGE_METADATA_DEFAULTS = {
   'assets/art/278c7891-3861-4ac5-a751-aa7fe782e9b5.webp': { caption: 'Dreaming in the clouds', alt: 'An orange horned dragon with stitched markings sleeps among white clouds.' },
@@ -660,7 +667,8 @@ function renderTemplate(name, vars) {
     // handle %%TOKENS%%
     str = str.replace(/%%(\w+)%%/g, (_, key) => {
       if (vars[key] == null) throw new Error(`Unresolved template token: ${key}`);
-      return key === 'KOFI_WIDGET' ? vars[key] : escapeHtml(vars[key]);
+      // DISCORD_EMBED_JSON is exclusively produced by the validated serializer.
+      return ['KOFI_WIDGET', 'DISCORD_EMBED_JSON'].includes(key) ? vars[key] : escapeHtml(vars[key]);
     });
     return str;
   }
@@ -817,8 +825,33 @@ async function build() {
   };
 
   for (const [template, filename, title, description] of PAGES) {
+    const pageTitle = title === SITE_TITLE ? title : title + ' — ' + SITE_TITLE;
+    const imagePath = template.startsWith('fursuit') ? PREVIEW_FURSUIT_IMAGE_URL
+      : template === 'premades.html' ? PREVIEW_PREMADE_IMAGE_URL
+      : ['art.html', 'gallery.html', 'tos.html'].includes(template) ? PREVIEW_ART_IMAGE_URL : OG_IMAGE_URL;
+    const image = httpUrl(absoluteUrl(imagePath), true);
+    // Verify same-site media in the staged output without fetching remote URLs.
+    const mediaUrl = new URL(image);
+    if (mediaUrl.origin === baseUrl.origin) {
+      const relative = decodeURIComponent(mediaUrl.pathname.slice(baseUrl.pathname.length));
+      const local = path.resolve(OUT, relative);
+      if (!mediaUrl.pathname.startsWith(baseUrl.pathname) || !local.startsWith(path.resolve(OUT) + path.sep) || !fs.existsSync(local)) throw new Error('Preview image must exist inside generated output');
+      if (fs.readFileSync(local).subarray(0, 100).toString().startsWith('version https://git-lfs.github.com/spec/')) throw new Error('Preview image is an LFS pointer');
+    }
+    const button = (label, link) => ({ label, url: httpUrl(absoluteUrl(link)) });
+    const buttons = template === 'contact.html'
+      ? [button(UI.NAV_ART, ART_LINK), button(UI.NAV_FURSUIT, FURSUIT_LINK)]
+      : ['art.html', 'fursuit.html', 'premades.html'].includes(template)
+        ? [button(UI.NAV_CONTACT, CONTACT_LINK), button(UI.NAV_GALLERY, GALLERY_LINK)]
+        : [button(UI.NAV_GALLERY, GALLERY_LINK), button(UI.NAV_CONTACT, CONTACT_LINK)];
+    const details = template === 'contact.html' ? services.slice(0, 2).map(service => `${service.name}: ${service.availability}`).join('\n')
+      : template === 'art.html' ? `${UI.ART_HEADING}: ${services[0].availability}\n${UI.ART_NEXT_STEPS}`
+      : template === 'fursuit.html' ? `${UI.FURSUIT_COMMISSION_HEADING}: ${services[1].availability}\n${UI.FURSUIT_NEXT_STEPS}` : undefined;
     fs.writeFileSync(path.join(OUT, filename), renderTemplate(template, {
-      ...vars, PAGE_TITLE: title === SITE_TITLE ? title : title + ' — ' + SITE_TITLE,
+      ...vars, PAGE_TITLE: pageTitle, OG_IMAGE_URL: image,
+      PREVIEW_IMAGE_ALT, PREVIEW_COLOR,
+      DISCORD_EMBED_JSON: createEmbed({ title: pageTitle, description, image, alt: PREVIEW_IMAGE_ALT,
+        color: parseInt(PREVIEW_COLOR.slice(1), 16), buttons, details }),
       PAGE_DESCRIPTION: description, CANONICAL_URL: absoluteUrl(filename),
     }));
   }
