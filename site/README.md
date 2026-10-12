@@ -97,12 +97,14 @@ images. Escape or Close dismisses it and returns focus. Background controls are 
 
 `SITE_URL` is the absolute site base URL (default `https://coffeescrafts.com`). Canonical
 URLs and sitemap entries use configured filenames. The build adds `robots.txt`, page
-descriptions, Open Graph tags, and a coffee-cup SVG favicon. Description settings are
+descriptions, Open Graph tags, and the Coffee's Crafts PNG favicon. Description settings are
 `SITE_DESCRIPTION`, `ART_DESCRIPTION`, `FURSUIT_DESCRIPTION`, `CONTACT_DESCRIPTION`,
 `TOS_DESCRIPTION`, and `FURSUIT_TOS_DESCRIPTION`; gallery/premades reuse `GALLERY_META`
 and `PREMADE_META`. `OG_IMAGE_URL` accepts an absolute or site-relative raster image
 and defaults to the existing Anthrocon badge photo. Adjust it when changing artwork
-directories. `FAVICON_URL` defaults to `favicon.svg`.
+directories. `FAVICON_URL` defaults to `favicon.png`.
+The homepage displays the same logo above its introduction. `LOGO_URL` defaults to
+`favicon.png` and can be overridden independently through repository variables or secrets.
 
 ## Commission brief
 

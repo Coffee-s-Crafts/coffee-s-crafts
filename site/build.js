@@ -129,7 +129,8 @@ const PREVIEW_PREMADE_IMAGE_URL = process.env.PREVIEW_PREMADE_IMAGE_URL || `${PR
 const PREVIEW_IMAGE_ALT = process.env.PREVIEW_IMAGE_ALT || SITE_TITLE;
 const PREVIEW_COLOR = process.env.PREVIEW_COLOR || '#8b3a1e';
 if (!/^#[0-9a-f]{6}$/i.test(PREVIEW_COLOR)) throw new Error('PREVIEW_COLOR must be #RRGGBB');
-const FAVICON_URL            = process.env.FAVICON_URL || 'favicon.svg';
+const FAVICON_URL            = process.env.FAVICON_URL || 'favicon.png';
+const LOGO_URL               = process.env.LOGO_URL || 'favicon.png';
 const IMAGE_METADATA_DEFAULTS = {
   'assets/art/278c7891-3861-4ac5-a751-aa7fe782e9b5.webp': { caption: 'Dreaming in the clouds', alt: 'An orange horned dragon with stitched markings sleeps among white clouds.' },
   'assets/art/3eb40aca-ecde-4d38-84c9-938915cebbde.webp': { caption: 'Sunset companions', alt: 'An orange animal rests beneath a tree beside a glowing companion at sunset.' },
@@ -768,7 +769,7 @@ async function build() {
     HERO_IMAGES: previewImages(HERO_IMAGE, allImages, UI.ART_CATEGORY),
     KOFI_WIDGET: KOFI_IFRAME || renderTemplate('partials/kofi.html', { ...UI, KOFI_EMBED_URL }),
     KOFI_WIDGETS: KOFI_EMBED_ENABLED ? [{}] : [],
-    FAVICON_URL, OG_IMAGE_URL: absoluteUrl(OG_IMAGE_URL),
+    FAVICON_URL, LOGO_URL, OG_IMAGE_URL: absoluteUrl(OG_IMAGE_URL),
     ART_AVAILABILITY: services[0].availability, FURSUIT_AVAILABILITY: services[1].availability,
     ART_COMMISSION_STATUS, FURSUIT_COMMISSION_STATUS,
     GITHUB_URL,
