@@ -65,6 +65,7 @@ jobs:
       ETSY_LINK_TEXT: ${{ vars.ETSY_LINK_TEXT || secrets.ETSY_LINK_TEXT }}
       ETSY_URL: ${{ vars.ETSY_URL || secrets.ETSY_URL }}
       FAVICON_URL: ${{ vars.FAVICON_URL || secrets.FAVICON_URL }}
+      LOGO_URL: ${{ vars.LOGO_URL || secrets.LOGO_URL }}
       FEATURED_HEADING: ${{ vars.FEATURED_HEADING || secrets.FEATURED_HEADING }}
       FEATURED_LINK_TEXT: ${{ vars.FEATURED_LINK_TEXT || secrets.FEATURED_LINK_TEXT }}
       FOOTER_TEXT: ${{ vars.FOOTER_TEXT || secrets.FOOTER_TEXT }}

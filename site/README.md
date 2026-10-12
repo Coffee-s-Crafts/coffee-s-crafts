@@ -103,6 +103,8 @@ descriptions, Open Graph tags, and the Coffee's Crafts PNG favicon. Description 
 and `PREMADE_META`. `OG_IMAGE_URL` accepts an absolute or site-relative raster image
 and defaults to the existing Anthrocon badge photo. Adjust it when changing artwork
 directories. `FAVICON_URL` defaults to `favicon.png`.
+The homepage displays the same logo above its introduction. `LOGO_URL` defaults to
+`favicon.png` and can be overridden independently through repository variables or secrets.
 
 ## Commission brief
 
