@@ -129,7 +129,7 @@ const PREVIEW_PREMADE_IMAGE_URL = process.env.PREVIEW_PREMADE_IMAGE_URL || `${PR
 const PREVIEW_IMAGE_ALT = process.env.PREVIEW_IMAGE_ALT || SITE_TITLE;
 const PREVIEW_COLOR = process.env.PREVIEW_COLOR || '#8b3a1e';
 if (!/^#[0-9a-f]{6}$/i.test(PREVIEW_COLOR)) throw new Error('PREVIEW_COLOR must be #RRGGBB');
-const FAVICON_URL            = process.env.FAVICON_URL || 'favicon.svg';
+const FAVICON_URL            = process.env.FAVICON_URL || 'favicon.png';
 const IMAGE_METADATA_DEFAULTS = {
   'assets/art/278c7891-3861-4ac5-a751-aa7fe782e9b5.webp': { caption: 'Dreaming in the clouds', alt: 'An orange horned dragon with stitched markings sleeps among white clouds.' },
   'assets/art/3eb40aca-ecde-4d38-84c9-938915cebbde.webp': { caption: 'Sunset companions', alt: 'An orange animal rests beneath a tree beside a glowing companion at sunset.' },
