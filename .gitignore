@@ -5,3 +5,8 @@ test-results/
 playwright-report/
 # Ignore build outputs
 
+
+render-dist/
+render-results/
+render-report/
+render-inventory/
