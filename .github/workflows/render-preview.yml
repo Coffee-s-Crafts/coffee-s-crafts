@@ -1,0 +1,81 @@
+name: Render previews
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: render-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  render:
+    # Standard hosted compute is free for public repositories. Never use larger runners.
+    if: ${{ !github.event.repository.private }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CI: true
+      # Owning organization confirmed $0 stop-usage controls for storage and LFS.
+      RENDER_UPLOAD_ENABLED: 'true'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm ci --no-audit --no-fund
+      - name: Record permanent artwork inventory
+        run: node scripts/render-safety.cjs record
+      - name: Test render directory boundaries
+        run: node --test tests/render-safety.test.cjs
+      - name: Build local default-content preview
+        run: npm run build:render
+      - name: Validate rendered HTML and local assets
+        run: npm run check:output
+        env:
+          OUTPUT_DIR: render-dist
+      - run: npx playwright install --with-deps chromium
+      - name: Check desktop and mobile renders
+        run: npm run check:render
+      - name: Verify permanent artwork is unchanged
+        id: preservation
+        if: ${{ !cancelled() }}
+        run: node scripts/render-safety.cjs verify
+      - name: Enforce report size cap
+        id: size
+        if: ${{ !cancelled() }}
+        run: node scripts/check-render-report.cjs
+      - name: Save browsable report and screenshots
+        id: upload
+        if: ${{ !cancelled() && steps.size.outcome == 'success' && steps.preservation.outcome == 'success' && env.RENDER_UPLOAD_ENABLED == 'true' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: coffee-render-report
+          path: render-report/
+          if-no-files-found: error
+          retention-days: 1
+      - name: Explain evidence and limits
+        if: ${{ !cancelled() }}
+        env:
+          UPLOAD_OUTCOME: ${{ steps.upload.outcome }}
+        run: |
+          {
+            echo '## Coffee render previews'
+            echo 'Eight existing pages plus gallery lightbox and commission brief, at desktop and mobile sizes.'
+            echo 'Default content and real source artwork. External requests are blocked; nothing is submitted or deployed.'
+            if [ "$UPLOAD_OUTCOME" = success ]; then
+              echo 'Download coffee-render-report and open index.html, or use npx playwright show-report on the extracted folder. Retention: one day; maximum: 15 MiB.'
+            else
+              echo 'No report artifact was retained. Check test/build logs; uploads may be disabled, capped, or unsuccessful.'
+            fi
+            echo 'These are functional layout checks, not pixel-baseline approval or production-artwork validation.'
+          } >> "$GITHUB_STEP_SUMMARY"

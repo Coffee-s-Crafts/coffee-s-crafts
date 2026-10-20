@@ -71,3 +71,44 @@ runs responsive keyboard/accessibility checks before publishing from `main`.
 Below are example workflow snippets that set environment variables and run the build during deploy. Store private values (emails, payment handles, tokens) as repository **secrets** and reference them in the workflow.
 
 1) Full [build + deploy to `gh-pages`](https://github.com/Coffee-s-Crafts/coffee-s-crafts/blob/main/.github/workflows/deploy-pages.yml) (push to `main`). Uses `peaceiris/actions-gh-pages` to publish the `dist` folder to the `gh-pages` branch.
+
+## Browsable render previews
+
+The separate **Render previews** workflow builds default site content locally with
+real source artwork, then captures all eight pages, the gallery lightbox, and the
+commission brief preview at desktop (1280px) and mobile (390px) widths. It checks
+navigation, image decoding, layout overflow, and the interactive states. External
+network requests are blocked, and no email, payment, or commission form is sent.
+This does not deploy, replace the existing accessibility suite, or approve pixel
+baselines. It does not validate production secrets, configured copy,
+external services, or browsers other than Chromium.
+
+Run locally with Node 24:
+
+```sh
+npm ci
+npx playwright install chromium
+git lfs pull
+node scripts/render-safety.cjs record
+npm run build:render
+OUTPUT_DIR=render-dist npm run check:output
+npm run check:render
+node scripts/render-safety.cjs verify
+npx playwright show-report render-report
+```
+
+The build uses real Git LFS source artwork and writes only `render-dist`; it never
+changes source artwork. Locally, run `git lfs pull` before building. The report embeds JPEG screenshots (quality 80) as
+attachments. This compression applies only to generated examples, never source artwork. CI uses one public standard runner, no dependency cache, one worker,
+no retries, and a ten-minute timeout. The owning organization confirmed a $0
+stop-usage budget for storage and LFS. Uploads can be disabled through
+`RENDER_UPLOAD_ENABLED` in the workflow. A report must be no larger than 15 MiB and
+is retained for one day. A size failure blocks upload but does not hide test
+failures. Without successful upload, CI logs remain available but screenshots and
+the HTML report are not retained. The existing deployment workflow is unchanged.
+
+Source artwork and all static files are inventoried by SHA-256 before the build
+and compared after render tests. Generated outputs use dedicated render directories;
+source/deploy paths and symlink escapes are rejected. Only the generated report
+artifact expires. No source artwork, deployed assets, history, or older artifacts
+are deleted or rewritten.
