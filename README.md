@@ -98,8 +98,8 @@ npx playwright show-report render-report
 ```
 
 The build uses real Git LFS source artwork and writes only `render-dist`; it never
-changes source artwork. Locally, run `git lfs pull` before building. The report embeds screenshots as
-attachments. CI uses one public standard runner, no dependency cache, one worker,
+changes source artwork. Locally, run `git lfs pull` before building. The report embeds JPEG screenshots (quality 80) as
+attachments. This compression applies only to generated examples, never source artwork. CI uses one public standard runner, no dependency cache, one worker,
 no retries, and a ten-minute timeout. The owning organization confirmed a $0
 stop-usage budget for storage and LFS. Uploads can be disabled through
 `RENDER_UPLOAD_ENABLED` in the workflow. A report must be no larger than 15 MiB and
