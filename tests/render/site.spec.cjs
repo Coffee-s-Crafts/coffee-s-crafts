@@ -9,7 +9,7 @@ async function capture(page, testInfo, name) {
     await document.fonts.ready;
   });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-  await testInfo.attach(name, { body: await page.screenshot({ fullPage: true, animations: 'disabled', type: 'jpeg', quality: 80 }), contentType: 'image/jpeg' });
+  await testInfo.attach(`${name.replace(/\.html$/, '')}.jpg`, { body: await page.screenshot({ fullPage: true, animations: 'disabled', type: 'jpeg', quality: 80 }), contentType: 'image/jpeg' });
 }
 
 test.beforeEach(async ({ context, page }) => {
